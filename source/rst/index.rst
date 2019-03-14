@@ -18,3 +18,4 @@
     :titlesonly:
 
     test_lecture
+    zreferences
