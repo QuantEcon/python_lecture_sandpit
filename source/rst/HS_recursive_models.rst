@@ -280,13 +280,13 @@ The optimal forecast of :math:`x_{t+1}` given current information is
 
     E(x_{t+1} \mid J_t) = Ax_t 
 
- and the one-step-ahead forecast error is
+and the one-step-ahead forecast error is
 
 .. math:: 
 
     x_{t+1} - E(x_{t+1} \mid J_t) = Cw_{t+1} 
 
- The covariance matrix of :math:`x_{t+1}` conditioned on :math:`J_t` is
+The covariance matrix of :math:`x_{t+1}` conditioned on :math:`J_t` is
 
  
 
@@ -689,13 +689,13 @@ To capture, set
    s_t = \begin{bmatrix} 0 \cr - \lambda \end{bmatrix} h_{t-1} +
    \begin{bmatrix} 1 \cr \lambda \end{bmatrix} c_t
 
- so that
+so that
 
 .. math:: s_{1t} = c_t
 
 .. math:: s_{2t} = \lambda (c_t - c_{t-1} ) .
 
- We set the first component :math:`b_{1t}` of :math:`b_t` to capture the
+We set the first component :math:`b_{1t}` of :math:`b_t` to capture the
 stochastic bliss process, and set the second component identically equal
 to zero. Thus, we set :math:`\Delta_h = 0, \Theta_h = 1`,
 
@@ -775,7 +775,7 @@ Information and shocks:
     z_{t+1} & = &A_{22} z_t + C_2 w_{t+1}
    \cr  b_t & = & U_b z_t \cr d_t & = & U_d z_t .\end{eqnarray*}
 
- Production Technology:
+Production Technology:
 
 .. math::
 
@@ -783,7 +783,7 @@ Information and shocks:
     \Phi_c c_t &+ & \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t \cr
    k_t &= &\Delta_k k_{t-1} + \Theta_k i_t \cr g_t \cdot g_t & = &\ell_t^2 . \end{eqnarray*}
 
- Household Technology:
+Household Technology:
 
 .. math::
 
@@ -791,7 +791,7 @@ Information and shocks:
     \cr s_t & = &
    \Lambda h_{t-1} + \Pi c_t \cr h_t & = & \Delta_h h_{t-1} + \Theta_h c_t \end{eqnarray*}
 
- Preferences:
+Preferences:
 
 .. math::
 
@@ -811,7 +811,7 @@ Information and shocks:
     z_{t+1} & = &\{A_{22}} z_t + \{C_2} w_{t+1}
    \cr  b_t & = & \{U_b} z_t \cr d_t & = & \{U_d} z_t .\end{eqnarray*}
 
- Production Technology:
+Production Technology:
 
 .. math::
 
@@ -864,8 +864,7 @@ Choose :math:`\{c_t, i_t, g_t\}_{t=0}^\infty` to maximize
      z _{t+1} & = & A_{22} z_t + C_2 w_{t+1} , \ b_t = U_b z_t,  \  \hbox{ and } \
    d_t = U_d z_t \end{eqnarray*}
 
- :math:`h_{-1},
-k_{-1}`, and :math:`z_0` are initial conditions.
+:math:`h_{-1}, k_{-1}`, and :math:`z_0` are initial conditions.
 
 Two Formulations
 
@@ -908,7 +907,7 @@ h_t, i_t, k_t`, and :math:`s_t`, respectively, are:
    {\cal M}_{t+1}^d) \mid J_t = 0 , \cr
    & - & s_t + b_t - {\cal M}_t^s = 0 \end{eqnarray*}
 
- for :math:`t=0,1, \ldots`. In addition, we have the complementary
+for :math:`t=0,1, \ldots`. In addition, we have the complementary
 slackness conditions (these recover the original transition equations)
 and the transversality conditions
 
@@ -992,7 +991,7 @@ Dynamic Programming
    V(x_0) = \max_{c_0, i_0, g_0} [ - .5 [ (s_0 - b_0) \cdot (s_0 - b_0) + g_0 \cdot g_0 ] + \beta  E V
    (x_1) ]
 
- subject to the linear constraints
+subject to the linear constraints
 
 .. math::
 
@@ -1019,11 +1018,11 @@ maximize
    - E \sum_{t=0}^\infty  \beta^t [ x_t^\prime  R x_t + u_t^\prime  Q
    u_t + 2 u_t^\prime  W x_t ], \ 0 < \beta < 1
 
- subject to
+subject to
 
 .. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0 ,
 
- where :math:`x_0` is given; :math:`x_t` is an :math:`n \times 1` vector
+where :math:`x_0` is given; :math:`x_t` is an :math:`n \times 1` vector
 of state variables, and :math:`u_t` is a :math:`k \times 1` vector of
 control variables. We assume :math:`w_{t+1}` is a martingale difference
 sequence with :math:`E w_t w_t^\prime = I`, and that :math:`C` is a
@@ -1039,13 +1038,13 @@ Dynamic Programming
    V (x_t) = \max_{u_t} \Bigl\{-( x_t^\prime R x_t + u_t^\prime Q u_t + 2
    u_t^\prime W x_t) + \beta E_t V (x_{t+1}) \Bigr\}
 
- subject to
+subject to
 
 .. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0 .
 
 .. math:: V(x_t) = - x_t^\prime P x_t - \rho ,
 
- :math:`P` satisfies
+:math:`P` satisfies
 
 .. math::
 
@@ -1053,7 +1052,7 @@ Dynamic Programming
    B + W)   (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P
    A + W') .
 
- This equation in :math:`P` is called the algebraic matrix Riccati
+This equation in :math:`P` is called the algebraic matrix Riccati
 equation.
 
 Decision rule: :math:`u_t = - F x_t`, where
@@ -1063,7 +1062,7 @@ Decision rule: :math:`u_t = - F x_t`, where
    F = (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P A +
    W') .
 
- The optimum decision rule for :math:`u_t` is independent of the
+The optimum decision rule for :math:`u_t` is independent of the
 parameters :math:`C`, and so of the noise statistics.
 
 .. _dynamic-programming-3:
@@ -1096,7 +1095,7 @@ Planning as a Dynamic Programming Problem
    \max_{ \{u_t, x_{t+1}\} }\ - E \sum_{t=0}^\infty \beta^t [x_t^\prime
    Rx_t + u_t^\prime Q u_t + 2u_t^\prime Wx_t ] , \quad 0 < \beta < 1 ,
 
- subject to
+subject to
 
 .. math:: x_{t+1} = Ax_t + B u_t + Cw_{t+1} , \ t \geq 0
 
@@ -1125,7 +1124,7 @@ Planning Problem as Dynamic Program
    \begin{bmatrix} R & W' \cr W & Q  \end{bmatrix}\ \ \begin{bmatrix} x_t
    \cr u_t \end{bmatrix}
 
- :math:`S = (G^\prime G + H^\prime H) / 2`
+:math:`S = (G^\prime G + H^\prime H) / 2`
 
 .. math::
 
@@ -1188,7 +1187,7 @@ Values as Inner Products
 
 .. math:: \pi (c) = E \sum_{t=0}^\infty \beta^t p_t^0 \cdot c_t \mid J_0 ,
 
- where :math:`p_t^0` belongs to :math:`L_0^2`.
+where :math:`p_t^0` belongs to :math:`L_0^2`.
 
 .. _representative-household-3:
 
@@ -1205,7 +1204,7 @@ maximize
    -\ {1 \over 2}\ E_0 \sum^\infty_{t=0} \beta^t\, \Bigl[(s_t-b_t) \cdot (s_t -
    b_t) + \ell_t^2\Bigr]
 
- subject to
+subject to
 
 .. math::
 
@@ -1233,7 +1232,7 @@ g_t, d_t\}`, each element of which is in :math:`L^2_0`, to maximize
    E_0\, \sum^\infty_{t=0} \beta^t\, (p^0_t \cdot c_t + q^0_t \cdot i_t - r^0_t
    \cdot k_{t-1} - w^0_t \ell_t - \alpha^0_t \cdot d_t)
 
- subject to
+subject to
 
 .. math:: \Phi_c\, c_t + \Phi_g\, g_t + \Phi_i\, i_t = \Gamma k_{t-1} + d_t
 
@@ -1253,7 +1252,7 @@ stochastic processes for :math:`\{k_t, i_t\}^\infty_{t=0}` to maximize
    E \sum^\infty_{t=0} \beta^t (r_t^0 \cdot k_{t-1} - q^0_t \cdot i_t) \mid
    J_0 - v_0 \cdot k_{-1}
 
- subject to
+subject to
 
 .. math:: k_t = \Delta_k k_{t-1} + \Theta_k i_t.
 
@@ -1299,7 +1298,7 @@ Equilibrium Price System
    v_0 = \Gamma^\prime {\cal M}^d_0 / \mu^w_0 + \Delta^\prime_k
    {\cal M}^k_0 / \mu^w_0.
 
- With this price system, values can be assigned to the Lagrange
+With this price system, values can be assigned to the Lagrange
 multipliers for each of our three classes of agents that cause all
 first-order necessary conditions to be satisfied at these prices and at
 the quantities associated with the optimum of the planning problem.
@@ -1309,8 +1308,7 @@ Asset Pricing
 
 Dividend Stream: :math:`\{y_t\} \in L^2_0`
 
-Asset Value:
-:math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 .`
+Asset Value: :math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 .`
 
 .. _asset-pricing-1:
 
@@ -1389,7 +1387,7 @@ v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
 
 .. math:: x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0).
 
- Innovations Representation:
+Innovations Representation:
 
 .. math::
 
@@ -1397,8 +1395,7 @@ v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
    \hat x_{t+1} &= &A^o \hat x_t + K_t a_t \cr
    y_t &= & G \hat x_t + a_t,\end{eqnarray*}
 
- where
-:math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
+where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
 
 .. _statistical-representations-1:
 
@@ -1413,13 +1410,13 @@ Original State-Space Representation:
     x_{t+1} & = & A^o x_t + C\color{red}{w_{t+1}} \cr
    y_t & =& Gx_t + \color{red}{v_t},  \end{eqnarray*}
 
-\ where :math:`v_t` is a martingale difference sequence of measurement
+where :math:`v_t` is a martingale difference sequence of measurement
 errors that satisfies :math:`Ev_t
 v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
 
 .. math:: x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0).
 
- Innovations Representation:
+Innovations Representation:
 
 .. math::
 
@@ -1427,8 +1424,10 @@ v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
    \hat x_{t+1} &= &A^o \hat x_t + K_t \color{red}{a_t} \cr
    y_t &= & G \hat x_t + \color{red}{a_t},\end{eqnarray*}
 
- where
-:math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
+where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
+
+
+
 
 .. _facts-motivating-filtering-1:
 
@@ -1448,7 +1447,7 @@ Kalman Filter
 
 .. math:: K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} .
 
- Riccati Difference Equation:
+Riccati Difference Equation:
 
 .. math::
 
@@ -1467,7 +1466,7 @@ Whitening Filter:
     a_t & = &y_t - G \hat x_t \cr
    \hat x_{t+1} &= &  A^o \hat x_t + K_t  a_t \end{eqnarray*}
 
- can be used recursively to construct a record of innovations
+can be used recursively to construct a record of innovations
 :math:`\{ a_t \}^T_{t=0}` from an :math:`(\hat x_0, \Sigma_0)` and a
 record of observations :math:`\{ y_t \}^T_{t=0}`.
 
@@ -1487,7 +1486,7 @@ Limiting Time-Invariant Innovations Representation
     \hat x_{t+1} &= & A^o \hat x_t + K a_t \cr
    y_t &= & G \hat x_t + a_t,  \end{eqnarray*}
 
- where :math:`E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R`.
+where :math:`E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R`.
 
 Factorization of Likelihood Function
 ====================================
@@ -1552,7 +1551,7 @@ Equating these two leads to:
    &  &[G(zI-A^o)^{-1}K +I] [G \Sigma G^\prime + R] [K'(z^{-1} I -A^{o\prime})^{-1}
    G^\prime + I] .\end{eqnarray*}
 
- Key Insight: The zeros of the polynomial
+Key Insight: The zeros of the polynomial
 :math:`\det [G(zI-A^o)^{-1}K +I]` all lie inside the unit circle, which
 means that :math:`a_t` lies in the space spanned by square summable
 linear combinations of :math:`y^t`.
@@ -1575,11 +1574,11 @@ A Wold moving average representation for :math:`\{y_t\}` is
 
 .. math:: y_t = [ G(I-A^oL)^{-1}KL + I] a_t  .
 
- Applying the inverse of the operator on the right side and using
+Applying the inverse of the operator on the right side and using
 
 .. math:: [G(I-A^oL)^{-1}KL+I]^{-1} = I - G[I - (A^o-KG)L]^{-1}KL
 
- gives the vector autoregressive representation
+gives the vector autoregressive representation
 
 .. math:: y_t = \sum_{j=1}^\infty G (A^o -KG)^{j-1} K y_{t-j} + a_t  .
 
@@ -1592,11 +1591,11 @@ A Wold moving average representation for :math:`\{y_t\}` is
 
 .. math:: y_t = [ G(I-A^oL)^{-1}{\color{red}K}L + I] a_t  .
 
- Applying the inverse of the operator on the right side and using
+Applying the inverse of the operator on the right side and using
 
 .. math:: [G(I-A^oL)^{-1}{\color{red}K}L+I]^{-1} = I - G[I - (A^o-{\color{red}K}G)L]^{-1}{\color{red}K} L
 
- gives the vector autoregressive representation
+gives the vector autoregressive representation
 
 .. math:: y_t = \sum_{j=1}^\infty G (A^o - {\color{red}K}G)^{j-1} {\color{red}K} y_{t-j} + a_t  .
 
@@ -1618,9 +1617,9 @@ Definition: A household service technology
 if
 
 
-:math:`\Pi` is nonsingular, and
+#. :math:`\Pi` is nonsingular, and
 
-The absolute values of the eigenvalues of :math:`(\Delta_h - \Theta_h
+#. The absolute values of the eigenvalues of :math:`(\Delta_h - \Theta_h
 \Pi^{-1}\Lambda)` are strictly less than :math:`1/\sqrt\beta`.
 
 .. _canonical-household-technologies-1:
@@ -1663,7 +1662,7 @@ An inverse household technology:
    h_t &= & (\Delta_h - \Theta_h\Pi^{-1} \Lambda) h_{t-1} + \Theta_h \Pi^{-1}
    s_t . \end{eqnarray*}
 
- Restriction (ii) on the eigenvalues of the matrix
+Restriction (ii) on the eigenvalues of the matrix
 :math:`(\Delta_h - \Theta_h \Pi^{-1}
 \Lambda)` keeps the household capital stock :math:`\{h_t\}` in
 :math:`L_0^2`.
@@ -1688,7 +1687,7 @@ An inverse household technology:
    h_t &= & (\Delta_h - \Theta_h\Pi^{-1} \Lambda) h_{t-1} + \Theta_h \Pi^{-1}
    s_t . \end{eqnarray*}
 
- Restriction (ii) on the eigenvalues of the matrix
+Restriction (ii) on the eigenvalues of the matrix
 :math:`(\Delta_h - \Theta_h \Pi^{-1}
 \Lambda)` keeps the household capital stock :math:`\{h_t\}` in
 :math:`L_0^2`.
@@ -1713,7 +1712,7 @@ An inverse household technology:
    h_t &= &{\color{red}(\Delta_h - \Theta_h\Pi^{-1} \Lambda)} h_{t-1} + \Theta_h {\color{red}\Pi^{-1}}
    s_t . \end{eqnarray*}
 
- Restriction (ii) on the eigenvalues of the matrix
+Restriction (ii) on the eigenvalues of the matrix
 :math:`(\Delta_h - \Theta_h \Pi^{-1}
 \Lambda)` keeps the household capital stock :math:`\{h_t\}` in
 :math:`L_0^2`.
@@ -1733,7 +1732,7 @@ Dynamic Demand Functions
    s_{i,t}& = & \Lambda h_{i,t-1} \cr
    h_{i,t}& = & \Delta _h h_{i,t-1}, \end{eqnarray*}
 
- where :math:`h_{i,-1} = h_{-1}`.
+where :math:`h_{i,-1} = h_{-1}`.
 
 .. _dynamic-demand-functions-1:
 
@@ -1779,7 +1778,7 @@ Dynamic Demand Functions
       ^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^0  \cr
        h_t & = & \Delta_h h_{t-1} + \Theta_h c_t . \end{eqnarray*}
 
- This system expresses consumption demands at date :math:`t` as
+This system expresses consumption demands at date :math:`t` as
 functions of: (i) time-\ :math:`t` conditional expectations of future
 scaled Arrow-Debreu prices :math:`\{p_{t+s}^0\}_{s=0}^\infty`; (ii) the
 stochastic process for the household’s endowment :math:`\{d_t\}` and
@@ -1809,7 +1808,7 @@ Dynamic Demand Functions
       ^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^0  \cr
        h_t & = & \Delta_h h_{t-1} + \Theta_h c_t . \end{eqnarray*}
 
- This system expresses consumption demands at date :math:`t` as
+This system expresses consumption demands at date :math:`t` as
 functions of: (i) time-\ :math:`t` conditional expectations of future
 scaled Arrow-Debreu prices :math:`\{p_{t+s}^0\}_{s=0}^\infty`; (ii) the
 stochastic process for the household’s endowment :math:`\{d_t\}` and
@@ -1966,7 +1965,7 @@ A representative firm maximizes
 
 .. math:: E \sum_{t=0}^\infty \beta^t \{ p_t c_t - g_t^2/2 \} ,
 
- subject to the technology
+subject to the technology
 
 .. math::
 
@@ -1975,13 +1974,13 @@ A representative firm maximizes
                 k_t &=  & \delta_k k_{t-1} + i_t \cr
                 g_t & = & f_1 i_t + f_2 d_t , \end{eqnarray*}
 
- where :math:`d_t` is a cost shifter, :math:`\gamma> 0`, and
+where :math:`d_t` is a cost shifter, :math:`\gamma> 0`, and
 :math:`f_1 >0` is a cost parameter and :math:`f_2 =1`. Demand is
 governed by
 
 .. math:: p_t = \alpha_0 - \alpha_1 c_t + u_t,
 
- where :math:`u_t` is a demand shifter with mean zero and
+where :math:`u_t` is a demand shifter with mean zero and
 :math:`\alpha_0, \alpha_1` are positive parameters. Assume that
 :math:`u_t, d_t` are uncorrelated first-order autoregressive processes.
 
@@ -1995,7 +1994,7 @@ A Rosen-Topel Housing Model
                 p_t & = & E_t \sum_{\tau =0}^\infty (\beta \delta_h)^\tau
                           R_{t+\tau} \end{eqnarray*}
 
- where :math:`h_t` is the stock of housing at time :math:`t`,
+where :math:`h_t` is the stock of housing at time :math:`t`,
 :math:`R_t` is the rental rate for housing, :math:`p_t` is the price of
 new houses, and :math:`b_t` is a demand shifter; :math:`\alpha < 0` is a
 demand parameter, and :math:`\delta_h` is a depreciation factor for
@@ -2011,7 +2010,7 @@ the stock of houses :math:`h_t` evolve according to
 
 .. math:: h_t = \delta_h h_{t-1} + c_t, \quad \delta_h \in (0,1) ,
 
- where :math:`c_t` is the rate of production of new houses. Houses
+where :math:`c_t` is the rate of production of new houses. Houses
 produce services :math:`s_t` according to
 :math:`s_t  = \bar \lambda h_t` or
 :math:`s_t  = \lambda h_{t-1} + \pi c_t,` where
@@ -2029,7 +2028,7 @@ Demand for housing services is
 
 .. math:: s_t = b_t - \mu_0 \rho_t^0 ,
 
- where the price of new houses :math:`p_t` is related to
+where the price of new houses :math:`p_t` is related to
 :math:`\rho_t^0` by
 :math:`\rho_t^0 = \pi^{-1} [  p_t - \beta \delta_h E_t p_{t+1}] .`
 
@@ -2050,12 +2049,12 @@ The law of motion for cattle stocks is
 
 .. math:: \tilde x_t = (1-\delta) \tilde x_{t-1} + g \tilde x_{t-3} - c_t,
 
- where :math:`c_t` is a rate of slaughtering. The total head count of
+where :math:`c_t` is a rate of slaughtering. The total head count of
 cattle,
 
 .. math:: \tilde y_t = \tilde x_t + g \tilde x_{t-1} + g \tilde x_{t-2},
 
- is the sum of adults, calves, and yearlings, respectively.
+is the sum of adults, calves, and yearlings, respectively.
 
 .. _cattle-cycles-1:
 
@@ -2074,7 +2073,7 @@ A representative farmer chooses :math:`\{c_t, \tilde x_t\}` to maximize
             &  - &   \Psi(\tilde x_t, \tilde x_{t-1},
             \tilde x_{t-2}, c_t) \}, \end{eqnarray*}
 
- where
+where
 
 .. math::
 
@@ -2085,7 +2084,7 @@ Demand is governed by
 
 .. math:: c_t = \alpha_0 - \alpha_1 p_t + \tilde d_t ,
 
- where :math:`\alpha_0 > 0`, :math:`\alpha_1 > 0`, and
+where :math:`\alpha_0 > 0`, :math:`\alpha_1 > 0`, and
 :math:`\{\tilde d_t\}_{t=0}^\infty` is a stochastic process with mean
 zero representing a demand shifter.
 
@@ -2104,11 +2103,11 @@ first, a demand curve for engineers
 
 .. math:: w_t = - \alpha_d N_t + \epsilon_{1t}\ ,\ \alpha_d > 0 ;
 
- second, a time-to-build structure of the education process
+second, a time-to-build structure of the education process
 
 .. math:: N_{t+k} = \delta_N N_{t+k-1} + n_t\ ,\ 0<\delta_N<1;
 
- third, a definition of the discounted present value of each new
+third, a definition of the discounted present value of each new
 engineering student
 
 .. math::
@@ -2116,11 +2115,11 @@ engineering student
    v_t = \beta^k E_t \sum^\infty_{j=0} (\beta  \delta_N)^j
       w_{t+k+j};
 
- and fourth, a supply curve of new students driven by :math:`v_t`
+and fourth, a supply curve of new students driven by :math:`v_t`
 
 .. math:: n_t = \alpha_s v_t + \epsilon_{2t}\ ,\ \alpha_s > 0.
 
- Here :math:`\{\epsilon_{1t}, \epsilon_{2t}\}` are stochastic processes
+Here :math:`\{\epsilon_{1t}, \epsilon_{2t}\}` are stochastic processes
 of labor demand and supply shocks.
 
 .. _market-for-engineers-1:
@@ -2154,7 +2153,7 @@ the technology for producing goods.
    %b_t &=  & \epsilon_{1t}
     \end{eqnarray*}
 
- This specification sets Rosen’s :math:`N_t = h_{1t-1}, n_t = c_t,
+This specification sets Rosen’s :math:`N_t = h_{1t-1}, n_t = c_t,
 h_{\tau+1,t-1} = n_{t-\tau}, \tau=1, \ldots, k`, and uses the
 home-produced service to capture the demand for labor. Here
 :math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`.
@@ -2179,7 +2178,7 @@ First, a demand curve for labor
         = \alpha_d \begin{bmatrix} N_{ut} \cr N_{st} \end{bmatrix}
            + \epsilon_{1t} ;
 
- where :math:`\alpha_d` is a :math:`(2 \times 2)` matrix of demand
+where :math:`\alpha_d` is a :math:`(2 \times 2)` matrix of demand
 parameters and :math:`\epsilon_{1t}` is a vector of demand shifters;
 second, time-to-train specifications for skilled and unskilled labor,
 respectively:
@@ -2190,7 +2189,7 @@ respectively:
     N_{st+k} &= &\delta_N N_{st+k-1} + n_{st} \cr
                 N_{ut} &=  &\delta_N N_{ut-1} + n_{ut} ; \end{eqnarray*}
 
- where :math:`N_{st}, N_{ut}` are stocks of the two types of labor, and
+where :math:`N_{st}, N_{ut}` are stocks of the two types of labor, and
 :math:`n_{st}, n_{ut}` are entry rates into the two occupations;
 
 .. _skilled-and-unskilled-workers-1:
@@ -2209,7 +2208,7 @@ skilled and unskilled occupations, respectively:
                 v_{ut} & =  &E_t \sum_{j=0}^\infty (\beta \delta_N)^j
        w_{ut+j}, \end{eqnarray*}
 
- where :math:`w_{ut}, w_{st}` are wage rates for the two occupations;
+where :math:`w_{ut}, w_{st}` are wage rates for the two occupations;
 and fourth, supply curves for new entrants:
 
 .. math::
@@ -2264,7 +2263,7 @@ and :math:`e`
    \sum\limits_{j=0}^\infty \beta^j (\phi_c)^\prime \chi_j =
     \sum\limits_{j=0}^\infty \beta^j \epsilon_j
 
- where :math:`\chi_j w_t` is the response of :math:`c_{t+j}` to
+where :math:`\chi_j w_t` is the response of :math:`c_{t+j}` to
 :math:`w_t` and :math:`\epsilon_j w_t` is the response of endowment
 :math:`e_{t+j}` to :math:`w_t`:
 
@@ -2309,7 +2308,7 @@ Gorman Heterogeneous Households
 
 .. math:: h_{jt} = \Delta_h\, h_{j,t-1} + \Theta_h\, c_{jt}
 
- and :math:`h_{j,-1}` is given.
+and :math:`h_{j,-1}` is given.
 
 .. math:: b_{jt} = U_{bj} z_t ,
 
@@ -2320,7 +2319,7 @@ Gorman Heterogeneous Households
         d_{jt}) \mid
    J_0 + v_0\, \cdot k_{j,-1},
 
- where :math:`k_{j,-1}` is given. The :math:`j^{\rm th}` consumer owns
+where :math:`k_{j,-1}` is given. The :math:`j^{\rm th}` consumer owns
 an endowment process :math:`d_{jt}`, governed by the stochastic process
 :math:`d_{jt} = U_{dj}\, z_t .`
 
@@ -2352,7 +2351,7 @@ Set
 
 .. math:: \ell_{jt} = (\mu_{0j}^w/\mu_{0a}^w) \ell_{at}
 
- Then solve the following equation for :math:`\mu_{0j}^{w}`:
+Then solve the following equation for :math:`\mu_{0j}^{w}`:
 
 .. math::
 
@@ -2371,7 +2370,7 @@ Set
    h_{jt} &= & (\Delta_h - \Theta_h \Pi^{-1}\Lambda) h_{j,t-1} + \Pi^{-1}
        \Theta_h  s_{jt} \end{eqnarray*}
 
- :math:`h_{j,-1}` given.
+Here :math:`h_{j,-1}` given.
 
 
 Non-Gorman Heterogeneous Households
@@ -2434,7 +2433,7 @@ Single consumer static inverse demand and implied preferences:
 
 .. math:: p_t = \mu_0^{-1} \Pi' b_t - \mu_0^{-1} \Pi' \Pi c_t.
 
- Integrating the marginal utility vector shows that preferences can be
+Integrating the marginal utility vector shows that preferences can be
 taken to be
 
 .. math:: ( - 2 \mu_0)^{-1} (\Pi c_t - b_t) \cdot (\Pi c_t - b_t )
@@ -2495,7 +2494,7 @@ choose :math:`\{c_{1t},c_{2t}\}` to maximize the criterion
    \sum^\infty_{t=0} \beta^t [\lambda (s_{1t} - b_{1t}) \cdot (s_{1t} - b_{1t})
     + (1-\lambda) (s_{2t} - b_{2t}) \cdot (s_{2t} - b_{2t})]
 
- subject to
+subject to
 
 .. math::
 
@@ -2504,7 +2503,7 @@ choose :math:`\{c_{1t},c_{2t}\}` to maximize the criterion
    s_{jt} &=  &\Delta_j h_{jt-1} + \Pi_j c_{jt}\ , j=1,2\cr
    c_{1t} +   c_{2t} & = &c_t, \end{eqnarray*}
 
- subject to :math:`(h_{1, -1},\, h_{2, -1})` given and
+subject to :math:`(h_{1, -1},\, h_{2, -1})` given and
 :math:`\{b_{1t}\},\, \{b_{2t}\},\, \{c_t\}` being known and fixed
 sequences. Substituting the :math:`\{c_{1t},\, c_{2t}\}` sequences that
 solve this problem as functions of :math:`\{b_{1t},\, b_{2t},\, c_t\}`
