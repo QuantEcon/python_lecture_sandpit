@@ -18,4 +18,6 @@
     :titlesonly:
 
     test_lecture
+    HS_recursive_models
+    comples_and_trig
     zreferences
