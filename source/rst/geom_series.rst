@@ -5,11 +5,11 @@
 .. index::
     single: python
     
-**********************
-Geometric series 101
-**********************
+************************************
+Geometric series and economics 101
+************************************
 
-This notebook describes important sets of ideas in economics that rely
+This lecture describes important  ideas in economics that rely
 on using the mathematics of geometric series
 
 Among these are
@@ -36,8 +36,7 @@ To start, we let :math:`c` be a real number that lies strictly between
    are strictly less than :math:`1` and strictly greater
    than\ :math:`-1`
 
--  the symbol :math:`\in` means *in* or *belongs to the following
-   set*
+-  the symbol :math:`\in` means *in* or *belongs to the set after the symbol*
 
 We want to evaluate geometric series of two types -- infinite and finite
 
@@ -53,13 +52,11 @@ Where :math:`\cdots` means that the series contiues without limit.
 The key formula is
 
 .. math::
-  :label: infinite
+   :label: infinite
   
-  1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }
+   1 + c + c^2 + c^3 + \cdots = \frac{1}{1 -c }
 
-**How to prove key formula :eq:`infinite`:**
-
-Multiply both sides of the above equation by :math:`(1-c)` and verify
+To prove key formula :eq:`infinite`, multiply both sides  by :math:`(1-c)` and verify
 that if :math:`c \in (-1,1)`, then the outcome is the
 equation :math:`1 = 1`
 
@@ -365,7 +362,7 @@ ignites a dynamic process of increases in national income by amounts
 
 .. math:: \Delta i, (1 + b )\Delta i, (1+b + b^2) \Delta i , \cdots
 
- at times :math:`0, 1, 2, \ldots`
+at times :math:`0, 1, 2, \ldots`
 
 **Remark 2** Let :math:`g_t` be an exogenous sequence of government
 expenditures

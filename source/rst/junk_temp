@@ -1,0 +1,186 @@
+
+.. math::
+
+   \begin{eqnarray*}
+    h_t &=  &\Delta_h h_{t-1} + \Theta_h  c_t \cr
+                s_t & = & \Lambda h_{t-1} + \Pi c_t  \cr
+                b_t  &= &U_b z_t. \end{eqnarray*}
+
+Definition: A household service technology
+:math:`(\Delta_h, \Theta_h, \Pi,\Lambda, U_b)` is said to be canonical
+if
+
+
+#. :math:`\Pi` is nonsingular, and
+
+#. The absolute values of the eigenvalues of :math:`(\Delta_h - \Theta_h
+\Pi^{-1}\Lambda)` are strictly less than :math:`1/\sqrt\beta`.
+
+.. _canonical-household-technologies-1:
+
+
+Canonical Household Technologies
+================================
+
+| Key property (invertiblility): A canonical household service
+  technology maps a service process :math:`\{s_t\}` in :math:`L_0^2`
+  into a corresponding consumption process :math:`\{c_t\}` for which the
+  implied household capital stock process :math:`\{h_t\}` is also in
+  :math:`L^2_0`.
+
+An inverse household technology:
+
+.. math::
+
+   \begin{eqnarray*}
+    \{ c_t} &= & - \Pi^{-1} \Lambda h_{t-1} + \Pi^{-1} \{ s_t}\cr
+   h_t &= & (\Delta_h - \Theta_h\Pi^{-1} \Lambda) h_{t-1} + \Theta_h \Pi^{-1}
+   s_t . \end{eqnarray*}
+
+Restriction (ii) on the eigenvalues of the matrix
+:math:`(\Delta_h - \Theta_h \Pi^{-1}
+\Lambda)` keeps the household capital stock :math:`\{h_t\}` in
+:math:`L_0^2`.
+
+.. _canonical-household-technologies-4:
+
+
+Canonical Household Technologies
+================================
+
+| Key property (invertiblility): A canonical household service
+  technology maps a service process :math:`\{s_t\}` in :math:`L_0^2`
+  into a corresponding consumption process :math:`\{c_t\}` for which the
+  implied household capital stock process :math:`\{h_t\}` is also in
+  :math:`L^2_0`.
+
+An inverse household technology:
+
+.. math::
+
+   \begin{eqnarray*}
+    c_t &= & - {\color{red}\Pi^{-1}} \Lambda h_{t-1} + {\color{red}\Pi^{-1}} s_t\cr
+   h_t &= &{\color{red}(\Delta_h - \Theta_h\Pi^{-1} \Lambda)} h_{t-1} + \Theta_h {\color{red}\Pi^{-1}}
+   s_t . \end{eqnarray*}
+
+Restriction (ii) on the eigenvalues of the matrix
+:math:`(\Delta_h - \Theta_h \Pi^{-1}
+\Lambda)` keeps the household capital stock :math:`\{h_t\}` in
+:math:`L_0^2`.
+
+
+
+Summary
+=======
+
+Information and shocks:
+
+.. math::
+
+   \begin{eqnarray*}
+    z_{t+1} & = &\{A_{22}} z_t + \{C_2} w_{t+1}
+   \cr  b_t & = & \{U_b} z_t \cr d_t & = & \{U_d} z_t .\end{eqnarray*}
+
+Production Technology:
+
+.. math::
+
+   \begin{eqnarray*}
+    \{\Phi_c} c_t +  \{\Phi_g} g_t + \{\Phi_i} i_t& = &\{\Gamma} k_{t-1} + d_t \cr
+   k_t &= &\{\Delta_k} k_{t-1} + \{\Theta_k} i_t \cr g_t \cdot g_t & = &\ell_t^2 . \end{eqnarray*}
+
+Household Technology:
+
+.. math::
+
+   \begin{eqnarray*}
+    \cr s_t & = &
+   \{\Lambda} h_{t-1} + \{\Pi} c_t \cr h_t & = & \{\Delta_h} h_{t-1} + \{\Theta_h} c_t \end{eqnarray*}
+
+Preferences:
+
+.. math::
+
+   \Bigl( {1 \over 2}\Bigr)  E \sum_{t=0}^\infty \{\beta}^t [ (s_t -
+   b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 < \beta < 1
+
+
+   ===========
+
+
+
+
+Choose :math:`\{c_t, i_t, g_t\}_{t=0}^\infty` to maximize
+
+.. math::
+
+   -(1/2)E \sum_{t=0}^\infty \beta^t [ (s_t - b_t) \cdot (s_t - b_t) + g_t \cdot g_t ] \bigl| J_0 .
+
+ subject to
+
+
+ =====================
+
+ Dynamic Demand Functions
+========================
+
+.. math:: W_0 = E_0\sum^\infty_{t=0}\beta ^t(w^0_t\ell _t + \alpha ^0_t\cdot d_t) + v_0\cdot k_{-1} .
+
+.. math::
+
+   \mu^w_0 = {E_0 \sum^\infty_{t=0} \beta^t \rho^0_t\cdot
+    (b_t -s_{i,t}) - W_0 \over E_0 \sum^\infty_{t=0}
+   \beta^t \rho^0_t \cdot \rho^0_t} .
+
+.. math::
+
+   \begin{eqnarray*}
+    c_t & = & -\Pi^{-1} \Lambda h_{t-1} + \Pi ^{-1} b_t
+    - \Pi^{-1} \mu_0^w E_t \{ \Pi^{\prime\, -1} - \Pi^{\prime\, -1}\Theta_h ' \cr
+   & & \qquad [I - (\Delta_h ' - \Lambda ' \Pi^{\prime \, -1} \Theta_h ')\beta L^{-1}]
+      ^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^0  \cr
+       h_t & = & \Delta_h h_{t-1} + \Theta_h c_t . \end{eqnarray*}
+
+This system expresses consumption demands at date :math:`t` as
+functions of: (i) time-\ :math:`t` conditional expectations of future
+scaled Arrow-Debreu prices :math:`\{p_{t+s}^0\}_{s=0}^\infty`; (ii) the
+stochastic process for the household’s endowment :math:`\{d_t\}` and
+preference shock :math:`\{b_t\}`, as mediated through the multiplier
+:math:`\mu_0^w` and wealth :math:`W_0`; and (iii) past values of
+consumption, as mediated through the state variable :math:`h_{t-1}`.
+
+.. _dynamic-demand-functions-3:
+
+
+
+.. _dynamic-demand-functions-2:
+
+
+
+Dynamic Demand Functions
+========================
+
+.. math:: W_0 = E_0\sum^\infty_{t=0}\beta ^t(w^0_t\ell _t + \alpha ^0_t\cdot d_t) + v_0\cdot k_{-1} .
+
+.. math::
+
+   \mu^w_0 = {E_0 \sum^\infty_{t=0} \beta^t \rho^0_t\cdot
+    (b_t -s_{i,t}) - W_0 \over E_0 \sum^\infty_{t=0}
+   \beta^t \rho^0_t \cdot \rho^0_t} .
+
+.. math::
+
+   \begin{eqnarray*}
+    c_t & = & -\Pi^{-1} \Lambda h_{t-1} + \Pi ^{-1} b_t
+    - \Pi^{-1} \{\mu_0^w } E_t \{ \Pi^{\prime\, -1} - \Pi^{\prime\, -1}\Theta_h ' \cr
+   & & \qquad [I - (\Delta_h ' - \Lambda ' \Pi^{\prime \, -1} \Theta_h ')\beta L^{-1}]
+      ^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^0  \cr
+       h_t & = & \Delta_h h_{t-1} + \Theta_h c_t . \end{eqnarray*}
+
+This system expresses consumption demands at date :math:`t` as
+functions of: (i) time-\ :math:`t` conditional expectations of future
+scaled Arrow-Debreu prices :math:`\{p_{t+s}^0\}_{s=0}^\infty`; (ii) the
+stochastic process for the household’s endowment :math:`\{d_t\}` and
+preference shock :math:`\{b_t\}`, as mediated through the multiplier
+:math:`\mu_0^w` and wealth :math:`W_0`; and (iii) past values of
+consumption, as mediated through the state variable :math:`h_{t-1}`.
