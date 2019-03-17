@@ -347,6 +347,13 @@ Evidently,
     v_1 &= & CC^\prime \cr
     v_j &=  & CC^\prime + A v_{j-1} A^\prime, \quad j \geq 2 . \end{align}
 
+
+.. math::
+
+   \begin{align}
+    v_1 &=  CC^\prime \cr
+    v_j &=   CC^\prime + A v_{j-1} A^\prime, \quad j \geq 2 . \end{align}
+
 Orthogonal Decomposition
 ---------------------------
 
