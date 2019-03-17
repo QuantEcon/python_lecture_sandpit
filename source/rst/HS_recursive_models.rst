@@ -61,7 +61,7 @@ Complete Markets Economies
 ============================
 
 Common objects and features
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 -  Commodity space.
 
@@ -80,7 +80,7 @@ Common objects and features
 -  Presence of a representative consumer.
 
 Absence of Frictions Such as :math:`\ldots`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------
 
 -  Enforcement.
 
@@ -91,7 +91,7 @@ Absence of Frictions Such as :math:`\ldots`
 -  Externalities.
 
 Hicks-Arrow tricks
-^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 Imperialism of complete markets models comes from:
 
@@ -100,7 +100,7 @@ Imperialism of complete markets models comes from:
 -  Indexing commodities and their prices by chance (Arrow).
 
 Forecasting?
-^^^^^^^^^^^^^
+-------------------------------
 
 -  Consequence of single budget constraint plus Hicks-Arrow tricks:
    households and firms need not forecast.
@@ -115,7 +115,7 @@ Forecasting?
     - knowledge of the  Markov structure of the economy’s state vector.
 
 Theory and Econometrics
-^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 -  Outcome of theorizing is a stochastic process, i.e., a probability
    distribution over sequences of prices and quantities, indexed by
@@ -129,7 +129,7 @@ A Class of Economies
 ====================
 
 Basic Ideas:
-^^^^^^^^^^^^^
+-------------------------------
 
 -  An economy consists of a list of matrices that describe peoples’
    household technologies, their preferences over consumption services,
@@ -189,7 +189,7 @@ complete markets economy (‘mongrel’ or ‘non-Gorman’ aggregation)
    aggregation.
 
 Insights and Practical Benefits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 -  Deeper understanding comes from recognizing common underlying
    structures
@@ -1351,17 +1351,17 @@ Econometrics
 ==============
 
 A tale of two state-space representations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------
 
 Facts Motivating Filtering
-==========================
+-------------------------------
 
 .. math:: H(y^t) \subset H(w^t,v^t)
 
 .. math:: H(y^t) = H(a^t)
 
 Statistical Representations
-===========================
+-------------------------------
 
 Original State-Space Representation:
 
@@ -1390,7 +1390,7 @@ where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G
 .. _statistical-representations-1:
 
 Statistical Representations
-===========================
+-------------------------------
 
 Original State-Space Representation:
 
@@ -1422,7 +1422,7 @@ where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G
 .. _facts-motivating-filtering-1:
 
 Facts Motivating Filtering
-==========================
+-------------------------------
 
 .. math:: H(y^t) \subset H(w^t,v^t)
 
@@ -1433,7 +1433,7 @@ Compare numbers of shocks in the two representations: :math:`n_w + n_y` versus  
 Compare spaces spanned
 
 Kalman Filter
-=============
+-------------------------------
 
 .. math:: K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} .
 
@@ -1446,7 +1446,7 @@ Riccati Difference Equation:
    &- & A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} G \Sigma_t A^{o \prime}. \end{eqnarray*}
 
 Whitener
-========
+-------------------------------
 
 Whitening Filter:
 
@@ -1461,7 +1461,7 @@ can be used recursively to construct a record of innovations
 record of observations :math:`\{ y_t \}^T_{t=0}`.
 
 Limiting Time-Invariant Innovations Representation
-==================================================
+--------------------------------------------------------------
 
 .. math::
 
@@ -1479,7 +1479,7 @@ Limiting Time-Invariant Innovations Representation
 where :math:`E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R`.
 
 Factorization of Likelihood Function
-====================================
+--------------------------------------------------------------
 
 Sample of observations :math:`\{y_s\}_{s=0}^T` on a
 :math:`(n_y \times 1)` vector.
@@ -1502,7 +1502,7 @@ Gaussian Log-Likelihood:
          + a_t' \Omega_t^{-1} a_t \biggr\} .
 
 Covariance Generating Functions
-===============================
+--------------------------------------------------------------
 
 Autocovariance: :math:`C_x(\tau) = E x_t x_{t-\tau}'`
 
@@ -1510,7 +1510,7 @@ Generating Function:
 :math:`S_x(z) = \sum_{\tau = -\infty}^\infty C_x(\tau) z^\tau, z \in C`
 
 Spectral Factorization Identity
-===============================
+-------------------------------
 
 Original state-space representation has too many shocks and implies:
 
@@ -1530,7 +1530,7 @@ Innovations representation has as many shocks as dimension of
 .. _spectral-factorization-identity-1:
 
 Spectral Factorization Identity
-===============================
+-------------------------------
 
 Equating these two leads to:
 
@@ -1551,14 +1551,14 @@ linear combinations of :math:`y^t`.
 Key Property: Invertibility
 
 Lag Operator
-============
+-------------------------------
 
 .. math:: L x_t \equiv x_{t-1}
 
 .. math:: L^{-1} x_t \equiv x_{t+1}
 
 Wold and Vector Autoregressive Representations
-==============================================
+--------------------------------------------------------------
 
 A Wold moving average representation for :math:`\{y_t\}` is
 
@@ -1575,7 +1575,7 @@ gives the vector autoregressive representation
 .. _wold-and-vector-autoregressive-representations-1:
 
 Wold and Vector Autoregressive Representations
-==============================================
+--------------------------------------------------------------
 
 A Wold moving average representation for :math:`\{y_t\}` is
 
@@ -1711,7 +1711,7 @@ ordering over aggregate consumption that is independent of the
 distribution of wealth.
 
 Re-Opened Markets
-=================
+-------------------------------
 
 .. math::
 
@@ -1746,7 +1746,7 @@ Re-Opened Markets
        h_t & = & \Delta_h h_{t-1} + \Theta_h c_t .  \end{eqnarray*}
 
 Dynamic Demand
-==============
+-------------------------------
 
 Define a time :math:`t` continuation of a sequence
 :math:`\{z_t\}_{t=0}^\infty` as the sequence
@@ -1769,7 +1769,7 @@ The time :math:`t` continuation of the vector of prices
 :math:`\{p_t^t\}`.
 
 Attaining a canonical hh technology
-===================================
+--------------------------------------------------------------
 
 Apply the following version of a factorization identity:
 
@@ -1791,7 +1791,7 @@ requirements for a canonical representation.
 
 
 Examples: Partial Equilibrium
-=============================
+-------------------------------
 
 Demand:
 
@@ -1807,7 +1807,7 @@ Demand:
 .. _examples-partial-equilibrium-1:
 
 Examples: Partial Equilibrium
-=============================
+-------------------------------
 
 A representative firm takes as given and beyond its control the
 stochastic process :math:`\{p_t\}_{t=0}^\infty`. The firm sells its
@@ -1833,7 +1833,7 @@ The firm chooses stochastic processes
                      \end{eqnarray*}
 
 Equilibrium Investment Under Uncertainty
-========================================
+--------------------------------------------------------------
 
 A representative firm maximizes
 
@@ -1859,7 +1859,7 @@ where :math:`u_t` is a demand shifter with mean zero and
 :math:`u_t, d_t` are uncorrelated first-order autoregressive processes.
 
 A Rosen-Topel Housing Model
-===========================
+-------------------------------
 
 .. math::
 
@@ -1877,7 +1877,7 @@ houses.
 .. _a-rosen-topel-housing-model-1:
 
 A Rosen-Topel Housing Model
-===========================
+-------------------------------
 
 We cast this demand specification within our class of models by letting
 the stock of houses :math:`h_t` evolve according to
@@ -1896,7 +1896,7 @@ time :math:`t`, measured in units of time :math:`t` consumption
 .. _a-rosen-topel-housing-model-2:
 
 A Rosen-Topel Housing Model
-===========================
+-------------------------------
 
 Demand for housing services is
 
@@ -1933,7 +1933,7 @@ is the sum of adults, calves, and yearlings, respectively.
 .. _cattle-cycles-1:
 
 Cattle Cycles
-=============
+-------------------------------
 
 A representative farmer chooses :math:`\{c_t, \tilde x_t\}` to maximize
 
@@ -1963,14 +1963,14 @@ where :math:`\alpha_0 > 0`, :math:`\alpha_1 > 0`, and
 zero representing a demand shifter.
 
 Models of Occupational Choice and Pay
-=====================================
+--------------------------------------------------------------
 
 -  Rosen schooling model for engineers.
 
 -  Two-occupation model.
 
 Market for Engineers
-====================
+-------------------------------
 
 Ryoo and Rosen’s (2004) model consists of the following equations:
 first, a demand curve for engineers
@@ -1999,7 +1999,7 @@ of labor demand and supply shocks.
 .. _market-for-engineers-1:
 
 Market for Engineers 
-=====================
+-------------------------------
 
 Definition: A partial equilibrium is a stochastic process
 :math:`\{w_t, N_t, v_t, n_t\}^\infty_{t=0}` satisfying these four
@@ -2007,7 +2007,7 @@ equations, and initial conditions
 :math:`N_{-1}, n_{-s}, s=1, \ldots, -k`.
 
 Capturing the Market for Engineers
-==================================
+--------------------------------------------------------------
 
 We sweep the time-to-build structure and the demand for engineers into
 the household technology and putting the supply of new engineers into
@@ -2033,7 +2033,7 @@ home-produced service to capture the demand for labor. Here
 :math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`.
 
 Trick for Capturing the Market for Engineers
-============================================
+--------------------------------------------------------------
 
 The supply of new workers becomes our consumption. The dynamic demand
 curve becomes Rosen’s dynamic supply curve for new workers.
@@ -2042,7 +2042,7 @@ curve becomes Rosen’s dynamic supply curve for new workers.
 Remark: This has an Imai-Keane flavor.
 
 Skilled and Unskilled Workers
-=============================
+-------------------------------
 
 First, a demand curve for labor
 
@@ -2069,7 +2069,7 @@ where :math:`N_{st}, N_{ut}` are stocks of the two types of labor, and
 .. _skilled-and-unskilled-workers-1:
 
 Skilled and Unskilled Workers
-=============================
+-------------------------------
 
 third, definitions of discounted present values of new entrants to the
 skilled and unskilled occupations, respectively:
@@ -2092,7 +2092,7 @@ and fourth, supply curves for new entrants:
            \epsilon_{2t}.
 
 Short Cut
-=========
+-------------------------------
 
 As an alternative, Siow simply used the ‘equalizing differences’
 condition
@@ -2116,7 +2116,7 @@ Permanent Income Models
 .. math:: \phi_ii_t-g_t=0
 
 Permanent Income Models: Implication One
-========================================
+--------------------------------------------------------------
 
 Equality of Present Values of Moving Average Coefficients of :math:`c`
 and :math:`e`
@@ -2142,7 +2142,7 @@ where :math:`\chi_j w_t` is the response of :math:`c_{t+j}` to
 :math:`e_{t+j}` to :math:`w_t`:
 
 Permanent Income Models: Implication Two
-========================================
+--------------------------------------------------------------
 
 Martingales
 
@@ -2157,7 +2157,7 @@ and
 .. math:: {\mathcal M}_t^c  =  (\Phi_c)^\prime {\mathcal M}_t^d = \phi_c {\cal M}_t^e
 
 Permanent Income Models: Testing
-================================
+--------------------------------------------------------------
 
 Test the two implications:
 
@@ -2171,7 +2171,7 @@ and by Attanasio and Pavoni (2011).
 
 
 Gorman Heterogeneous Households
-===============================
+--------------------------------------------------------------
 
 .. math::
 
@@ -2219,7 +2219,7 @@ Punchline: :math:`\exists` a representative consumer. Use it to compute
 competitive equilibrium aggregate allocation and price system.
 
 To Compute Individual Allocations
-=================================
+--------------------------------------------------------------
 
 Set
 
@@ -2248,7 +2248,7 @@ Here :math:`h_{j,-1}` given.
 
 
 Non-Gorman Heterogeneous Households
-===================================
+--------------------------------------------------------------
 
 Preferences and Household Technologies:
 
@@ -2268,7 +2268,7 @@ Preferences and Household Technologies:
 .. math:: z_{t+1} = A_{22} z_t + C_2 w_{t+1} .
 
 Production Technology
-=====================
+-------------------------------
 
 .. math::
 
@@ -2285,7 +2285,7 @@ Production Technology
 .. math:: d_{it} = U_{d_i} z_t\quad ,\ i=1,2 .
 
 A Pareto Problem
-================
+-------------------------------
 
 .. math::
 
@@ -2297,7 +2297,7 @@ A Pareto Problem
    b_{2t}) \cdot (s_{2t} - b_{2t}) + \ell^2_{2t}] \end{eqnarray*}
 
 Mongrel Aggregation: Static
-===========================
+-------------------------------
 
 Single consumer static inverse demand and implied preferences:
 
@@ -2315,7 +2315,7 @@ taken to be
 .. _mongrel-aggregation-static-1:
 
 Mongrel Aggregation: Static
-===========================
+-------------------------------
 
 Key Insight: Factor the inverse of a ‘covariance matrix’.
 
@@ -2357,7 +2357,7 @@ Dynamic Analogue
 -  Dynamic: factor a spectral-density matrix like object.
 
 Programming Problem for Dynamic Mongrel Aggregation
-===================================================
+--------------------------------------------------------------
 
 Our strategy for deducing the mongrel preference ordering over
 :math:`c_t = c_{1t} + c_{2t}` is to solve the programming problem:
@@ -2385,7 +2385,7 @@ into the objective determines a mongrel preference ordering over
 :math:`\{c_t\} = \{c_{1t} + c_{2t}\}`.
 
 Dynamic Case: A Programming Problem for Mongrel Aggregation
-===========================================================
+--------------------------------------------------------------
 
 In solving this problem, it is convenient to proceed by using Fourier
 transforms.   
