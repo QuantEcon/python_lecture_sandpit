@@ -19,5 +19,6 @@
 
     test_lecture
     HS_recursive_models
-    comples_and_trig
+    complex_and_trig
+    geom_series
     zreferences
