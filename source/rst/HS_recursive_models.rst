@@ -1015,7 +1015,7 @@ where :math:`x_0` is given; :math:`x_t` is an :math:`n \times 1` vector
 of state variables, and :math:`u_t` is a :math:`k \times 1` vector of
 control variables.
 
- We assume :math:`w_{t+1}` is a martingale difference
+We assume :math:`w_{t+1}` is a martingale difference
 sequence with :math:`E w_t w_t^\prime = I`, and that :math:`C` is a
 matrix conformable to :math:`x` and :math:`w`.
 
@@ -1613,10 +1613,10 @@ if
 
 .
 **Key invertiblility property:** A canonical household service
- technology maps a service process :math:`\{s_t\}` in :math:`L_0^2`
- into a corresponding consumption process :math:`\{c_t\}` for which the
- implied household capital stock process :math:`\{h_t\}` is also in
- :math:`L^2_0`.
+technology maps a service process :math:`\{s_t\}` in :math:`L_0^2`
+into a corresponding consumption process :math:`\{c_t\}` for which the
+implied household capital stock process :math:`\{h_t\}` is also in
+:math:`L^2_0`.
 
 An inverse household technology:
 
@@ -1725,7 +1725,7 @@ Re-Opened Markets
     s_{i,t}& = & \Lambda h_{i,t-1} \cr
    h_{i,t}& =  & \Delta _h h_{i,t-1},\end{eqnarray*}
 
- where now :math:`h_{i,t-1} = h_{t-1}`. Define time :math:`t` wealth
+where now :math:`h_{i,t-1} = h_{t-1}`. Define time :math:`t` wealth
 :math:`W_t`
 
 .. math:: W_t = E_t\sum^\infty_{j=0}\beta ^j(w^t_{t+j}\ell_{t+j} + \alpha ^t_{t+j}\cdot d_{t+j}) + v_t\cdot k_{t-1} .
@@ -1784,7 +1784,7 @@ Apply the following version of a factorization identity:
    [\hat\Pi + \beta^{1/2} L \hat\Lambda
    (I - \beta^{1/2} L \Delta_h)^{-1} \Theta_h]\end{eqnarray*}
 
- The factorization identity guarantees that the
+The factorization identity guarantees that the
 :math:`[\hat \Lambda, \hat \Pi]` representation satisfies both
 requirements for a canonical representation.
 
