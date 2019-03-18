@@ -909,9 +909,9 @@ and also transversality conditions
 .. math::
 
    \begin{align}
-    \lim_{t \to \infty}& \beta^t & E [ {\cal M}_t^{k \prime} k_t ]
+    \lim_{t \to \infty}& \beta^t  E [ {\cal M}_t^{k \prime} k_t ]
    \mid J_0 = 0  \\
-    \lim_{t \to \infty}& \beta^t&  E [ {\cal M}_t^{h \prime} h_t ]
+    \lim_{t \to \infty}& \beta^t   E [ {\cal M}_t^{h \prime} h_t ]
    \mid J_0 = 0\end{align}
 
 
@@ -1219,7 +1219,9 @@ Type I Firm
 ===========
 
 A type I firm rents capital and labor and endowments and produces
-:math:`c_t, i_t`. It chooses stochastic processes for
+:math:`c_t, i_t`. 
+
+It chooses stochastic processes for
 :math:`\{c_t, i_t, k_t, \ell_t,
 g_t, d_t\}`, each element of which is in :math:`L^2_0`, to maximize
 
@@ -1238,9 +1240,12 @@ Type II Firm
 ============
 
 A firm of type II that acquires capital via investment and then rents
-stocks of capital to the :math:`c,i`-producing type I firm. A type II
-firm is a price taker facing the vector :math:`v_0` and the stochastic
-processes :math:`\{r^0_t, q^0_t\}`. The firm chooses :math:`k_{-1}` and
+stocks of capital to the :math:`c,i`-producing type I firm.
+
+A type II firm is a price taker facing the vector :math:`v_0` and the stochastic
+processes :math:`\{r^0_t, q^0_t\}`. 
+
+The firm chooses :math:`k_{-1}` and
 stochastic processes for :math:`\{k_t, i_t\}^\infty_{t=0}` to maximize
 
 .. math::
@@ -1260,15 +1265,10 @@ A competitive equilibrium is a price system
 and an allocation :math:`\{c_t, i_t, k_t, h_t, g_t, d_t\}^\infty_{t=0}`
 that satisfy the following conditions:
 
+   * Each component of the price system and the allocation resides in the space :math:`L^2_0`.
 
 
-Each component of the price system and the allocation resides in the
-space :math:`L^2_0`.
-
-
-Given the price system and given :math:`h_{-1},\, k_{-1}`, the
-allocation solves the representative household’s problem and the
-problems of the two types of firms.
+   * Given the price system and given :math:`h_{-1},\, k_{-1}`, the allocation solves the representative household’s problem and the problems of the two types of firms.
 
 Equilibrium Price System
 ========================
@@ -1359,17 +1359,9 @@ Econometrics
 A tale of two state-space representations
 -----------------------------------------------
 
-Facts Motivating Filtering
--------------------------------
 
-.. math:: H(y^t) \subset H(w^t,v^t)
 
-.. math:: H(y^t) = H(a^t)
-
-Statistical Representations
--------------------------------
-
-Original State-Space Representation:
+**Original State-Space Representation:**
 
 .. math::
 
@@ -1383,7 +1375,7 @@ v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
 
 .. math:: x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0).
 
-Innovations Representation:
+**Innovations Representation:**
 
 .. math::
 
@@ -1395,51 +1387,24 @@ where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G
 
 .. _statistical-representations-1:
 
-Statistical Representations
--------------------------------
-
-Original State-Space Representation:
-
-.. math::
-
-   \begin{align}
-    x_{t+1} &= A^o x_t + C\color{blue}{w_{t+1}} \\
-   y_t & =  Gx_t + \color{blue}{v_t}\end{align}
-
-where :math:`v_t` is a martingale difference sequence of measurement
-errors that satisfies :math:`Ev_t
-v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
-
-.. math:: x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0).
-
-Innovations Representation:
-
-.. math::
-
-   \begin{align}
-   \hat x_{t+1} &=A^o \hat x_t + K_t \color{blue}{a_t} \\
-   y_t &= G \hat x_t + \color{blue}{a_t},\end{align}
-
-where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
 
 
+Compare numbers of shocks in the two representations:
 
-
-.. _facts-motivating-filtering-1:
-
-Facts Motivating Filtering
--------------------------------
-
-.. math:: H(y^t) \subset H(w^t,v^t)
-
-.. math:: H(y^t) = H(a^t)
-
-Compare numbers of shocks in the two representations: :math:`n_w + n_y` versus  :math:`n_y` 
+  *  :math:`n_w + n_y` versus  :math:`n_y` 
 
 Compare spaces spanned
 
-Kalman Filter
--------------------------------
+
+   * :math:`H(y^t) \subset H(w^t,v^t)`
+
+   * :math:`H(y^t) = H(a^t)`
+
+
+
+**Kalman Filter:**
+
+Kalman gain:
 
 .. math:: K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} .
 
@@ -1451,8 +1416,8 @@ Riccati Difference Equation:
     \Sigma_{t+1} &= A^o \Sigma_t A^{o \prime} + CC^\prime \\
    &- A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} G \Sigma_t A^{o \prime}\end{align}
 
-Whitener
--------------------------------
+**Innovations Representation as Whitener**
+
 
 Whitening Filter:
 
@@ -1466,8 +1431,8 @@ can be used recursively to construct a record of innovations
 :math:`\{ a_t \}^T_{t=0}` from an :math:`(\hat x_0, \Sigma_0)` and a
 record of observations :math:`\{ y_t \}^T_{t=0}`.
 
-Limiting Time-Invariant Innovations Representation
---------------------------------------------------------------
+**Limiting Time-Invariant Innovations Representation**
+
 
 .. math::
 
@@ -1495,9 +1460,7 @@ Sample of observations :math:`\{y_s\}_{s=0}^T` on a
    \begin{align}
     f(y_T, y_{T-1}, \ldots, y_0 )&=
          f_T(y_T \vert y_{T-1}, \ldots, y_0) f_{T-1}(y_{T-1} \vert
-         y_{T-2}, \ldots, y_0) \cdots \\
-        &  f_1(y_1 \vert y_0)
-    f_0(y_0 )  \\
+         y_{T-2}, \ldots, y_0) \cdots   f_1(y_1 \vert y_0)  f_0(y_0 )  \\
     &= g_T(a_T) g_{T-1} (a_{T-1}) \ldots g_1(a_1) f_0(y_0).\end{align}
 
 Gaussian Log-Likelihood:
@@ -1556,15 +1519,17 @@ linear combinations of :math:`y^t`.
 
 Key Property: Invertibility
 
-Lag Operator
--------------------------------
+
+Wold and Vector Autoregressive Representations
+--------------------------------------------------------------
+
+Lag operator arithmetic
+
 
 .. math:: L x_t \equiv x_{t-1}
 
 .. math:: L^{-1} x_t \equiv x_{t+1}
 
-Wold and Vector Autoregressive Representations
---------------------------------------------------------------
 
 A Wold moving average representation for :math:`\{y_t\}` is
 
@@ -2124,8 +2089,7 @@ Permanent Income Models
 Permanent Income Models: Implication One
 --------------------------------------------------------------
 
-Equality of Present Values of Moving Average Coefficients of :math:`c`
-and :math:`e`
+Equality of Present Values of Moving Average Coefficients of :math:`c` and :math:`e`
 
 .. math:: k_{t-1} = \beta \sum\limits_{j=0}^\infty \beta^j (\phi_c \cdot c_{t+j} - e_{t+j}).
 

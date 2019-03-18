@@ -184,3 +184,45 @@ stochastic process for the household’s endowment :math:`\{d_t\}` and
 preference shock :math:`\{b_t\}`, as mediated through the multiplier
 :math:`\mu_0^w` and wealth :math:`W_0`; and (iii) past values of
 consumption, as mediated through the state variable :math:`h_{t-1}`.
+
+---------------------
+
+
+**Facts Motivating Filtering**
+
+
+.. math:: H(y^t) \subset H(w^t,v^t)
+
+.. math:: H(y^t) = H(a^t)
+
+Statistical Representations
+-------------------------------
+
+Original State-Space Representation:
+
+.. math::
+
+   \begin{align}
+    x_{t+1} &= A^o x_t + C\color{blue}{w_{t+1}} \\
+   y_t & =  Gx_t + \color{blue}{v_t}\end{align}
+
+where :math:`v_t` is a martingale difference sequence of measurement
+errors that satisfies :math:`Ev_t
+v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
+
+.. math:: x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0).
+
+Innovations Representation:
+
+.. math::
+
+   \begin{align}
+   \hat x_{t+1} &=A^o \hat x_t + K_t \color{blue}{a_t} \\
+   y_t &= G \hat x_t + \color{blue}{a_t},\end{align}
+
+where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
+
+
+
+
+.. _facts-motivating-filtering-1:
