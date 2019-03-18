@@ -1775,23 +1775,24 @@ Demand:
         L^{-1}]^{-1} \Lambda' \Pi^{\prime -1} \beta L^{-1} \}  p_t  \\
      h_t &= \Delta_h h_{t-1} + \Theta_h c_t \end{align}
 
-.. _examples-partial-equilibrium-1:
 
-Examples: Partial Equilibrium
--------------------------------
+Reverse engineer preferences that generate this demand system:
 
 A representative firm takes as given and beyond its control the
-stochastic process :math:`\{p_t\}_{t=0}^\infty`. The firm sells its
-output :math:`c_t` in a competitive market each period. Only spot
-markets convene at each date :math:`t\geq 0`. The firm also faces an
-exogenous process of cost disturbances :math:`d_t`.
+stochastic process :math:`\{p_t\}_{t=0}^\infty`.
 
-The firm chooses stochastic processes
-:math:`\{c_t, g_t, i_t, k_t\}_{t=0}^\infty` to maximize
+The firm sells its
+output :math:`c_t` in a competitive market each period. 
+
+Only spot markets convene at each date :math:`t\geq 0`. 
+
+The firm also faces an exogenous process of cost disturbances :math:`d_t`.
+
+The firm chooses stochastic processes :math:`\{c_t, g_t, i_t, k_t\}_{t=0}^\infty` to maximize
 
 .. math:: E_0 \sum_{t=0}^\infty \beta^t \{ p_t \cdot c_t - g_t \cdot g_t/2 \}
 
- subject to given :math:`k_{-1}` and
+subject to given :math:`k_{-1}` and
 
 .. math::
 
@@ -1826,8 +1827,9 @@ governed by
 .. math:: p_t = \alpha_0 - \alpha_1 c_t + u_t,
 
 where :math:`u_t` is a demand shifter with mean zero and
-:math:`\alpha_0, \alpha_1` are positive parameters. Assume that
-:math:`u_t, d_t` are uncorrelated first-order autoregressive processes.
+:math:`\alpha_0, \alpha_1` are positive parameters. 
+
+Assume that :math:`u_t, d_t` are uncorrelated first-order autoregressive processes.
 
 A Rosen-Topel Housing Model
 -------------------------------
@@ -1845,29 +1847,22 @@ new houses, and :math:`b_t` is a demand shifter; :math:`\alpha < 0` is a
 demand parameter, and :math:`\delta_h` is a depreciation factor for
 houses.
 
-.. _a-rosen-topel-housing-model-1:
-
-A Rosen-Topel Housing Model
--------------------------------
 
 We cast this demand specification within our class of models by letting
 the stock of houses :math:`h_t` evolve according to
 
 .. math:: h_t = \delta_h h_{t-1} + c_t, \quad \delta_h \in (0,1) ,
 
-where :math:`c_t` is the rate of production of new houses. Houses
-produce services :math:`s_t` according to
+where :math:`c_t` is the rate of production of new houses. 
+
+Houses produce services :math:`s_t` according to
 :math:`s_t  = \bar \lambda h_t` or
 :math:`s_t  = \lambda h_{t-1} + \pi c_t,` where
-:math:`\lambda= \bar \lambda \delta_h, \pi = \bar \lambda`. We can take
-:math:`\bar \lambda \rho_t^0  = R_t` as the rental rate on housing at
-time :math:`t`, measured in units of time :math:`t` consumption
-(housing).
+:math:`\lambda= \bar \lambda \delta_h, \pi = \bar \lambda`.
 
-.. _a-rosen-topel-housing-model-2:
+We can take :math:`\bar \lambda \rho_t^0  = R_t` as the rental rate on housing at
+time :math:`t`, measured in units of time :math:`t` consumption (housing).
 
-A Rosen-Topel Housing Model
--------------------------------
 
 Demand for housing services is
 
@@ -1885,11 +1880,14 @@ freshly slaughtered beef, :math:`m_t` the feeding cost of preparing an
 animal for slaughter, :math:`\tilde h_t` the one-period holding cost for
 a mature animal, :math:`\gamma_1 \tilde h_t` the one-period holding cost
 for a yearling, and :math:`\gamma_0 \tilde
-h_t` the one-period holding cost for a calf. The cost processes
+h_t` the one-period holding cost for a calf. 
+
+The cost processes
 :math:`\{\tilde h_t, m_t\}_{t=0}^\infty` are exogenous, while the
 stochastic process :math:`\{p_t\}_{t=0}^\infty` is determined by a
 rational expectations equilibrium. Let :math:`\tilde x_t` be the
 breeding stock, and :math:`\tilde y_t` be the total stock of animals.
+
 The law of motion for cattle stocks is
 
 .. math:: \tilde x_t = (1-\delta) \tilde x_{t-1} + g \tilde x_{t-3} - c_t,
@@ -1903,8 +1901,7 @@ is the sum of adults, calves, and yearlings, respectively.
 
 .. _cattle-cycles-1:
 
-Cattle Cycles
--------------------------------
+
 
 A representative farmer chooses :math:`\{c_t, \tilde x_t\}` to maximize
 
@@ -1941,7 +1938,7 @@ Models of Occupational Choice and Pay
 -  Two-occupation model.
 
 Market for Engineers
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ryoo and Rosen’s (2004) model consists of the following equations:
 first, a demand curve for engineers
@@ -1969,16 +1966,13 @@ of labor demand and supply shocks.
 
 .. _market-for-engineers-1:
 
-Market for Engineers 
--------------------------------
 
-Definition: A partial equilibrium is a stochastic process
+
+**Definition:** A partial equilibrium is a stochastic process
 :math:`\{w_t, N_t, v_t, n_t\}^\infty_{t=0}` satisfying these four
 equations, and initial conditions
 :math:`N_{-1}, n_{-s}, s=1, \ldots, -k`.
 
-Capturing the Market for Engineers
---------------------------------------------------------------
 
 We sweep the time-to-build structure and the demand for engineers into
 the household technology and putting the supply of new engineers into
@@ -2003,17 +1997,17 @@ h_{\tau+1,t-1} = n_{t-\tau}, \tau=1, \ldots, k`, and uses the
 home-produced service to capture the demand for labor. Here
 :math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`.
 
-Trick for Capturing the Market for Engineers
---------------------------------------------------------------
 
-The supply of new workers becomes our consumption. The dynamic demand
-curve becomes Rosen’s dynamic supply curve for new workers.
+
+ * The supply of new workers becomes our consumption.
+
+ * The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.
 
 
 Remark: This has an Imai-Keane flavor.
 
 Skilled and Unskilled Workers
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First, a demand curve for labor
 
@@ -2039,8 +2033,6 @@ where :math:`N_{st}, N_{ut}` are stocks of the two types of labor, and
 
 .. _skilled-and-unskilled-workers-1:
 
-Skilled and Unskilled Workers
--------------------------------
 
 third, definitions of discounted present values of new entrants to the
 skilled and unskilled occupations, respectively:
@@ -2062,10 +2054,10 @@ and fourth, supply curves for new entrants:
          = \alpha_s \begin{bmatrix} v_{ut} \\ v_{st} \end{bmatrix} +
            \epsilon_{2t}.
 
-Short Cut
+**Short Cut**
 -------------------------------
 
-As an alternative, Siow simply used the ‘equalizing differences’
+As an alternative, Siow simply used the  **equalizing differences**
 condition
 
 .. math:: v_{ut} = v_{st}.
@@ -2086,33 +2078,31 @@ Permanent Income Models
 
 .. math:: \phi_ii_t-g_t=0
 
-Permanent Income Models: Implication One
---------------------------------------------------------------
+**Implication One:**
 
 Equality of Present Values of Moving Average Coefficients of :math:`c` and :math:`e`
 
-.. math:: k_{t-1} = \beta \sum\limits_{j=0}^\infty \beta^j (\phi_c \cdot c_{t+j} - e_{t+j}).
+.. math:: k_{t-1} = \beta \sum_{j=0}^\infty \beta^j (\phi_c \cdot c_{t+j} - e_{t+j}).
 
- :math:`\Rightarrow`
+:math:`\Rightarrow`
 
 .. math::
 
-   k_{t-1} = \beta \sum\limits_{j=0}^\infty  \beta^j E (\phi_c
+   k_{t-1} = \beta \sum_{j=0}^\infty  \beta^j E (\phi_c
        \cdot c_{t+j} - e_{t+j})|J_t.
 
- :math:`\Rightarrow`
+:math:`\Rightarrow`
 
 .. math::
 
-   \sum\limits_{j=0}^\infty \beta^j (\phi_c)^\prime \chi_j =
-    \sum\limits_{j=0}^\infty \beta^j \epsilon_j
+   \sum_{j=0}^\infty \beta^j (\phi_c)^\prime \chi_j =
+    \sum_{j=0}^\infty \beta^j \epsilon_j
 
 where :math:`\chi_j w_t` is the response of :math:`c_{t+j}` to
 :math:`w_t` and :math:`\epsilon_j w_t` is the response of endowment
 :math:`e_{t+j}` to :math:`w_t`:
 
-Permanent Income Models: Implication Two
---------------------------------------------------------------
+**Implication Two:**
 
 Martingales
 
@@ -2126,8 +2116,7 @@ and
 
 .. math:: {\mathcal M}_t^c  =  (\Phi_c)^\prime {\mathcal M}_t^d = \phi_c {\cal M}_t^e
 
-Permanent Income Models: Testing
---------------------------------------------------------------
+**Testing Permanent Income Models:**
 
 Test the two implications:
 
@@ -2141,7 +2130,7 @@ and by Attanasio and Pavoni (2011).
 
 
 Gorman Heterogeneous Households
---------------------------------------------------------------
+================================
 
 .. math::
 
@@ -2172,24 +2161,30 @@ an endowment process :math:`d_{jt}`, governed by the stochastic process
 Gorman Heterogeneous Households
 ===============================
 
-This specification confines heterogeneity among consumers to: (a)
-differences in the preference processes :math:`\{b_{jt}\}`, represented
-by different selections of :math:`U_{bj}`; (b) differences in the
-endowment processes :math:`\{d_{jt}\}`, represented by different
-selections of :math:`U_{dj}`; (c) differences in :math:`h_{j,-1}`; and
-(d) differences in :math:`k_{j,-1}`. The matrices
-:math:`\Lambda,\,\Pi,\,\Delta_h,\,\Theta_h` do not depend on :math:`j`.
+This specification confines heterogeneity among consumers to:
+
+   *  differences in the preference processes :math:`\{b_{jt}\}`, represented by different selections of :math:`U_{bj}`; 
+
+   *  differences in the endowment processes :math:`\{d_{jt}\}`, represented by different selections of :math:`U_{dj}`; 
+   
+   * differences in :math:`h_{j,-1}`; and
+
+   * differences in :math:`k_{j,-1}`. 
+   
+The matrices :math:`\Lambda,\,\Pi,\,\Delta_h,\,\Theta_h` do not depend on :math:`j`.
+
 This makes everybody’s demand system have the form described earlier,
 with different :math:`\mu_{j0}^w`\ ’s (reflecting different wealth
 levels) and different :math:`b_{jt}` preference shock processes and
 initial conditions for household capital stocks.   
 
 
-Punchline: :math:`\exists` a representative consumer. Use it to compute
-competitive equilibrium aggregate allocation and price system.
+**Punchline:** :math:`\exists` a representative consumer.
 
-To Compute Individual Allocations
---------------------------------------------------------------
+Use it to compute competitive equilibrium aggregate allocation and price system.
+
+**Computing  Allocations to Individuals:**
+
 
 Set
 
@@ -2218,7 +2213,7 @@ Here :math:`h_{j,-1}` given.
 
 
 Non-Gorman Heterogeneous Households
---------------------------------------------------------------
+====================================
 
 Preferences and Household Technologies:
 
@@ -2237,8 +2232,7 @@ Preferences and Household Technologies:
 
 .. math:: z_{t+1} = A_{22} z_t + C_2 w_{t+1} .
 
-Production Technology
--------------------------------
+**Production Technology**
 
 .. math::
 
@@ -2254,8 +2248,8 @@ Production Technology
 
 .. math:: d_{it} = U_{d_i} z_t, \quad \ i=1,2 .
 
-A Pareto Problem
--------------------------------
+**Pareto Problem:**
+
 
 .. math::
 
@@ -2266,8 +2260,7 @@ A Pareto Problem
    - {1\over 2}\, (1-\lambda) E_0 \sum^\infty_{t=0}\, \beta^t [ (s_{2t} -
    b_{2t}) \cdot (s_{2t} - b_{2t}) + \ell^2_{2t}] \end{align}
 
-Mongrel Aggregation: Static
--------------------------------
+**Mongrel Aggregation: Static**
 
 Single consumer static inverse demand and implied preferences:
 
@@ -2284,10 +2277,9 @@ taken to be
 
 .. _mongrel-aggregation-static-1:
 
-Mongrel Aggregation: Static
--------------------------------
 
-Key Insight: Factor the inverse of a ‘covariance matrix’.
+
+**Key Insight:** Factor the inverse of a ‘covariance matrix’.
 
 Two consumers, :math:`i=1,2`, with demand curves
 
@@ -2311,7 +2303,7 @@ Setting :math:`c_{1t} + c_{2t} = c_t` and solving for :math:`p_t` gives
         \mu_{02} \Pi_2^{-1} \Pi_2^{-1 \prime}
          )^{-1} c_t\end{align}
 
-Punchline: choose :math:`\Pi` associated with the aggregate ordering to
+**Punchline:** choose :math:`\Pi` associated with the aggregate ordering to
 satisfy
 
 .. math::
@@ -2319,15 +2311,14 @@ satisfy
    \mu_0^{-1} \Pi' \Pi = (\mu_{01} \Pi_1^{-1} \Pi_2^{-1 \prime}
          + \mu_{02} \Pi_2^{-1} \Pi_2^{-1 \prime})^{-1} .
 
-Dynamic Analogue
-================
+**Dynamic Analogue:**
+
 
 -  Static: factor a covariance matrix like object.
 
 -  Dynamic: factor a spectral-density matrix like object.
 
-Programming Problem for Dynamic Mongrel Aggregation
---------------------------------------------------------------
+Programming Problem for Dynamic Mongrel Aggregation:
 
 Our strategy for deducing the mongrel preference ordering over
 :math:`c_t = c_{1t} + c_{2t}` is to solve the programming problem:
@@ -2349,40 +2340,24 @@ subject to
 
 subject to :math:`(h_{1, -1},\, h_{2, -1})` given and
 :math:`\{b_{1t}\},\, \{b_{2t}\},\, \{c_t\}` being known and fixed
-sequences. Substituting the :math:`\{c_{1t},\, c_{2t}\}` sequences that
+sequences. 
+
+Substituting the :math:`\{c_{1t},\, c_{2t}\}` sequences that
 solve this problem as functions of :math:`\{b_{1t},\, b_{2t},\, c_t\}`
 into the objective determines a mongrel preference ordering over
 :math:`\{c_t\} = \{c_{1t} + c_{2t}\}`.
 
-Dynamic Case: A Programming Problem for Mongrel Aggregation
---------------------------------------------------------------
 
 In solving this problem, it is convenient to proceed by using Fourier
 transforms.   
 
-Secret Weapon: Another application of the spectral factorization
+**Secret Weapon:** Another application of the spectral factorization
 identity.
 
-.. _section-4:
-
-   Complete market economies are all alike but each incomplete market
-   economy is incomplete in its own individual way.   Robert E. Lucas,
-   Jr., (1989)
-
-.. _section-5:
-
- 
 
 
-.. _section-6:
+.. epigraph::
 
- 
-
-
-.. _section-7:
-
- 
-
-.. _section-8:
+    "Complete market economies are all alike but each incomplete market  economy is incomplete in its own individual way."   Robert E. Lucas,   Jr., (1989)
 
  
