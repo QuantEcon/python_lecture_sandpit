@@ -30,10 +30,12 @@ Recursive Models of Dynamic Linear Economies
 Diverse Models
 ==============
 
-A variety of superficially different models are all instances of the same general class of models that are presented
+This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium described 
 by Lars Peter Hansen and Thomas J. Sargent :cite:`HS2013`
 
-Instances of this class of models 
+A variety of superficially different models are all instances of this class of models
+
+Instances of the class of models 
 
 -  Lucas asset pricing model.
 
@@ -53,106 +55,109 @@ Instances of this class of models
 
 .. _section-1:
 
--  Their apparent diversity conceals an essential unity
+The apparent diversity of these models conceals an essential unity, a fact that illustrates the quotation by Robert E. Lucas, Jr., with which
+we began this lecture
 
--  All are of them are special cases of a linear-quadratic-Gaussian model of general
-   economic equilibrium.
+And of course the idea expressed by Lucas is an application of the idea expressed in the quote from Henri Poincare
+
+So it is fitting that we begin by stating the limited number of names that in applications we shall give to a variety of things
+
 
 .. _section-2:
 
   
 
-Complete Markets Economies
-============================
+The :cite:`HS2013` class of models is cast in terms of a common mathematical representation of  these objects
 
-Common objects and features
--------------------------------
+-  A commodity space
 
--  Commodity space.
+-  A technology
 
--  Technology.
+-  People and their preferences over commodities cast in terms of a household technology for producing consumer services
 
--  People and their preferences over commodities.
+-  A price system
 
--  Price system.
+-  A single budget constraint per person
 
--  One budget constraint per person.
+-  An equilibrium definition
 
--  Equilibrium definition.
+-  Two welfare theorems
 
--  Two welfare theorems.
+-  The existence of a representative consumer even when there are many people in the model 
 
--  Presence of a representative consumer.
+The models have **no frictions** such as :math:`\ldots`
 
-Absence of Frictions Such as :math:`\ldots`
-----------------------------------------------
+-  Enforcement difficulties
 
--  Enforcement.
+-  Information asymmetries
 
--  Information asymmetries.
+-  Other forms of transactions costs
 
--  Other forms of transactions costs.
+-  Externalities
 
--  Externalities.
+The models extensively use the  powerful ideas of 
 
-Hicks-Arrow tricks
--------------------------------
 
-Imperialism of complete markets models comes from:
+-  Indexing commodities and their prices by time (John R. Hicks)
 
--  Indexing commodities and their prices by time (Hicks).
+-  Indexing commodities and their prices by chance (Kenneth Arrow)
 
--  Indexing commodities and their prices by chance (Arrow).
+
+Much of  the imperialism of complete markets models comes from applying these two tricks
+
+The Hicks trick of indexing commodities by time is the idea that **dynamics are a special case of statics**
+
+The Arrow trick of indexing commodities by chance is the idea that **analysis of trade under uncertainty is a special 
+case of the analysis of trade under certainty**
 
 Forecasting?
 -------------------------------
 
--  Consequence of single budget constraint plus Hicks-Arrow tricks:
-   households and firms need not forecast.
+The consequence of single budget constraint plus the Hicks-Arrow tricks is that households and firms need not forecast
 
--  But there exist equivalent structures – recursive competitive
-   equilibria – where they do appear to need to forecast. 
+But there exist equivalent structures called **recursive competitive equilibria** in which  they do appear to need to forecast. 
    
--  To forecast, they use: 
+In these structures, to forecast, households and firms use: 
 
-    - equilibrium pricing functions, and 
+- equilibrium pricing functions, and 
     
-    - knowledge of the  Markov structure of the economy’s state vector.
+- knowledge of the  Markov structure of the economy’s state vector.
 
 Theory and Econometrics
 -------------------------------
 
--  Outcome of theorizing is a stochastic process, i.e., a probability
-   distribution over sequences of prices and quantities, indexed by
-   parameters describing preferences, technologies, and information
-   flows.
+For an application of the  :cite:`HS2013` class of models, the outcome of theorizing is a stochastic process, i.e., a probability
+distribution over sequences of prices and quantities, indexed by  parameters describing preferences, technologies, and information flows
 
--  Another name for that object is a likelihood function, a central
-   object of both frequentist and Bayesian statistics.
+Another name for that object is a likelihood function, a key object of both frequentist and Bayesian statistics
 
-A Class of Economies
-====================
+There are two important uses of an **equilibrium stochastic process** or **likelihood function**
 
-Basic Ideas:
+The first is to solve the **direct problem**
+
+The **direct problem** takes as inputs values of the parameters that define preferences, technologies, and information flows and as 
+an output characterizes or simulates random paths of quantities and prices
+
+The second use of an equilibrium stochastic process or likelihood function is to solve the **inverse problem**
+
+The **inverse problem** takes as an input a time series sample of observations on a subset of prices and quantities determined by the model 
+and from them makes inferences about the parameters that define the model's preferences, technologies, and information flows
+
+
+More Details
 -------------------------------
 
--  An economy consists of a list of matrices that describe peoples’
-   household technologies, their preferences over consumption services,
-   their production technologies, and their information sets.
+A :cite:`HS2013` economy consists of **lists of matrices** that describe peoples’ household technologies, their preferences over consumption services,  their production technologies, and their information sets.
 
--  Complete markets.
+There are complete markets in history-contingent commodities
 
--  Competitive equilibrium allocations and prices satisfy equations that
-   are easy to write down and solve.
+Competitive equilibrium allocations and prices satisfy equations that are easy to write down and solve
 
--  Competitive equilibrium outcomes have representations that are
-   convenient econometrically.
+Competitive equilibrium prices and quantities have representations that are convenient econometrically.
 
--  Different example economies manifest themselves simply as different
-   settings for various matrices.
+Different example economies manifest themselves simply as different settings for various matrices
 
-Tools
-^^^^^^
+:cite:`HS2013` analyze the models with these tools:
 
 -  A theory of recursive dynamic competitive economies;
 
@@ -161,11 +166,8 @@ Tools
 -  Recursive methods for estimating and interpreting vector
    autoregressions;
 
--  Python, Julia, MATLAB.
 
-Alternative Interpretations of Representative Household
----------------------------------------------------------
-
+The models are flexible enough to express alternative senses of a representative household
 
 -  A single ‘stand-in’ household (Prescott).
 
@@ -174,35 +176,26 @@ Alternative Interpretations of Representative Household
 
 -  Heterogeneous household technologies violating conditions for Gorman
    aggregation but susceptible to aggregation into a single
-   representative household via ‘non-Gorman aggregation’.
+   representative household via ‘non-Gorman' or 'mongrel' aggregation’.
 
+The three alternative types of aggregation have different consequences in terms how  prices and allocations can be computed.
 
-**Remark:** There is a sense in which a representative agent exists for any
-complete markets economy (‘mongrel’ or ‘non-Gorman’ aggregation)
-
-
-
-
-
--  The three alternative senses have different consequences in terms how
-   prices and allocations can be computed.
-
--  Can prices and an aggregate allocation be computed before the
-   allocation to individual heterogeneous households?
+In particular, can prices and an aggregate allocation be computed before the
+equilibrium allocation to individual heterogeneous households is computed?
 
 -  Answers are “Yes” for Gorman aggregation, “No” for non-Gorman
    aggregation.
 
-Insights and Practical Benefits
---------------------------------
 
--  Deeper understanding comes from recognizing common underlying
+In summary, the insights and practical benefits from things to be presented in this lecture
+are
+
+-  Deeper understandings come from recognizing common underlying
    structures
 
--  Unleash a common suite of programs (Python).
+-  Unleashing a common suite of Python programs 
 
-Mathematical Tools
--------------------
+We'll use the following **mathematical tools**
 
 
 -  Stochastic Difference Equations (Linear).
@@ -210,17 +203,20 @@ Mathematical Tools
 -  Duality: LQ Dynamic Programming and Linear Filtering  are the same thing
    mathematically
 
--  Spectral Factorization Identity (for understanding vector
+-  The Spectral Factorization Identity (for understanding vector
    autoregressions and non-Gorman aggregation).
 
-Roadmap
---------
+So here is our roadmap
 
--  Information.
+We'll describe sets of matrices that pin down
 
--  Technology.
+-  Information
 
--  Preferences.
+-  Technologies
+
+-  Preferences
+
+Then we'll describe
 
 -  Equilibrium concept and computation.
 
@@ -229,10 +225,10 @@ Roadmap
 .. _section-3:
 
 Stochastic Model of Information Flows and Outcomes
-====================================================
+----------------------------------------------------
 
-Linear Stochastic Difference Equations
------------------------------------------
+We'll use  stochastic linear difference equations to describe information flows **and** equilibrium outcomes 
+
 
 The sequence :math:`\{w_t : t=1,2, \ldots\}` is said to be a martingale
 difference sequence adapted to :math:`\{J_t : t=0, 1, \ldots \}` if
@@ -406,25 +402,27 @@ where :math:`z_0` is a given initial condition. The eigenvalues of the
 matrix :math:`A_{22}` have absolute values that are less than or equal
 to one.
 
-Other Components of Economies
 
-
--  Production technologies.
-
--  Household technologies.
-
--  Preferences.
-
-Summary
---------
-
-**Information and shocks**
+Thus, in summary our model of **information and shocks** is
 
 .. math::
 
    \begin{align}
     z_{t+1} &=A_{22} z_t + C_2 w_{t+1}
    \\  b_t &= U_b z_t \\ d_t &= U_d z_t .\end{align}
+
+
+We can now state other components of our economies, in particular
+
+
+-  Production technologies
+
+-  Household technologies
+
+-  Household preferences
+
+
+We can summarize these as follows
 
 **Production Technology**
 
