@@ -30,6 +30,11 @@ Recursive Models of Dynamic Linear Economies
 Diverse Models
 ==============
 
+A variety of superficially different models are all instances of the same general class of models that are presented
+by Lars Peter Hansen and Thomas J. Sargent :cite:`HS2013`
+
+Instances of this class of models 
+
 -  Lucas asset pricing model.
 
 -  Lucas-Prescott model of investment under uncertainty.
@@ -50,7 +55,7 @@ Diverse Models
 
 -  Their apparent diversity conceals an essential unity
 
--  All are special cases of a linear-quadratic-Gaussian model of general
+-  All are of them are special cases of a linear-quadratic-Gaussian model of general
    economic equilibrium.
 
 .. _section-2:
