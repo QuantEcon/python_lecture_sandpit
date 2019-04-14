@@ -263,7 +263,7 @@ for :math:`t=0,1,\ldots`  where :math:`A` is an :math:`n` by :math:`n` matrix an
 :math:`n` by :math:`N` matrix.
 
 
-Evidently, the distribution of :math:`x_{t+1}` given :math:`x_t` is
+Evidently, the distribution of :math:`x_{t+1}` conditional on :math:`x_t` is
 :math:`{\mathcal N}(Ax_t, CC')`
 
 Information Sets
@@ -412,7 +412,7 @@ Thus, in summary our model of **information and shocks** is
    \\  b_t &= U_b z_t \\ d_t &= U_d z_t .\end{align}
 
 
-We can now state other components of our economies, in particular
+We can now briefly summarize other components of our economies, in particular
 
 
 -  Production technologies
@@ -422,9 +422,12 @@ We can now state other components of our economies, in particular
 -  Household preferences
 
 
-We can summarize these as follows
+
 
 **Production Technology**
+
+Where :math:`c_t` is a vector of consumption rates, :math:`k_t` is a vector of physical capital goods, :math:`g_t` is 
+a vector intermediate productions goods, :math:`d_t` is a vector of technology shocks, the production technology is
 
 .. math::
 
@@ -432,15 +435,40 @@ We can summarize these as follows
     \Phi_c c_t +  \Phi_g g_t + \Phi_i i_t &=\Gamma k_{t-1} + d_t \\
    k_t &=\Delta_k k_{t-1} + \Theta_k i_t \\ g_t \cdot g_t &=\ell_t^2 \end{align}
 
+Here :math:`\Phi_c, \Phi_g, \Phi_i, \Gamma, \Delta_k, \Theta_k` are all matrices comformable to the vectors they multiply and
+:math:`\ell_t` is a disutility generating resource supplied by the household
+
+
+For technical reasons that facilitate computations, we make the following 
+
+**Assumption:** :math:`[\Phi_c\ \Phi_g]` is nonsingular.
+
+
+
 **Household Technology**
+
+Households confront a technology that allows them to devote consumption goods to construct a vector :math:`h_t` of household capital goods
+and a vector :math:`s_t` of utility generating  house services
 
 .. math::
 
    \begin{align}
-    \\ s_t &=
-   \Lambda h_{t-1} + \Pi c_t \\ h_t &= \Delta_h h_{t-1} + \Theta_h c_t \end{align}
+    s_t &=  \Lambda h_{t-1} + \Pi c_t \\
+    h_t &= \Delta_h h_{t-1} + \Theta_h c_t \end{align}
+
+where :math:`\Lambda, \Pi, \Delta_h, \Theta_h` are matrices that pin down the household technology  
+
+We make the following 
+
+**Assumption:** The absolute values of the eigenvalues of :math:`\Delta_h`
+are less than or equal to one.
+
+Below, we'll outline further assumptions that we shall occasionally impose
 
 **Preferences**
+
+Where :math:`b_t` is a stochastic process of preference shocks that will play the role of demand shifters, the representative household orders
+stochastic processes of consumption services :math:`s_t` according to
 
 
 .. math::
@@ -449,16 +477,16 @@ We can summarize these as follows
    b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 < \beta < 1
 
 
-Production Technologies
--------------------------
+We now proceed to give examples of production and household technologies that appear in various models that appear in the literature
+
+First we give examples of production Technologies
+
 
 .. math:: \Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t .
 
 .. math:: \mid g_t \mid \leq \ell_t
 
-
-
-**Assumption:** :math:`[\Phi_c\ \Phi_g]` is nonsingular.
+so we'll be looking for specifications of the matrices :math:`\Phi_c, \Phi_g, \Phi_i, \Gamma, \Delta_k, \Theta_k` that define them
 
 Endowment Economy
 ------------------
@@ -537,10 +565,7 @@ process.
 
 
 
-Preferences
-------------
-
-The household's preferences are ordered by
+Now we describe some examples of preferences, which as we have seen are ordered by
 
 .. math::
 
@@ -554,22 +579,20 @@ where household services are produced via the household technology
 
 .. math:: s_t = \Lambda h_{t-1} + \Pi c_t .
 
+and we make 
+
 **Assumption:** The absolute values of the eigenvalues of :math:`\Delta_h`
 are less than or equal to one.
 
-
-
-**Canonical**  household technologies  satisfy an ‘invertibility’
+Later we shall introduce **canonical**  household technologies that  satisfy an ‘invertibility’
 requirement relating sequences :math:`\{s_t\}` of services and
 :math:`\{c_t\}` of consumption flows.
 
 
-
-**Note:** Later we’ll describe how to obtain a canonical representation
+And  we’ll describe how to obtain a canonical representation
 of a household technology from one that is not canonical.
 
-Some Examples of Preferences
-------------------------------
+Here are some examples of household preferences
 
 **Time Separable preferences**
 
@@ -749,14 +772,12 @@ up to a common factor, for all dates and states.
 The scale factor is
 determined by the choice of numeraire.
 
-**Substitutes and Complements**
 
-
-Notions of substitutes and complements can be defined in terms of these
+Notions of **substitutes and complements** can be defined in terms of these
 Frisch demand functions.
 
-Two goods can be said to be substitutes if the
-cross-price effect is positive and to be complements if this effect is
+Two goods can be said to be **substitutes** if the
+cross-price effect is positive and to be **complements** if this effect is
 negative. 
 
 Hence this classification is determined by the off-diagonal
@@ -768,31 +789,8 @@ If :math:`\pi_2` and :math:`\pi_3` have the same
 sign, the goods are substitutes. If they have opposite signs, the goods
 are complements.
 
-Square Summability
--------------------
 
-Impose:
-
-.. math::
-
-   E \sum^\infty_{t=0} \beta^t h_t \cdot h_t \mid J_0 < \infty\ \hbox { and }\
-   E \sum^\infty_{t=0} \beta^t k_t \cdot k_t \mid J_0 < \infty .
-
-Define:
-
-.. math::
-
-   L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
-   variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
-   y_t^2 \mid J_0 < + \infty] .
-
-Require that each component of :math:`h_t` and each component of
-:math:`k_t` belong to :math:`L_0^2`.
-
-.. _summary-2:
-
-Summary
---------
+To summarize, our economic structure consists of the matrices that define the following components:
 
 **Information and shocks**
 
@@ -826,9 +824,9 @@ Summary
    b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 < \beta < 1
 
 
-**Battle Plan**
+*Next steps:** we move on to discuss two closely connected concepts 
 
--  Planning Problem (Optimal Resource Allocation Problem)
+-  A Planning Problem or Optimal Resource Allocation Problem
 
 -  Competitive Equilibrium
 
@@ -858,9 +856,29 @@ subject to the constraints
 
 and initial conditions for :math:`h_{-1}, k_{-1}`, and :math:`z_0`
 
-We shall compare and utiliize two approaches to solving the planning problem
 
-**Two Formulations**
+Throughout, we shall impose the following **square summability** conditions
+
+
+
+.. math::
+
+   E \sum^\infty_{t=0} \beta^t h_t \cdot h_t \mid J_0 < \infty\ \hbox { and }\
+   E \sum^\infty_{t=0} \beta^t k_t \cdot k_t \mid J_0 < \infty .
+
+Define:
+
+.. math::
+
+   L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
+   variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
+   y_t^2 \mid J_0 < + \infty] .
+
+Thus, we require that each component of :math:`h_t` and each component of
+:math:`k_t` belong to :math:`L_0^2`.
+
+
+We shall compare and utiliize two approaches to solving the planning problem
 
 -  Lagrangian
 
@@ -919,13 +937,12 @@ and also transversality conditions
 
 
 
--  The system formed by the FONCs and the transition equations can be
-   handed over to Python
+The system formed by the FONCs and the transition equations can be  handed over to Python
 
--  Python will solve planning problem for fixed parameter values.
+Python will solve planning problem for fixed parameter values.
 
 
-**Python  Ready Equations**
+Here are the **Python  Ready Equations**
 
 .. math::
 
@@ -947,7 +964,7 @@ and also transversality conditions
      z _{t+1} &= A_{22} z_t + C_2 w_{t+1} , \ b_t = U_b z_t,  \  \hbox{ and } \
    d_t = U_d z_t  \end{align}
 
-**Shadow Prices**
+
 
 The Lagrange multipliers or **shadow prices** satisfy
 
@@ -975,13 +992,18 @@ The Lagrange multipliers or **shadow prices** satisfy
    {\cal M}_t^i =
    \Theta _k^\prime {\cal M}_t^k .
 
-**Computational method:**
+Although it is possible use matrix operator methods to solve the above **Python ready equations**, that is not
+the approach we'll use
 
-We'll use dynamic programming to get recursive representations for both quantities and shadow prices.
+Instead, we'll use dynamic programming to get recursive representations for both quantities and shadow prices.
 
 Dynamic Programming  always starts with the word **let**
 
 Thus, let :math:`V(x_0)` be the optimal value function for the planning problem as a function of the initial state vector :math:`x_0`
+
+(Thus, in essence, dynamic programming amounts to an application of a **guess and verify** method in which we begin with a guess about the answer 
+to the problem we want to solve. That's why we start with **let** :math:`V(x_0)` be the (value of the) answer to the problem, then establish and 
+verity a bunch of conditions :math:`V(x_0)` has to satisfy if indeed it is the answer.)
 
 The optimal value function :math:`V(x)` satisfies the **Bellman equation**
 
@@ -1092,7 +1114,7 @@ We can now state the planning problem as a dynamic programming problem
    \max_{ \{u_t, x_{t+1}\} }\ - E \sum_{t=0}^\infty \beta^t [x_t^\prime
    Rx_t + u_t^\prime Q u_t + 2u_t^\prime Wx_t ] , \quad 0 < \beta < 1 ,
 
-where the meximization is subject to
+where  maximization is subject to
 
 .. math:: x_{t+1} = Ax_t + B u_t + Cw_{t+1} , \ t \geq 0
 
@@ -1168,33 +1190,27 @@ For us a useful fact is that Lagrange multipliers equal gradients of the  planne
 
 We will use this fact and these equations to compute competitive equilibrium prices
 
+Let's start with describing the **commodity space** and **pricing functional** for our competitive equilibrium
 
-Competitive Equilibrium
-==========================
+For the  **commodity space** we use
 
-
-Commodity space
------------------
 .. math::
 
    L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
    variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
    y_t^2 \mid J_0 < + \infty]
 
-Pricing Functional
--------------------
-
-Values as Inner Products
+For **pricing functionals** we express  values as inner products
 
 .. math:: \pi (c) = E \sum_{t=0}^\infty \beta^t p_t^0 \cdot c_t \mid J_0 ,
 
 where :math:`p_t^0` belongs to :math:`L_0^2`.
 
 
-**Representative Household in a competitive equilibrium**
+With these objects in our toolkit, we move on to state the problem of a **Representative Household in a competitive equilibrium**
 
-Owns endowment process and initial stocks of :math:`h` and :math:`k`.
-Chooses stochastic processes for :math:`\{c_t,\, s_t,\, h_t,\,
+The representative household oOwns endowment process and initial stocks of :math:`h` and :math:`k` and 
+chooses stochastic processes for :math:`\{c_t,\, s_t,\, h_t,\,
 \ell_t\}^\infty_{t=0}`, each element of which is in :math:`L^2_0`, to
 maximize
 
@@ -1217,6 +1233,9 @@ subject to
 
    h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad h_{-1}, k_{-1}\
    \hbox{ given} .
+
+
+We now desribe the problems faced by two types of firms called type I and type II
 
 Type I Firm
 ===========
@@ -1242,7 +1261,7 @@ subject to
 Type II Firm
 ============
 
-A firm of type II that acquires capital via investment and then rents
+A firm of type II  acquires capital via investment and then rents
 stocks of capital to the :math:`c,i`-producing type I firm.
 
 A type II firm is a price taker facing the vector :math:`v_0` and the stochastic
@@ -1260,10 +1279,9 @@ subject to
 
 .. math:: k_t = \Delta_k k_{t-1} + \Theta_k i_t.
 
-Competitive Equilibrium
-=======================
+We can now state the following 
 
-A competitive equilibrium is a price system
+**Definition:** A competitive equilibrium is a price system
 :math:`[v_0, \{p^0_t, w^0_t, \alpha^0_t, q^0_t, r^0_t\}^\infty_{t=0}]`
 and an allocation :math:`\{c_t, i_t, k_t, h_t, g_t, d_t\}^\infty_{t=0}`
 that satisfy the following conditions:
@@ -1271,10 +1289,18 @@ that satisfy the following conditions:
    * Each component of the price system and the allocation resides in the space :math:`L^2_0`.
 
 
-   * Given the price system and given :math:`h_{-1},\, k_{-1}`, the allocation solves the representative household’s problem and the problems of the two types of firms.
+   * Given the price system and given :math:`h_{-1},\, k_{-1}`, the allocation solves the representative household’s problem and 
+     the problems of the two types of firms.
 
-Equilibrium Price System
-========================
+Versions of the two classical welfare theorems prevail under our assumptions
+
+We exploit that fact in our algorithm for computing a competiive equilibrium
+ 
+ **Step 1:** Solve the planning problem by using dynamic programming.  The allocation (i.e., **quantitites**) that solve the planning problem **are** the 
+ competitive equilibrium quantities
+
+ **Step 2:** use the following formulas to compute the **equilibrium price system**
+
 
 .. math::
 
@@ -1297,22 +1323,22 @@ Equilibrium Price System
    v_0 = \Gamma^\prime {\cal M}^d_0 / \mu^w_0 + \Delta^\prime_k
    {\cal M}^k_0 / \mu^w_0.
 
-With this price system, values can be assigned to the Lagrange
+**Verification:** With this price system, values can be assigned to the Lagrange
 multipliers for each of our three classes of agents that cause all
 first-order necessary conditions to be satisfied at these prices and at
 the quantities associated with the optimum of the planning problem.
 
-Asset Pricing
-=============
+An important use of an equilbrium pricing system is to do asset pricing
 
-Dividend Stream: :math:`\{y_t\} \in L^2_0`
+Thus, imagine that we are presented a dividend stream: :math:`\{y_t\} \in L^2_0`
+and want to compute the value of a perpetual claim to this stream.
 
-Asset Value: :math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 .`
+To value this asset we simply take **price times quantity** and add to get 
+an asset value: :math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 .`
 
-.. _asset-pricing-1:
+To compute :math:`ao` we proceed as follows. 
 
-Asset Pricing
-=============
+We let
 
 .. math:: y_t = U_a\, x_t
 
@@ -1320,7 +1346,7 @@ Asset Pricing
 
 .. math:: Z_a = U^\prime_a M_c / \mu^w_0.
 
-Convenient formulas:
+We have the following convenient formulas:
 
 .. math:: a_0 = x^\prime_0\, \mu_a\, x_0 + \sigma_a
 
@@ -1334,8 +1360,16 @@ Convenient formulas:
    \sigma_a = {\beta \over 1 - \beta}\ {\rm trace } \left( Z_a \sum^\infty_{\tau = 0}
    \,\beta^\tau\, (A^o)^\tau\, C C^\prime (A^{o \prime})^\tau \right).
 
+
 Re-Opening Markets
-==================
+-------------------   
+
+We have assumed that all trading occurs once-and-for-all at time :math:`t=0`
+
+If we were to **re-open markets** at some time :math:`t >0` at time :math:`t` wealth levels implicitly defined by
+time :math:`0` trades, we would obtain the same equilibrium allocation (i.e., quantities) and the following time :math:`t`
+price system
+ 
 
 .. math::
 
@@ -1359,8 +1393,19 @@ Re-Opening Markets
 Econometrics
 ==============
 
-A tale of two state-space representations
------------------------------------------------
+Up to now we have described how to solve the **direct problem** that maps model parameters into an (equilibrium) stochastic process
+of prices and quantities
+
+Recall the **inverse problem** of inferring model parameters from a single realization of a time series of some of the prices and quantities
+
+Another name for the inverse problem is **econometrics**
+
+An advantage of the :cite:`HS2013` structure is that it comes with a self-contained theory of econometrics
+
+It is really just a tale of two state-space representations
+
+
+Here they are:
 
 
 
@@ -2352,12 +2397,18 @@ into the objective determines a mongrel preference ordering over
 
 
 In solving this problem, it is convenient to proceed by using Fourier
-transforms.   
+transforms.  For details, please see :cite:`HS2013` where they deploy a 
 
 **Secret Weapon:** Another application of the spectral factorization
 identity.
 
 
+**Concluding remark:** The :cite:`HS2013` class of models described in this lecture are all complete markets models.  We have exploited
+the fact that complete market models **are all alike** to allow us to define a class that **gives the same name to different things** in the
+spirit of Henri Poincare.
+
+Could we create such a class for **incomplete markets** models?  That would be nice, but before trying it would be wise to contemplate
+the remainder of the statement by Robert E. Lucas, Jr., with which we began this lecture
 
 .. epigraph::
 
