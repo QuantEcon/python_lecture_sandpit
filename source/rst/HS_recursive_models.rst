@@ -24,66 +24,37 @@ Recursive Models of Dynamic Linear Economies
 
 .. epigraph::
 
-    "Every partial equilibrium model can be interpreted as a general equilibrium model." --   Anonymous
+    "Every partial equilibrium model can be reinterpreted as a general equilibrium model." --   Anonymous
 
 
-Diverse Models
-==============
+A Suite of  Models
+===================
 
-This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium described 
-by Lars Peter Hansen and Thomas J. Sargent :cite:`HS2013`
+This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium
+designed by Lars Peter Hansen and Thomas J. Sargent :cite:`HS2013` 
 
-A variety of superficially different models are all instances of this class of models
+In saying that "complete markets are all alike", Robert E. Lucas, Jr. was noting  that all of them have 
 
-Instances of the class of models 
+- a commodity space
 
--  Lucas asset pricing model.
+- a space dual to the commodity space in which prices reside
 
--  Lucas-Prescott model of investment under uncertainty.
+- endowments of resources
 
--  Asset pricing models with habit persistence.
+- peoples' preferences over goods 
 
--  Rosen-Topel equilibrium model of housing.
+- physical technologies for transforming resources into goods
 
--  Rosen schooling models.
+- random processes that govern shocks to technologies and preferences and associated information flows
 
--  Rosen-Murphy-Scheinkman model of cattle cycles.
+- a single budget constraint per person
 
--  Hansen-Sargent-Tallarini model of robustness and asset pricing.
+- the existence of a representative consumer even when there are many people in the model 
 
--  Many more :math:`\ldots`
+- a concept of competitive equilibrium
 
-.. _section-1:
+- theorems connecting competive equilibrium allocations to allocations that would be chosen by a benevolent social planner 
 
-The apparent diversity of these models conceals an essential unity, a fact that illustrates the quotation by Robert E. Lucas, Jr., with which
-we began this lecture
-
-And of course the idea expressed by Lucas is an application of the idea expressed in the quote from Henri Poincare
-
-So it is fitting that we begin by stating the limited number of names that in applications we shall give to a variety of things
-
-
-.. _section-2:
-
-  
-
-The :cite:`HS2013` class of models is cast in terms of a common mathematical representation of  these objects
-
--  A commodity space
-
--  A technology
-
--  People and their preferences over commodities cast in terms of a household technology for producing consumer services
-
--  A price system
-
--  A single budget constraint per person
-
--  An equilibrium definition
-
--  Two welfare theorems
-
--  The existence of a representative consumer even when there are many people in the model 
 
 The models have **no frictions** such as :math:`\ldots`
 
@@ -110,10 +81,47 @@ The Hicks trick of indexing commodities by time is the idea that **dynamics are 
 The Arrow trick of indexing commodities by chance is the idea that **analysis of trade under uncertainty is a special 
 case of the analysis of trade under certainty**
 
+The :cite:`HS2013` class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
+that allow the models to be analyzed completely using only the tools of linear time series models and linear-quadratic optimal control described
+in the the two lectures  :doc:`Linear State Space Models<linear_models>` and :doc:`Linear Quadratic Control<lqcontrol>`
+
+There are costs and benefits associated with the simplifications and specializations needed to make a particular model fit within the 
+:cite:`HS2013` class
+
+- the costs are that  linear-quadratic structures are sometimes too confining
+
+- benefits include computational speed, simplicity, and ability to analyze many model features analytically or nearly analytically
+
+
+A variety of superficially different models are all instances of the :cite:`HS2013` class of models
+
+
+-  Lucas asset pricing model.
+
+-  Lucas-Prescott model of investment under uncertainty.
+
+-  Asset pricing models with habit persistence.
+
+-  Rosen-Topel equilibrium model of housing.
+
+-  Rosen schooling models.
+
+-  Rosen-Murphy-Scheinkman model of cattle cycles.
+
+-  Hansen-Sargent-Tallarini model of robustness and asset pricing.
+
+-  Many more :math:`\ldots`
+
+.. _section-1:
+
+The diversity of these models conceals an essential unity that illustrates the quotation by Robert E. Lucas, Jr., with which
+we began this lecture
+
+
 Forecasting?
 -------------------------------
 
-The consequence of single budget constraint plus the Hicks-Arrow tricks is that households and firms need not forecast
+A consequence of a single budget constraint per person  plus the Hicks-Arrow tricks is that households and firms need not forecast
 
 But there exist equivalent structures called **recursive competitive equilibria** in which  they do appear to need to forecast. 
    
@@ -121,7 +129,7 @@ In these structures, to forecast, households and firms use:
 
 - equilibrium pricing functions, and 
     
-- knowledge of the  Markov structure of the economy’s state vector.
+- knowledge of the  Markov structure of the economy’s state vector
 
 Theory and Econometrics
 -------------------------------
@@ -147,17 +155,20 @@ and from them makes inferences about the parameters that define the model's pref
 More Details
 -------------------------------
 
-A :cite:`HS2013` economy consists of **lists of matrices** that describe peoples’ household technologies, their preferences over consumption services,  their production technologies, and their information sets.
+A :cite:`HS2013` economy consists of **lists of matrices** that describe peoples’ household technologies, their preferences over
+consumption services,  their production technologies, and their information sets
 
 There are complete markets in history-contingent commodities
 
-Competitive equilibrium allocations and prices satisfy equations that are easy to write down and solve
+Competitive equilibrium allocations and prices   
 
-Competitive equilibrium prices and quantities have representations that are convenient econometrically.
+- satisfy equations that are easy to write down and solve
+
+- have representations that are convenient econometrically
 
 Different example economies manifest themselves simply as different settings for various matrices
 
-:cite:`HS2013` analyze the models with these tools:
+:cite:`HS2013` use these tools:
 
 -  A theory of recursive dynamic competitive economies;
 
@@ -174,11 +185,11 @@ The models are flexible enough to express alternative senses of a representative
 -  Heterogeneous households satisfying conditions for Gorman aggregation
    into a representative household.
 
--  Heterogeneous household technologies violating conditions for Gorman
-   aggregation but susceptible to aggregation into a single
+-  Heterogeneous household technologies that  violate conditions for Gorman
+   aggregation but are still susceptible to aggregation into a single
    representative household via ‘non-Gorman' or 'mongrel' aggregation’.
 
-The three alternative types of aggregation have different consequences in terms how  prices and allocations can be computed.
+These three alternative types of aggregation have different consequences in terms how  prices and allocations can be computed.
 
 In particular, can prices and an aggregate allocation be computed before the
 equilibrium allocation to individual heterogeneous households is computed?
@@ -187,13 +198,13 @@ equilibrium allocation to individual heterogeneous households is computed?
    aggregation.
 
 
-In summary, the insights and practical benefits from things to be presented in this lecture
+In summary, the insights and practical benefits from economics to be introduced in this lecture
 are
 
--  Deeper understandings come from recognizing common underlying
+-  Deeper understandings that come from recognizing common underlying
    structures
 
--  Unleashing a common suite of Python programs 
+-  Speed and ease of computation that come from unleashing a common suite of Python programs 
 
 We'll use the following **mathematical tools**
 
@@ -901,8 +912,8 @@ Form the Lagrangian
    {\cal M}_t^{s \prime} \cdot (s_t - \Lambda h_{t-1} - \Pi c_t )
    \biggr] \Bigl| J_0 \end{align}
 
-The planner maximizes :math:`{\mathcal L}` by maximizing with respect to the quantities :math:`\{c_t, i_t, g_t\}_{t=0}^\infty`
-and minimizing with respect to the Lagrange multipliers :math:`{\cal M}_t^d, {\cal M}_t^k, {\cal M}_t^h, {\cal M}_t^s`
+The planner maximizes :math:`{\mathcal L}` with respect to the quantities :math:`\{c_t, i_t, g_t\}_{t=0}^\infty`
+and minimizes with respect to the Lagrange multipliers :math:`{\cal M}_t^d, {\cal M}_t^k, {\cal M}_t^h, {\cal M}_t^s`
 
 First-order necessary conditions for maximization with respect to
 :math:`c_t, g_t,
@@ -996,6 +1007,10 @@ Although it is possible use matrix operator methods to solve the above **Python 
 the approach we'll use
 
 Instead, we'll use dynamic programming to get recursive representations for both quantities and shadow prices.
+
+
+Dynamic Programming
+--------------------
 
 Dynamic Programming  always starts with the word **let**
 
@@ -1209,7 +1224,12 @@ where :math:`p_t^0` belongs to :math:`L_0^2`.
 
 With these objects in our toolkit, we move on to state the problem of a **Representative Household in a competitive equilibrium**
 
-The representative household oOwns endowment process and initial stocks of :math:`h` and :math:`k` and 
+
+Representative Household
+-------------------------
+
+
+The representative household owns endowment process and initial stocks of :math:`h` and :math:`k` and 
 chooses stochastic processes for :math:`\{c_t,\, s_t,\, h_t,\,
 \ell_t\}^\infty_{t=0}`, each element of which is in :math:`L^2_0`, to
 maximize
@@ -1558,14 +1578,14 @@ Equating these two leads to:
    & [G(zI-A^o)^{-1}K +I] [G \Sigma G^\prime + R] [K'(z^{-1} I -A^{o\prime})^{-1}
    G^\prime + I] .\end{align}
 
-Key Insight: The zeros of the polynomial
+**Key Insight:** The zeros of the polynomial
 :math:`\det [G(zI-A^o)^{-1}K +I]` all lie inside the unit circle, which
 means that :math:`a_t` lies in the space spanned by square summable
 linear combinations of :math:`y^t`.
 
 .. math:: H(a^t) = H(y^t)
 
-Key Property: Invertibility
+**Key Property:** Invertibility
 
 
 Wold and Vector Autoregressive Representations
@@ -1787,7 +1807,7 @@ process, and the household’s continuation plan for :math:`\{\ell_t\}`.
 The time :math:`t` continuation of the vector of prices
 :math:`\{p_t^t\}`.
 
-Attaining a canonical hh technology
+Attaining a canonical household technology
 --------------------------------------------------------------
 
 Apply the following version of a factorization identity:
@@ -2046,13 +2066,12 @@ home-produced service to capture the demand for labor. Here
 :math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`.
 
 
+- The supply of new workers becomes our consumption.
 
- * The supply of new workers becomes our consumption.
-
- * The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.
+- The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.
 
 
-Remark: This has an Imai-Keane flavor.
+**Remark:** This has an Imai-Keane flavor.
 
 Skilled and Unskilled Workers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2211,13 +2230,13 @@ Gorman Heterogeneous Households
 
 This specification confines heterogeneity among consumers to:
 
-   *  differences in the preference processes :math:`\{b_{jt}\}`, represented by different selections of :math:`U_{bj}`; 
+- differences in the preference processes :math:`\{b_{jt}\}`, represented by different selections of :math:`U_{bj}`; 
 
-   *  differences in the endowment processes :math:`\{d_{jt}\}`, represented by different selections of :math:`U_{dj}`; 
+- differences in the endowment processes :math:`\{d_{jt}\}`, represented by different selections of :math:`U_{dj}`; 
    
-   * differences in :math:`h_{j,-1}`; and
+- differences in :math:`h_{j,-1}`; and
 
-   * differences in :math:`k_{j,-1}`. 
+- differences in :math:`k_{j,-1}`. 
    
 The matrices :math:`\Lambda,\,\Pi,\,\Delta_h,\,\Theta_h` do not depend on :math:`j`.
 
