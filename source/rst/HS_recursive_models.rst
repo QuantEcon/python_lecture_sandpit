@@ -33,6 +33,35 @@ A Suite of  Models
 This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium
 designed by Lars Peter Hansen and Thomas J. Sargent :cite:`HS2013` 
 
+The class of models is implemented in a Python class DLE that is part of  quantecon  
+
+Subsequent lectures   use the DLE class to implement various instances that have appeared in the economics literature
+
+  NATASHA XXXXX: LET'S LIST THE    SISTER LECTURES  HERE PLEASE WHEN THEY HAVE BEEN CONVERTED FROM THE NOTEBOOKS AND ARE READY TO BE MADE LIVE
+
+  THE LECTURES WILL BE THESE (IF WE DON'T CHANGE  THE TITLES)
+
+
+
+  1. Growth in Dynamic Linear Economies
+
+  2. Lucas Asset Pricing using DLE
+
+  3. IRFs in Hall Model
+
+  4. Permanent Income Using the DLE class
+  
+  5. Rosen schooling model
+
+  6. Cattle cycles
+
+  7. Hansen-Sargent Invertibility Example
+
+
+
+Overview of the models
+-----------------------
+
 In saying that "complete markets are all alike", Robert E. Lucas, Jr. was noting  that all of them have 
 
 - a commodity space
