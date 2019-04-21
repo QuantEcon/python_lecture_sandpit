@@ -18,7 +18,16 @@
     :titlesonly:
 
     test_lecture
-    HS_recursive_models
     complex_and_trig
     geom_series
+
+    HS_recursive_models
+    growth_in_dles
+    lucas_asset_pricing_dles
+    irfs_in_hall_model
+    permanent_income_dles
+    rosen_schooling_model
+    cattle_cycles
+    hs_invertibility_example
+
     zreferences
