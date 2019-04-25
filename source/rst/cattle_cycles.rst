@@ -25,7 +25,7 @@ understand sources of recurrent cycles in US cattle stocks and prices
 
 We will need the following imports
 
-.. code-block:: ipython3
+.. code-block:: ipython
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -186,8 +186,8 @@ To map this into our class, we set :math:`f_1^2 = \frac{\Psi_1}{2}`,
     # what matrices are associated with a particular technology.
     
     Information = namedtuple('Information', ['a22', 'c2', 'ub', 'ud'])
-    Technology = namedtuple('Technology', ['phic', 'phig', 'phii', 'gamma', 'deltak', 'thetak'])
-    Preferences = namedtuple('Preferences', ['beta', 'llambda', 'pih', 'deltah', 'thetah'])
+    Technology = namedtuple('Technology', ['ϕ_c', 'ϕ_g', 'ϕ_i', 'γ', 'δ_k', 'θ_k'])
+    Preferences = namedtuple('Preferences', ['β', 'l_λ', 'π_h', 'δ_h', 'θ_h'])
 
 We choose the parameters used in :cite:`rosen1994cattle`
 
@@ -197,7 +197,7 @@ We choose the parameters used in :cite:`rosen1994cattle`
     lλ = np.array([[0]])
     
     a1 = 0.5
-    πh = np.array([[1/(sqrt(a1))]])
+    πh = np.array([[1 / (sqrt(a1))]])
     δh = np.array([[0]])
     θh = np.array([[0]])
     
@@ -315,7 +315,7 @@ to generate cycles in quantities
 
 .. code-block:: python3
 
-    TotalStock = Econ1.k[0] + g * Econ1.k[1] + g * Econ1.k[2] # Calculation of y_t
+    TotalStock = Econ1.k[0] + g * Econ1.k[1] + g * Econ1.k[2]  # Calculation of y_t
     plt.plot(TotalStock)
     plt.xlim((-1, 100))
     plt.title('Total number of cattle')
