@@ -1,4 +1,4 @@
-.. _cattle_cycles:
+.. _rosen_schooling_model:
 
 .. include:: /_static/includes/header.raw
 
