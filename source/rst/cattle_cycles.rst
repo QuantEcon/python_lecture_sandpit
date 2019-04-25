@@ -25,7 +25,7 @@ understand sources of recurrent cycles in US cattle stocks and prices
 
 We will need the following imports
 
-.. code-block:: python3
+.. code-block:: ipython3
 
     import numpy as np
     import matplotlib.pyplot as plt
