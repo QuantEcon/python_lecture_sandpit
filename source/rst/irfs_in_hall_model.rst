@@ -237,7 +237,7 @@ around its non-stochastic steady state
     γ_2 = np.array([[γ_12], [0]])
     
     l_λ2 = np.array([[0.1]])
-    pih2 = np.array([[0]])
+    π_h2 = np.array([[0]])
     
     x01 = np.array([[150], [100], [1], [0], [0]])
     
