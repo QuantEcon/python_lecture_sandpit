@@ -10,14 +10,14 @@ Growth in Dynamic Linear Economies
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition to what's included in  Anaconda, this lecture uses the quantecon  library
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-This notebook describes several complete market economies having a
+This lecture describes several complete market economies having a
 common linear-quadratic-Gaussian structure
 
 Three examples of such economies show how the DLE class can be used to
@@ -26,7 +26,7 @@ different versions of these economies can or cannot generate sustained
 growth
 
 
-We will need the following imports
+We require the following imports
 
 .. code-block:: ipython
 

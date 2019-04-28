@@ -10,14 +10,14 @@ IRFs in Hall Models
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition to what's in Anaconda, this lecture uses the quantecon library
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-We'll also need the following imports
+We'll make these imports
 
 .. code-block:: ipython
 
@@ -27,14 +27,13 @@ We'll also need the following imports
     from quantecon import DLE
     %matplotlib inline
 
-This notebook shows how the DLE class can be used to create impulse
+This lecture shows how the DLE class can be used to create impulse
 response functions for three related economies, starting from
 Hall (1978) :cite:`Hall1978`
 
 Knowledge of the basic economic environment is assumed
 
-See the notebook
-"Growth in Dynamic Linear Economies" for more details
+See the lecture "Growth in Dynamic Linear Economies" for more details
 
 Example 1: Hall (1978)
 =======================
@@ -272,5 +271,5 @@ The impulse response functions confirm that consumption is now much more
 responsive to an endowment shock (and investment less so) than in
 Example 1
 
-As in Example 2, the endowment shock does not have permanent effects on
-either variable
+As in Example 2, the endowment shock has permanent effects on
+neither variable

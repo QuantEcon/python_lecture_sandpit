@@ -1,17 +1,46 @@
+.. _hs_invertibility_example:
 
-Hansen-Sargent Invertibility Example (Chapter 8 Appendix E)
------------------------------------------------------------
+.. include:: /_static/includes/header.raw
 
-This notebook analyzes and illustrates the **invertibility** problem
-endemic in a class of permanent income models
+.. highlight:: python3
+
+****************************
+Shock Non Invertibility 
+****************************
+
+.. contents:: :depth: 2
+
+
+In addition to what's in Anaconda, this lecture uses the quantecon library
+
+.. code-block:: ipython
+  :class: hide-output
+
+  !pip install quantecon
+
+We'll make these imports
+
+.. code-block:: ipython
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from quantecon import LQ
+    from quantecon import DLE
+    %matplotlib inline
+
+This lecture can be viewed as introducing  an early contribution to what is now often called 
+a **news and noise** issue
+
+In particular, it analyzes and illustrates an **invertibility** issue that is
+endemic within a class of permanent income models
 
 Technically, the invertibility problem indicates a situation in which
 histories of the shocks in an econometrician's autoregressive or Wold
 moving average representation span a smaller information space than do
 the shocks seen by the agent inside the econometrician's model
 
-This situation sets the stage for an econometrician unaware of the
-problem to misinterpret the shocks and \| likely responses to them
+This situation sets the stage for an econometrician who is unaware of the
+problem to  misinterpret  shocks and likely responses to them
 
 .. code:: ipython3
 
@@ -19,11 +48,11 @@ problem to misinterpret the shocks and \| likely responses to them
     import quantecon as qe
     import matplotlib.pyplot as plt
     from quantecon import LQ
-    from DynLinEcon import DLE
+    from quantecon import DLE
     from math import sqrt
     %matplotlib inline
 
-We consider the following version of Hall's (1978) model in which the
+We consider the following modification  of Robert Hall's (1978) model :cite:`Hall1978` in which the
 endowment process is the sum of two orthogonal autoregressive processes:
 
 **Preferences**
@@ -163,7 +192,7 @@ The econometrician obtains a Wold representation for the process
       \end{array} } 
       \right] u_t
 
-The Appendix of chapter 8 of **HS2013XXX** explains why the impulse
+The Appendix of chapter 8 of :cite:`HS2013`  explains why the impulse
 response functions in the Wold representation estimated by the
 econometrician do not resemble the impulse response functions that
 depict the response of consumption and the deficit to innovations to
@@ -181,7 +210,7 @@ This means that :math:`u_t` will typically be a distributed lag of
 Thus, the econometrician's news :math:`u_t` potentially responds
 belatedly to agents' news :math:`w_t`.
 
-We will construct Figures from **Chapter 8 Appendix E of HS2013** to
+We will construct Figures from Chapter 8 Appendix E of :cite:`HS2013` to
 illustrate these ideas:
 
 .. code:: ipython3
@@ -207,8 +236,6 @@ illustrate these ideas:
     plt.title('Response to $w_{2t}$');
 
 
-
-.. image:: HS_Invertibility_Example_files/HS_Invertibility_Example_6_0.png
 
 
 The above figure displays the impulse response of consumption and the
@@ -268,9 +295,6 @@ expected present value.
 
 
 
-.. image:: HS_Invertibility_Example_files/HS_Invertibility_Example_9_0.png
-
-
 The above figure displays the impulse response of consumption and the
 deficit to the innovations in the econometrician's Wold representation.
 
@@ -313,10 +337,6 @@ Consumption responds only to the first innovation.
     plt.plot(a2_w2,label='Deficit innov.')
     plt.legend(loc='best')
     plt.title('Response to $w_{2t}$');
-
-
-
-.. image:: HS_Invertibility_Example_files/HS_Invertibility_Example_11_0.png
 
 
 The above figure displays the impulse responses of :math:`u_t` to

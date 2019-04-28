@@ -1593,10 +1593,7 @@ Innovations representation has as many shocks as dimension of
    S_y(z) = [G(zI-A^o)^{-1}K +I] [G \Sigma G^\prime + R]
    [K^\prime (z^{-1} I -A^{o\prime})^{-1} G^\prime + I].
 
-.. _spectral-factorization-identity-1:
 
-Spectral Factorization Identity
--------------------------------
 
 Equating these two leads to:
 
@@ -2455,8 +2452,10 @@ identity.
 the fact that complete market models **are all alike** to allow us to define a class that **gives the same name to different things** in the
 spirit of Henri Poincare.
 
-Could we create such a class for **incomplete markets** models?  That would be nice, but before trying it would be wise to contemplate
-the remainder of the statement by Robert E. Lucas, Jr., with which we began this lecture
+Could we create such a class for **incomplete markets** models? 
+
+That would be nice, but before trying it would be wise to contemplate
+the remainder of a statement by Robert E. Lucas, Jr., with which we began this lecture
 
 .. epigraph::
 

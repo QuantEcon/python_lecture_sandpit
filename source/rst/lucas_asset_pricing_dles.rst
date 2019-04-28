@@ -10,22 +10,22 @@ Lucas Asset Pricing Using DLE
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition to what's in Anaconda, this lecture uses the quantecon  library
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-This notebook shows how the DLE class can be used to price payout
+This lecture uses  the DLE class to price payout
 streams that are linear functions of the economy's state vector, as well
 as risk-free assets that pay out one unit of the first consumption good
 with certainty
 
-We assume knowledge of the basic economic environment captured in the
+We assume basic knowledge of the class of economic environments that fall within the domain of the
 DLE class
 
-Many details about the basic environment are contained in the notebook
+Many details about the basic environment are contained in the lecture
 "Growth in Dynamic Linear Economies"
 
 We'll also need the following imports

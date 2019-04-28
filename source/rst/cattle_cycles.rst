@@ -10,20 +10,20 @@ Cattle Cycles
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition what's in Anaconda, this lecture uses the quantecon library 
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-This notebook uses the DLE class to construct the "Cattle Cycles" model
+This lecture uses the DLE class to construct instances of  the "Cattle Cycles" model
 of Rosen, Murphy and Scheinkman (1994) :cite:`rosen1994cattle`
 
 That paper constructs a rational expectations equilibrium model to
 understand sources of recurrent cycles in US cattle stocks and prices
 
-We will need the following imports
+We make the following imports
 
 .. code-block:: ipython
 
@@ -189,7 +189,7 @@ To map this into our class, we set :math:`f_1^2 = \frac{\Psi_1}{2}`,
     Technology = namedtuple('Technology', ['ϕ_c', 'ϕ_g', 'ϕ_i', 'γ', 'δ_k', 'θ_k'])
     Preferences = namedtuple('Preferences', ['β', 'l_λ', 'π_h', 'δ_h', 'θ_h'])
 
-We choose the parameters used in :cite:`rosen1994cattle`
+We set parameters to those used by :cite:`rosen1994cattle`
 
 .. code-block:: python3
 
@@ -307,7 +307,7 @@ baseline case of :math:`\rho_3 = 0.6`)
 
     Econ1.compute_sequence(x0, ts_length=100)
 
-Rosen, Murphy and Scheinkman (1994) use the model to understand the
+:cite:`rosen1994cattle` use the model to understand the
 sources of recurrent cycles in total cattle stocks
 
 Plotting :math:`y_t` for a simulation of their model shows its ability
@@ -322,7 +322,7 @@ to generate cycles in quantities
     plt.show()
 
 
-In Figure 3 of their paper, :cite:`rosen1994cattle` plot the impulse response functions
+In their Figure 3, :cite:`rosen1994cattle` plot the impulse response functions
 of consumption and the breeding stock of cattle to the demand shock,
 :math:`\tilde d_t`, under the three different values of :math:`\rho_3`
 
@@ -391,4 +391,4 @@ We replicate their Figure 4 below
 The fact that :math:`y_t` is a weighted moving average of :math:`x_t`
 creates a humped shape response of the total stock in response to demand
 shocks, contributing to the cyclicality seen in the first graph of this
-notebook
+lecture

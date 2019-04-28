@@ -10,7 +10,7 @@ Permanent Income Model using the DLE class
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition to what's included in  Anaconda, this lecture uses the quantecon  library
 
 .. code-block:: ipython
   :class: hide-output
@@ -18,17 +18,25 @@ In addition what's in Anaconda, this lecture will need the following libraries
   !pip install quantecon
 
 
-This notebook adds a third solution method for the
-linear-quadratic-Gaussian permanent income model with
-:math:`\beta R = 1`, complementing the other two solution methods shown
-in `this
-notebook <http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb>`__
+NATASHA XXXX: PLEASE CORRECT THE FOLLOWING TO MAKE THE POINTERS TO THE LECTURES COME OUT CORRECTLY IN BOTH THE LECTURE AND THE 
+GENERATED NOTEBOOK? ALSO, SEE NEAR THE END OF THE LECTURE WHERE I REFER TO THE SAME THINGS.  OK?
 
-The new solution method uses the **DLE** class, which maps the permanent
+This lecture adds a third solution method for the
+linear-quadratic-Gaussian permanent income model with
+:math:`\beta R = 1`, complementing the other two solution methods described in in 
+:doc:`Optimal Savings I: The Permanent Income Model<perm_income>` and
+:doc:`Optimal Savings II: LQ Techniques<perm_income_cons>` and this Jupyter
+notebook `<http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb>`__
+
+
+
+The additional solution method uses the **DLE** class
+
+In this way, we  map the permanent
 income model into the framework of Hansen & Sargent (2013) "Recursive
 Models of Dynamic Linear Economies" :cite:`HS2013`
 
-We'll also need the following imports
+We'll also require the following imports
 
 .. code-block:: ipython
 
@@ -234,13 +242,13 @@ The state vector in the LQ problem is
 :math:`\left[\matrix{z_t \cr b_t\cr}\right]`
 
 Consequently, the relevant elements of Econ1.Sc are the same as in
-:math:`-F` from the \*\* XXXX previous notebook\*\*
+:math:`-F` occur when we apply other approaches to the same model in the lecture 
+:doc:`Optimal Savings II: LQ Techniques<perm_income_cons>` and this Jupyter
+notebook `<http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb>`__
 
-(see line 9 of **XXXX that notebook** for a print out of the :math:`-F`
-matrix)
 
-The plot below quickly replicates the first two figures of \*\* XXXX
-that notebook\*\* to confirm that the solutions are the same
+The plot below quickly replicates the first two figures of 
+that that lecture and that  notebook to confirm that the solutions are the same
 
 .. code-block:: python3
 

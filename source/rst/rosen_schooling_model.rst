@@ -10,7 +10,8 @@ Rosen schooling model
 
 .. contents:: :depth: 2
 
-In addition what's in Anaconda, this lecture will need the following libraries
+
+In addition to what's included in  Anaconda, this lecture uses the quantecon  library
 
 .. code-block:: ipython
   :class: hide-output
@@ -46,7 +47,7 @@ The model consists of the following equations:
 
 -  a demand curve for engineers:
 
-.. math:: w_t = - \\alpha_d N_t + \epsilon_{dt} 
+.. math:: w_t = - \alpha_d N_t + \epsilon_{dt} 
 
 -  a time-to-build structure of the education process:
 
@@ -117,10 +118,8 @@ where :math:`\psi_1` is inversely proportional to :math:`\alpha_s`
 Information
 ============
 
-We want to set :math:`b_t = \epsilon_{dt}` and $d\_{1t} =
-:raw-latex:`\epsilon`\_{st} $
-
-Therefore:
+Because we  want :math:`b_t = \epsilon_{dt}` and :math:`d_{1t} =\epsilon_{st}`, we set
+ 
 
 .. math::
 
@@ -323,7 +322,8 @@ and :math:`N_t` (on the right) to a positive demand shock, for
 Both panels in the above figure show that raising k lowers the effect of
 a positive demand shock on entry into the engineering profession
 
-Increasing the number of periods of schooling that is required lowers
-the number of new students in response to a demand shock, as new
-students will benefit less from the impact of that shock on wages
+Increasing the number of periods of schooling lowers
+the number of new students in response to a demand shock
+
+This occurs because  with longer required schooling, new students ultimately benefit less from the impact of that shock on wages
 
