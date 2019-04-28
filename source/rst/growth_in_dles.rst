@@ -28,7 +28,7 @@ growth
 
 We will need the following imports
 
-.. code-block:: python3
+.. code-block:: ipython
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -122,7 +122,7 @@ The DLE class in Python maps this planning problem into a linear
 quadratic dynamic programming problem and then solves it by using
 QuantEcon's LQ class
 
-(See Section 5.5 of Hansen & Sargent (2013) (HS2013) for a full
+(See Section 5.5 of Hansen & Sargent (2013) :cite:`HS2013` for a full
 description of how to map these economies into an LQ setting, and how to
 use the solution to the LQ problem to construct the output matrices in
 order to simulate the economies)
@@ -243,24 +243,38 @@ For simulations of this economy, we choose an initial condition of
 .. code-block:: python3
 
     # Parameter Matrices
-    γ1 = 0.1
-    ϕ1 = 1e-5
+    γ_1 = 0.1
+    ϕ_1 = 1e-5
     
-    ϕc, ϕg, ϕi, γ, δk, θk = (np.array([[1], [0]]), np.array([[0], [1]]), np.array([[1], [-ϕ1]]),
-                                               np.array([[γ1], [0]]), np.array([[.95]]), np.array([[1]]))
+    ϕ_c, ϕ_g, ϕ_i, γ, δ_k, θ_k = (np.array([[1], [0]]), 
+                                  np.array([[0], [1]]), 
+                                  np.array([[1], [-ϕ_1]]),
+                                  np.array([[γ_1], [0]]), 
+                                  np.array([[.95]]), 
+                                  np.array([[1]]))
     
-    β, lλ, πh, δh, θh = (np.array([[1/1.05]]), np.array([[0]]), np.array([[1]]),
-                                          np.array([[.9]]), np.array([[1]]) - np.array([[.9]]))
+    β, l_λ, π_h, δ_h, θ_h = (np.array([[1 / 1.05]]), 
+                             np.array([[0]]), 
+                             np.array([[1]]),
+                             np.array([[.9]]), 
+                             np.array([[1]]) - np.array([[.9]]))
     
-    a22, c2, ub, ud = (np.array([[1, 0, 0],[0, 0.8, 0],[0, 0, 0.5]]), np.array([[0, 0],[1, 0],[0, 1]]),
-                        np.array([[30, 0, 0]]), np.array([[5, 1, 0],[0, 0, 0]]))
+    a22, c2, ub, ud = (np.array([[1,   0,   0],
+                                 [0, 0.8,   0],
+                                 [0,   0, 0.5]]), 
+                       np.array([[0, 0],
+                                 [1, 0],
+                                 [0, 1]]),
+                       np.array([[30, 0, 0]]), 
+                       np.array([[5, 1, 0], 
+                                 [0, 0, 0]]))
     
     # Initial condition
-    x0 = np.array([[5],[150],[1],[0],[0]])
+    x0 = np.array([[5], [150], [1], [0], [0]])
     
     Info1 = (a22, c2, ub, ud)
-    Tech1 = (ϕc, ϕg, ϕi, γ, δk, θk)
-    Pref1 = (β, lλ, πh, δh, θh)
+    Tech1 = (ϕ_c, ϕ_g, ϕ_i, γ, δ_k, θ_k)
+    Pref1 = (β, l_λ, π_h, δ_h, θ_h)
 
 These parameter values are used to define an economy of the DLE class
 
@@ -273,7 +287,7 @@ initial state vector :math:`x_0`
 
 .. code-block:: python3
 
-    Econ1.compute_sequence(x0,ts_length = 300)
+    Econ1.compute_sequence(x0, ts_length=300)
 
 The economy stores the simulated values for each variable. Below we plot
 consumption and investment
@@ -281,10 +295,10 @@ consumption and investment
 .. code-block:: python3
 
     # This is the right panel of Fig 5.7.1 from p.105 of HS2013
-    plt.plot(Econ1.c[0],label='Cons.')
-    plt.plot(Econ1.i[0],label='Inv.')
-    plt.legend(loc='best');
-
+    plt.plot(Econ1.c[0], label='Cons.')
+    plt.plot(Econ1.i[0], label='Inv.')
+    plt.legend()
+    plt.show()
 
 
 Inspection of the plot shows that the sample paths of consumption and
@@ -296,7 +310,6 @@ This is confirmed by checking the eigenvalues of :math:`A^o`
 .. code-block:: python3
 
     Econ1.endo, Econ1.exo
-
 
 
 The endogenous eigenvalue that appears to be unity reflects the random
@@ -320,7 +333,7 @@ steady state of consumption, investment and capital
 .. code-block:: python3
 
     Econ1.compute_steadystate()
-    np.set_printoptions(precision=3,suppress=True)
+    np.set_printoptions(precision=3, suppress=True)
     print(Econ1.css, Econ1.iss, Econ1.kss)
 
 
@@ -363,10 +376,10 @@ Therefore, we need to define the following new parameters
     γ2 = 0.15
     γ22 = np.array([[γ2], [0]])
     
-    ϕ12 = 1
-    ϕi2 = np.array([[1], [-ϕ12]])
+    ϕ_12 = 1
+    ϕ_i2 = np.array([[1], [-ϕ_12]])
     
-    Tech2 = (ϕc, ϕg, ϕi2, γ22, δk, θk)
+    Tech2 = (ϕ_c, ϕ_g, ϕ_i2, γ22, δ_k, θ_k)
     
     x02 = np.array([[5], [20], [1], [0], [0]])
 
@@ -377,12 +390,12 @@ consumption and investment
 
     Econ2 = DLE(Info1, Tech2, Pref1)
     
-    Econ2.compute_sequence(x02,ts_length = 300)
+    Econ2.compute_sequence(x02, ts_length=300)
     
     plt.plot(Econ2.c[0], label='Cons.')
     plt.plot(Econ2.i[0], label='Inv.')
-    plt.legend(loc='best')
-    plt.ylim((0,30));
+    plt.legend()
+    plt.show()
 
 
 
@@ -451,8 +464,8 @@ define the new value of :math:`\lambda`
 
 .. code-block:: python3
 
-    lλ2 = np.array([[-1]])
-    Pref2 = (β,lλ2,πh,δh,θh)
+    l_λ2 = np.array([[-1]])
+    Pref2 = (β, l_λ2, π_h, δ_h, θ_h)
 
 .. code-block:: python3
 
@@ -462,12 +475,13 @@ We simulate this economy from the original state vector
 
 .. code-block:: python3
 
-    Econ3.compute_sequence(x0,ts_length = 300)
+    Econ3.compute_sequence(x0, ts_length=300)
     
     # This is the right panel of Fig 5.10.1 from p.110 of HS2013
     plt.plot(Econ3.c[0], label='Cons.')
     plt.plot(Econ3.i[0], label='Inv.')
-    plt.legend(loc='best');
+    plt.legend()
+    plt.show()
 
 
 
@@ -495,17 +509,17 @@ Example 3.1: Raise :math:`\lambda` to -0.7
 
 .. code-block:: python3
 
-    lλ3 = np.array([[-0.7]])
-    Pref3 = (β, lλ3, πh, δh, θh)
+    l_λ3 = np.array([[-0.7]])
+    Pref3 = (β, l_λ3, π_h, δ_h, θ_h)
     
     Econ4 = DLE(Info1, Tech1, Pref3)
     
-    Econ4.compute_sequence(x0,ts_length = 300)
+    Econ4.compute_sequence(x0, ts_length=300)
     
     plt.plot(Econ4.c[0], label='Cons.')
     plt.plot(Econ4.i[0], label='Inv.')
-    plt.legend(loc='best')
-    plt.ylim((0, 25));
+    plt.legend()
+    plt.show()
 
 
 
@@ -526,18 +540,17 @@ Example 3.2: Lower :math:`\beta` to 0.94
 
 .. code-block:: python3
 
-    β2 = np.array([[0.94]])
-    Pref4 = (β2,lλ,πh,δh,θh)
+    β_2 = np.array([[0.94]])
+    Pref4 = (β_2, l_λ, π_h, δ_h, θ_h)
     
     Econ5 = DLE(Info1, Tech1, Pref4)
     
-    Econ5.compute_sequence(x0,ts_length = 300)
+    Econ5.compute_sequence(x0, ts_length=300)
     
     plt.plot(Econ5.c[0], label='Cons.')
     plt.plot(Econ5.i[0], label='Inv.')
-    plt.legend(loc='best');
-
-
+    plt.legend()
+    plt.show()
 
 Growth also fails if we lower :math:`\beta`, since we now have
 :math:`\beta(\gamma_1 + \delta_k) < 1`
