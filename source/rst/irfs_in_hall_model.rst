@@ -1,8 +1,9 @@
 .. _irfs_in_hall_model:
 
-.. include:: /_static/includes/header.raw
+.. include:: /_static/includes/lecture_howto_py.raw
 
-.. highlight:: python3
+.. index::
+    single: python
 
 ****************************
 IRFs in Hall Models

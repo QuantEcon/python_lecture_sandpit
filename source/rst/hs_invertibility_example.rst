@@ -1,8 +1,9 @@
 .. _hs_invertibility_example:
 
-.. include:: /_static/includes/header.raw
+.. include:: /_static/includes/lecture_howto_py.raw
 
-.. highlight:: python3
+.. index::
+    single: python
 
 ****************************
 Shock Non Invertibility 
@@ -23,9 +24,11 @@ We'll make these imports
 .. code-block:: ipython
 
     import numpy as np
+    import quantecon as qe
     import matplotlib.pyplot as plt
     from quantecon import LQ
     from quantecon import DLE
+    from math import sqrt
     %matplotlib inline
 
 This lecture can be viewed as introducing  an early contribution to what is now often called 
@@ -41,16 +44,6 @@ the shocks seen by the agent inside the econometrician's model
 
 This situation sets the stage for an econometrician who is unaware of the
 problem to  misinterpret  shocks and likely responses to them
-
-.. code:: ipython3
-
-    import numpy as np
-    import quantecon as qe
-    import matplotlib.pyplot as plt
-    from quantecon import LQ
-    from quantecon import DLE
-    from math import sqrt
-    %matplotlib inline
 
 We consider the following modification  of Robert Hall's (1978) model :cite:`Hall1978` in which the
 endowment process is the sum of two orthogonal autoregressive processes:
@@ -106,7 +99,7 @@ endowment process is the sum of two orthogonal autoregressive processes:
       \right]
 
 The preference shock is constant at 30, while the endowment process is
-the sum of a constant and two orthogonal processes.
+the sum of a constant and two orthogonal processes
 
 Specifically:
 
@@ -117,40 +110,39 @@ Specifically:
 .. math::  d_{2t} = 4w_{2t} + 0.8(4w_{2t-1})+ 0.6(4w_{2t-2})+ 0.4(4w_{2t-3}) 
 
 :math:`d_{1t}` is a first-order AR process, while :math:`d_{2t}` is a
-third order pure moving average process.
+third order pure moving average process
 
-.. code:: ipython3
+.. code-block:: python3
 
-    gamma1 = 0.05
-    gamma = np.array([[gamma1],[0]])
-    phic = np.array([[1],[0]])
-    phig = np.array([[0],[1]])
-    phi1 = 0.00001
-    phii = np.array([[1],[-phi1]])
-    deltak = np.array([[1]])
-    thetak = np.array([[1]])
-    beta = np.array([[1/1.05]])
-    llambda = np.array([[0]])
-    pih = np.array([[1]])
-    deltah = np.array([[.9]])
-    thetah = np.array([[1]])-deltah
-    ud = np.array([[5,1,1,0.8,0.6,0.4],[0,0,0,0,0,0]])
-    a22 = np.zeros((6,6))
-    a22[[0, 1, 3, 4, 5], [0, 1, 2, 3, 4]] = np.array([1.0, 0.9, 1.0, 1.0, 1.0]) #Chase's great trick
-    c2= np.zeros((6,2))
-    c2[[1,2],[0,1]] = np.array([1.0,4.0])
-    ub=np.array([[30,0,0,0,0,0]])
-    x0 = np.array([[5],[150],[1],[0],[0],[0],[0],[0]])
+    γ_1 = 0.05
+    γ = np.array([[γ_1], [0]])
+    ϕ_c = np.array([[1], [0]])
+    ϕ_g = np.array([[0], [1]])
+    ϕ_1 = 0.00001
+    ϕ_i = np.array([[1], [-ϕ_1]])
+    δ_k = np.array([[1]])
+    θ_k = np.array([[1]])
+    β = np.array([[1 / 1.05]])
+    l_λ = np.array([[0]])
+    π_h = np.array([[1]])
+    δ_h = np.array([[.9]])
+    θ_h = np.array([[1]]) - δ_h
+    ud = np.array([[5, 1, 1, 0.8, 0.6, 0.4], 
+                   [0, 0, 0,   0,   0,   0]])
+    a22 = np.zeros((6, 6))
+    a22[[0, 1, 3, 4, 5], [0, 1, 2, 3, 4]] = np.array([1.0, 0.9, 1.0, 1.0, 1.0])  # Chase's great trick
+    c2 = np.zeros((6, 2))
+    c2[[1, 2], [0, 1]] = np.array([1.0, 4.0])
+    ub = np.array([[30, 0, 0, 0, 0, 0]])
+    x0 = np.array([[5], [150], [1], [0], [0], [0], [0], [0]])
     
-    Info1 = (a22,c2,ub,ud)
-    Tech1 = (phic,phig,phii,gamma,deltak,thetak)
-    Pref1 = (beta,llambda,pih,deltah,thetah)
-
-.. code:: ipython3
+    Info1 = (a22, c2, ub, ud)
+    Tech1 = (ϕ_c, ϕ_g, ϕ_i, γ, δ_k, θ_k)
+    Pref1 = (β, l_λ, π_h, δ_h, θ_h)
 
     Econ1 = DLE(Info1, Tech1, Pref1)
 
-We define the household's net of interest deficit as :math:`c_t - d_t`.
+We define the household's net of interest deficit as :math:`c_t - d_t`
 
 Hall's model imposes "expected present-value budget balance" in the
 sense that
@@ -171,13 +163,13 @@ If we define the moving average representation of
       \right] w_t
 
 then Hall's model imposes the restriction
-:math:`\sigma_2(\beta) = [0\,\,\,0]`.
+:math:`\sigma_2(\beta) = [0\,\,\,0]`
 
 The agent inside this model sees histories of both components of the
-endowment process :math:`d_{1t}` and :math:`d_{2t}`.
+endowment process :math:`d_{1t}` and :math:`d_{2t}`
 
 The econometrician has data on the history of the pair
-:math:`[c_t,d_t]`, but not directly on the history of :math:`w_t`.
+:math:`[c_t,d_t]`, but not directly on the history of :math:`w_t`
 
 The econometrician obtains a Wold representation for the process
 :math:`[c_t,c_t-d_t]`:
@@ -196,11 +188,11 @@ The Appendix of chapter 8 of :cite:`HS2013`  explains why the impulse
 response functions in the Wold representation estimated by the
 econometrician do not resemble the impulse response functions that
 depict the response of consumption and the deficit to innovations to
-agents' information.
+agents' information
 
 Technically, :math:`\sigma_2(\beta) = [0\,\,\,0]` implies that the
 history of :math:`u_t`\ s spans a *smaller* linear space than does the
-history of :math:`w_t`\ s.
+history of :math:`w_t`\ s
 
 This means that :math:`u_t` will typically be a distributed lag of
 :math:`w_t` that is not concentrated at zero lag:
@@ -208,53 +200,51 @@ This means that :math:`u_t` will typically be a distributed lag of
 .. math::  u_t = \sum_{j=0}^\infty \alpha_j w_{t-j} 
 
 Thus, the econometrician's news :math:`u_t` potentially responds
-belatedly to agents' news :math:`w_t`.
+belatedly to agents' news :math:`w_t`
 
 We will construct Figures from Chapter 8 Appendix E of :cite:`HS2013` to
 illustrate these ideas:
 
-.. code:: ipython3
+.. code-block:: python3
 
     # This is Fig 8.E.1 from p.188 of HS2013
     
-    Econ1.irf(ts_length=40,shock=None)
+    Econ1.irf(ts_length=40, shock=None)
     
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     plt.subplot(121)
-    plt.plot(Econ1.c_irf,label='Consumption')
-    plt.plot(Econ1.c_irf-Econ1.d_irf[:,0].reshape(40,1),label='Deficit')
-    plt.legend(loc='best')
+    plt.plot(Econ1.c_irf, label='Consumption')
+    plt.plot(Econ1.c_irf - Econ1.d_irf[:,0].reshape(40,1), label='Deficit')
+    plt.legend()
     plt.title('Response to $w_{1t}$')
     
-    shock2 = np.array([[0],[1]])
-    Econ1.irf(ts_length=40,shock=shock2)
+    shock2 = np.array([[0], [1]])
+    Econ1.irf(ts_length=40, shock=shock2)
     
     plt.subplot(122)
-    plt.plot(Econ1.c_irf,label='Consumption')
-    plt.plot(Econ1.c_irf-Econ1.d_irf[:,0].reshape(40,1),label='Deficit')
-    plt.legend(loc='best')
-    plt.title('Response to $w_{2t}$');
-
-
-
+    plt.plot(Econ1.c_irf, label='Consumption')
+    plt.plot(Econ1.c_irf - Econ1.d_irf[:,0].reshape(40, 1), label='Deficit')
+    plt.legend()
+    plt.title('Response to $w_{2t}$')
+    plt.show()
 
 The above figure displays the impulse response of consumption and the
-deficit to the endowment innovations.
+deficit to the endowment innovations
 
 Consumption displays the characteristic "random walk" response with
-respect to each innovation. Each endowment innovation leads to a
-temporary surplus followed by a permanent net-of-interest deficit.
+respect to each innovation
+
+Each endowment innovation leads to a
+temporary surplus followed by a permanent net-of-interest deficit
 
 The temporary surplus just offsets the permanent deficit in terms of
-expected present value.
+expected present value
 
-.. code:: ipython3
+.. code-block:: python3
 
-    G_HS = np.vstack([Econ1.Sc,Econ1.Sc-Econ1.Sd[0,:].reshape(1,8)])
-    H_HS = 1e-8 * np.eye(2) #Set very small so there is no measurement error
+    G_HS = np.vstack([Econ1.Sc, Econ1.Sc-Econ1.Sd[0, :].reshape(1, 8)])
+    H_HS = 1e-8 * np.eye(2)  # Set very small so there is no measurement error
     LSS_HS = qe.LinearStateSpace(Econ1.A0, Econ1.C, G_HS, H_HS)
-
-.. code:: ipython3
 
     HS_kal = qe.Kalman(LSS_HS)
     w_lss = HS_kal.whitener_lss() 
@@ -276,38 +266,40 @@ expected present value.
         y2_w2[t] = ma_coefs[t][1, 1]
         
     # This scales the impulse responses to match those in the book
-    y1_w1 = sqrt(HS_kal.stationary_innovation_covar()[0,0])*y1_w1
-    y2_w1 = sqrt(HS_kal.stationary_innovation_covar()[0,0])*y2_w1
-    y1_w2 = sqrt(HS_kal.stationary_innovation_covar()[1,1])*y1_w2
-    y2_w2 = sqrt(HS_kal.stationary_innovation_covar()[1,1])*y2_w2
+    y1_w1 = sqrt(HS_kal.stationary_innovation_covar()[0, 0]) * y1_w1
+    y2_w1 = sqrt(HS_kal.stationary_innovation_covar()[0, 0]) * y2_w1
+    y1_w2 = sqrt(HS_kal.stationary_innovation_covar()[1, 1]) * y1_w2
+    y2_w2 = sqrt(HS_kal.stationary_innovation_covar()[1, 1]) * y2_w2
     
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     plt.subplot(121)
-    plt.plot(y1_w1,label='Consumption')
-    plt.plot(y2_w1,label='Deficit')
-    plt.legend(loc='best')
+    plt.plot(y1_w1, label='Consumption')
+    plt.plot(y2_w1, label='Deficit')
+    plt.legend()
     plt.title('Response to $u_{1t}$')
+    
     plt.subplot(122)
-    plt.plot(y1_w2,label='Consumption')
-    plt.plot(y2_w2,label='Deficit')
-    plt.legend(loc='best')
-    plt.title('Response to $u_{2t}$');
+    plt.plot(y1_w2, label='Consumption')
+    plt.plot(y2_w2, label='Deficit')
+    plt.legend()
+    plt.title('Response to $u_{2t}$')
+    plt.show()
 
 
 
 The above figure displays the impulse response of consumption and the
-deficit to the innovations in the econometrician's Wold representation.
+deficit to the innovations in the econometrician's Wold representation
 
 -  this is the object that would be recovered from a high order vector
    autoregression on the econometrician's observations
 
-Consumption responds only to the first innovation.
+Consumption responds only to the first innovation
 
 -  this is indicative of the Granger causality imposed on the
    :math:`[c_t, c_t - d_t]` process by Hall's model: consumption Granger
-   causes :math:`c_t - d_t`, with no reverse causality.
+   causes :math:`c_t - d_t`, with no reverse causality
 
-.. code:: ipython3
+.. code-block:: python3
 
     # This is Fig 8.E.3 from p.189 of HS2013
     
@@ -326,18 +318,18 @@ Consumption responds only to the first innovation.
         a2_w1[t] = ycoefs[t][1, 0]
         a2_w2[t] = ycoefs[t][1, 1]
     
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     plt.subplot(121)
-    plt.plot(a1_w1,label='Consumption innov.')
-    plt.plot(a2_w1,label='Deficit innov.')
+    plt.plot(a1_w1, label='Consumption innov.')
+    plt.plot(a2_w1, label='Deficit innov.')
     plt.title('Response to $w_{1t}$')
-    plt.legend(loc='best')
+    plt.legend()
     plt.subplot(122)
-    plt.plot(a1_w2,label='Consumption innov.')
-    plt.plot(a2_w2,label='Deficit innov.')
-    plt.legend(loc='best')
-    plt.title('Response to $w_{2t}$');
-
+    plt.plot(a1_w2, label='Consumption innov.')
+    plt.plot(a2_w2, label='Deficit innov.')
+    plt.legend()
+    plt.title('Response to $w_{2t}$')
+    plt.show()
 
 The above figure displays the impulse responses of :math:`u_t` to
 :math:`w_t`, as depicted in:
@@ -347,7 +339,7 @@ The above figure displays the impulse responses of :math:`u_t` to
 While the responses of the innovations to consumption are concentrated
 at lag zero for both components of :math:`w_t`, the responses of the
 innovations to :math:`(c_t - d_t)` are spread over time (especially in
-response to :math:`w_{1t}`).
+response to :math:`w_{1t}`)
 
 Thus, the innovations to :math:`(c_t - d_t)` as revealed by the vector
 autoregression depend on what the economic agent views as "old news"

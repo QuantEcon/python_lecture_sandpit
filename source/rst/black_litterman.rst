@@ -1,8 +1,9 @@
 .. _black_litterman:
 
-.. include:: /_static/includes/header.raw
+.. include:: /_static/includes/lecture_howto_py.raw
 
-.. highlight:: python3
+.. index::
+    single: python
 
 ****************************************************
 Two modifications of mean-variance portfolio theory

@@ -6,7 +6,6 @@
     single: python
 
 
-
 ***************************************************
 Recursive Models of Dynamic Linear Economies
 ***************************************************
