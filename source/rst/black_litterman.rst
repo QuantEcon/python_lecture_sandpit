@@ -19,7 +19,7 @@ Remarks about estimating means and variances
 ----------------------------------------------
 
 The famous **Black-Litterman** (1992) :cite:`black1992global` portfolio choice model that we
-describe in this notebook is motivated by the finding that with high or
+describe in this lecture is motivated by the finding that with high or
 moderate frequency data, means are more difficult to estimate than
 variances
 
@@ -32,11 +32,11 @@ the one hand, an robust control theorists, on the other, would recommend
 modifying the **mean-variance portfolio choice model** to take that into
 account
 
-At the end of this notebook, we shall use some rates of convergence
+At the end of this lecture, we shall use some rates of convergence
 results and some simulations to verify how means are more difficult to
 estimate than variances
 
-Among the ideas in play in this notebook will be
+Among the ideas in play in this lecture will be
 
 -  Mean-variance portfolio theory
 
@@ -62,7 +62,7 @@ This lecture describes two lines of thought that modify the classic
 mean-variance portfolio choice model in ways designed to make its
 recommendations more plausible
 
-As we mentioned above, the two approaches build on a common hunch --
+As we mentioned above, the two approaches build on a common and widespread hunch --
 that because it is much easier statistically to estimate covariances of
 excess returns than it is to estimate their means, it makes sense to
 contemplated the consequences of adjusting investors' subjective beliefs
@@ -247,7 +247,7 @@ Evidently, portfolio rule :eq:`risky-portfolio` then implies that
 
 or
 
-.. math:: \delta_m = \frac{\bf SR}{\sigma}
+.. math:: \delta_m = \frac{{\bf SR}_m}{\sigma}
 
 Following the Black-Litterman philosophy, our first step will be to back
 a value of :math:`\delta_m` from
@@ -491,7 +491,7 @@ labelled as iso-likelihood ellipses
 
 In our specific example, we can use the pair
 :math:`(\bar d_1, \bar d_2)` as being two "likelihood" values for which
-the corresponding isolikelihood ellipses in the excess return space are
+the corresponding iso-likelihood ellipses in the excess return space are
 given by
 
 .. math::
@@ -514,7 +514,7 @@ The pairs :math:`(\bar d_1, \bar d_2)` for which there
 is such a point outlines a curve in the excess return space. This curve
 is reminiscent of the Pareto curve in an Edgeworth-box setting
 
-Leamer (1978) :cite:`leamer1978specification` calls this curve *information contract curve* and
+Leamer (1978) :cite:`leamer1978specification` calls this an *information contract curve* and
 describes it by the following program: maximize the likelihood of one
 view, say the Black-Litterman recommendation, while keeping the
 likelihood of the other view at least at a prespecified constant
@@ -542,8 +542,9 @@ which defines the *information contract curve* between
   + \lambda (\tau \Sigma)^{-1}\hat \mu )
 
 Note that if :math:`\lambda = 1`, :eq:`info-curve` is equivalent with :eq:`mix-views` and it
-identifies one point on the information contract curve. Furthermore,
-because :math:`\lambda` is a function of the minimum likelihood
+identifies one point on the information contract curve. 
+
+Furthermore, because :math:`\lambda` is a function of the minimum likelihood
 :math:`\bar d_2` on the RHS of the constraint, by varying
 :math:`\bar d_2` (or :math:`\lambda` ), we can trace out the whole curve
 as the figure below illustrates
@@ -833,7 +834,7 @@ the covariance matrix of excess returns
 The robust control theory is another approach that also hinges on
 adjusting mean excess returns but not covariances
 
-Associated with a robust control problem is what Hansen and Sargent call
+Associated with a robust control problem is what Hansen and Sargent :cite:`HansenSargent2001`, :cite`HansenSargent2008` call
 a :math:`{\sf T}` operator
 
 Let's define the :math:`{\sf T}` operator as it applies to the problem
@@ -1038,13 +1039,19 @@ size grows to infinity)
 can inform us about the relative (asymptotic) rates
 
 We will show that in general, with dependent data, the limit
-:math:`B` depends on the sampling frequency. In particular, we find
+:math:`B` depends on the sampling frequency. 
+
+In particular, we find
 that the rate of convergence of the variance estimator is less sensitive
 to increased sampling frequency than the rate of convergence of the mean
-estimator. Hence, we can expect the relative asymptotic
+estimator. 
+
+Hence, we can expect the relative asymptotic
 rate, :math:`B`, to get smaller with higher frequency data,
 illustrating that "it is more difficult to estimate means than
-variances". That is, we need significantly more data to obtain a given
+variances". 
+
+That is, we need significantly more data to obtain a given
 precision of the mean estimate than for our variance estimate
 
 A special case -- i.i.d. sample
