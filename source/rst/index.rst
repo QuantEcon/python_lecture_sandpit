@@ -20,7 +20,6 @@
     test_lecture
     complex_and_trig
     geom_series
-
     HS_recursive_models
     growth_in_dles
     lucas_asset_pricing_dles
@@ -29,5 +28,7 @@
     rosen_schooling_model
     cattle_cycles
     hs_invertibility_example
-
+    black_litterman
+    von_neumann_model
+	
     zreferences

@@ -1,4 +1,4 @@
-.. _aiyagari:
+.. _von_neumann_model:
 
 .. include:: /_static/includes/header.raw
 
@@ -27,7 +27,7 @@ following important tools:
 -  the Perron-Frobenius theorem
 
 
-.. code-block:: python3
+.. code-block:: ipython
 
     import numpy as np
     import matplotlib.pyplot as plt
