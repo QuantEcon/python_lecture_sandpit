@@ -834,7 +834,7 @@ the covariance matrix of excess returns
 The robust control theory is another approach that also hinges on
 adjusting mean excess returns but not covariances
 
-Associated with a robust control problem is what Hansen and Sargent :cite:`HansenSargent2001`, :cite`HansenSargent2008` call
+Associated with a robust control problem is what Hansen and Sargent :cite:`HansenSargent2001`, :cite:`HansenSargent2008` call
 a :math:`{\sf T}` operator
 
 Let's define the :math:`{\sf T}` operator as it applies to the problem
