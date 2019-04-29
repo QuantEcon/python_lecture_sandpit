@@ -10,6 +10,7 @@ Rosen schooling model
 
 .. contents:: :depth: 2
 
+**Co-author:** Sebastian Graves
 
 In addition to what's included in  Anaconda, this lecture uses the quantecon  library
 

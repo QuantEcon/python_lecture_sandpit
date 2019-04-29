@@ -10,6 +10,8 @@ IRFs in Hall Models
 
 .. contents:: :depth: 2
 
+**Co-author:** Sebastian Graves
+
 In addition to what's in Anaconda, this lecture uses the quantecon library
 
 .. code-block:: ipython
