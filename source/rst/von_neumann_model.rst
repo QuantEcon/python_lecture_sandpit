@@ -17,8 +17,9 @@ This notebook uses the class ``Neumann`` to calculate key objects of a
 linear growth model of John von Neumann (1937) :cite:`von1937uber` that was generalized by
 Kemeny, Moregenstern and Thompson (1956) :cite:`kemeny1956generalization`
 
-Objects of interest are the maximal expansion rate (:math:`\alpha`), the interest factor (:math:`β`), and
-the optimal intensities (:math:`x`) and prices (:math:`p`)
+Objects of interest are the maximal expansion rate (:math:`\alpha`), the
+interest factor (:math:`β`), and the optimal intensities (:math:`x`) and
+prices (:math:`p`)
 
 In addition to watching how the towering mind of John von Neumann
 formulated an equilibrium model of price and quantity vectors in
@@ -303,7 +304,7 @@ The code below provides the ``Neumann`` class
           return γ, x, p
 
 Notation
-----------
+===========
 
 We use the following notation
 
@@ -338,7 +339,7 @@ denote the :math:`j` th column and :math:`i` th row of :math:`A`,
 respectively
 
 Model ingredients and assumptions
-----------------------------------
+====================================
 
 A pair :math:`(A,B)` of :math:`m\times n` nonnegative matrices defines
 an economy.
@@ -442,7 +443,7 @@ instance
     N2
 
 Dynamic interpretation
-----------------------
+====================================
 
 Attach a time index :math:`t` to the preceding objects, regard aneconomy
 as a dynamic system, and study sequences
@@ -478,7 +479,7 @@ Accordingly, :math:`Ap_t` tells the costs of production in period
 :math:`t` and :math:`Bp_t` tells revenues in period :math:`t+1`
 
 Balanced growth
----------------
+-----------------
 
 We follow John von Neumann in studying “balanced growth”
 
@@ -514,8 +515,9 @@ The balanced growth assumption allows us to drop time subscripts and
 conduct an analysis purely in terms of a time-invariant growth rate
 :math:`\alpha` and interest factor :math:`\beta`
 
+
 Duality
--------
+========
 
 The following two problems are connected by a remarkable dual
 relationship between the technological and valuation characteristics of
@@ -589,17 +591,16 @@ following holds true
 
 .. 
 
-  *Proof (Sketch):* Assumption I and II imply that there exist
-  :math:`(\alpha_0, x_0)` and :math:`(\beta_0, p_0)` solving the TEP
-  and EEP, repspectively. If :math:`\gamma^*>\alpha_0`, then by
-  defintion of :math:`\alpha_0`, there cannot exist a semipositive
-  :math:`x` that satisfies :math:`x^T B \geq \gamma^{* } x^T A`.
-  Similarly, if :math:`\gamma^*<\beta_0`, there is no semipositive
-  :math:`p` so that :math:`Bp \leq \gamma^{* } Ap`. Let
-  :math:`\gamma^{* }\in[\beta_0, \alpha_0]`, then
-  :math:`x_0^T B \geq \alpha_0 x_0^T A \geq \gamma^{* } x_0^T A`.
-  Moreover, :math:`Bp_0\leq \beta_0 A p_0\leq \gamma^* A p_0`. This two
-  inequalities imply :math:`x_0\left(B - \gamma^{* } A\right)p_0 = 0`.
+   *Proof (Sketch):* Assumption I and II imply that there exist :math:`(\alpha_0,
+   x_0)` and :math:`(\beta_0, p_0)` solving the TEP and EEP, repspectively. If
+   :math:`\gamma^*>\alpha_0`, then by defintion of :math:`\alpha_0`, there cannot
+   exist a semipositive :math:`x` that satisfies :math:`x^T B \geq \gamma^{* }
+   x^T A`.  Similarly, if :math:`\gamma^*<\beta_0`, there is no semipositive
+   :math:`p` so that :math:`Bp \leq \gamma^{* } Ap`. Let :math:`\gamma^{*
+   }\in[\beta_0, \alpha_0]`, then :math:`x_0^T B \geq \alpha_0 x_0^T A \geq
+   \gamma^{* } x_0^T A`.  Moreover, :math:`Bp_0\leq \beta_0 A p_0\leq \gamma^* A
+   p_0`. This two inequalities imply :math:`x_0\left(B - \gamma^{* } A\right)p_0
+   = 0`.
 
 Here the constant :math:`\gamma^{*}` is both expansion and interest
 factor (not neccessarily optimal)
@@ -636,7 +637,7 @@ significantly reduces the number of (relevant) solutions
 
 
 Interpretation as a game theoretic problem (two-player zero-sum game)
----------------------------------------------------------------------
+=======================================================================
 
 To compute the equilibrium :math:`(\gamma^{*}, x_0, p_0)`, we follow the
 algorithm proposed by Hamburger, Thompson and Weil (1967), building on
@@ -681,10 +682,13 @@ zero-sum game
 
 Moreover, von Neumann’s Minmax Theorem (1928) :cite:`neumann1928theorie` implies that
 
-.. math:: V(C) = \max_x \min_p \hspace{2mm} x^T C p = \min_p \max_x \hspace{2mm} x^T C p = (x^*)^T C p^*
+.. math:: 
+   V(C) = \max_x \min_p \hspace{2mm} x^T C p = \min_p \max_x \hspace{2mm} x^T C p = (x^*)^T C p^*
+
+
 
 Connection with Linear Programming (LP)
-========================================
+-----------------------------------------
 
 Finding Nash equilibria of a finite two-player zero-sum game can be
 formulated as a linear programming problem
@@ -991,8 +995,7 @@ These assumptions imply that :math:`B=I_n`, i.e., that :math:`B` can be
 written as an identity matrix (possibly after reshuffling its rows and
 columns)
 
-The simple model has the following special property (Theorem 9.11. in
- :cite:`gale1989theory`): if :math:`x_0` and :math:`\alpha_0>0` solve the TEP
+The simple model has the following special property (Theorem 9.11. in :cite:`gale1989theory`): if :math:`x_0` and :math:`\alpha_0>0` solve the TEP
 with :math:`(A,I_n)`, then
 
 .. math:: 
