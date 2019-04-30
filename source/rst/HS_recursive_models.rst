@@ -36,25 +36,21 @@ The class of models is implemented in a Python class DLE that is part of  quante
 
 Subsequent lectures   use the DLE class to implement various instances that have appeared in the economics literature
 
-  NATASHA XXXXX: LET'S LIST THE    SISTER LECTURES  HERE PLEASE WHEN THEY HAVE BEEN CONVERTED FROM THE NOTEBOOKS AND ARE READY TO BE MADE LIVE
-
-  THE LECTURES WILL BE THESE (IF WE DON'T CHANGE  THE TITLES)
-
-
-
-  1. Growth in Dynamic Linear Economies
-
-  2. Lucas Asset Pricing using DLE
-
-  3. IRFs in Hall Model
-
-  4. Permanent Income Using the DLE class
   
-  5. Rosen schooling model
 
-  6. Cattle cycles
+  1. :doc:`Growth in Dynamic Linear Economies <growth_in_dles>`
 
-  7. Hansen-Sargent Invertibility Example
+  2. :doc:`Lucas Asset Pricing using DLE <lucas_asset_pricing_dles>`
+
+  3. :doc:`IRFs in Hall Model <irfs_in_hall_model>`
+
+  4. :doc:`Permanent Income Using the DLE class <permanent_income_dles>`
+  
+  5. :doc:`Rosen schooling model <rosen_schooling_model>`
+
+  6. :doc:`Cattle cycles <cattle_cycles>`
+
+  7. :doc:`Shock Non Invertibility <hs_invertibility_example>`
 
 
 
@@ -208,7 +204,7 @@ Different example economies manifest themselves simply as different settings for
 
 The models are flexible enough to express alternative senses of a representative household
 
--  A single ‘stand-in’ household (Prescott).
+-  A single ‘stand-in’ household of the type used to good effect by Edward C. Prescott
 
 -  Heterogeneous households satisfying conditions for Gorman aggregation
    into a representative household.
@@ -2033,7 +2029,8 @@ Models of Occupational Choice and Pay
 Market for Engineers
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Ryoo and Rosen’s (2004) model consists of the following equations:
+Ryoo and Rosen’s (2004) :cite:`ryoo2004engineering` model consists of the following equations:
+
 first, a demand curve for engineers
 
 .. math:: w_t = - \alpha_d N_t + \epsilon_{1t}\ ,\ \alpha_d > 0 ;
@@ -2095,8 +2092,12 @@ home-produced service to capture the demand for labor. Here
 
 - The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.
 
-
 **Remark:** This has an Imai-Keane flavor.
+
+For more details and Python code see :doc:`Rosen schooling model <rosen_schooling_model>`
+
+
+
 
 Skilled and Unskilled Workers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

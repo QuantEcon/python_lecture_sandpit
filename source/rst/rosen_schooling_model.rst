@@ -13,6 +13,10 @@ Rosen schooling model
 
 **Co-author:** Sebastian Graves
 
+
+This lecture is yet another part of a suite of lectures that use the quantecon DLE class to instantiate models within the
+:cite:`HS2013` class of models described in detail in :doc:`Recursive Models of Dynamic Linear Economies<HS_recursive_models>`
+
 In addition to what's included in  Anaconda, this lecture uses the quantecon  library
 
 .. code-block:: ipython

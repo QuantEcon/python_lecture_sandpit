@@ -6,7 +6,7 @@
     single: python
 
 **************************************************
-A von Neumann growth model (and a generalization)
+von Neumann growth model (and a generalization)
 **************************************************
 
 .. contents:: :depth: 2
@@ -25,7 +25,7 @@ formulated an equilibrium model of price and quantity vectors in
 balanced growth, this notebook shows how fruitfully to employ the
 following important tools:
 
--  a zero-sum two player game
+-  a zero-sum two-player game
 
 -  linear programming
 
@@ -52,7 +52,7 @@ The code below provides the ``Neumann`` class
   class Neumann(object):
       """
       This class describes the Generalized von Neumann growth model as it was
-      discussed in Kemeny et al. (1956, ECTA) and Gale (1960, Chapter 9.5):
+      discussed in Kemeny et al. (1956, ECTA) :cite:`kemeny1956generalization` and Gale (1960, Chapter 9.5) :cite:`gale1989theory`:
 
       Let:
       n ... number of goods
@@ -134,7 +134,7 @@ The code below provides the ``Neumann`` class
       def bounds(self):
           """
           Calculate the trivial upper and lower bounds for alpha (expansion rate) and
-          beta (interest factor). See the proof of Theorem 9.8 in Gale (1960)
+          beta (interest factor). See the proof of Theorem 9.8 in Gale (1960) :cite:`gale1989theory`
           """
 
           n, m = self.n, self.m
@@ -401,7 +401,7 @@ for all :math:`j\in S`, :math:`\exists i\in T`, s.t. :math:`b_{i,j}>0`.
 The economy is **irreducible** if there are no proper independent
 subsets
 
-We study two examples, both coming from Chapter 9.6 of Gale (1960)
+We study two examples, both coming from Chapter 9.6 of Gale (1960) :cite:`gale1989theory`
 
 .. code-block:: python3
 
@@ -489,7 +489,7 @@ Then *balanced growth* is a situation in which
 
 .. math:: x_{t+1}./x_t = \alpha , \quad \forall t \geq 0
 
-With balanced growth, the law of motion of :math:`x` is evidently :math:`x_{t+1}=\alpha `x_t` 
+With balanced growth, the law of motion of :math:`x` is evidently :math:`x_{t+1}=\alpha x_t` 
 and so we can rewrite the feasibility constraint as
 
 .. math:: x^T_{t}B \geq \alpha x^T_t A \hspace{1cm}\forall t
@@ -531,7 +531,7 @@ and a number :math:`\alpha\in\mathbb{R}`, s.t.
     &\text{s.t. }\hspace{2mm}x^T B \geq \alpha x^T A
     \end{align*}
 
-Theorem 9.3 of David Gale’s book assets that if Assumptions I and II are
+Theorem 9.3 of David Gale’s book :cite:`gale1989theory` assets that if Assumptions I and II are
 both satisfied, then a maximum value of :math:`\alpha` exists and it is
 positive
 
@@ -563,7 +563,7 @@ For simplicity (and to emphasize a close connection to zero-sum games),
 in the following, we normalize both vectors
 :math:`x_0` and :math:`p_0` to have unit length
 
-A standard duality argument (see Lemma 9.4. in (Gale, 1960)) implies
+A standard duality argument (see Lemma 9.4. in (Gale, 1960) :cite:`gale1989theory`) implies
 that under Assumptions I and II, :math:`\beta_0\leq \alpha_0`
 
 But in the other direction, that is :math:`\beta_0\geq \alpha_0`,
@@ -992,7 +992,7 @@ written as an identity matrix (possibly after reshuffling its rows and
 columns)
 
 The simple model has the following special property (Theorem 9.11. in
-Gale): if :math:`x_0` and :math:`\alpha_0>0` solve the TEP
+ :cite:`gale1989theory`): if :math:`x_0` and :math:`\alpha_0>0` solve the TEP
 with :math:`(A,I_n)`, then
 
 .. math:: 

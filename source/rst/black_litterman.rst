@@ -515,7 +515,9 @@ The pairs :math:`(\bar d_1, \bar d_2)` for which there
 is such a point outlines a curve in the excess return space. This curve
 is reminiscent of the Pareto curve in an Edgeworth-box setting
 
-Leamer (1978) :cite:`leamer1978specification` calls this an *information contract curve* and
+Dickey (1975) :cite:`Dickey1975` calls it a *curve decolletage*
+
+Leamer (1978) :cite:`leamer1978specification` calls it an *information contract curve* and
 describes it by the following program: maximize the likelihood of one
 view, say the Black-Litterman recommendation, while keeping the
 likelihood of the other view at least at a prespecified constant
@@ -1296,20 +1298,4 @@ relative MSEs and the sampling frequency
    estimator's MSE deteriorates more than that of the variance
    estimator
 
-References
-------------
-
-Black, F. and Litterman, R., 1992. "Global portfolio optimization".
-Financial analysts journal, 48(5), pp.28-43
-
-Dickey, J. 1975. "Bayesian alternatives to the F-test and least-squares
-estimate in the normal linear model", in: S.E. Fienberg and A. Zellner,
-eds., "Studies in Bayesian econometrics and statistics" (North-Holland,
-Amsterdam) 515-554
-
-Hansen, Lars Peter and Thomas J. Sargent. 2001. "Robust Control and
-Model Uncertainty." American Economic Review, 91(2): 60-66
-
-Leamer, E.E., 1978. **Specification searches: Ad hoc inference with
-nonexperimental data**, (Vol. 53). John Wiley & Sons Incorporated
 
