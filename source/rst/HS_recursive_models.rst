@@ -612,7 +612,7 @@ where household services are produced via the household technology
 
 .. math:: h_t = \Delta_h h_{t-1} + \Theta_h c_t
 
-.. math:: s_t = \Lambda h_{t-1} + \Pi c_t .
+.. math:: s_t = \Lambda h_{t-1} + \Pi c_t
 
 and we make 
 
@@ -621,11 +621,11 @@ are less than or equal to one.
 
 Later we shall introduce **canonical**  household technologies that  satisfy an ‘invertibility’
 requirement relating sequences :math:`\{s_t\}` of services and
-:math:`\{c_t\}` of consumption flows.
+:math:`\{c_t\}` of consumption flows
 
 
 And  we’ll describe how to obtain a canonical representation
-of a household technology from one that is not canonical.
+of a household technology from one that is not canonical
 
 Here are some examples of household preferences
 
@@ -644,7 +644,7 @@ Here are some examples of household preferences
 Services at :math:`t` are related to the stock of durables at the
 beginning of the period:
 
-.. math:: s_t = \lambda h_{t-1} \ , \ \lambda > 0  .
+.. math:: s_t = \lambda h_{t-1} \ , \ \lambda > 0 
 
 Preferences are ordered by
 
@@ -654,7 +654,7 @@ Preferences are ordered by
    b_t)^2 + \ell_t^2\right] \mid J_0
 
 Set :math:`\Delta_h = \delta_h,
-\Theta_h =1, \Lambda = \lambda, \Pi = 0`.
+\Theta_h =1, \Lambda = \lambda, \Pi = 0`
 
 **Habit Persistence**
 
@@ -670,7 +670,7 @@ Set :math:`\Delta_h = \delta_h,
 
 Here the effective bliss point :math:`b_t + \lambda (1 - \delta_h)
 \sum^\infty_{j=0} \delta^j_h\, c_{t-j-1}` shifts in response to a moving
-average of past consumption.
+average of past consumption
 
 
 **Initial Conditions**
@@ -678,24 +678,24 @@ average of past consumption.
 Preferences of this form require an initial condition for the geometric
 sum :math:`\sum^\infty_{j=0} \delta_h^j c_{t - j-1}` that we specify as
 an initial condition for the ‘stock of household durables,’
-:math:`h_{-1}`.
+:math:`h_{-1}`
 
 .. _habit-persistence-1:
 
 
 Set
 
-.. math:: h_t = \delta_h h_{t-1} + (1-\delta_h) c_t \quad ,\ 0 < \delta_h < 1 .
+.. math:: h_t = \delta_h h_{t-1} + (1-\delta_h) c_t \quad ,\ 0 < \delta_h < 1 
 
 .. math::
 
    h_t = (1 - \delta_h) \sum^t_{j=0} \delta_h^j\, c_{t-j} + \delta^{t+1}_h\,
-   h_{-1} .
+   h_{-1} 
 
-.. math:: s_t = - \lambda h_{t-1} + c_t, \ \lambda > 0 .
+.. math:: s_t = - \lambda h_{t-1} + c_t, \ \lambda > 0 
 
 To implement, set
-:math:`\Lambda = -\lambda,\ \Pi = 1,\ \Delta_h = \delta_h,\ \Theta_h=1-\delta_h`.
+:math:`\Lambda = -\lambda,\ \Pi = 1,\ \Delta_h = \delta_h,\ \Theta_h=1-\delta_h`
 
 **Seasonal Habit Persistence**
 
@@ -710,7 +710,7 @@ To implement, set
     0<\beta < 1\ ,\ 0 < \delta_h < 1\ ,\ \lambda > 0 
 
 Here the effective bliss point :math:`b_t + \lambda (1 - \delta_h) \sum^\infty_{j=0} \delta^j_h\, c_{t-4j-4}` shifts in response to a
-moving average of past consumptions of the same quarter.
+moving average of past consumptions of the same quarter
 
 
 
@@ -768,18 +768,18 @@ so that
 
 .. math:: s_{1t} = c_t
 
-.. math:: s_{2t} = \lambda (c_t - c_{t-1} ) .
+.. math:: s_{2t} = \lambda (c_t - c_{t-1} ) 
 
 We set the first component :math:`b_{1t}` of :math:`b_t` to capture the
 stochastic bliss process, and set the second component identically equal
 to zero. 
 
-Thus, we set :math:`\Delta_h = 0, \Theta_h = 1`,
+Thus, we set :math:`\Delta_h = 0, \Theta_h = 1`
 
 .. math::
 
    \Lambda = \begin{bmatrix} 0 \\ -\lambda \end{bmatrix}\ ,\ \Pi =
-   \begin{bmatrix} 1 \\ \lambda \end{bmatrix} .
+   \begin{bmatrix} 1 \\ \lambda \end{bmatrix} 
 
 **Multiple Consumption Goods**
 
@@ -789,14 +789,14 @@ Thus, we set :math:`\Delta_h = 0, \Theta_h = 1`,
    \Lambda = \begin{bmatrix} 0\\0\end{bmatrix} \ \hbox { and } \ \Pi =
    \begin{bmatrix}\pi_1 & 0 \\ \pi_2 & \pi_3 \end{bmatrix} .
 
-.. math:: -{1 \over 2} \beta^t (\Pi c_t - b_t)^\prime (\Pi c_t - b_t).
+.. math:: -{1 \over 2} \beta^t (\Pi c_t - b_t)^\prime (\Pi c_t - b_t)
 
-.. math:: mu_t= - \beta^t [\Pi^\prime \Pi\, c_t - \Pi^\prime\, b_t].
+.. math:: mu_t= - \beta^t [\Pi^\prime \Pi\, c_t - \Pi^\prime\, b_t]
 
 .. math::
 
    c_t = - (\Pi^\prime \Pi)^{-1} \beta^{-t} mu_t + (\Pi^\prime \Pi)^{-1}
-   \Pi^\prime b_t .
+   \Pi^\prime b_t 
 
 This is called the **Frisch demand function** for consumption.
 
@@ -805,24 +805,26 @@ We can think of the vector :math:`mu_t` as playing the role of prices,
 up to a common factor, for all dates and states. 
 
 The scale factor is
-determined by the choice of numeraire.
+determined by the choice of numeraire
 
 
 Notions of **substitutes and complements** can be defined in terms of these
-Frisch demand functions.
+Frisch demand functions
 
 Two goods can be said to be **substitutes** if the
 cross-price effect is positive and to be **complements** if this effect is
-negative. 
+negative.
 
 Hence this classification is determined by the off-diagonal
 element of :math:`-(\Pi^\prime \Pi)^{-1}`, which is equal to
 :math:`\pi_2 \pi_3 /\det
-(\Pi^\prime \Pi)`. 
+(\Pi^\prime \Pi)`.
 
 If :math:`\pi_2` and :math:`\pi_3` have the same
-sign, the goods are substitutes. If they have opposite signs, the goods
-are complements.
+sign, the goods are substitutes
+
+If they have opposite signs, the goods
+are complements
 
 
 To summarize, our economic structure consists of the matrices that define the following components:
@@ -833,7 +835,7 @@ To summarize, our economic structure consists of the matrices that define the fo
 
    \begin{align}
    z_{t+1} &=A_{22} z_t + C_2 w_{t+1}
-   \\  b_t &= U_b z_t \\ d_t &= U_d z_t .\end{align}
+   \\  b_t &= U_b z_t \\ d_t &= U_d z_t \end{align}
 
 **Production Technology**
 
@@ -899,7 +901,7 @@ Throughout, we shall impose the following **square summability** conditions
 .. math::
 
    E \sum^\infty_{t=0} \beta^t h_t \cdot h_t \mid J_0 < \infty\ \hbox { and }\
-   E \sum^\infty_{t=0} \beta^t k_t \cdot k_t \mid J_0 < \infty .
+   E \sum^\infty_{t=0} \beta^t k_t \cdot k_t \mid J_0 < \infty 
 
 Define:
 
@@ -907,10 +909,10 @@ Define:
 
    L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
    variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
-   y_t^2 \mid J_0 < + \infty] .
+   y_t^2 \mid J_0 < + \infty] 
 
 Thus, we require that each component of :math:`h_t` and each component of
-:math:`k_t` belong to :math:`L_0^2`.
+:math:`k_t` belong to :math:`L_0^2`
 
 
 We shall compare and utiliize two approaches to solving the planning problem
@@ -956,7 +958,7 @@ h_t, i_t, k_t`, and :math:`s_t`, respectively, are:
    {\cal M}_{t+1}^d) \mid J_t = 0 , \\
    &- s_t + b_t - {\cal M}_t^s = 0 \end{align}
 
-for :math:`t=0,1, \ldots`. 
+for :math:`t=0,1, \ldots`
 
 In addition, we have the complementary
 slackness conditions (these recover the original transition equations)
@@ -974,7 +976,7 @@ and also transversality conditions
 
 The system formed by the FONCs and the transition equations can be  handed over to Python
 
-Python will solve planning problem for fixed parameter values.
+Python will solve planning problem for fixed parameter values
 
 
 Here are the **Python  Ready Equations**
@@ -1003,29 +1005,29 @@ Here are the **Python  Ready Equations**
 
 The Lagrange multipliers or **shadow prices** satisfy
 
-.. math:: {\cal M}_t^s = b_t - s_t .
+.. math:: {\cal M}_t^s = b_t - s_t 
 
 .. math::
 
    {\cal M}_t^h = E \biggl[ \sum_{\tau =1}^\infty \beta^\tau
    (\Delta_h^\prime)^{\tau - 1} \Lambda^\prime {\cal M}_{t+ \tau}^s
-   \mid J_t\biggr] .
+   \mid J_t\biggr] 
 
 .. math::
 
    {\cal M}_t^d = \begin{bmatrix}\Phi_c^\prime\\ \Phi_g^\prime\\\end{bmatrix}^{-1}\
    \begin{bmatrix} \Theta_h^\prime {\cal M}_t^h  + \Pi^\prime {\cal M}_t^s \\
-   -g_t \\  \end{bmatrix}.
+   -g_t \\  \end{bmatrix}
 
 .. math::
 
    {\cal M}_t^k = E \biggl[\sum _{\tau=1}^\infty \beta^\tau (\Delta_k^\prime)^{\tau-1}
-   \Gamma^\prime {\cal M}_{t+ \tau}^d \mid J_t\biggr] .
+   \Gamma^\prime {\cal M}_{t+ \tau}^d \mid J_t\biggr] 
 
 .. math::
 
    {\cal M}_t^i =
-   \Theta _k^\prime {\cal M}_t^k .
+   \Theta _k^\prime {\cal M}_t^k 
 
 Although it is possible use matrix operator methods to solve the above **Python ready equations**, that is not
 the approach we'll use
@@ -1038,11 +1040,12 @@ Dynamic Programming
 
 Dynamic Programming  always starts with the word **let**
 
-Thus, let :math:`V(x_0)` be the optimal value function for the planning problem as a function of the initial state vector :math:`x_0`
+Thus, let :math:`V(x_0)` be the optimal value function for the
+ planning problem as a function of the initial state vector :math:`x_0`
 
 (Thus, in essence, dynamic programming amounts to an application of a **guess and verify** method in which we begin with a guess about the answer 
 to the problem we want to solve. That's why we start with **let** :math:`V(x_0)` be the (value of the) answer to the problem, then establish and 
-verity a bunch of conditions :math:`V(x_0)` has to satisfy if indeed it is the answer.)
+verity a bunch of conditions :math:`V(x_0)` has to satisfy if indeed it is the answer)
 
 The optimal value function :math:`V(x)` satisfies the **Bellman equation**
 
@@ -1080,15 +1083,15 @@ maximize
 
 subject to
 
-.. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0 ,
+.. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0
 
 where :math:`x_0` is given; :math:`x_t` is an :math:`n \times 1` vector
 of state variables, and :math:`u_t` is a :math:`k \times 1` vector of
-control variables.
+control variables
 
 We assume :math:`w_{t+1}` is a martingale difference
 sequence with :math:`E w_t w_t^\prime = I`, and that :math:`C` is a
-matrix conformable to :math:`x` and :math:`w`.
+matrix conformable to :math:`x` and :math:`w`
 
 The optimal value function :math:`V(x)` satisfies the Bellman equation
 
@@ -1099,9 +1102,9 @@ The optimal value function :math:`V(x)` satisfies the Bellman equation
 
 where maximization is subject to
 
-.. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0 .
+.. math:: x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0
 
-.. math:: V(x_t) = - x_t^\prime P x_t - \rho ,
+.. math:: V(x_t) = - x_t^\prime P x_t - \rho
 
 :math:`P` satisfies
 
@@ -1109,7 +1112,7 @@ where maximization is subject to
 
    P =  R + \beta A^\prime P A - (\beta A^\prime P
    B + W)   (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P
-   A + W') .
+   A + W')
 
 This equation in :math:`P` is called the algebraic matrix Riccati
 equation.
@@ -1119,10 +1122,10 @@ The optimal decision rule is :math:`u_t = - F x_t`, where
 .. math::
 
    F = (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P A +
-   W') .
+   W')
 
 The optimum decision rule for :math:`u_t` is independent of the
-parameters :math:`C`, and so of the noise statistics.
+parameters :math:`C`, and so of the noise statistics
 
 
 
@@ -1133,7 +1136,7 @@ Iterating on the Bellman operator leads to
    V_{j+1} (x_t) = \max_{u_t} \Bigl\{-( x_t^\prime R x_t + u_t^\prime Q
    u_t + 2 u_t^\prime W x_t) + \beta E_t V_j (x_{t+1}) \Bigr\}
 
-.. math:: V_j (x_t) =- x_t^\prime P_{j} x_t - \rho_{j},
+.. math:: V_j (x_t) =- x_t^\prime P_{j} x_t - \rho_{j}
 
 where :math:`P_{j}` and :math:`\rho_{j}` satisfy the equations
 
@@ -1151,7 +1154,7 @@ We can now state the planning problem as a dynamic programming problem
 .. math::
 
    \max_{ \{u_t, x_{t+1}\} }\ - E \sum_{t=0}^\infty \beta^t [x_t^\prime
-   Rx_t + u_t^\prime Q u_t + 2u_t^\prime Wx_t ] , \quad 0 < \beta < 1 ,
+   Rx_t + u_t^\prime Q u_t + 2u_t^\prime Wx_t ] , \quad 0 < \beta < 1
 
 where  maximization is subject to
 
@@ -1224,7 +1227,7 @@ For us a useful fact is that Lagrange multipliers equal gradients of the  planne
    {\mathcal M}_t^c = M_c x_t\ \hbox{ where }\ M_c = \Theta_h^\prime
    M_h + \Pi^\prime M_s
 
-.. math:: {\mathcal M}_t^i = M_i x_t\ \hbox{ where } \ M_i = \Theta_k^\prime M_k .
+.. math:: {\mathcal M}_t^i = M_i x_t\ \hbox{ where } \ M_i = \Theta_k^\prime M_k
 
 
 We will use this fact and these equations to compute competitive equilibrium prices
@@ -1241,12 +1244,13 @@ For the  **commodity space** we use
 
 For **pricing functionals** we express  values as inner products
 
-.. math:: \pi (c) = E \sum_{t=0}^\infty \beta^t p_t^0 \cdot c_t \mid J_0 ,
+.. math:: \pi (c) = E \sum_{t=0}^\infty \beta^t p_t^0 \cdot c_t \mid J_0
 
-where :math:`p_t^0` belongs to :math:`L_0^2`.
+where :math:`p_t^0` belongs to :math:`L_0^2`
 
 
-With these objects in our toolkit, we move on to state the problem of a **Representative Household in a competitive equilibrium**
+With these objects in our toolkit, we move on to state the 
+problem of a **Representative Household in a competitive equilibrium**
 
 
 Representative Household
@@ -1276,13 +1280,13 @@ subject to
 .. math::
 
    h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad h_{-1}, k_{-1}\
-   \hbox{ given} .
+   \hbox{ given} 
 
 
 We now desribe the problems faced by two types of firms called type I and type II
 
 Type I Firm
-===========
+-------------
 
 A type I firm rents capital and labor and endowments and produces
 :math:`c_t, i_t`. 
@@ -1300,16 +1304,16 @@ subject to
 
 .. math:: \Phi_c\, c_t + \Phi_g\, g_t + \Phi_i\, i_t = \Gamma k_{t-1} + d_t
 
-.. math:: -\, \ell_t^2 + g_t \cdot g_t = 0 .
+.. math:: -\, \ell_t^2 + g_t \cdot g_t = 0 
 
 Type II Firm
-============
+-------------
 
 A firm of type II  acquires capital via investment and then rents
-stocks of capital to the :math:`c,i`-producing type I firm.
+stocks of capital to the :math:`c,i`-producing type I firm
 
 A type II firm is a price taker facing the vector :math:`v_0` and the stochastic
-processes :math:`\{r^0_t, q^0_t\}`. 
+processes :math:`\{r^0_t, q^0_t\}`.
 
 The firm chooses :math:`k_{-1}` and
 stochastic processes for :math:`\{k_t, i_t\}^\infty_{t=0}` to maximize
@@ -1321,7 +1325,7 @@ stochastic processes for :math:`\{k_t, i_t\}^\infty_{t=0}` to maximize
 
 subject to
 
-.. math:: k_t = \Delta_k k_{t-1} + \Theta_k i_t.
+.. math:: k_t = \Delta_k k_{t-1} + \Theta_k i_t
 
 We can now state the following 
 
@@ -1330,17 +1334,19 @@ We can now state the following
 and an allocation :math:`\{c_t, i_t, k_t, h_t, g_t, d_t\}^\infty_{t=0}`
 that satisfy the following conditions:
 
-   * Each component of the price system and the allocation resides in the space :math:`L^2_0`.
+   * Each component of the price system and the allocation resides in the space :math:`L^2_0`
 
 
    * Given the price system and given :math:`h_{-1},\, k_{-1}`, the allocation solves the representative household’s problem and 
-     the problems of the two types of firms.
+     the problems of the two types of firms
 
 Versions of the two classical welfare theorems prevail under our assumptions
 
 We exploit that fact in our algorithm for computing a competiive equilibrium
  
- **Step 1:** Solve the planning problem by using dynamic programming.  The allocation (i.e., **quantitites**) that solve the planning problem **are** the 
+ **Step 1:** Solve the planning problem by using dynamic programming
+ 
+ The allocation (i.e., **quantitites**) that solve the planning problem **are** the 
  competitive equilibrium quantities
 
  **Step 2:** use the following formulas to compute the **equilibrium price system**
@@ -1365,22 +1371,22 @@ We exploit that fact in our algorithm for computing a competiive equilibrium
 .. math::
 
    v_0 = \Gamma^\prime {\cal M}^d_0 / \mu^w_0 + \Delta^\prime_k
-   {\cal M}^k_0 / \mu^w_0.
+   {\cal M}^k_0 / \mu^w_0
 
 **Verification:** With this price system, values can be assigned to the Lagrange
 multipliers for each of our three classes of agents that cause all
 first-order necessary conditions to be satisfied at these prices and at
-the quantities associated with the optimum of the planning problem.
+the quantities associated with the optimum of the planning problem
 
 An important use of an equilbrium pricing system is to do asset pricing
 
 Thus, imagine that we are presented a dividend stream: :math:`\{y_t\} \in L^2_0`
-and want to compute the value of a perpetual claim to this stream.
+and want to compute the value of a perpetual claim to this stream
 
 To value this asset we simply take **price times quantity** and add to get 
-an asset value: :math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 .`
+an asset value: :math:`a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0 `
 
-To compute :math:`ao` we proceed as follows. 
+To compute :math:`ao` we proceed as follows
 
 We let
 
@@ -1402,7 +1408,7 @@ We have the following convenient formulas:
 .. math::
 
    \sigma_a = {\beta \over 1 - \beta}\ {\rm trace } \left( Z_a \sum^\infty_{\tau = 0}
-   \,\beta^\tau\, (A^o)^\tau\, C C^\prime (A^{o \prime})^\tau \right).
+   \,\beta^\tau\, (A^o)^\tau\, C C^\prime (A^{o \prime})^\tau \right)
 
 
 Re-Opening Markets
@@ -1475,7 +1481,7 @@ v_t' = R, E w_{t+1} v_s' = 0` for all :math:`t+1 \geq s` and
    \hat x_{t+1} &=A^o \hat x_t + K_t a_t \\
    y_t &= G \hat x_t + a_t,\end{align}
 
-where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`.
+where :math:`a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R`
 
 .. _statistical-representations-1:
 
@@ -1498,7 +1504,7 @@ Compare spaces spanned
 
 Kalman gain:
 
-.. math:: K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} .
+.. math:: K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1}
 
 Riccati Difference Equation:
 
@@ -1521,7 +1527,7 @@ Whitening Filter:
 
 can be used recursively to construct a record of innovations
 :math:`\{ a_t \}^T_{t=0}` from an :math:`(\hat x_0, \Sigma_0)` and a
-record of observations :math:`\{ y_t \}^T_{t=0}`.
+record of observations :math:`\{ y_t \}^T_{t=0}`
 
 **Limiting Time-Invariant Innovations Representation**
 
@@ -1542,7 +1548,7 @@ record of observations :math:`\{ y_t \}^T_{t=0}`.
 where :math:`E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R`.
 
 Factorization of Likelihood Function
---------------------------------------------------------------
+--------------------------------------
 
 Sample of observations :math:`\{y_s\}_{s=0}^T` on a
 :math:`(n_y \times 1)` vector.
@@ -1560,10 +1566,10 @@ Gaussian Log-Likelihood:
 .. math::
 
    -.5 \sum_{t=0}^T \biggl\{ n_y \ln (2 \pi ) + \ln \vert \Omega _t \vert
-         + a_t' \Omega_t^{-1} a_t \biggr\} .
+         + a_t' \Omega_t^{-1} a_t \biggr\}
 
 Covariance Generating Functions
---------------------------------------------------------------
+--------------------------------
 
 Autocovariance: :math:`C_x(\tau) = E x_t x_{t-\tau}'`
 
@@ -1622,7 +1628,7 @@ Lag operator arithmetic
 
 A Wold moving average representation for :math:`\{y_t\}` is
 
-.. math:: y_t = [ G(I-A^oL)^{-1}KL + I] a_t  .
+.. math:: y_t = [ G(I-A^oL)^{-1}KL + I] a_t  
 
 Applying the inverse of the operator on the right side and using
 
@@ -1630,7 +1636,7 @@ Applying the inverse of the operator on the right side and using
 
 gives the vector autoregressive representation
 
-.. math:: y_t = \sum_{j=1}^\infty G (A^o -KG)^{j-1} K y_{t-j} + a_t  .
+.. math:: y_t = \sum_{j=1}^\infty G (A^o -KG)^{j-1} K y_{t-j} + a_t 
 
 .. _wold-and-vector-autoregressive-representations-1:
 
@@ -1639,7 +1645,7 @@ Wold and Vector Autoregressive Representations
 
 A Wold moving average representation for :math:`\{y_t\}` is
 
-.. math:: y_t = [ G(I-A^oL)^{-1}{\color{blue}K}L + I] a_t  .
+.. math:: y_t = [ G(I-A^oL)^{-1}{\color{blue}K}L + I] a_t 
 
 Applying the inverse of the operator on the right side and using
 
@@ -1647,10 +1653,10 @@ Applying the inverse of the operator on the right side and using
 
 gives the vector autoregressive representation
 
-.. math:: y_t = \sum_{j=1}^\infty G (A^o - {\color{blue}K}G)^{j-1} {\color{blue}K} y_{t-j} + a_t  .
+.. math:: y_t = \sum_{j=1}^\infty G (A^o - {\color{blue}K}G)^{j-1} {\color{blue}K} y_{t-j} + a_t 
 
 Dynamic Demand Curves and Canonical Household Technologies
------------------------------------------------------------
+===========================================================
 
 Canonical Household Technologies
 ---------------------------------
@@ -1676,7 +1682,7 @@ if
 technology maps a service process :math:`\{s_t\}` in :math:`L_0^2`
 into a corresponding consumption process :math:`\{c_t\}` for which the
 implied household capital stock process :math:`\{h_t\}` is also in
-:math:`L^2_0`.
+:math:`L^2_0`
 
 An inverse household technology:
 
@@ -1704,7 +1710,7 @@ Dynamic Demand Functions
 
    \rho^0_t \equiv \Pi^{-1 \prime} \Bigl[p^0_t - \Theta _h^\prime E_t
    \sum^\infty_{\tau=1} \beta^\tau (\Delta_h^\prime - \Lambda^\prime \Pi^{-1 \prime}
-   \Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^0_{t+\tau} \Bigr] .
+   \Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^0_{t+\tau} \Bigr] 
 
 .. math::
 
@@ -1712,18 +1718,18 @@ Dynamic Demand Functions
    s_{i,t}&= \Lambda h_{i,t-1} \\
    h_{i,t}&= \Delta _h h_{i,t-1}\end{align}
 
-where :math:`h_{i,-1} = h_{-1}`.
+where :math:`h_{i,-1} = h_{-1}`
 
 .. _dynamic-demand-functions-1:
 
 
-.. math:: W_0 = E_0\sum^\infty_{t=0}\beta ^t(w^0_t\ell _t + \alpha ^0_t\cdot d_t) + v_0\cdot k_{-1} .
+.. math:: W_0 = E_0\sum^\infty_{t=0}\beta ^t(w^0_t\ell _t + \alpha ^0_t\cdot d_t) + v_0\cdot k_{-1} 
 
 .. math::
 
    \mu^w_0 = {E_0 \sum^\infty_{t=0} \beta^t \rho^0_t\cdot
     (b_t -s_{i,t}) - W_0 \over E_0 \sum^\infty_{t=0}
-   \beta^t \rho^0_t \cdot \rho^0_t} .
+   \beta^t \rho^0_t \cdot \rho^0_t} 
 
 .. math::
 
@@ -1742,7 +1748,7 @@ scaled Arrow-Debreu prices :math:`\{p_{t+s}^0\}_{s=0}^\infty`; (ii) the
 stochastic process for the household’s endowment :math:`\{d_t\}` and
 preference shock :math:`\{b_t\}`, as mediated through the multiplier
 :math:`\mu_0^w` and wealth :math:`W_0`; and (iii) past values of
-consumption, as mediated through the state variable :math:`h_{t-1}`.
+consumption, as mediated through the state variable :math:`h_{t-1}`
 
 
 Gorman Aggregation and Engel curves
@@ -1750,25 +1756,25 @@ Gorman Aggregation and Engel curves
 
 We shall explore how the dynamic demand schedule for consumption goods
 opens up the possibility of satisfying Gorman’s (1953) conditions for
-aggregation in a heterogeneous consumer model.
+aggregation in a heterogeneous consumer model
 
 The first equation of our demand system is an Engel curve for consumption that is linear in the
 marginal utility :math:`\mu_0^2` of individual wealth with a coefficient
-on :math:`\mu_0^w` that depends only on prices.
+on :math:`\mu_0^w` that depends only on prices
 
 The multiplier :math:`\mu_0^w` depends on wealth in an affine relationship, so that
-consumption is linear in wealth.
+consumption is linear in wealth
 
 In a model with multiple consumers who have the same household technologies
 (:math:`\Delta_h, \Theta_h, \Lambda, \Pi`) but possibly different
 preference shock processes and initial values of household capital
 stocks, the coefficient on the marginal utility of wealth is the same
-for all consumers. 
+for all consumers.
 
 Gorman showed that when Engel curves satisfy this
 property, there exists a unique community or aggregate preference
 ordering over aggregate consumption that is independent of the
-distribution of wealth.
+distribution of wealth
 
 Re-Opened Markets
 -------------------------------
@@ -1777,7 +1783,7 @@ Re-Opened Markets
 
    \rho^t_{t} \equiv \Pi^{-1 \prime} \Bigl[p^t_{t} - \Theta _h^\prime E_t
    \sum^\infty_{\tau=1} \beta^\tau (\Delta_h^\prime - \Lambda^\prime \Pi^{-1 \prime}
-   \Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^t_{t+\tau} \Bigr] .
+   \Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^t_{t+\tau} \Bigr] 
 
 .. math::
 
@@ -1794,7 +1800,7 @@ where now :math:`h_{i,t-1} = h_{t-1}`. Define time :math:`t` wealth
 
    \mu^w_t = {E_t \sum^\infty_{j=0} \beta^j \rho^t_{t+j}\cdot
     (b_{t+j} -s_{i,t+j}) - W_t \over E_t \sum^\infty_{t=0}
-   \beta^j \rho^t_{t+j} \cdot \rho^t_{t+j}} .
+   \beta^j \rho^t_{t+j} \cdot \rho^t_{t+j}} 
 
 .. math::
 
@@ -1815,21 +1821,21 @@ time :math:`t` vector of demands for :math:`c_t` are influenced by:
 
 Through the multiplier :math:`\mu^w_t`, the time :math:`t` continuation
 of the preference shock process :math:`\{b_t\}` and the time :math:`t`
-continuation of :math:`\{s_{i,t}\}`.
+continuation of :math:`\{s_{i,t}\}`
 
-The time :math:`t-1` level of household durables :math:`h_{t-1}`.
+The time :math:`t-1` level of household durables :math:`h_{t-1}`
 
 Everything that affects the household’s time :math:`t` wealth, including
 its stock of physical capital :math:`k_{t-1}` and its value :math:`v_t`,
 the time :math:`t` continuation of the factor prices
 :math:`\{w_t, \alpha_t\}`, the household’s continuation endowment
-process, and the household’s continuation plan for :math:`\{\ell_t\}`.
+process, and the household’s continuation plan for :math:`\{\ell_t\}`
 
 The time :math:`t` continuation of the vector of prices
-:math:`\{p_t^t\}`.
+:math:`\{p_t^t\}`
 
 Attaining a canonical household technology
---------------------------------------------------------------
+--------------------------------------------
 
 Apply the following version of a factorization identity:
 
@@ -1846,7 +1852,7 @@ Apply the following version of a factorization identity:
 
 The factorization identity guarantees that the
 :math:`[\hat \Lambda, \hat \Pi]` representation satisfies both
-requirements for a canonical representation.
+requirements for a canonical representation
 
 
 
@@ -1868,14 +1874,14 @@ Demand:
 Reverse engineer preferences that generate this demand system:
 
 A representative firm takes as given and beyond its control the
-stochastic process :math:`\{p_t\}_{t=0}^\infty`.
+stochastic process :math:`\{p_t\}_{t=0}^\infty`
 
 The firm sells its
-output :math:`c_t` in a competitive market each period. 
+output :math:`c_t` in a competitive market each period
 
-Only spot markets convene at each date :math:`t\geq 0`. 
+Only spot markets convene at each date :math:`t\geq 0`
 
-The firm also faces an exogenous process of cost disturbances :math:`d_t`.
+The firm also faces an exogenous process of cost disturbances :math:`d_t`
 
 The firm chooses stochastic processes :math:`\{c_t, g_t, i_t, k_t\}_{t=0}^\infty` to maximize
 
@@ -1898,7 +1904,7 @@ Equilibrium Investment Under Uncertainty
 
 A representative firm maximizes
 
-.. math:: E \sum_{t=0}^\infty \beta^t \{ p_t c_t - g_t^2/2 \} ,
+.. math:: E \sum_{t=0}^\infty \beta^t \{ p_t c_t - g_t^2/2 \}
 
 subject to the technology
 
@@ -1916,9 +1922,9 @@ governed by
 .. math:: p_t = \alpha_0 - \alpha_1 c_t + u_t,
 
 where :math:`u_t` is a demand shifter with mean zero and
-:math:`\alpha_0, \alpha_1` are positive parameters. 
+:math:`\alpha_0, \alpha_1` are positive parameters
 
-Assume that :math:`u_t, d_t` are uncorrelated first-order autoregressive processes.
+Assume that :math:`u_t, d_t` are uncorrelated first-order autoregressive processes
 
 A Rosen-Topel Housing Model
 -------------------------------
@@ -1934,32 +1940,32 @@ where :math:`h_t` is the stock of housing at time :math:`t`,
 :math:`R_t` is the rental rate for housing, :math:`p_t` is the price of
 new houses, and :math:`b_t` is a demand shifter; :math:`\alpha < 0` is a
 demand parameter, and :math:`\delta_h` is a depreciation factor for
-houses.
+houses
 
 
 We cast this demand specification within our class of models by letting
 the stock of houses :math:`h_t` evolve according to
 
-.. math:: h_t = \delta_h h_{t-1} + c_t, \quad \delta_h \in (0,1) ,
+.. math:: h_t = \delta_h h_{t-1} + c_t, \quad \delta_h \in (0,1)
 
 where :math:`c_t` is the rate of production of new houses. 
 
 Houses produce services :math:`s_t` according to
 :math:`s_t  = \bar \lambda h_t` or
 :math:`s_t  = \lambda h_{t-1} + \pi c_t,` where
-:math:`\lambda= \bar \lambda \delta_h, \pi = \bar \lambda`.
+:math:`\lambda= \bar \lambda \delta_h, \pi = \bar \lambda`
 
 We can take :math:`\bar \lambda \rho_t^0  = R_t` as the rental rate on housing at
-time :math:`t`, measured in units of time :math:`t` consumption (housing).
+time :math:`t`, measured in units of time :math:`t` consumption (housing)
 
 
 Demand for housing services is
 
-.. math:: s_t = b_t - \mu_0 \rho_t^0 ,
+.. math:: s_t = b_t - \mu_0 \rho_t^0 
 
 where the price of new houses :math:`p_t` is related to
 :math:`\rho_t^0` by
-:math:`\rho_t^0 = \pi^{-1} [  p_t - \beta \delta_h E_t p_{t+1}] .`
+:math:`\rho_t^0 = \pi^{-1} [  p_t - \beta \delta_h E_t p_{t+1}] `
 
 Cattle Cycles
 =============
@@ -1969,24 +1975,24 @@ freshly slaughtered beef, :math:`m_t` the feeding cost of preparing an
 animal for slaughter, :math:`\tilde h_t` the one-period holding cost for
 a mature animal, :math:`\gamma_1 \tilde h_t` the one-period holding cost
 for a yearling, and :math:`\gamma_0 \tilde
-h_t` the one-period holding cost for a calf. 
+h_t` the one-period holding cost for a calf
 
 The cost processes
 :math:`\{\tilde h_t, m_t\}_{t=0}^\infty` are exogenous, while the
 stochastic process :math:`\{p_t\}_{t=0}^\infty` is determined by a
 rational expectations equilibrium. Let :math:`\tilde x_t` be the
-breeding stock, and :math:`\tilde y_t` be the total stock of animals.
+breeding stock, and :math:`\tilde y_t` be the total stock of animals
 
 The law of motion for cattle stocks is
 
-.. math:: \tilde x_t = (1-\delta) \tilde x_{t-1} + g \tilde x_{t-3} - c_t,
+.. math:: \tilde x_t = (1-\delta) \tilde x_{t-1} + g \tilde x_{t-3} - c_t
 
 where :math:`c_t` is a rate of slaughtering. The total head count of
-cattle,
+cattle
 
 .. math:: \tilde y_t = \tilde x_t + g \tilde x_{t-1} + g \tilde x_{t-2},
 
-is the sum of adults, calves, and yearlings, respectively.
+is the sum of adults, calves, and yearlings, respectively
 
 .. _cattle-cycles-1:
 
@@ -2009,25 +2015,25 @@ where
 .. math::
 
    \Psi = {\psi_1 \over 2} \tilde x_t^2 + {\psi_2 \over 2} \tilde x_{t-1}^2
-         + {\psi_3 \over 2} \tilde x_{t-2}^2 + {\psi_4 \over 2} c_t^2.
+         + {\psi_3 \over 2} \tilde x_{t-2}^2 + {\psi_4 \over 2} c_t^2
 
 Demand is governed by
 
-.. math:: c_t = \alpha_0 - \alpha_1 p_t + \tilde d_t ,
+.. math:: c_t = \alpha_0 - \alpha_1 p_t + \tilde d_t 
 
 where :math:`\alpha_0 > 0`, :math:`\alpha_1 > 0`, and
 :math:`\{\tilde d_t\}_{t=0}^\infty` is a stochastic process with mean
-zero representing a demand shifter.
+zero representing a demand shifter
 
 Models of Occupational Choice and Pay
---------------------------------------------------------------
+======================================
 
--  Rosen schooling model for engineers.
+-  Rosen schooling model for engineers
 
--  Two-occupation model.
+-  Two-occupation model
 
 Market for Engineers
-^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 Ryoo and Rosen’s (2004) :cite:`ryoo2004engineering` model consists of the following equations:
 
@@ -2049,10 +2055,10 @@ engineering student
 
 and fourth, a supply curve of new students driven by :math:`v_t`
 
-.. math:: n_t = \alpha_s v_t + \epsilon_{2t}\ ,\ \alpha_s > 0.
+.. math:: n_t = \alpha_s v_t + \epsilon_{2t}\ ,\ \alpha_s > 0
 
 Here :math:`\{\epsilon_{1t}, \epsilon_{2t}\}` are stochastic processes
-of labor demand and supply shocks.
+of labor demand and supply shocks
 
 .. _market-for-engineers-1:
 
@@ -2061,12 +2067,12 @@ of labor demand and supply shocks.
 **Definition:** A partial equilibrium is a stochastic process
 :math:`\{w_t, N_t, v_t, n_t\}^\infty_{t=0}` satisfying these four
 equations, and initial conditions
-:math:`N_{-1}, n_{-s}, s=1, \ldots, -k`.
+:math:`N_{-1}, n_{-s}, s=1, \ldots, -k`
 
 
 We sweep the time-to-build structure and the demand for engineers into
 the household technology and putting the supply of new engineers into
-the technology for producing goods.
+the technology for producing goods
 
 .. math::
 
@@ -2085,14 +2091,14 @@ the technology for producing goods.
 This specification sets Rosen’s :math:`N_t = h_{1t-1}, n_t = c_t,
 h_{\tau+1,t-1} = n_{t-\tau}, \tau=1, \ldots, k`, and uses the
 home-produced service to capture the demand for labor. Here
-:math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`.
+:math:`\lambda_1` embodies Rosen’s demand parameter :math:`\alpha_d`
 
 
-- The supply of new workers becomes our consumption.
+- The supply of new workers becomes our consumption
 
-- The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.
+- The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers
 
-**Remark:** This has an Imai-Keane flavor.
+**Remark:** This has an Imai-Keane flavor
 
 For more details and Python code see :doc:`Rosen schooling model <rosen_schooling_model>`
 
@@ -2100,7 +2106,7 @@ For more details and Python code see :doc:`Rosen schooling model <rosen_schoolin
 
 
 Skilled and Unskilled Workers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 First, a demand curve for labor
 
@@ -2148,7 +2154,6 @@ and fourth, supply curves for new entrants:
            \epsilon_{2t}.
 
 **Short Cut**
--------------------------------
 
 As an alternative, Siow simply used the  **equalizing differences**
 condition
@@ -2234,9 +2239,9 @@ Gorman Heterogeneous Households
 
 .. math:: h_{jt} = \Delta_h\, h_{j,t-1} + \Theta_h\, c_{jt}
 
-and :math:`h_{j,-1}` is given.
+and :math:`h_{j,-1}` is given
 
-.. math:: b_{jt} = U_{bj} z_t ,
+.. math:: b_{jt} = U_{bj} z_t 
 
 .. math::
 
@@ -2247,7 +2252,7 @@ and :math:`h_{j,-1}` is given.
 
 where :math:`k_{j,-1}` is given. The :math:`j^{\rm th}` consumer owns
 an endowment process :math:`d_{jt}`, governed by the stochastic process
-:math:`d_{jt} = U_{dj}\, z_t .`
+:math:`d_{jt} = U_{dj}\, z_t `
 
 .. _gorman-heterogeneous-households-1:
 
@@ -2262,17 +2267,17 @@ This specification confines heterogeneity among consumers to:
    
 - differences in :math:`h_{j,-1}`; and
 
-- differences in :math:`k_{j,-1}`. 
+- differences in :math:`k_{j,-1}`
    
 The matrices :math:`\Lambda,\,\Pi,\,\Delta_h,\,\Theta_h` do not depend on :math:`j`.
 
 This makes everybody’s demand system have the form described earlier,
 with different :math:`\mu_{j0}^w`\ ’s (reflecting different wealth
 levels) and different :math:`b_{jt}` preference shock processes and
-initial conditions for household capital stocks.   
+initial conditions for household capital stocks
 
 
-**Punchline:** :math:`\exists` a representative consumer.
+**Punchline:** :math:`\exists` a representative consumer
 
 Use it to compute competitive equilibrium aggregate allocation and price system.
 
@@ -2313,7 +2318,7 @@ Preferences and Household Technologies:
 .. math::
 
    - {1\over 2} E\, \sum^\infty_{t=0}\, \beta^t\, [ (s_{it} - b_{it}) \cdot
-   (s_{it} - b_{it}) + \ell^2_{it}]\mid J_0 .
+   (s_{it} - b_{it}) + \ell^2_{it}]\mid J_0 
 
 .. math::
 
@@ -2323,7 +2328,7 @@ Preferences and Household Technologies:
 
 .. math:: b_{it} = U_{bi} z_t
 
-.. math:: z_{t+1} = A_{22} z_t + C_2 w_{t+1} .
+.. math:: z_{t+1} = A_{22} z_t + C_2 w_{t+1} 
 
 **Production Technology**
 
@@ -2337,9 +2342,9 @@ Preferences and Household Technologies:
 .. math::
 
    g_t \cdot g_t = \ell^2_t,\qquad
-      \ \ell_t = \ell_{1t} + \ell_{2t}  .
+      \ \ell_t = \ell_{1t} + \ell_{2t}  
 
-.. math:: d_{it} = U_{d_i} z_t, \quad \ i=1,2 .
+.. math:: d_{it} = U_{d_i} z_t, \quad \ i=1,2 
 
 **Pareto Problem:**
 
@@ -2433,24 +2438,24 @@ subject to
 
 subject to :math:`(h_{1, -1},\, h_{2, -1})` given and
 :math:`\{b_{1t}\},\, \{b_{2t}\},\, \{c_t\}` being known and fixed
-sequences. 
+sequences
 
 Substituting the :math:`\{c_{1t},\, c_{2t}\}` sequences that
 solve this problem as functions of :math:`\{b_{1t},\, b_{2t},\, c_t\}`
 into the objective determines a mongrel preference ordering over
-:math:`\{c_t\} = \{c_{1t} + c_{2t}\}`.
+:math:`\{c_t\} = \{c_{1t} + c_{2t}\}`
 
 
 In solving this problem, it is convenient to proceed by using Fourier
 transforms.  For details, please see :cite:`HS2013` where they deploy a 
 
 **Secret Weapon:** Another application of the spectral factorization
-identity.
+identity
 
 
 **Concluding remark:** The :cite:`HS2013` class of models described in this lecture are all complete markets models.  We have exploited
 the fact that complete market models **are all alike** to allow us to define a class that **gives the same name to different things** in the
-spirit of Henri Poincare.
+spirit of Henri Poincare
 
 Could we create such a class for **incomplete markets** models? 
 

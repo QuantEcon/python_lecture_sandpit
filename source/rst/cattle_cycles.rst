@@ -95,7 +95,7 @@ Demand for beef is government by :math:`c_t = a_0 - a_1p_t + \tilde d_t`
 where :math:`\tilde d_t` is a stochastic process with mean zero,
 representing a demand shifter
 
-Mapping into HS2013 framework
+Mapping into HS2013 Framework
 ==============================
 
 Preferences

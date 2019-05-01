@@ -80,7 +80,7 @@ We represent this model in the :cite:`HS2013` framework by
    goods
 
 Preferences
-============
+------------
 
 .. math::
 
@@ -110,7 +110,7 @@ Below we set things up so that the number of years of education, k, can
 be varied
 
 Technology
-===========
+------------
 
 To capture Ryoo and Rosen's :cite:`ryoo2004engineering` supply curve, we use the physical
 technology:
@@ -122,7 +122,7 @@ technology:
 where :math:`\psi_1` is inversely proportional to :math:`\alpha_s`
 
 Information
-============
+------------
 
 Because we  want :math:`b_t = \epsilon_{dt}` and :math:`d_{1t} =\epsilon_{st}`, we set
  
@@ -159,8 +159,8 @@ supply and demand shocks
     Technology = namedtuple('Technology', ['ϕ_c', 'ϕ_g', 'ϕ_i', 'γ', 'δ_k', 'θ_k'])
     Preferences = namedtuple('Preferences', ['β', 'l_λ', 'π_h', 'δ_h', 'θ_h'])
 
-Effects of changes in education technology and demand
------------------------------------------------------
+Effects of Changes in Education Technology and Demand
+------------------------------------------------------
 
 We now study how changing
 

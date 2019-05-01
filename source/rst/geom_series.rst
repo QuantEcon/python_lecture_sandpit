@@ -6,7 +6,7 @@
     single: python
     
 ************************************
-Geometric series and economics 101
+Geometric Series and Economics 101
 ************************************
 
 This lecture describes important  ideas in economics that rely

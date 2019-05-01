@@ -78,7 +78,7 @@ We'll need the following imports
    import matplotlib.pyplot as plt
    
 
-An example
+An Example
 -----------
 
 Consider the complex number :math:`z = 1 + \sqrt{3} i`
@@ -151,7 +151,7 @@ To prove de Moivre's theorem, note that
 
 and compute
 
-Applications of de Moivre's theorem
+Applications of de Moivre's Theorem
 =====================================
 
 Example 1
@@ -335,7 +335,7 @@ and plot the dynamic
     plt.show()
 
 
-Trigonometric identities
+Trigonometric Identities
 ------------------------
 
 We can obtain a complete suite of trigonometric identities by

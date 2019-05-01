@@ -338,7 +338,7 @@ row and :math:`j` th column
 denote the :math:`j` th column and :math:`i` th row of :math:`A`,
 respectively
 
-Model ingredients and assumptions
+Model Ingredients and Assumptions
 ====================================
 
 A pair :math:`(A,B)` of :math:`m\times n` nonnegative matrices defines
@@ -636,7 +636,7 @@ this extra condition does not affect the existence result, while it
 significantly reduces the number of (relevant) solutions
 
 
-Interpretation as a game theoretic problem (two-player zero-sum game)
+Interpretation as a Game Theoretic Problem (Two-player Zero-sum Game)
 =======================================================================
 
 To compute the equilibrium :math:`(\gamma^{*}, x_0, p_0)`, we follow the
@@ -808,14 +808,14 @@ This suggests an algorithm to compute
 input-output pair :math:`(A, B)`
 
 Algorithm
-==========
+----------
 
 Hamburger, Thompson and Weil (1967) :cite:`hamburger1967computation` propose a simple bisection algorithm
 to find the minimal and maximal roots (i.e. :math:`\beta_0` and
 :math:`\alpha_0`) of the function :math:`\gamma \mapsto V(M(\gamma))`
 
 Step 1
-------
+~~~~~~~~~
 
 First, notice that we can easily find trivial upper and lower bounds for
 :math:`\alpha_0` and :math:`\beta_0`
@@ -843,7 +843,7 @@ The *bounds* method calculates these trivial bounds for us
 
 
 Step 2
--------
+~~~~~~~~~
 
 Compute :math:`\alpha_0` and :math:`\beta_0`
 

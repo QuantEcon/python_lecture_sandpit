@@ -46,7 +46,7 @@ We require the following imports
 
 
 
-Common structure
+Common Structure
 ================
 
 Our example economies have the following features
@@ -98,7 +98,7 @@ matrices
 
 and the scalar :math:`\beta`
 
-A planning problem
+A Planning Problem
 ==================
 
 The first welfare theorem asserts that a competitive equilibrium
@@ -224,7 +224,7 @@ We shall vary
 and the initial state :math:`x_0` across the three economies
 
 Example 1: Hall (1978)
-======================
+-----------------------
 
 First, we set parameters such that consumption follows a random walk. In
 particular, we set
@@ -350,7 +350,7 @@ However, the near-unity endogenous eigenvalue means that these steady
 state values are of little relevance
 
 Example 2: Altered growth condition
-===================================
+------------------------------------
 
 We generate our next economy by making two alterations to the parameters
 of Example 1
@@ -432,7 +432,7 @@ than 1
 
 
 Example 3: A Jones-Manuelli (1990) Economy
-==========================================
+-------------------------------------------
 
 For our third economy, we choose parameter values with the aim of
 generating *sustained* growth in consumption, investment and capital
@@ -494,7 +494,9 @@ We simulate this economy from the original state vector
 
 
 Thus, adding habit persistence to the Hall model of Example 1 is enough
-to generate sustained growth in our economy. The eigenvalues of
+to generate sustained growth in our economy
+
+The eigenvalues of
 :math:`A^o` in this new economy are
 
 .. code-block:: python3
@@ -513,7 +515,7 @@ To show the importance of both of these for generating growth, we
 consider the following experiments
 
 Example 3.1: Raise :math:`\lambda` to -0.7
-==========================================
+-------------------------------------------
 
 .. code-block:: python3
 
@@ -544,7 +546,7 @@ eigenvalues is now less than 1
 
 
 Example 3.2: Lower :math:`\beta` to 0.94
-========================================
+-----------------------------------------
 
 .. code-block:: python3
 
