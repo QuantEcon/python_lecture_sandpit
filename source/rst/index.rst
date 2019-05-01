@@ -30,5 +30,6 @@
     hs_invertibility_example
     black_litterman
     von_neumann_model
+    muth_kalman
 	
     zreferences
