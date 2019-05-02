@@ -37,16 +37,16 @@ We'll also need the following imports
 
 
 This lecture uses the Kalman filter to reformulate John F. Muth’s first
-paper about rational expectations
+paper :cite:`Muth1960` about rational expectations
 
 Muth used *classical* prediction methods to reverse engineer a
-stochastic process that renders optimal Milton Friedman’s “adaptive
+stochastic process that renders optimal Milton Friedman’s :cite:`Friedman1956` “adaptive
 expectations” scheme
 
 Friedman (1956) and Muth (1960)
 =================================
 
-Milton Friedman :cite:`Friedman1956` (1956) (consumption function book) posited that
+Milton Friedman :cite:`Friedman1956` (1956) posited that
 consumer’s forecast their future disposable income with the adaptive
 expectations scheme
 
@@ -59,7 +59,7 @@ where :math:`K \in (0,1)` and :math:`y_{t+i,t}^*` is a forecast of
 future :math:`y` over horizon :math:`i`
 
 Milton Friedman justified the **exponential smoothing** forecasting
-scheme :eq:`expectations` informally, arguing that it seemed a plausible way to use
+scheme :eq:`expectations` informally, noting  that it seemed a plausible way to use
 past income to forecast future income
 
 In his first paper about rational expectations, John F. Muth :cite:`Muth1960`
@@ -77,11 +77,17 @@ Friedman’s adaptive expectation scheme the **answer**
 Muth (1960) used classical prediction methods based on lag-operators and
 :math:`z`-tranforms to find the answer to his question
 
-Please see lectures XXXX and XXXX for an introduction to the classical
+Please see lectures :doc:`Classical Control with Linear Algebra<lu_tricks>` and
+:doc:`Classical Filtering and Prediction with Linear Algebra<classical_filtering>` for an introduction to the classical
 tools that Muth used
+
 
 Rather than using those classical tools, in this lecture we apply the
 Kalman filter to express the heart of Muth’s analysis concisely
+
+The lecture :doc:`First Look at Kalman Filter<kalman>` describes the Kalman filter
+
+We'll use limiting versions of the Kalman filter corresponding to what are called **stationary values** in that lecture
 
 A :math:`\{y_t\}` Process for Which Adaptive Expectations are Optimal
 ------------------------------------------------------------------------
@@ -128,15 +134,14 @@ where :math:`\hat x_t = E [x_t | y_{t-1}, y_{t-2}, \ldots ]` and
 :math:`a_t` is in the space spanned by square summable linear
 combinations of :math:`y_t, y_{t-1}, \ldots`
 
-For more
-ramifications of this property, see lecture XXXXX in the suite of DLE
-lectures
+For more ramifications of this property, see the lectures  :doc:`Shock Non Invertibility<hs_invertibility_example>`  and
+:doc:`Recursive Models of Dynamic Linear Economies<HS_recursive_models>`
 
 Later we’ll stack these statespace systems :eq:`statespace` and :eq:`innovations` to display some
 classic findings of Muth
 
 But first let’s create an instance of the statespace system :eq:`statespace` then
-apply the quantecon ``Kalman`` class
+apply the quantecon ``Kalman`` class, then uses it to construct the associated "innovations representation"
 
 .. code-block:: python3
 
@@ -297,14 +302,14 @@ Recall that we wrote down the innovation representation that depended on
     plt.show()
 
 
-VAR/ARMA Representation
------------------------
+MA and AR Representations
+---------------------------
 
 Now we shall extract from the **Kalman** instance kmuth coefficients of
 
 -  a fundamental moving average representation that represents
    :math:`y_t` as a one-sided moving sum of current and past
-   :math:`a_t`\ s
+   :math:`a_t`\ s that are square summable linear combinations of :math:`y_t, y_{t-1}, \ldots `
 
 -  a univariate autogression representation that depicts the
    coefficients in a linear least squares projection of :math:`y_t` on
