@@ -5,9 +5,21 @@
 .. index::
     single: python
     
-************************************
-Geometric Series and Economics 101
-************************************
+    
+*******************************************
+Geometric Series for High School Economics 
+*******************************************
+
+
+.. contents:: :depth: 2
+
+
+In addition what's in Anaconda, this lecture will need the following libraries
+
+.. code-block:: ipython
+
+  !pip install quantecon
+
 
 This lecture describes important  ideas in economics that rely
 on using the mathematics of geometric series
@@ -21,7 +33,7 @@ Among these are
 
 -  interest rates and present values of streams of payouts from assets
 
-These and other applications illustrate the wise crack that **in
+These and other applications prove the truth of the wise crack that **in
 economics, a little knowledge of geometric series goes a long way**
 
 Geometric series: key formulas
@@ -47,7 +59,7 @@ The first type of geometric that interests us is the infinite series
 
 .. math:: 1 + c + c^2 + c^3 + \cdots
 
-Where :math:`\cdots` means that the series contiues without limit.
+Where :math:`\cdots` means that the series continues without limit.
 
 The key formula is
 
@@ -96,7 +108,7 @@ issue
       called dollars or pounds or :math:`\ldots`
 
    -  a *deposit* is a balance in a checking or savings account that
-      entitles the owner to ask the bank for immediate payment in cashs
+      entitles the owner to ask the bank for immediate payment in cash
 
 -  when the UK and France and the US were on either a gold or silver
    standard (before 1914, for example)
@@ -111,7 +123,7 @@ Economists and financiers often define the **supply of money** as an
 economy-wide sum of **cash** plus **deposits**
 
 In a **fractional reserve banking system** (one in which the reserve
-ratio :math:`r < 1`), **banks create money** by issuing deposits
+ratio :math:`r` satisfying :math:`0 < r < 1`), **banks create money** by issuing deposits
 *backed* by fractional reserves plus loans that they make to their
 customers
 
@@ -135,7 +147,9 @@ reserves :math:`R_i` must satisfy the balance sheet equation (because
 
 The left side of the above equation is the sum of the bank's **assets**,
 namely, the loans :math:`L_i` it has outstanding plus its reserves of
-cash :math:`R_i`. The right side records bank :math:`i`'s liabilities,
+cash :math:`R_i`. 
+
+The right side records bank :math:`i`'s liabilities,
 namely, the deposits :math:`D_i` held by its depositors; these are
 IOU's from the bank to its depositors in the form of either checking
 accounts or savings accounts (or before 1914, bank notes issued by a
@@ -280,8 +294,9 @@ The third equation simply states that investment is exogenous at level
 
 - *exogenous* means *determined outside this model*
 
-Substituting the second equation into the first gives :math:`(1-b) y = i;
- solving this equation for :math:`y` gives
+Substituting the second equation into the first gives :math:`(1-b) y = i`
+
+Solving this equation for :math:`y` gives
 
 .. math:: y = \frac{1}{1-b} i  
 
@@ -552,10 +567,17 @@ one-period interest rate is :math:`r` and when :math:`r > g`
 
 
 
-Notes to Dongchen
+Notes to Brandon
 ===================
 
-Hi. We can do various things with the above formulas --
+These notes are broken into two parts, part T from me and part J from John Stachurski 
+
+Here goes
+
+Part T
+--------
+
+I'd like to do various other fun things with the above formulas --
 
 -  we can generalize them to apply to finite payment streams -- we'd
    just apply the formula for finite geometric series
@@ -574,7 +596,7 @@ Hi. We can do various things with the above formulas --
 
 what do you think?
 
-To do ideas -- from John Stachurski and me
+Part J (with some additions from T)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It will look nice if your students could add in figures showing, for
@@ -605,82 +627,12 @@ behavior.
 
 After that, taxes could be introduced.
 
-As separate lectures, we could also teach linear systems when discussing
-supply and demand, and then switch to nonlinear systems. Ordinarily such
-topics would be though of as too hard for students at this level, but we
-can use it as an opportunity to teach the bisection algorithm for
-finding the zero of a function.
-
-Even my kids are hearing the word "algorithm" at school and starting to
-learn about them.
-
-Regards, John.
-
-On Wed, Aug 1, 2018 at 6:30 AM Thomas J Sargent thomas.sargent@nyu.edu
-wrote: Dear John, As an experiment I am working with two high school
-kids to try to write a low level notebook/lecture. Geometric series is
-the topic. So far, all of the input has been from me on this one. I
-attach the first draft of the notebook. I'll probably have to complete
-this myself, maybe with some help from Natasha.
-
-I'll try to think of a couple of other applications beyond the three I
-have started with.
-
-Tom
-
---
-
-Visit me at http://johnstachurski.netm John and me
-
-Dear John, Thanks for these great suggestions. I am going to add them as
-a "to do" cell at the end of the lecture.
-
-I agree that adding the types of graphs that you suggest will make the
-lecture much better. This is the sort of thing I hope to do.
-
-Tom
-
-On Tue, Jul 31, 2018 at 8:11 PM John Stachurski
-john.stachurski@gmail.com wrote: Hi Tom,
-
-This is great!
-
-It will look nice if your students could add in figures showing, for
-example, the time path of y\_t in the Keynesian multiplier. I guess you
-already have this in mind.
-
-The accumulation example could be extended, possibly in a separate
-lecture, by showing the time path for household wealth when
-
-w\_{t+1} = (1 + r) (w\_t + y\_t - c\_t)
-
-Here c\_t could be a fixed fraction of current wealth. Or perhaps c\_t =
-w\_t + y\_t at low levels of wealth but savings is positive above some
-threshold.
-
-Then one can investigate the time path of wealth under different
-assumptions for {y\_t}, which is taken to be deterministic but
-endogenous.
-
-For example, how is w\_T at some large T affected by a change in the
-growth rate of y\_t? How about a change in r? Which is more important?
-
-The students will see the power of compounding in a setting they can
-relate to.
-
-They could also investigate the impact of different kinds of savings
-behavior.
-
-After that, taxes could be introduced.
+Part W from J (W is for wild and ambitious -- you can ignore for now)
+----------------------------------------------------------------------
 
 As separate lectures, we could also teach linear systems when discussing
 supply and demand, and then switch to nonlinear systems. Ordinarily such
 topics would be though of as too hard for students at this level, but we
 can use it as an opportunity to teach the bisection algorithm for
 finding the zero of a function.
-
-Even my kids are hearing the word "algorithm" at school and starting to
-learn about them.
-
-Regards, John.
 

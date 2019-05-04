@@ -6,13 +6,41 @@
     single: python
 
 **********************************
-Complex numbers and trignometry
+Complex Numbers and Trignometry
 **********************************
 
 .. contents:: :depth: 2
 
+
+In addition what's in Anaconda, this lecture will need the following libraries
+
+.. code-block:: ipython
+
+  !pip install quantecon
+
 Overview
 =========
+
+This lecture introduces some elementary mathematics and trigonometry
+
+Useful and interesting in its own right, these concepts reap substantial rewards when studying dynamics generated
+by linear difference equations or linear differential equations
+
+For example, these tools are keys to understanding outcomes attained by Paul Samuelson (1939) :cite:`Samuelson1939` in his classic paper on interactions
+between the investment accelertor and the Keynesian consumption function, our topic in the lecture :doc:`The Samuelson accelerator<samuelson>` 
+
+In addition to providing foundations for Samuelson's work and extensions of it, this lecture can be read as a stand-alone quick
+reminder of key results from elementary high school trigonometry
+
+So let's dive in
+
+
+Complex numbers
+----------------
+
+A complex number has a **real part** :math:`x` and a purely **imaginary part** :math:`y`
+
+
 
 The Euclidean, polar, and trigonometric forms of a complex number
 :math:`z` are:
@@ -193,7 +221,7 @@ that :math:`\bar{z}`\ is the **complex conjugate** of\ :math:`z`
 Let :math:`a = pe^{i\omega}` and :math:`\bar{a} = pe^{-i\omega}` be
 another complex conjugate pair
 
-We want to calculate :math:`x_n = az^n + \bar{a}\bar{z}^n`
+For each element of a sequence of integers :math:`n = 0, 1, 2, \ldots, ` we want to calculate :math:`x_n = az^n + \bar{a}\bar{z}^n`
 
 To do so, we can apply de Moivre's formula
 
@@ -213,7 +241,9 @@ Thus,
 Example 3
 ----------
 
-Consider a **second-order linear difference equation**
+This example provides  machinery that is at the heard of Samuelson's analysis of his multiplier-accelerator model :cite:`Samuelson1939` 
+
+Thus, consider a **second-order linear difference equation**
 
 .. math:: x_{n+2} = c_1 x_{n+1} + c_2 x_n 
 
@@ -227,7 +257,7 @@ or
 
 has roots :math:`z_1, z_1`
 
-A **solution** is a sequence :math:`\{x_n\}_{n=0}^\infty` that satisfies
+A **solution**  is a sequence :math:`\{x_n\}_{n=0}^\infty` that satisfies
 the difference equation
 
 Under the following circumstances we can apply our example 2 formula to
