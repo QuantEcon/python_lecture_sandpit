@@ -12,12 +12,6 @@ Complex Numbers and Trignometry
 .. contents:: :depth: 2
 
 
-In addition what's in Anaconda, this lecture will need the following libraries
-
-.. code-block:: ipython
-
-  !pip install quantecon
-
 Overview
 =========
 
@@ -26,11 +20,14 @@ This lecture introduces some elementary mathematics and trigonometry
 Useful and interesting in its own right, these concepts reap substantial rewards when studying dynamics generated
 by linear difference equations or linear differential equations
 
-For example, these tools are keys to understanding outcomes attained by Paul Samuelson (1939) :cite:`Samuelson1939` in his classic paper on interactions
-between the investment accelertor and the Keynesian consumption function, our topic in the lecture :doc:`The Samuelson accelerator<samuelson>` 
+For example, these tools are keys to understanding outcomes attained by Paul
+Samuelson (1939) :cite:`Samuelson1939` in his classic paper on interactions
+between the investment accelertor and the Keynesian consumption function, our
+topic in the lecture :doc:`The Samuelson accelerator<samuelson>` 
 
-In addition to providing foundations for Samuelson's work and extensions of it, this lecture can be read as a stand-alone quick
-reminder of key results from elementary high school trigonometry
+In addition to providing foundations for Samuelson's work and extensions of
+it, this lecture can be read as a stand-alone quick reminder of key results
+from elementary high school trigonometry
 
 So let's dive in
 
@@ -42,8 +39,7 @@ A complex number has a **real part** :math:`x` and a purely **imaginary part** :
 
 
 
-The Euclidean, polar, and trigonometric forms of a complex number
-:math:`z` are:
+The Euclidean, polar, and trigonometric forms of a complex number :math:`z` are:
 
 .. math::
 
@@ -53,19 +49,18 @@ The Euclidean, polar, and trigonometric forms of a complex number
 
 The second equality above is known as called **Euler's formula**
 
--  Euler contributed many other formulas too!
+-  `Euler <https://en.wikipedia.org/wiki/Leonhard_Euler>`__ contributed many other formulas too!
 
 The complex conjugate :math:`\bar z` of :math:`z` is defined as
 
 .. math:: \bar z = r e^{-i \theta} = r (\cos{\theta} - i \sin{\theta} )
 
-:math:`x`\ is the **real** part of :math:`z` and :math:`y` is the
+The value :math:`x` is the **real** part of :math:`z` and :math:`y` is the
 **imaginary** part of :math:`z`
 
-:math:`\| z \|` = :math:`\bar z z = r` is called the **modulus**
-of\ :math:`z`
+The symbol :math:`\| z \|` = :math:`\bar z z = r` represents the **modulus** of :math:`z`
 
-:math:`r` is the Euclidean distance of vector :math:`(x,y)` from the
+The value :math:`r` is the Euclidean distance of vector :math:`(x,y)` from the
 origin:
 
 .. math::
@@ -74,11 +69,9 @@ origin:
    r = |z| = \sqrt{x^2 + y^2}
    \end{equation}
 
-:math:`\theta` is the angle of :math:`(x,y)` with respect to the real
-axis
+The value :math:`\theta` is the angle of :math:`(x,y)` with respect to the real axis
 
-Evidently, the tangent of :math:`\theta`
-is :math:`\left(\frac{y}{x}\right)`
+Evidently, the tangent of :math:`\theta` is :math:`\left(\frac{y}{x}\right)`
 
 Therefore,
 
@@ -111,7 +104,7 @@ An Example
 
 Consider the complex number :math:`z = 1 + \sqrt{3} i`
 
-For :math:`z = 1 + \sqrt{3} i`, :math:`x = 1`,\ :math:`y = \sqrt{3}`
+For :math:`z = 1 + \sqrt{3} i`, :math:`x = 1`, :math:`y = \sqrt{3}`
 
 It follows that :math:`r = 2` and
 :math:`\theta = \tan^{-1}(\sqrt{3}) = \frac{\pi}{3} = 60^o`
@@ -213,8 +206,7 @@ We recogize this as a theorem of **Pythagoras**
 Example 2
 ----------
 
-Let :math:`z = re^{i\theta}`\ and\ :math:`\bar{z} = re^{-i\theta}` so
-that :math:`\bar{z}`\ is the **complex conjugate** of\ :math:`z`
+Let :math:`z = re^{i\theta}` and :math:`\bar{z} = re^{-i\theta}` so that :math:`\bar{z}` is the **complex conjugate** of :math:`z`
 
 :math:`(z, \bar z)` form a **complex conjugate pair** of complex numbers
 
@@ -285,8 +277,7 @@ the ratio of :math:`x_1` to :math:`x_0` is
    \frac{x_1}{x_0} = \frac{r \cos{(\omega + \theta)}}{\cos{\omega}}
    \end{equation}
 
-We can solve this equation for :math:`\omega`\ then solve for\ :math:`p`
-using :math:`x_0 = 2 pr^0 \cos{(\omega + n\theta)}`
+We can solve this equation for :math:`\omega` then solve for :math:`p` using :math:`x_0 = 2 pr^0 \cos{(\omega + n\theta)}`
 
 With the ``sympy`` package in Python, we are able to solve and plot the
 dynamics of :math:`x_n` given different values of :math:`n`
