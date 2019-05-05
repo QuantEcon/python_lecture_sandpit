@@ -239,7 +239,7 @@ Thus, consider a **second-order linear difference equation**
 
 .. math:: x_{n+2} = c_1 x_{n+1} + c_2 x_n 
 
-whose **characteristic polynomial**
+whose **characteristic polynomial** is
 
 .. math:: z^2 - c_1 z - c_2 = 0
 
