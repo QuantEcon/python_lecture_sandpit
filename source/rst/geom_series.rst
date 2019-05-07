@@ -20,21 +20,26 @@ In addition what's in Anaconda, this lecture will need the following libraries
 
   !pip install quantecon
 
-
-This lecture describes important  ideas in economics that rely
-on using the mathematics of geometric series
+The lecture describes some  important  elementary ideas in economics that use the mathematics of geometric series
 
 Among these are
 
--  the Keynesian multiplier
+-  the Keynesian **multiplier**
 
--  the money multiplier that prevails in fractional reserve banking
+-  the money **multiplier** that prevails in fractional reserve banking
    systems
 
 -  interest rates and present values of streams of payouts from assets
 
-These and other applications prove the truth of the wise crack that **in
-economics, a little knowledge of geometric series goes a long way**
+(As we shall see below, the term **multiplier** comes down to meaning **sum of a convergent geometric series**)
+
+
+
+These and other applications prove the truth of the wise crack that
+
+.. epigraph::
+
+    "in economics, a little knowledge of geometric series goes a long way "
 
 Geometric series: key formulas
 ===============================
@@ -567,72 +572,9 @@ one-period interest rate is :math:`r` and when :math:`r > g`
 
 
 
-Notes to Brandon
+Note to Natasha
 ===================
 
-These notes are broken into two parts, part T from me and part J from John Stachurski 
-
-Here goes
-
-Part T
---------
-
-I'd like to do various other fun things with the above formulas --
-
--  we can generalize them to apply to finite payment streams -- we'd
-   just apply the formula for finite geometric series
-
--  we can do various **experiments** using both Python and calculus
-   (maybe using Python to do the calculus)
-
-   -  E.g., we can show what happens to values of assets when
-      :math:`r`\ increases and when\ :math:`g` increases
-
-   -  we can show what happens to the value of assets when
-      :math:`g`\ approaches\ :math:`r` from below
-
-   -  we can show how the formulas for finite streams still apply when
-      :math:`g >r` but how they break down when :math:`r < g`
-
-what do you think?
-
-Part J (with some additions from T)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-It will look nice if your students could add in figures showing, for
-example, the time path of y\_t in the Keynesian multiplier. I guess you
-already have this in mind.
-
-The accumulation example could be extended, possibly in a separate
-lecture, by showing the time path for household wealth when
-
-w\_{t+1} = (1 + r) (w\_t + y\_t - c\_t)
-
-Here c\_t could be a fixed fraction of current wealth. Or perhaps c\_t =
-w\_t + y\_t at low levels of wealth but savings is positive above some
-threshold.
-
-Then one can investigate the time path of wealth under different
-assumptions for {y\_t}, which is taken to be deterministic but
-endogenous.
-
-For example, how is w\_T at some large T affected by a change in the
-growth rate of y\_t? How about a change in r? Which is more important?
-
-The students will see the power of compounding in a setting they can
-relate to.
-
-They could also investigate the impact of different kinds of savings
-behavior.
-
-After that, taxes could be introduced.
-
-Part W from J (W is for wild and ambitious -- you can ignore for now)
-----------------------------------------------------------------------
-
-As separate lectures, we could also teach linear systems when discussing
-supply and demand, and then switch to nonlinear systems. Ordinarily such
-topics would be though of as too hard for students at this level, but we
-can use it as an opportunity to teach the bisection algorithm for
-finding the zero of a function.
+Please "glue" the "second" lecture from the "second notebook" geometric_series_v3 starting here 
+and do any cosmetic smoothing and editing required while probably leaving the above material alone
 
