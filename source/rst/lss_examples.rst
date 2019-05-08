@@ -294,7 +294,7 @@ not the same as the stationary distribution
     plt.hist(yT[0,:], bins='auto',normed = True);
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
     plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
-    plt.legend(loc='best')
+    plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{20}$');
 
 But it appears to be very close when :math:`T = 50`, as we might have
@@ -308,7 +308,7 @@ expected from our first simulations
     plt.hist(yT[0,:], bins='auto',normed = True);
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
     plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
-    plt.legend(loc='best')
+    plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{50}$');
 
 Now, lets consider the impact of an "investment shock" on the paths of
@@ -345,7 +345,7 @@ a one standard-deviation investment shock in our model
     plt.plot(np.asarray(y_coef)[:,:,0])
     plt.xlabel('$j$',fontsize=18)
     plt.ylim([0,1])
-    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc = 'upper right')
+    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
     plt.title('Impulse response to positive investment shock with $b = 0.5$');
 
 Now consider what happens if we turn off the accelerator mechanism, by
@@ -372,7 +372,7 @@ above.
     plt.plot(np.asarray(y_coef)[:,:,0])
     plt.xlabel('$j$',fontsize=18)
     plt.ylim([0,1])
-    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc = 'upper right')
+    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
     plt.title('Impulse response to positive investment shock with $b = 0$');
 
 Finally, lets consider a third parameterization, raising :math:`b` from
