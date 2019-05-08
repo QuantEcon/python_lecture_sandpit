@@ -9,15 +9,15 @@ lecture <https://lectures.quantecon.org/py/linear_models.html>`__)
 In this notebook, we will illustrate the methods that can be used on
 instances of this class
 
-To illustrate these methods, we will use Paul Samuleson's (1939)
+To illustrate these methods, we will use Paul Samuleson's (1939) :cite:`Samuelson1939`
 multiplier-accelerator model
 
 Samuelson's (1939) Multiplier-Accelerator Model
 -------------------------------------------------
 
 The previous lecture showed (among other things) how to represent a
-univariate auto-regressive processes as a ``LinearStateSpace`` model. We
-will do the same for Samuelson's (1939) multiplier-accelerator model
+univariate auto-regressive processes as a ``LinearStateSpace`` model
+We will do the same for Samuelson's (1939) multiplier-accelerator model
 
 Assume that
 
@@ -112,7 +112,7 @@ To start, lets assume the following parameter values:
 
 .. math::  a = 0.9,b = 0.5, \gamma = 10,\sigma = 0.5,G = 5 
 
-.. code-block:: python3
+.. code-block:: ipython
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -169,12 +169,14 @@ growing
     plt.plot(y[0:2,:].T)
     plt.xlabel('t')
     plt.legend(['$Y_t$', '$C_t$'],loc = 'lower right')
-    plt.title('Simulation of $C_t$ and $Y_t$');
+    plt.title('Simulation of $C_t$ and $Y_t$')
+    plt.show()
     
     plt.subplot(122)
     plt.plot(y[2,:])
     plt.xlabel('t')
-    plt.title('Simulation of $I_t$').plt.show()
+    plt.title('Simulation of $I_t$')
+    plt.show()
 
 Next, we plot 200 independent simulations of :math:`\{Y_t\}` for 150
 periods, each starting from :math:`Y_0 = Y_{-1} = 200`
@@ -189,7 +191,8 @@ distribution, but that it takes around 50 periods to get there
         x, y = Samuelson.simulate(ts_length = 150)
         plt.plot(y[0,:])
     plt.xlabel('t')
-    plt.title('200 simulations of $Y_t$ with $b = 0.5$');
+    plt.title('200 simulations of $Y_t$ with $b = 0.5$')
+    plt.show()
 
 The next method we will use is ``stationary_distributions()``
 
@@ -295,7 +298,8 @@ not the same as the stationary distribution
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
     plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
     plt.legend()
-    plt.title('Comparing stationary density with simulations of $Y_{20}$');
+    plt.title('Comparing stationary density with simulations of $Y_{20}$')
+    plt.show()
 
 But it appears to be very close when :math:`T = 50`, as we might have
 expected from our first simulations
@@ -309,7 +313,8 @@ expected from our first simulations
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
     plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
     plt.legend()
-    plt.title('Comparing stationary density with simulations of $Y_{50}$');
+    plt.title('Comparing stationary density with simulations of $Y_{50}$')
+    plt.show()
 
 Now, lets consider the impact of an "investment shock" on the paths of
 :math:`C_t,I_t` and :math:`Y_t`. To do this, we can use the
@@ -346,7 +351,8 @@ a one standard-deviation investment shock in our model
     plt.xlabel('$j$',fontsize=18)
     plt.ylim([0,1])
     plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
-    plt.title('Impulse response to positive investment shock with $b = 0.5$');
+    plt.title('Impulse response to positive investment shock with $b = 0.5$')
+    plt.show()
 
 Now consider what happens if we turn off the accelerator mechanism, by
 setting :math:`b = 0`
@@ -373,7 +379,8 @@ above.
     plt.xlabel('$j$',fontsize=18)
     plt.ylim([0,1])
     plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
-    plt.title('Impulse response to positive investment shock with $b = 0$');
+    plt.title('Impulse response to positive investment shock with $b = 0$')
+    plt.show()
 
 Finally, lets consider a third parameterization, raising :math:`b` from
 0.5 to 1. This means that investment now rises one-for-one with the
