@@ -571,10 +571,326 @@ price of an infinite payment stream :math:`x_0 G^t` when the nominal
 one-period interest rate is :math:`r` and when :math:`r > g`
 
 
+We can also extend the asset pricing formula so that it applies to finite leases
 
-Note to Natasha
-===================
+Let the payment stream on the lease now be :math:`x_t` for :math:`t= 1,2, \dots,T`, where again
 
-Please "glue" the "second" lecture from the "second notebook" geometric_series_v3 starting here 
-and do any cosmetic smoothing and editing required while probably leaving the above material alone
+.. math:: x_t = G^t x_0
+
+The present value of this lease is:
+
+.. math:: \begin{equation} \begin{split}p_0&=x_0 + x_1/R  + \dots +x_T/R^T \\ &= x_0(1+GR^{-1}+\dots +G^{T}R^{-T}) \\ &= \frac{x_0(1-G^{T+1}R^{-(T+1)})}{1-GR^{-1}}  \end{split}\end{equation}
+
+Applying the Taylor series to :math:`R^{-(T+1)}` about :math:`r=0` we get:
+
+.. math:: \frac{1}{(1+r)^{T+1}}= 1-r(T+1)+\frac{1}{2}r^2(T+1)(T+2)+\dots \approx 1-r(T+1) 
+
+Similarly, applying the Taylor series to :math:`G^{T+1}` about :math:`g=0`:
+
+.. math:: (1+g)^{T+1} = 1+(T+1)g(1+g)^T+(T+1)Tg^2(1+g)^{T-1}+\dots \approx 1+ (T+1)g 
+
+Thus, we get the following approximation:
+
+.. math:: p_0 =\frac{x_0(1-(1+(T+1)g)(1-r(T+1)))}{1-(1-r)(1+g) } 
+
+Expanding:
+
+.. math::  \begin{align*}p_0 &=\frac{x_0(1-1+(T+1)^2 rg -r(T+1)+g(T+1))}{1-1+r-g+rg}  \\&=\frac{x_0(T+1)((T+1)rg+r-g)}{r-g+rg} \\ &\approx \frac{x_0(T+1)(r-g)}{r-g}+\frac{x_0rg(T+1)}{r-g}\\ &= x_0(T+1) + \frac{x_0rg(T+1)}{r-g}  \end{align*}
+
+We could have also approximated by removing the second term
+:math:`rgx_0(T+1)` when :math:`T` is relatively small compared to
+:math:`1/(rg)` to get :math:`x_0(T+1)` as in the finite stream
+approximation.
+
+We will plot the true finite stream present-value and the two
+approximations, under different values of T, and g and r in python.
+
+First we plot the true finite stream present-value after computing it
+below.
+
+.. code:: ipython3
+
+    #basic imports
+    get_ipython().system('pip install quantecon')
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import scipy as sp
+    get_ipython().run_line_magic('matplotlib', 'inline')
+    
+    #true present value of a finite lease
+    def finite_lease_pv(T,g,r,x_0):
+      G=(1+g)
+      R=(1+r)
+      return (x_0*(1-G**(T+1)*R**(-T-1)))/(1-G*R**(-1))
+    #first approximation for our finite lease
+           
+    def finite_lease_pv_approx_f(T,g,r,x_0):
+      p=x_0*(T+1) + x_0*r*g*(T+1)/(r-g)
+      return p
+    #second approximation for our finite lease
+    def finite_lease_pv_approx_s(T,g,r,x_0):
+      return (x_0*(T+1)) 
+    #infinite lease
+    def infinite_lease(g,r,x_0):
+      G=(1+g)
+      R=(1+r)
+      return x_0/(1-G*R**(-1))
+                                 
+
+Now that we have test run our functions, we can plot some outcomes.
+
+First we study the quality of our approximations
+
+.. code:: ipython3
+
+    g=.02
+    r=.03
+    x_0=1
+    T_max=50
+    T=np.arange(0,T_max+1)
+    plt.figure()
+    plt.title('Finite Lease Present Value $T$ Periods Ahead')
+    plt.plot(T,finite_lease_pv(T,g,r,x_0), label='True T-period Lease PV')
+    plt.plot(T,finite_lease_pv_approx_f(T,g,r,x_0),label='T-period Lease First-order Approx.')
+    plt.plot(T,finite_lease_pv_approx_s(T,g,r,x_0),label='T-period Lease First-order Approx. adj.')
+    plt.legend()
+    plt.xlabel('$T$ Periods Ahead')
+    plt.ylabel('Present Value, $p_0$')
+    plt.show()
+
+Evidently our approximations perform well for small values of T
+
+However, holding :math:`g` and r fixed, our approximations deteriorate as T increases
+
+Next we compare the infinite and finite duration lease present values
+over different lease lengths :math:`T`
+
+.. code:: ipython3
+
+    #convergence of infinite and finite. 
+    T_max=1000
+    T=np.arange(0,T_max+1)
+    plt.figure()
+    plt.title('Infinite and Finite Lease Present Value $T$ Periods Ahead')
+    plt.plot(T,finite_lease_pv(T,g,r,x_0),label='T-period lease PV')
+    plt.plot(T,np.ones(T_max+1)*infinite_lease(g,r,x_0),'--',label='Infinite lease PV')
+    plt.xlabel('$T$ Periods Ahead')
+    plt.ylabel('Present Value, $p_0$')
+    plt.legend()
+    plt.show()
+
+The above graphs shows how as duration :math:`T \rightarrow +\infty`,
+the value of a lease of duration :math:`T` approaches the value of a
+perpetural lease
+
+Now we consider two different views of what happens as :math:`r` and
+:math:`g` covary
+
+.. code:: ipython3
+
+    #first view
+    #changing r and g
+    plt.figure()
+    plt.title('Value of lease of length  $T$')
+    plt.ylabel('Present Value, $p_0$')
+    plt.xlabel('$T$ periods ahead')
+    T_max=10
+    T=np.arange(0,T_max+1)
+    #r>>g, much bigger than g
+    r=.9
+    g=.4
+    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r\gg g$')
+    #r>g
+    r=.5
+    g=.4
+    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r>g$',color='green')
+    
+    #r~g, not defined when r=g, but approximately goes to straight line with slope 1
+    r=.4001
+    g=.4
+    plt.plot(finite_lease_pv(T,g,r,x_0),label=r'$r \approx g$',color='orange')
+    
+    #r<g
+    r=.4
+    g=.5
+    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r<g$',color='red')
+    plt.legend()
+    plt.show()
+
+
+The above graphs gives a big hint for why the condition :math:`r > g` is
+necessary if a lease of length :math:`T = +\infty` is to have finite
+value
+
+For fans of 3-d graphs the same point comes through in the following
+graph
+
+If you aren't enamored of 3-d graphs, feel free to skip the next
+visualization!
+
+.. code:: ipython3
+
+    #second view
+    from matplotlib import cm
+    from mpl_toolkits.mplot3d import Axes3D
+    fig = plt.figure()
+    T=3
+    ax = fig.gca(projection='3d')
+    r=np.arange(0.01,.99,.005)
+    g=np.arange(0.01,.99,.005)
+    
+    rr,gg = np.meshgrid(r,g)
+    z= finite_lease_pv(T,gg,rr,x_0)
+    #removes points where undefined
+    same=(rr==gg)
+    z[same]=np.nan
+    surf=ax.plot_surface(rr,gg,z,cmap=cm.coolwarm, antialiased=True,clim=(0,15))
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+    ax.set_xlabel('$r$')
+    ax.set_ylabel('$g$')
+    ax.set_zlabel('Present Value,$p_0$')    
+    ax.view_init(20,10)
+    plt.title('Three Period Lease PV with Varying $g$ and $r$')
+    plt.show()
+
+
+We can use a little calculus to study how the present value :math:`p_0`
+of a lease varies with :math:`r` and :math:`g`
+
+We will use a library called ``SymPy``.
+
+``SymPy`` enables us to do symbolic math calculations including
+computing derivatives of algebraic equations.
+
+We will illustrate how it works by creating a symbolic expression that
+represents our present value formula for an infinite lease
+
+After that, we'll use ``SymPy`` to compute derivatives
+
+.. code:: ipython3
+
+    import sympy as sp
+    from sympy import init_printing
+    
+    #creates algebraic symbols that can be used in an algebraic expression.
+    g,r,x0=sp.symbols('g,r,x0')
+    G=(1+g)
+    R=(1+r)
+    p0=x0/(1-G*R**(-1))
+    init_printing()
+    print('Our formula is:')
+    p0
+
+.. code:: ipython3
+
+    print('dp0/dg is:')
+    dp_dg= sp.diff(p0,g)
+    dp_dg
+
+.. code:: ipython3
+
+    print('dp0/dr is:')
+    dp_dr=sp.diff(p0,r)
+    dp_dr
+
+We can see that for :math:`\frac{\partial p_0}{\partial r}<0` as long as
+:math:`r>g`, :math:`r>0` and :math:`g>0` and :math:`x_0` is positive,
+this equation will always be negative. Similarly,
+:math:`\frac{\partial p_0}{\partial g}>0` as long as :math:`r>g`,
+:math:`r>0` and :math:`g>0` and :math:`x_0` is positive, this equation
+will always be postive.
+
+Back to Keynesian multiplier
+----------------------------
+
+We will now go back to the case of the Keynesian multiplier and plot the
+time path of :math:`y_t`, given that consumption is a constant fraction
+of national income, and investment is fixed.
+
+.. code:: ipython3
+
+    #function that calculates a path of y
+    def calculate_y(i,b,g,T,y_init):
+        y=np.zeros(T+1)
+        y[0]=i+b*y_init+g
+        for t in range(1,T+1):
+            y[t]=b*y[t-1]+i+g
+        return y    
+    #helper function for plotting
+    #def plotter_y(i,b,g,T,y_init):
+    #    y=calculate_y(i,b,g,T,y_init)
+    #    T_vec=np.arange(0,T+1)
+    #    return T_vec, y
+    # initial values
+    i_0 = .3
+    g_0 = .3
+    #2/3 of income goes towards consumption
+    b=2/3
+    y_init=0
+    T=100
+    
+    
+    
+    plt.figure()
+    plt.title('Path of Aggregate Output Over Time')
+    plt.xlabel('$t$')
+    plt.ylabel('$y_t$')
+    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init))
+    # output predicted by geometric series
+    plt.hlines(i_0/(1-b)+g_0/(1-b),xmin=-1,xmax=101,linestyles='--',)
+    plt.show()
+
+In this model, income grows over time, until it gradually converges to
+the infinite geometric series sum of income. We now examine what will
+happen if we vary the so-called **marginal propensity to consume**,
+i.e., the fraction of income that is consumed
+
+.. code:: ipython3
+
+    #changing fraction of consumption
+    b_0=1/3
+    b_1 = 2/3
+    b_2 = 5/6
+    b_3=.9
+    plt.figure()
+    plt.title('Changing Consumption as a Fraction of Income')
+    plt.ylabel('$y_t$')
+    plt.xlabel('$t$')
+    for b in (b_0, b_1, b_2,b_3):
+        plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label= r'$b=$'+f"{b:.2f}")
+    plt.legend()
+    plt.show()
+
+Increasing the marginal propensity to consumer :math:`b` increases the
+path of output over time.
+
+.. code:: ipython3
+
+    # changing initial investment:
+    i_1=.4
+    plt.figure()
+    plt.title('An Increase in Investment on Output')
+    plt.ylabel('$y_t$')
+    plt.xlabel('$t$')
+    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label=r'$i=.3$',linestyle='--')
+    plt.plot(np.arange(0,T+1),calculate_y(i_1,b,g_0,T,y_init),label=r'$i=.4$')
+    plt.legend()
+    plt.show()
+    #changing government spending
+    g_1= .4
+    plt.figure()
+    plt.title('An Increase in Government Spending on Output')
+    plt.ylabel('$y_t$')
+    plt.xlabel('$t$')
+    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label=r'$g=.3$',linestyle='--')
+    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_1,T,y_init),label=r'$g=.4$')
+    plt.legend()
+    plt.show()
+
+Notice here, whether government spending increases from .3 to .4 or
+investment increases from .3 to .4, the shifts in the graphs are
+identical.
+
+Please explain why
+
 
