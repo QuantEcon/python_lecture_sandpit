@@ -1,6 +1,18 @@
+.. _lss_examples:
 
+.. include:: /_static/includes/lecture_howto_py.raw
+
+.. index::
+    single: python
+
+*************************************
 Methods of the LinearStateSpace Class
-=======================================
+*************************************
+
+.. contents:: :depth: 2
+
+**Co-author: **
+
 
 QuantEcon contains a class which has various methods for operating on
 ``LinearStateSpace`` Models (such models are explained in detail `in this
@@ -13,10 +25,11 @@ To illustrate these methods, we will use Paul Samuleson's (1939) :cite:`Samuelso
 multiplier-accelerator model
 
 Samuelson's (1939) Multiplier-Accelerator Model
--------------------------------------------------
+===============================================
 
 The previous lecture showed (among other things) how to represent a
 univariate auto-regressive processes as a ``LinearStateSpace`` model
+
 We will do the same for Samuelson's (1939) multiplier-accelerator model
 
 Assume that
@@ -163,17 +176,17 @@ growing
 
     x, y = Samuelson.simulate(ts_length = 150)
     
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     
     plt.subplot(121)
-    plt.plot(y[0:2,:].T)
+    plt.plot(y[0:2, :].T)
     plt.xlabel('t')
-    plt.legend(['$Y_t$', '$C_t$'],loc = 'lower right')
+    plt.legend(['$Y_t$', '$C_t$'], loc = 'lower right')
     plt.title('Simulation of $C_t$ and $Y_t$')
     plt.show()
     
     plt.subplot(122)
-    plt.plot(y[2,:])
+    plt.plot(y[2, :])
     plt.xlabel('t')
     plt.title('Simulation of $I_t$')
     plt.show()
@@ -186,10 +199,10 @@ distribution, but that it takes around 50 periods to get there
 
 .. code-block:: python3
 
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     for i in range(200):
         x, y = Samuelson.simulate(ts_length = 150)
-        plt.plot(y[0,:])
+        plt.plot(y[0, :])
     plt.xlabel('t')
     plt.title('200 simulations of $Y_t$ with $b = 0.5$')
     plt.show()
@@ -291,12 +304,12 @@ not the same as the stationary distribution
 
 .. code-block:: python3
 
-    xT,yT = Samuelson.replicate(T=20,num_reps=10000)
+    xT,yT = Samuelson.replicate(T=20, num_reps=10000)
     
     plt.figure(figsize=(8,4))
-    plt.hist(yT[0,:], bins='auto',normed = True);
+    plt.hist(yT[0,:], bins='auto', normed = True);
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
-    plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
+    plt.plot(x_axis, norm.pdf(x_axis, mux[0][0], sigx[0][0]**0.5), label='Stationary Density')
     plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{20}$')
     plt.show()
@@ -306,12 +319,12 @@ expected from our first simulations
 
 .. code-block:: python3
 
-    xT,yT = Samuelson.replicate(T=50,num_reps=10000)
+    xT,yT = Samuelson.replicate(T=50, num_reps=10000)
     
     plt.figure(figsize=(8,4))
-    plt.hist(yT[0,:], bins='auto',normed = True);
+    plt.hist(yT[0,:], bins='auto', normed = True);
     x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
-    plt.plot(x_axis, norm.pdf(x_axis,mux[0][0],sigx[0][0]**0.5),label='Stationary Density')
+    plt.plot(x_axis, norm.pdf(x_axis, mux[0][0], sigx[0][0]**0.5), label='Stationary Density')
     plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{50}$')
     plt.show()
@@ -346,11 +359,11 @@ a one standard-deviation investment shock in our model
 
 .. code-block:: python3
 
-    plt.figure(figsize=(8,4))
-    plt.plot(np.asarray(y_coef)[:,:,0])
-    plt.xlabel('$j$',fontsize=18)
-    plt.ylim([0,1])
-    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
+    plt.figure(figsize=(8, 4))
+    plt.plot(np.asarray(y_coef)[:, :, 0])
+    plt.xlabel('$j$', fontsize=18)
+    plt.ylim([0, 1])
+    plt.legend(['$Y_{t+j}$', '$C_{t+j}$', '$I_{t+j}$'], loc='upper right')
     plt.title('Impulse response to positive investment shock with $b = 0.5$')
     plt.show()
 
@@ -374,11 +387,11 @@ above.
     
     x_coef, y_coef = Samuelson2.impulse_response(j=20)
     
-    plt.figure(figsize=(8,4))
-    plt.plot(np.asarray(y_coef)[:,:,0])
-    plt.xlabel('$j$',fontsize=18)
-    plt.ylim([0,1])
-    plt.legend(['$Y_{t+j}$', '$C_{t+j}$','$I_{t+j}$'],loc='upper right')
+    plt.figure(figsize=(8, 4))
+    plt.plot(np.asarray(y_coef)[:, :, 0])
+    plt.xlabel('$j$', fontsize=18)
+    plt.ylim([0, 1])
+    plt.legend(['$Y_{t+j}$', '$C_{t+j}$', '$I_{t+j}$'], loc='upper right')
     plt.title('Impulse response to positive investment shock with $b = 0$')
     plt.show()
 
@@ -411,7 +424,7 @@ behaviour
 
     x,y = Samuelson3.simulate(ts_length = 150)
     
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12, 4))
     for i in range(200):
         x, y = Samuelson3.simulate(ts_length = 150)
         plt.plot(y[0,:])
@@ -530,8 +543,8 @@ reduced to :math:`-1`
         # Detect location of constant in the state vector (if it exists)
         cons_ind = []
         for j in range(dim_x):
-            if np.array_equal(A[j,:] - np.eye(dim_x)[j,:],np.zeros(dim_x)) == True:
-                if np.array_equal(C[j,:] - np.zeros(dim_w),np.zeros(dim_w)) == True:
+            if np.array_equal(A[j,:] - np.eye(dim_x)[j,:], np.zeros(dim_x)) == True:
+                if np.array_equal(C[j,:] - np.zeros(dim_w), np.zeros(dim_w)) == True:
                     cons_ind = j
         
         # If constant exists, create submatrix of A without constant
@@ -573,7 +586,7 @@ In a ``LinearStateSpace`` model, these expectations are given by:
 
 .. math::  S_y = G(I - \beta A)^{-1} x_t 
 
-We can calculate that using the ``geometric_sums()`` method.
+We can calculate that using the ``geometric_sums()`` method
 
 .. code-block:: python3
 
