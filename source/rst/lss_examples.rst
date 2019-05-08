@@ -4,33 +4,33 @@ Methods of the Linear State Space Class
 
 QuantEcon contains a class which has various methods for operating on
 Linear State Space Models (such models are explained in detail `in this
-lecture <https://lectures.quantecon.org/py/linear_models.html>`__).
+lecture <https://lectures.quantecon.org/py/linear_models.html>`__)
 
 In this notebook, we will illustrate the methods that can be used on
-instances of this class.
+instances of this class
 
 To illustrate these methods, we will use Paul Samuleson's (1939)
-multiplier-accelerator model.
+multiplier-accelerator model
 
 Samuelson's (1939) multiplier-accelerator model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The previous lecture showed (among other things) how to represent a
 univariate auto-regressive processes as a linear state space model. We
-will do the same for Samuelson's (1939) multiplier-accelerator model.
+will do the same for Samuelson's (1939) multiplier-accelerator model
 
 Assume that
 
--  :math:`\{G_t\}` is a sequence of levels of government expenditures.
+-  :math:`\{G_t\}` is a sequence of levels of government expenditures
 
 -  :math:`\{C_t\}` is a sequence of levels of aggregate consumption
-   expenditures, a key endogenous variable in the model.
+   expenditures, a key endogenous variable in the model
 
 -  :math:`\{I_t\}` is a sequence of rates of investment, another key
-   endogenous variable.
+   endogenous variable
 
 -  :math:`\{Y_t\}` is a sequence of levels of national income, yet
-   another endogenous variable.
+   another endogenous variable
 
 -  :math:`a` is the "marginal propensity to consume" in the Keynesian
    consumption function :math:`C_t = a Y_{t-1} + \gamma`
@@ -40,9 +40,9 @@ Assume that
 
 -  :math:`\{\epsilon_{t}\}` is a sequence of independently and
    identically distributed :math:`N(0,1)` random variables, i.e., mean
-   zero, variance one.
+   zero, variance one
 
--  $:raw-latex:`\sigma `:raw-latex:`\geq `0 $ is a "volatility"
+-  :math:`\sigma` :math:`\geq` 0 is a "volatility"
    parameter.
 
 The model combines the consumption function
@@ -97,15 +97,16 @@ as a linear state space model in the following way:
                       I_t \cr} \right]}  
 
 We use this form as we are interested in the paths of :math:`C` and
-:math:`I` as well as :math:`Y`.
+:math:`I` as well as :math:`Y`
 
-We want to ask the following questions of this model: \* Does
-:math:`Y_t` have a stationary distribution? If so, what is it? \* How
-long does it take for :math:`Y_t` to reach its stationary distribution?
+We want to ask the following questions of this model: 
+
+\* Does :math:`Y_t` have a stationary distribution? If so, what is it? 
+\* How long does it take for :math:`Y_t` to reach its stationary distribution?
 \* What is the effect of an investment shock, :math:`\sigma \epsilon_t`,
 on present and future values of :math:`C_t,I_t` and :math:`Y_t`?
 
-The methods of the Linear State Space class will be able to help us out.
+The methods of the Linear State Space class will be able to help us out
 
 To start, lets assume the following parameter values:
 
@@ -147,16 +148,16 @@ class called ``Samuelson``
 Notice, we didn't give the class a value for :math:`\Sigma_0`. In this
 case, the class automatically assumes that :math:`\Sigma_0 = 0`, i.e.
 the first period's values of the state vector are given by
-:math:`\mu_0`.
+:math:`\mu_0`
 
 The first method we will highlight is ``simulate()``
 
 Below we simulate :math:`C_t`, :math:`I_t` and :math:`Y_t` for 150
-periods.
+periods
 
 There is evidence in the plots of the "investment accelerator".
 Investment is highest in the first twenty periods, while :math:`Y_t` is
-growing.
+growing
 
 .. code:: ipython3
 
@@ -176,10 +177,10 @@ growing.
     plt.title('Simulation of $I_t$', fontsize=14);
 
 Next, we plot 200 independent simulations of :math:`\{Y_t\}` for 150
-periods, each starting from :math:`Y_0 = Y_{-1} = 200`.
+periods, each starting from :math:`Y_0 = Y_{-1} = 200`
 
 We can see that it does appear that the model approaches a stationary
-distribution, but that it takes around 50 periods to get there.
+distribution, but that it takes around 50 periods to get there
 
 .. code:: ipython3
 
@@ -225,7 +226,7 @@ A stationary distribution for :math:`y` is then given by
 The calculation of the stationary distribution actually relies on
 another method for the Linear State Space class: ``moment_sequence()``
 
-This method is an example of a generator function.
+This method is an example of a generator function
 
 .. code:: ipython3
 
@@ -280,7 +281,7 @@ particular value of :math:`T` (i.e. it only returns observations of
 For a large enough value of ``num_reps``, we can use this method, and
 our knowledge of the stationary distribution to check how long it takes
 the population moments of the model to approach the stationary
-distribution.
+distribution
 
 If we try T = 20, we can see that the the histogram of :math:`Y_{20}` is
 not the same as the stationary distribution
@@ -348,7 +349,7 @@ a one standard-deviation investment shock in our model
     plt.title('Impulse response to positive investment shock with $b = 0.5$', fontsize=14);
 
 Now consider what happens if we turn off the accelerator mechanism, by
-setting :math:`b = 0`.
+setting :math:`b = 0`
 
 Without the accelerator mechanism, the response of national income to an
 investment shock is smaller, and doesn't display the "hump-shape" seen
@@ -376,7 +377,7 @@ above.
 
 Finally, lets consider a third parameterization, raising :math:`b` from
 0.5 to 1. This means that investment now rises one-for-one with the
-lagged change in national income.
+lagged change in national income
 
 .. code:: ipython3
 
@@ -411,7 +412,7 @@ behaviour
     plt.title('200 simulations of $Y_t$ with $b = 1$', fontsize=14);
 
 We could have predicted this if we remembered the math of second-order
-auto-regressive processes.
+auto-regressive processes
 
 Let :math:`z_t` follow an AR(2) process:
 
@@ -419,13 +420,13 @@ Let :math:`z_t` follow an AR(2) process:
 
 The following picture (borrowed from p. 189 of Macroeconomic Theory, 2nd
 edition, by Thomas Sargent) shows the dynamics of :math:`z_t` that we
-can expect for different values of :math:`\rho_1, \rho_2`.
+can expect for different values of :math:`\rho_1, \rho_2`
 
 The red dot indicates our current set of parameters. By setting
 :math:`b = 1` in the Samuelson model, we were setting
 :math:`\rho_2 = -1` in the equivalent AR(2) process, and consequently
 our model is on the knife-edge case between dampened and explosive
-oscillations.
+oscillations
 
 .. code:: ipython3
 
@@ -504,11 +505,11 @@ matrix. The following function checks the eigenvalues of the A matrix of
 a linear state space model. If all eigenvalues of A have moduli strictly
 less than unity (apart from one associated with a constant in the state
 vector), then the function reports that a stationary distribution
-exists.
+exists
 
 The function reports that a stationary distribution exists for our first
 and second sets of parameter values, but not when :math:`b` has been
-reduced to :math:`-1`.
+reduced to :math:`-1`
 
 .. code:: ipython3
 
