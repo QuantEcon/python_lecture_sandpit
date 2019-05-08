@@ -17,6 +17,7 @@ Geometric Series for High School Economics
 In addition what's in Anaconda, this lecture will need the following libraries
 
 .. code-block:: ipython
+  :class: hide-output
 
   !pip install quantecon
 
@@ -64,7 +65,7 @@ The first type of geometric that interests us is the infinite series
 
 .. math:: 1 + c + c^2 + c^3 + \cdots
 
-Where :math:`\cdots` means that the series continues without limit.
+Where :math:`\cdots` means that the series continues without limit
 
 The key formula is
 
@@ -152,7 +153,7 @@ reserves :math:`R_i` must satisfy the balance sheet equation (because
 
 The left side of the above equation is the sum of the bank's **assets**,
 namely, the loans :math:`L_i` it has outstanding plus its reserves of
-cash :math:`R_i`. 
+cash :math:`R_i`
 
 The right side records bank :math:`i`'s liabilities,
 namely, the deposits :math:`D_i` held by its depositors; these are
@@ -600,13 +601,13 @@ Expanding:
 We could have also approximated by removing the second term
 :math:`rgx_0(T+1)` when :math:`T` is relatively small compared to
 :math:`1/(rg)` to get :math:`x_0(T+1)` as in the finite stream
-approximation.
+approximation
 
 We will plot the true finite stream present-value and the two
-approximations, under different values of T, and g and r in python.
+approximations, under different values of T, and g and r in python
 
 First we plot the true finite stream present-value after computing it
-below.
+below
 
 .. code:: ipython3
 
@@ -637,7 +638,7 @@ below.
       return x_0/(1-G*R**(-1))
                                  
 
-Now that we have test run our functions, we can plot some outcomes.
+Now that we have test run our functions, we can plot some outcomes
 
 First we study the quality of our approximations
 
@@ -757,7 +758,7 @@ visualization!
 We can use a little calculus to study how the present value :math:`p_0`
 of a lease varies with :math:`r` and :math:`g`
 
-We will use a library called ``SymPy``.
+We will use a library called ``SymPy``
 
 ``SymPy`` enables us to do symbolic math calculations including
 computing derivatives of algebraic equations.
@@ -772,7 +773,7 @@ After that, we'll use ``SymPy`` to compute derivatives
     import sympy as sp
     from sympy import init_printing
     
-    #creates algebraic symbols that can be used in an algebraic expression.
+    #creates algebraic symbols that can be used in an algebraic expression
     g,r,x0=sp.symbols('g,r,x0')
     G=(1+g)
     R=(1+r)
@@ -862,7 +863,7 @@ i.e., the fraction of income that is consumed
     plt.show()
 
 Increasing the marginal propensity to consumer :math:`b` increases the
-path of output over time.
+path of output over time
 
 .. code:: ipython3
 
@@ -889,7 +890,7 @@ path of output over time.
 
 Notice here, whether government spending increases from .3 to .4 or
 investment increases from .3 to .4, the shifts in the graphs are
-identical.
+identical
 
 Please explain why
 
