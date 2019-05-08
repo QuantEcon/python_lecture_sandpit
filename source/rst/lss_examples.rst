@@ -12,7 +12,7 @@ instances of this class
 To illustrate these methods, we will use Paul Samuleson's (1939)
 multiplier-accelerator model
 
-Samuelson's (1939) multiplier-accelerator model
+Samuelson's (1939) Multiplier-Accelerator Model
 -------------------------------------------------
 
 The previous lecture showed (among other things) how to represent a
@@ -42,7 +42,7 @@ Assume that
    identically distributed :math:`N(0,1)` random variables, i.e., mean
    zero, variance one
 
--  :math:`\sigma` :math:`\geq 0` is a "volatility"
+-  :math:`\sigma \geq 0` is a "volatility"
    parameter.
 
 The model combines the consumption function
