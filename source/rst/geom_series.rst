@@ -280,7 +280,7 @@ components
 
 The first equation is a national income identity asserting that
 consumption :math:`c` plus investment :math:`i` equals national income
-:math:`y`:
+:math:`y` :
 
 .. math:: c+ i = y
 
@@ -609,31 +609,31 @@ below
 
 .. code-block:: python3
 
-    #basic imports
+    # Basic imports
     get_ipython().system('pip install quantecon')
     import matplotlib.pyplot as plt
     import numpy as np
     import scipy as sp
     get_ipython().run_line_magic('matplotlib', 'inline')
     
-    #true present value of a finite lease
+    # True present value of a finite lease
     def finite_lease_pv(T, g, r, x_0):
-      G=(1+g)
-      R=(1+r)
-      return (x_0*(1-G**(T+1)*R**(-T-1)))/(1-G*R**(-1))
-    #first approximation for our finite lease
+      G = (1 + g)
+      R = (1 + r)
+      return (x_0*(1 - G**(T + 1)*R**(-T - 1)))/(1 - G*R**(-1))
+    # First approximation for our finite lease
            
     def finite_lease_pv_approx_f(T, g, r, x_0):
-      p=x_0*(T+1) + x_0*r*g*(T+1)/(r-g)
+      p = x_0*(T + 1) + x_0*r*g*(T + 1)/(r - g)
       return p
-    #second approximation for our finite lease
+    # Second approximation for our finite lease
     def finite_lease_pv_approx_s(T, g, r, x_0):
-      return (x_0*(T+1)) 
-    #infinite lease
+      return (x_0*(T + 1)) 
+    # Infinite lease
     def infinite_lease(g, r, x_0):
-      G=(1+g)
-      R=(1+r)
-      return x_0/(1-G*R**(-1))
+      G = (1 + g)
+      R = (1 + r)
+      return x_0/(1 - G*R**(-1))
                                  
 
 Now that we have test run our functions, we can plot some outcomes
@@ -642,11 +642,11 @@ First we study the quality of our approximations
 
 .. code-block:: python3
 
-    g=.02
-    r=.03
-    x_0=1
-    T_max=50
-    T=np.arange(0, T_max+1)
+    g = .02
+    r = .03
+    x_0 = 1
+    T_max = 50
+    T = np.arange(0, T_max+1)
     plt.figure()
     plt.title('Finite Lease Present Value $T$ Periods Ahead')
     plt.plot(T, finite_lease_pv(T, g, r, x_0), label='True T-period Lease PV')
@@ -666,9 +666,9 @@ over different lease lengths :math:`T`
 
 .. code-block:: python3
 
-    #convergence of infinite and finite
-    T_max=1000
-    T=np.arange(0, T_max+1)
+    # Convergence of infinite and finite
+    T_max = 1000
+    T = np.arange(0, T_max+1)
     plt.figure()
     plt.title('Infinite and Finite Lease Present Value $T$ Periods Ahead')
     plt.plot(T, finite_lease_pv(T, g, r, x_0), label='T-period lease PV')
@@ -687,31 +687,31 @@ Now we consider two different views of what happens as :math:`r` and
 
 .. code-block:: python3
 
-    #first view
-    #changing r and g
+    # First view
+    # Changing r and g
     plt.figure()
     plt.title('Value of lease of length $T$')
     plt.ylabel('Present Value, $p_0$')
     plt.xlabel('$T$ periods ahead')
-    T_max=10
+    T_max = 10
     T=np.arange(0, T_max+1)
-    #r>>g, much bigger than g
-    r=.9
-    g=.4
+    # r>>g, much bigger than g
+    r = .9
+    g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r\gg g$')
-    #r>g
-    r=.5
-    g=.4
+    # r>g
+    r = .5
+    g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r>g$', color='green')
     
-    #r~g, not defined when r=g, but approximately goes to straight line with slope 1
-    r=.4001
-    g=.4
+    # r~g, not defined when r = g, but approximately goes to straight line with slope 1
+    r = .4001
+    g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label=r'$r \approx g$', color='orange')
     
-    #r<g
-    r=.4
-    g=.5
+    # r<g
+    r = .4
+    g = .5
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r<g$', color='red')
     plt.legend()
     plt.show()
@@ -729,21 +729,21 @@ visualization!
 
 .. code-block:: python3
 
-    #second view
+    # Second view
     from matplotlib import cm
     from mpl_toolkits.mplot3d import Axes3D
     fig = plt.figure()
-    T=3
+    T = 3
     ax = fig.gca(projection='3d')
-    r=np.arange(0.01, .99, .005)
-    g=np.arange(0.01, .99, .005)
+    r = np.arange(0.01, .99, .005)
+    g = np.arange(0.01, .99, .005)
     
-    rr,gg = np.meshgrid(r, g)
-    z= finite_lease_pv(T, gg, rr, x_0)
-    #removes points where undefined
-    same=(rr==gg)
-    z[same]=np.nan
-    surf=ax.plot_surface(rr, gg, z, cmap=cm.coolwarm, antialiased=True, clim=(0, 15))
+    rr, gg = np.meshgrid(r, g)
+    z = finite_lease_pv(T, gg, rr, x_0)
+    # Removes points where undefined
+    same = (rr==gg)
+    z[same] = np.nan
+    surf = ax.plot_surface(rr, gg, z, cmap=cm.coolwarm, antialiased=True, clim=(0, 15))
     fig.colorbar(surf, shrink=0.5, aspect=5)
     ax.set_xlabel('$r$')
     ax.set_ylabel('$g$')
@@ -771,11 +771,11 @@ After that, we'll use ``SymPy`` to compute derivatives
     import sympy as sp
     from sympy import init_printing
     
-    #creates algebraic symbols that can be used in an algebraic expression
-    g,r,x0=sp.symbols('g, r, x0')
-    G=(1+g)
-    R=(1+r)
-    p0=x0/(1-G*R**(-1))
+    # Creates algebraic symbols that can be used in an algebraic expression
+    g, r, x0 = sp.symbols('g, r, x0')
+    G = (1 + g)
+    R = (1 + r)
+    p0 = x0/(1 - G*R**(-1))
     init_printing()
     print('Our formula is:')
     p0
@@ -783,13 +783,13 @@ After that, we'll use ``SymPy`` to compute derivatives
 .. code-block:: python3
 
     print('dp0/dg is:')
-    dp_dg= sp.diff(p0, g)
+    dp_dg = sp.diff(p0, g)
     dp_dg
 
 .. code-block:: python3
 
     print('dp0/dr is:')
-    dp_dr=sp.diff(p0, r)
+    dp_dr = sp.diff(p0, r)
     dp_dr
 
 We can see that for :math:`\frac{\partial p_0}{\partial r}<0` as long as
@@ -808,25 +808,25 @@ of national income, and investment is fixed.
 
 .. code-block:: python3
 
-    #function that calculates a path of y
+    # Function that calculates a path of y
     def calculate_y(i, b, g, T, y_init):
-        y=np.zeros(T+1)
-        y[0]=i+b*y_init+g
+        y = np.zeros(T+1)
+        y[0] = i + b*y_init+g
         for t in range(1, T+1):
-            y[t]=b*y[t-1]+i+g
+            y[t] = b*y[t-1]+i+g
         return y    
-    #helper function for plotting
+    # Helper function for plotting
     #def plotter_y(i, b, g, T, y_init):
-    #    y=calculate_y(i, b, g, T, y_init)
-    #    T_vec=np.arange(0, T+1)
+    #    y = calculate_y(i, b, g, T, y_init)
+    #    T_vec = np.arange(0, T+1)
     #    return T_vec, y
     # initial values
     i_0 = .3
     g_0 = .3
-    #2/3 of income goes towards consumption
-    b=2/3
-    y_init=0
-    T=100
+    # 2/3 of income goes towards consumption
+    b = 2/3
+    y_init = 0
+    T = 100
     
     
     
@@ -835,7 +835,7 @@ of national income, and investment is fixed.
     plt.xlabel('$t$')
     plt.ylabel('$y_t$')
     plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init))
-    # output predicted by geometric series
+    #Output predicted by geometric series
     plt.hlines(i_0/(1-b)+g_0/(1-b), xmin=-1, xmax=101, linestyles='--')
     plt.show()
 
@@ -846,17 +846,17 @@ i.e., the fraction of income that is consumed
 
 .. code-block:: python3
 
-    #changing fraction of consumption
-    b_0=1/3
+    # Changing fraction of consumption
+    b_0 = 1/3
     b_1 = 2/3
     b_2 = 5/6
-    b_3=.9
+    b_3 = .9
     plt.figure()
     plt.title('Changing Consumption as a Fraction of Income')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
     for b in (b_0, b_1, b_2, b_3):
-        plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label= r'$b=$'+f"{b:.2f}")
+        plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$b=$'+f"{b:.2f}")
     plt.legend()
     plt.show()
 
@@ -865,8 +865,8 @@ path of output over time
 
 .. code-block:: python3
 
-    # changing initial investment:
-    i_1=.4
+    # Changing initial investment:
+    i_1 = .4
     plt.figure()
     plt.title('An Increase in Investment on Output')
     plt.ylabel('$y_t$')
@@ -875,8 +875,8 @@ path of output over time
     plt.plot(np.arange(0, T+1), calculate_y(i_1, b, g_0, T, y_init), label=r'$i=.4$')
     plt.legend()
     plt.show()
-    #changing government spending
-    g_1= .4
+    # Changing government spending
+    g_1 = .4
     plt.figure()
     plt.title('An Increase in Government Spending on Output')
     plt.ylabel('$y_t$')
