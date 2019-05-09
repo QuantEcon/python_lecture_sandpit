@@ -11,9 +11,6 @@ Methods of the LinearStateSpace Class
 
 .. contents:: :depth: 2
 
-**Co-author: **
-
-
 QuantEcon contains a class which has various methods for operating on
 ``LinearStateSpace`` Models (such models are explained in detail `in this
 lecture <https://lectures.quantecon.org/py/linear_models.html>`__)
@@ -135,28 +132,28 @@ To start, lets assume the following parameter values:
 
 .. code-block:: python3
 
-    a, b, gamma, sigma, g = 0.95, 0.5, 10, 0.5, 5
+    a, b, γ, σ, g = 0.95, 0.5, 10, 0.5, 5
     
-    A = [[a+b, -b, gamma+g, 0],
-         [1,   0,  0,       0],
-         [0,   0,  1,       0],
-         [b,   -b, 0,       0]]
-    C = [[sigma],
+    A = [[a+b, -b, γ+g, 0],
+         [  1,  0,   0, 0],
+         [  0,  0,   1, 0],
+         [  b, -b,   0, 0]]
+    C = [[σ],
          [0],
          [0],
-         [sigma]]
-    G = [[1, 0, 0,     0],
-         [0, a, gamma, 0],
-         [0, 0, 0,     1]]
+         [σ]]
+    G = [[1, 0, 0, 0],
+         [0, a, γ, 0],
+         [0, 0, 0, 1]]
     
-    mu = [200, 200, 1,0]
+    μ = [200, 200, 1, 0]
 
 Lets use these matrices to create an instance of the Linear State Space
 class called ``Samuelson``
 
 .. code-block:: python3
 
-    Samuelson = LinearStateSpace(A, C, G, mu_0 = mu)
+    Samuelson = LinearStateSpace(A, C, G, mu_0 = μ)
 
 Notice, we didn't give the class a value for :math:`\Sigma_0`. In this
 case, the class automatically assumes that :math:`\Sigma_0 = 0`, i.e.
@@ -229,15 +226,15 @@ A stationary distribution for :math:`y` is then given by
 
 .. code-block:: python3
 
-    mux, muy, sigx, sigy = Samuelson.stationary_distributions()
+    μ_x, μ_y, σ_x, σ_y = Samuelson.stationary_distributions()
 
 .. code-block:: python3
 
-    print(mux)
+    print(μ_x)
 
 .. code-block:: python3
 
-    print(sigx)
+    print(σ_x)
 
 The calculation of the stationary distribution actually relies on
 another method for the ``LinearStateSpace`` class: ``moment_sequence()``
@@ -257,30 +254,30 @@ given :math:`\mu_0, \Sigma_0`:
 
 .. code-block:: python3
 
-    mu_x0, mu_y0, sig_x0, sig_y0 = next(gen)
+    μ_x0, μ_y0, σ_x0, σ_y0 = next(gen)
 
 .. code-block:: python3
 
-    print(mu_x0)
+    print(μ_x0)
 
 .. code-block:: python3
 
-    print(sig_x0)
+    print(σ_x0)
 
 If we apply the ``next()`` method again, we get :math:`\mu_1, \Sigma_1`,
 and so on:
 
 .. code-block:: python3
 
-    mu_x1, mu_y1, sig_x1, sig_y1 = next(gen)
+    μ_x1, μ_y1, σ_x1, σ_y1 = next(gen)
 
 .. code-block:: python3
 
-    print(mu_x1)
+    print(μ_x1)
 
 .. code-block:: python3
 
-    print(sig_x1)
+    print(σ_x1)
 
 You can read more about the benefits of generators
 `here <https://lectures.quantecon.org/py/python_advanced_features.html#paf-generators>`__.
@@ -308,8 +305,8 @@ not the same as the stationary distribution
     
     plt.figure(figsize=(8,4))
     plt.hist(yT[0,:], bins='auto', normed = True);
-    x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
-    plt.plot(x_axis, norm.pdf(x_axis, mux[0][0], sigx[0][0]**0.5), label='Stationary Density')
+    x_axis = np.arange(μ_x[0] - 15, μ_x[0] + 15, 0.5)
+    plt.plot(x_axis, norm.pdf(x_axis, μ_x[0][0], σ_x[0][0]**0.5), label='Stationary Density')
     plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{20}$')
     plt.show()
@@ -323,8 +320,8 @@ expected from our first simulations
     
     plt.figure(figsize=(8,4))
     plt.hist(yT[0,:], bins='auto', normed = True);
-    x_axis = np.arange(mux[0] - 15, mux[0] + 15, 0.5)
-    plt.plot(x_axis, norm.pdf(x_axis, mux[0][0], sigx[0][0]**0.5), label='Stationary Density')
+    x_axis = np.arange(μ_x[0] - 15, μ_x[0] + 15, 0.5)
+    plt.plot(x_axis, norm.pdf(x_axis, μ_x[0][0], σ_x[0][0]**0.5), label='Stationary Density')
     plt.legend()
     plt.title('Comparing stationary density with simulations of $Y_{50}$')
     plt.show()
@@ -378,12 +375,12 @@ above.
 
     b = 0
     
-    A2 = [[a+b, -b, gamma+g, 0],
-         [1,   0,  0,       0],
-         [0,   0,  1,       0],
-         [b,   -b, 0,       0]]
+    A2 = [[a+b, -b, γ+g, 0],
+          [  1,  0,   0, 0],
+          [  0,  0,   1, 0],
+          [  b, -b,   0, 0]]
     
-    Samuelson2 = LinearStateSpace(A2, C, G, mu_0 = mu)
+    Samuelson2 = LinearStateSpace(A2, C, G, mu_0 = μ)
     
     x_coef, y_coef = Samuelson2.impulse_response(j=20)
     
@@ -403,12 +400,12 @@ lagged change in national income
 
     b = 1
     
-    A3 = [[a+b, -b, gamma+g, 0],
-         [1,   0,  0,       0],
-         [0,   0,  1,       0],
-         [b,   -b, 0,       0]]
+    A3 = [[a+b, -b, γ+g, 0],
+          [  1,  0,   0, 0],
+          [  0,  0,   1, 0],
+          [  b, -b,   0, 0]]
     
-    Samuelson3 = LinearStateSpace(A3, C, G, mu_0 = mu)
+    Samuelson3 = LinearStateSpace(A3, C, G, mu_0 = μ)
 
 If we try to find the stationary distribution for this new
 parameterization we find that we receive an error
@@ -590,15 +587,15 @@ We can calculate that using the ``geometric_sums()`` method
 
 .. code-block:: python3
 
-    S_x1, S_y1 = Samuelson.geometric_sums(beta = 0.95, x_t = mu)
+    S_x1, S_y1 = Samuelson.geometric_sums(beta = 0.95, x_t = μ)
     print(S_y1)
 
 .. code-block:: python3
 
-    S_x2, S_y2 = Samuelson2.geometric_sums(beta = 0.95, x_t = mu)
+    S_x2, S_y2 = Samuelson2.geometric_sums(beta = 0.95, x_t = μ)
     print(S_y2)
 
 .. code-block:: python3
 
-    S_x3, S_y3 = Samuelson3.geometric_sums(beta = 0.95, x_t = mu)
+    S_x3, S_y3 = Samuelson3.geometric_sums(beta = 0.95, x_t = μ)
     print(S_y3)
