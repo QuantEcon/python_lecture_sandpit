@@ -502,11 +502,9 @@ dollar at :math:`t`
 
 It follows that
 
--  the units of :math:`R^{-1}` are dollars at :math:`t` per dollar
-   at\ :math:`t+1`
+-  the units of :math:`R^{-1}` are dollars at :math:`t` per dollar at :math:`t+1`
 
--  the units of :math:`R^{-2}` are dollars at :math:`t` per dollar
-   at\ :math:`t+2`
+-  the units of :math:`R^{-2}` are dollars at :math:`t` per dollar at :math:`t+2`
 
 -  and so on; the units of :math:`R^{-j}` are dollars at :math:`t` per
    dollar at :math:`t+j`
@@ -604,12 +602,12 @@ We could have also approximated by removing the second term
 approximation
 
 We will plot the true finite stream present-value and the two
-approximations, under different values of T, and g and r in python
+approximations, under different values of :math:`T`, and :math:`g` and :math:`r` in python
 
 First we plot the true finite stream present-value after computing it
 below
 
-.. code:: ipython3
+.. code-block:: python3
 
     #basic imports
     get_ipython().system('pip install quantecon')
@@ -619,20 +617,20 @@ below
     get_ipython().run_line_magic('matplotlib', 'inline')
     
     #true present value of a finite lease
-    def finite_lease_pv(T,g,r,x_0):
+    def finite_lease_pv(T, g, r, x_0):
       G=(1+g)
       R=(1+r)
       return (x_0*(1-G**(T+1)*R**(-T-1)))/(1-G*R**(-1))
     #first approximation for our finite lease
            
-    def finite_lease_pv_approx_f(T,g,r,x_0):
+    def finite_lease_pv_approx_f(T, g, r, x_0):
       p=x_0*(T+1) + x_0*r*g*(T+1)/(r-g)
       return p
     #second approximation for our finite lease
-    def finite_lease_pv_approx_s(T,g,r,x_0):
+    def finite_lease_pv_approx_s(T, g, r, x_0):
       return (x_0*(T+1)) 
     #infinite lease
-    def infinite_lease(g,r,x_0):
+    def infinite_lease(g, r, x_0):
       G=(1+g)
       R=(1+r)
       return x_0/(1-G*R**(-1))
@@ -642,39 +640,39 @@ Now that we have test run our functions, we can plot some outcomes
 
 First we study the quality of our approximations
 
-.. code:: ipython3
+.. code-block:: python3
 
     g=.02
     r=.03
     x_0=1
     T_max=50
-    T=np.arange(0,T_max+1)
+    T=np.arange(0, T_max+1)
     plt.figure()
     plt.title('Finite Lease Present Value $T$ Periods Ahead')
-    plt.plot(T,finite_lease_pv(T,g,r,x_0), label='True T-period Lease PV')
-    plt.plot(T,finite_lease_pv_approx_f(T,g,r,x_0),label='T-period Lease First-order Approx.')
-    plt.plot(T,finite_lease_pv_approx_s(T,g,r,x_0),label='T-period Lease First-order Approx. adj.')
+    plt.plot(T, finite_lease_pv(T, g, r, x_0), label='True T-period Lease PV')
+    plt.plot(T, finite_lease_pv_approx_f(T, g, r, x_0), label='T-period Lease First-order Approx.')
+    plt.plot(T, finite_lease_pv_approx_s(T, g, r,x_0), label='T-period Lease First-order Approx. adj.')
     plt.legend()
     plt.xlabel('$T$ Periods Ahead')
     plt.ylabel('Present Value, $p_0$')
     plt.show()
 
-Evidently our approximations perform well for small values of T
+Evidently our approximations perform well for small values of :math:`T`
 
-However, holding :math:`g` and r fixed, our approximations deteriorate as T increases
+However, holding :math:`g` and r fixed, our approximations deteriorate as :math:`T` increases
 
 Next we compare the infinite and finite duration lease present values
 over different lease lengths :math:`T`
 
-.. code:: ipython3
+.. code-block:: python3
 
-    #convergence of infinite and finite. 
+    #convergence of infinite and finite
     T_max=1000
-    T=np.arange(0,T_max+1)
+    T=np.arange(0, T_max+1)
     plt.figure()
     plt.title('Infinite and Finite Lease Present Value $T$ Periods Ahead')
-    plt.plot(T,finite_lease_pv(T,g,r,x_0),label='T-period lease PV')
-    plt.plot(T,np.ones(T_max+1)*infinite_lease(g,r,x_0),'--',label='Infinite lease PV')
+    plt.plot(T, finite_lease_pv(T, g, r, x_0), label='T-period lease PV')
+    plt.plot(T, np.ones(T_max+1)*infinite_lease(g, r, x_0), '--', label='Infinite lease PV')
     plt.xlabel('$T$ Periods Ahead')
     plt.ylabel('Present Value, $p_0$')
     plt.legend()
@@ -687,34 +685,34 @@ perpetural lease
 Now we consider two different views of what happens as :math:`r` and
 :math:`g` covary
 
-.. code:: ipython3
+.. code-block:: python3
 
     #first view
     #changing r and g
     plt.figure()
-    plt.title('Value of lease of length  $T$')
+    plt.title('Value of lease of length $T$')
     plt.ylabel('Present Value, $p_0$')
     plt.xlabel('$T$ periods ahead')
     T_max=10
-    T=np.arange(0,T_max+1)
+    T=np.arange(0, T_max+1)
     #r>>g, much bigger than g
     r=.9
     g=.4
-    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r\gg g$')
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r\gg g$')
     #r>g
     r=.5
     g=.4
-    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r>g$',color='green')
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r>g$', color='green')
     
     #r~g, not defined when r=g, but approximately goes to straight line with slope 1
     r=.4001
     g=.4
-    plt.plot(finite_lease_pv(T,g,r,x_0),label=r'$r \approx g$',color='orange')
+    plt.plot(finite_lease_pv(T, g, r, x_0), label=r'$r \approx g$', color='orange')
     
     #r<g
     r=.4
     g=.5
-    plt.plot(finite_lease_pv(T,g,r,x_0),label='$r<g$',color='red')
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r<g$', color='red')
     plt.legend()
     plt.show()
 
@@ -729,7 +727,7 @@ graph
 If you aren't enamored of 3-d graphs, feel free to skip the next
 visualization!
 
-.. code:: ipython3
+.. code-block:: python3
 
     #second view
     from matplotlib import cm
@@ -737,20 +735,20 @@ visualization!
     fig = plt.figure()
     T=3
     ax = fig.gca(projection='3d')
-    r=np.arange(0.01,.99,.005)
-    g=np.arange(0.01,.99,.005)
+    r=np.arange(0.01, .99, .005)
+    g=np.arange(0.01, .99, .005)
     
-    rr,gg = np.meshgrid(r,g)
-    z= finite_lease_pv(T,gg,rr,x_0)
+    rr,gg = np.meshgrid(r, g)
+    z= finite_lease_pv(T, gg, rr, x_0)
     #removes points where undefined
     same=(rr==gg)
     z[same]=np.nan
-    surf=ax.plot_surface(rr,gg,z,cmap=cm.coolwarm, antialiased=True,clim=(0,15))
+    surf=ax.plot_surface(rr, gg, z, cmap=cm.coolwarm, antialiased=True, clim=(0, 15))
     fig.colorbar(surf, shrink=0.5, aspect=5)
     ax.set_xlabel('$r$')
     ax.set_ylabel('$g$')
-    ax.set_zlabel('Present Value,$p_0$')    
-    ax.view_init(20,10)
+    ax.set_zlabel('Present Value, $p_0$')    
+    ax.view_init(20, 10)
     plt.title('Three Period Lease PV with Varying $g$ and $r$')
     plt.show()
 
@@ -768,13 +766,13 @@ represents our present value formula for an infinite lease
 
 After that, we'll use ``SymPy`` to compute derivatives
 
-.. code:: ipython3
+.. code-block:: python3
 
     import sympy as sp
     from sympy import init_printing
     
     #creates algebraic symbols that can be used in an algebraic expression
-    g,r,x0=sp.symbols('g,r,x0')
+    g,r,x0=sp.symbols('g, r, x0')
     G=(1+g)
     R=(1+r)
     p0=x0/(1-G*R**(-1))
@@ -782,16 +780,16 @@ After that, we'll use ``SymPy`` to compute derivatives
     print('Our formula is:')
     p0
 
-.. code:: ipython3
+.. code-block:: python3
 
     print('dp0/dg is:')
-    dp_dg= sp.diff(p0,g)
+    dp_dg= sp.diff(p0, g)
     dp_dg
 
-.. code:: ipython3
+.. code-block:: python3
 
     print('dp0/dr is:')
-    dp_dr=sp.diff(p0,r)
+    dp_dr=sp.diff(p0, r)
     dp_dr
 
 We can see that for :math:`\frac{\partial p_0}{\partial r}<0` as long as
@@ -808,19 +806,19 @@ We will now go back to the case of the Keynesian multiplier and plot the
 time path of :math:`y_t`, given that consumption is a constant fraction
 of national income, and investment is fixed.
 
-.. code:: ipython3
+.. code-block:: python3
 
     #function that calculates a path of y
-    def calculate_y(i,b,g,T,y_init):
+    def calculate_y(i, b, g, T, y_init):
         y=np.zeros(T+1)
         y[0]=i+b*y_init+g
-        for t in range(1,T+1):
+        for t in range(1, T+1):
             y[t]=b*y[t-1]+i+g
         return y    
     #helper function for plotting
-    #def plotter_y(i,b,g,T,y_init):
-    #    y=calculate_y(i,b,g,T,y_init)
-    #    T_vec=np.arange(0,T+1)
+    #def plotter_y(i, b, g, T, y_init):
+    #    y=calculate_y(i, b, g, T, y_init)
+    #    T_vec=np.arange(0, T+1)
     #    return T_vec, y
     # initial values
     i_0 = .3
@@ -836,9 +834,9 @@ of national income, and investment is fixed.
     plt.title('Path of Aggregate Output Over Time')
     plt.xlabel('$t$')
     plt.ylabel('$y_t$')
-    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init))
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init))
     # output predicted by geometric series
-    plt.hlines(i_0/(1-b)+g_0/(1-b),xmin=-1,xmax=101,linestyles='--',)
+    plt.hlines(i_0/(1-b)+g_0/(1-b), xmin=-1, xmax=101, linestyles='--')
     plt.show()
 
 In this model, income grows over time, until it gradually converges to
@@ -846,7 +844,7 @@ the infinite geometric series sum of income. We now examine what will
 happen if we vary the so-called **marginal propensity to consume**,
 i.e., the fraction of income that is consumed
 
-.. code:: ipython3
+.. code-block:: python3
 
     #changing fraction of consumption
     b_0=1/3
@@ -857,15 +855,15 @@ i.e., the fraction of income that is consumed
     plt.title('Changing Consumption as a Fraction of Income')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    for b in (b_0, b_1, b_2,b_3):
-        plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label= r'$b=$'+f"{b:.2f}")
+    for b in (b_0, b_1, b_2, b_3):
+        plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label= r'$b=$'+f"{b:.2f}")
     plt.legend()
     plt.show()
 
 Increasing the marginal propensity to consumer :math:`b` increases the
 path of output over time
 
-.. code:: ipython3
+.. code-block:: python3
 
     # changing initial investment:
     i_1=.4
@@ -873,8 +871,8 @@ path of output over time
     plt.title('An Increase in Investment on Output')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label=r'$i=.3$',linestyle='--')
-    plt.plot(np.arange(0,T+1),calculate_y(i_1,b,g_0,T,y_init),label=r'$i=.4$')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$i=.3$', linestyle='--')
+    plt.plot(np.arange(0, T+1), calculate_y(i_1, b, g_0, T, y_init), label=r'$i=.4$')
     plt.legend()
     plt.show()
     #changing government spending
@@ -883,8 +881,8 @@ path of output over time
     plt.title('An Increase in Government Spending on Output')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_0,T,y_init),label=r'$g=.3$',linestyle='--')
-    plt.plot(np.arange(0,T+1),calculate_y(i_0,b,g_1,T,y_init),label=r'$g=.4$')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$g=.3$', linestyle='--')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_1, T, y_init), label=r'$g=.4$')
     plt.legend()
     plt.show()
 
