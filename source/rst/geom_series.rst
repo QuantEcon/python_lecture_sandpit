@@ -280,7 +280,7 @@ components
 
 The first equation is a national income identity asserting that
 consumption :math:`c` plus investment :math:`i` equals national income
-:math:`y` :
+:math:`y`:
 
 .. math:: c+ i = y
 
@@ -811,9 +811,9 @@ of national income, and investment is fixed.
     # Function that calculates a path of y
     def calculate_y(i, b, g, T, y_init):
         y = np.zeros(T+1)
-        y[0] = i + b*y_init+g
+        y[0] = i + b*y_init + g
         for t in range(1, T+1):
-            y[t] = b*y[t-1]+i+g
+            y[t] = b*y[t-1] + i + g
         return y    
     # Helper function for plotting
     #def plotter_y(i, b, g, T, y_init):
