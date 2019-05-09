@@ -31,5 +31,6 @@
     black_litterman
     von_neumann_model
     muth_kalman
+    lss_examples
 	
     zreferences
