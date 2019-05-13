@@ -607,33 +607,34 @@ approximations, under different values of :math:`T`, and :math:`g` and :math:`r`
 First we plot the true finite stream present-value after computing it
 below
 
-.. code-block:: python3
+.. code-block:: ipython
 
     # Basic imports
-    get_ipython().system('pip install quantecon')
     import matplotlib.pyplot as plt
     import numpy as np
     import scipy as sp
-    get_ipython().run_line_magic('matplotlib', 'inline')
+    %matplotlib inline
     
     # True present value of a finite lease
     def finite_lease_pv(T, g, r, x_0):
-      G = (1 + g)
-      R = (1 + r)
-      return (x_0 * (1 - G**(T + 1) * R**(-T - 1)))/(1 - G * R**(-1))
-    # First approximation for our finite lease
-           
+        G = (1 + g)
+        R = (1 + r)
+        return (x_0 * (1 - G**(T + 1) * R**(-T - 1)))/(1 - G * R**(-1))
+      
+    # First approximation for our finite lease       
     def finite_lease_pv_approx_f(T, g, r, x_0):
-      p = x_0 * (T + 1) + x_0 * r * g * (T + 1)/(r - g)
-      return p
+        p = x_0 * (T + 1) + x_0 * r * g * (T + 1)/(r - g)
+        return p
+    
     # Second approximation for our finite lease
     def finite_lease_pv_approx_s(T, g, r, x_0):
-      return (x_0 * (T + 1)) 
+        return (x_0 * (T + 1)) 
+      
     # Infinite lease
     def infinite_lease(g, r, x_0):
-      G = (1 + g)
-      R = (1 + r)
-      return x_0/(1 - G * R**(-1))
+        G = (1 + g)
+        R = (1 + r)
+        return x_0/(1 - G * R**(-1))
                                  
 
 Now that we have test run our functions, we can plot some outcomes
