@@ -42,7 +42,7 @@ These and other applications prove the truth of the wise crack that
 
     "in economics, a little knowledge of geometric series goes a long way "
 
-Geometric series: key formulas
+Geometric Series: Key Formulas
 ===============================
 
 To start, we let :math:`c` be a real number that lies strictly between
@@ -58,7 +58,7 @@ To start, we let :math:`c` be a real number that lies strictly between
 
 We want to evaluate geometric series of two types -- infinite and finite
 
-Infinite geometric series
+Infinite Geometric Series
 --------------------------
 
 The first type of geometric that interests us is the infinite series
@@ -78,7 +78,7 @@ To prove key formula :eq:`infinite`, multiply both sides  by :math:`(1-c)` and v
 that if :math:`c \in (-1,1)`, then the outcome is the
 equation :math:`1 = 1`
 
-Finite geometric series
+Finite Geometric Series
 ------------------------
 
 The second series that interests us is the finite geomtric series
@@ -101,7 +101,7 @@ Three Examples
 We now move on to describe some famuous economic applications of
 geometric series
 
-The money multiplier in fractional reserve banking
+The Money Multiplier in Fractional Reserve Banking
 --------------------------------------------------
 
 In a fractional reserve banking system, banks hold only a fraction
@@ -140,7 +140,7 @@ The geometric series formula :eq:`infinite` is at the heart of the classic model
 the money creation process -- one that leads us to the celebrated
 **money multiplier**
 
-A simple model
+A Simple Model
 ~~~~~~~~~~~~~~
 
 There is a set of banks named :math:`i = 0, 1, 2, \ldots`
@@ -256,10 +256,10 @@ Equation :eq:`sumdeposits` asserts that the **money multiplier** is
 .. experiments like lowering reserve requirements? Or others you may suggest?
 
 
-Keynesian multiplier
+Keynesian Multiplier
 --------------------
 
-Static version
+Static Version
 ----------------
 
 The famous economist John Maynard Keynes and his followers created a
@@ -324,7 +324,7 @@ The expression :math:`\sum_{t=0}^\infty b^t` motivates an interpretation
 of the multiplier as the outcome of a dynamic process that we describe
 next
 
-Dynamic version of Keynesian multiplier
+Dynamic Version of Keynesian Multiplier
 ---------------------------------------
 
 We arrive at a dynamic version by interpreting the nonnegative integer
@@ -403,7 +403,7 @@ in government expenditures
 .. illustrate basic concepts, maybe the idea of a "difference equation" and how we solve it?
 
 
-Interest rates and present values
+Interest Rates and Present Values
 ---------------------------------
 
 We can apply our formula for geometric series to study how interest
@@ -512,7 +512,7 @@ It follows that
 So if someone has a claim on :math:`x` dollars at time :math:`t+j`, it
 is worth :math:`x R^{-j}` dollars at time :math:`t` (e.g., today)
 
-Application to asset pricing
+Application to Asset Pricing
 -----------------------------
 
 A **lease** requires a payments stream of :math:`x_t` dollars at
@@ -695,21 +695,21 @@ Now we consider two different views of what happens as :math:`r` and
     plt.xlabel('$T$ periods ahead')
     T_max = 10
     T=np.arange(0, T_max+1)
-    # r>>g, much bigger than g
+    # r >> g, much bigger than g
     r = .9
     g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r\gg g$')
-    # r>g
+    # r > g
     r = .5
     g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r>g$', color='green')
     
-    # r~g, not defined when r = g, but approximately goes to straight line with slope 1
+    # r ~ g, not defined when r = g, but approximately goes to straight line with slope 1
     r = .4001
     g = .4
     plt.plot(finite_lease_pv(T, g, r, x_0), label=r'$r \approx g$', color='orange')
     
-    # r<g
+    # r < g
     r = .4
     g = .5
     plt.plot(finite_lease_pv(T, g, r, x_0), label='$r<g$', color='red')
@@ -799,7 +799,7 @@ this equation will always be negative. Similarly,
 :math:`r>0` and :math:`g>0` and :math:`x_0` is positive, this equation
 will always be postive.
 
-Back to Keynesian multiplier
+Back to Keynesian Multiplier
 ----------------------------
 
 We will now go back to the case of the Keynesian multiplier and plot the
