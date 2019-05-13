@@ -42,7 +42,7 @@ We'll need the following imports
 Samuelson's (1939) Multiplier-Accelerator Model
 ===============================================
 
-Aamong other things, the  lecture :doc:`Linear State Space Models<linear_models>`showed  how to represent a
+Among other things, the  lecture :doc:`Linear State Space Models<linear_models>`showed  how to represent a
 univariate auto-regressive processes as a linear state space model
 
 We will do the same for Samuelson's (1939) multiplier-accelerator model described and simulated in
