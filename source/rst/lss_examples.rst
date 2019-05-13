@@ -5,27 +5,28 @@
 .. index::
     single: python
 
-*************************************
+**************************************
 Methods of the LinearStateSpace Class
-*************************************
+**************************************
 
 .. contents:: :depth: 2
 
-In addition to what's in Anaconda, this lecture will need the following libraries
+**Co-author: Sebastian Graves**
+
+In addition to what's in Anaconda, this lecture uses the following libraries
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-QuantEcon contains a class which has various methods for operating on
-linear state space models (such models are explained in detail `in this
+QuantEcon contains a class that has various methods for operating on
+linear state space models 
+
+(linear state space  models are explained in detail `in this
 lecture <https://lectures.quantecon.org/py/linear_models.html>`__)
 
-In this notebook, we will illustrate the methods that can be used on
-instances of this class
-
-To illustrate these methods, we will use Paul Samuleson's (1939) :cite:`Samuelson1939`
+In this lecture, we illustrate how the methods can be applied to an instantiation of Paul Samuleson's (1939) :cite:`Samuelson1939`
 multiplier-accelerator model
 
 We'll need the following imports
@@ -41,10 +42,11 @@ We'll need the following imports
 Samuelson's (1939) Multiplier-Accelerator Model
 ===============================================
 
-The previous lecture showed (among other things) how to represent a
+Aamong other things, the  lecture :doc:`Linear State Space Models<linear_models>`showed  how to represent a
 univariate auto-regressive processes as a linear state space model
 
-We will do the same for Samuelson's (1939) multiplier-accelerator model
+We will do the same for Samuelson's (1939) multiplier-accelerator model described and simulated in
+:doc:`Samuelson Multiplier Accelerator <samuelson>`
 
 Assume that
 
@@ -132,17 +134,17 @@ as a linear state space model in the following way:
                       1 \cr
                       I_t \cr} \right]}  
 
-We use this form as we are interested in the paths of :math:`C` and
+We use this form because we are interested in the paths of :math:`C` and
 :math:`I` as well as :math:`Y`
 
-We want to ask the following questions of this model: 
+We want to ask the following questions: 
 
 \* Does :math:`Y_t` have a stationary distribution? If so, what is it? 
 \* How long does it take for :math:`Y_t` to reach its stationary distribution?
 \* What is the effect of an investment shock, :math:`\sigma \epsilon_t`,
 on present and future values of :math:`C_t,I_t` and :math:`Y_t`?
 
-The methods of the ``LinearStateSpace`` class will be able to help us out
+The methods of the ``LinearStateSpace`` class can  help us out
 
 To start, lets assume the following parameter values:
 
@@ -412,14 +414,14 @@ above
     plt.show()
 
 Finally, lets consider a third parameterization, raising :math:`b` from
-0.5 to 1
+0.5 to .8
 
-This means that investment now rises one-for-one with the
+This means that investment now is more sensitive to the
 lagged change in national income
 
 .. code-block:: python3
 
-    b = 1
+    b = 1.0
     
     A3 = [[a+b, -b, γ+g, 0],
           [  1,  0,   0, 0],
@@ -458,10 +460,8 @@ Let :math:`z_t` follow an AR(2) process:
 
 .. math::  z_{t+1} = \alpha + \rho_1 z_t+ \rho_2 z_{t-1} + w_{t+1} 
 
-The following picture (borrowed from p. 189 of Macroeconomic Theory, 2nd
-edition, by Thomas Sargent) shows the dynamics of :math:`z_t` that we
-can expect for different values of :math:`\rho_1, \rho_2`
-
+The following picture (borrowed from p. 189 of :cite:`Sargent1987`) shows the dynamics of :math:`z_t` that we
+can expect for different values of :math:`\rho_1, \rho_2`   
 The red dot indicates our current set of parameters
 
 By setting
