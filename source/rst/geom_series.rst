@@ -40,7 +40,7 @@ These and other applications prove the truth of the wise crack that
 
 .. epigraph::
 
-    "in economics, a little knowledge of geometric series goes a long way "
+    "in economics, a little knowledge of geometric series goes a long way"
 
 Geometric Series: Key Formulas
 ===============================
@@ -141,7 +141,7 @@ the money creation process -- one that leads us to the celebrated
 **money multiplier**
 
 A Simple Model
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 There is a set of banks named :math:`i = 0, 1, 2, \ldots`
 
@@ -643,19 +643,18 @@ First we study the quality of our approximations
 
 .. code-block:: python3
 
-    g = .02
-    r = .03
+    g = 0.02
+    r = 0.03
     x_0 = 1
     T_max = 50
     T = np.arange(0, T_max+1)
-    plt.figure()
-    plt.title('Finite Lease Present Value $T$ Periods Ahead')
     plt.plot(T, finite_lease_pv(T, g, r, x_0), label='True T-period Lease PV')
     plt.plot(T, finite_lease_pv_approx_f(T, g, r, x_0), label='T-period Lease First-order Approx.')
     plt.plot(T, finite_lease_pv_approx_s(T, g, r,x_0), label='T-period Lease First-order Approx. adj.')
     plt.legend()
     plt.xlabel('$T$ Periods Ahead')
     plt.ylabel('Present Value, $p_0$')
+    plt.title('Finite Lease Present Value $T$ Periods Ahead')
     plt.show()
 
 Evidently our approximations perform well for small values of :math:`T`
@@ -670,10 +669,9 @@ over different lease lengths :math:`T`
     # Convergence of infinite and finite
     T_max = 1000
     T = np.arange(0, T_max+1)
-    plt.figure()
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='T-period lease PV')
+    plt.plot(np.ones(T_max+1) * infinite_lease(g, r, x_0), label='Infinite lease PV')
     plt.title('Infinite and Finite Lease Present Value $T$ Periods Ahead')
-    plt.plot(T, finite_lease_pv(T, g, r, x_0), label='T-period lease PV')
-    plt.plot(T, np.ones(T_max+1)*infinite_lease(g, r, x_0), '--', label='Infinite lease PV')
     plt.xlabel('$T$ Periods Ahead')
     plt.ylabel('Present Value, $p_0$')
     plt.legend()
@@ -690,30 +688,32 @@ Now we consider two different views of what happens as :math:`r` and
 
     # First view
     # Changing r and g
-    plt.figure()
+    T_max = 10
+    T = np.arange(0, T_max+1)
+    
+    # r >> g, much bigger than g
+    r = 0.9
+    g = 0.4
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r\gg g$')
+    
+    # r > g
+    r = 0.5
+    g = 0.4
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r>g$', c='green')
+    
+    # r ~ g, not defined when r = g, but approximately goes to straight line with slope 1
+    r = 0.4001
+    g = 0.4
+    plt.plot(finite_lease_pv(T, g, r, x_0), label=r'$r \approx g$', c='orange')
+    
+    # r < g
+    r = 0.4
+    g = 0.5
+    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r<g$', c='red')
+    
     plt.title('Value of lease of length $T$')
     plt.ylabel('Present Value, $p_0$')
     plt.xlabel('$T$ periods ahead')
-    T_max = 10
-    T=np.arange(0, T_max+1)
-    # r >> g, much bigger than g
-    r = .9
-    g = .4
-    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r\gg g$')
-    # r > g
-    r = .5
-    g = .4
-    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r>g$', color='green')
-    
-    # r ~ g, not defined when r = g, but approximately goes to straight line with slope 1
-    r = .4001
-    g = .4
-    plt.plot(finite_lease_pv(T, g, r, x_0), label=r'$r \approx g$', color='orange')
-    
-    # r < g
-    r = .4
-    g = .5
-    plt.plot(finite_lease_pv(T, g, r, x_0), label='$r<g$', color='red')
     plt.legend()
     plt.show()
 
@@ -733,22 +733,21 @@ visualization!
     # Second view
     from matplotlib import cm
     from mpl_toolkits.mplot3d import Axes3D
-    fig = plt.figure()
+    fig = plt.figure(figsize=(10, 6))
     T = 3
     ax = fig.gca(projection='3d')
-    r = np.arange(0.01, .99, .005)
-    g = np.arange(0.01, .99, .005)
+    r = np.arange(0.01, 0.99, 0.005)
+    g = np.arange(0.01, 0.99, 0.005)
     
     rr, gg = np.meshgrid(r, g)
     z = finite_lease_pv(T, gg, rr, x_0)
-    # Removes points where undefined
+    
+    # Remove points where undefined
     same = (rr==gg)
     z[same] = np.nan
     surf = ax.plot_surface(rr, gg, z, cmap=cm.coolwarm, antialiased=True, clim=(0, 15))
     fig.colorbar(surf, shrink=0.5, aspect=5)
-    ax.set_xlabel('$r$')
-    ax.set_ylabel('$g$')
-    ax.set_zlabel('Present Value, $p_0$')    
+    ax.set(xlabel='$r$', ylabel='$g$', zlabel='Present Value, $p_0$')
     ax.view_init(20, 10)
     plt.title('Three Period Lease PV with Varying $g$ and $r$')
     plt.show()
@@ -795,17 +794,19 @@ After that, we'll use ``SymPy`` to compute derivatives
 
 We can see that for :math:`\frac{\partial p_0}{\partial r}<0` as long as
 :math:`r>g`, :math:`r>0` and :math:`g>0` and :math:`x_0` is positive,
-this equation will always be negative. Similarly,
+this equation will always be negative
+
+Similarly,
 :math:`\frac{\partial p_0}{\partial g}>0` as long as :math:`r>g`,
 :math:`r>0` and :math:`g>0` and :math:`x_0` is positive, this equation
-will always be postive.
+will always be postive
 
 Back to Keynesian Multiplier
 ----------------------------
 
 We will now go back to the case of the Keynesian multiplier and plot the
 time path of :math:`y_t`, given that consumption is a constant fraction
-of national income, and investment is fixed.
+of national income, and investment is fixed
 
 .. code-block:: python3
 
@@ -815,29 +816,21 @@ of national income, and investment is fixed.
         y[0] = i + b * y_init + g
         for t in range(1, T+1):
             y[t] = b * y[t-1] + i + g
-        return y    
-    # Helper function for plotting
-    #def plotter_y(i, b, g, T, y_init):
-    #    y = calculate_y(i, b, g, T, y_init)
-    #    T_vec = np.arange(0, T+1)
-    #    return T_vec, y
-    # initial values
-    i_0 = .3
-    g_0 = .3
-    # 2/3 of income goes towards consumption
-    b = 2/3
+        return y
+        
+    i_0 = 0.3
+    g_0 = 0.3
+    b = 2/3  # 2/3 of income goes towards consumption
     y_init = 0
     T = 100
     
-    
-    
-    plt.figure()
+    plt.plot(calculate_y(i_0, b, g_0, T, y_init))
     plt.title('Path of Aggregate Output Over Time')
     plt.xlabel('$t$')
     plt.ylabel('$y_t$')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init))
-    #Output predicted by geometric series
-    plt.hlines(i_0/(1-b)+g_0/(1-b), xmin=-1, xmax=101, linestyles='--')
+    
+    # Output predicted by geometric series
+    plt.hlines(i_0 / (1 - b) + g_0 / (1 - b), xmin=-1, xmax=101)
     plt.show()
 
 In this model, income grows over time, until it gradually converges to
@@ -848,16 +841,17 @@ i.e., the fraction of income that is consumed
 .. code-block:: python3
 
     # Changing fraction of consumption
-    b_0 = 1/3
-    b_1 = 2/3
-    b_2 = 5/6
-    b_3 = .9
-    plt.figure()
+    b_0 = 1 / 3
+    b_1 = 2 / 3
+    b_2 = 5 / 6
+    b_3 = 0.9
+
+    for b in (b_0, b_1, b_2, b_3):
+        plt.plot(calculate_y(i_0, b, g_0, T, y_init), label=rf'$b={b:.2f}$')
+        
     plt.title('Changing Consumption as a Fraction of Income')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    for b in (b_0, b_1, b_2, b_3):
-        plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$b=$'+f"{b:.2f}")
     plt.legend()
     plt.show()
 
@@ -867,28 +861,28 @@ path of output over time
 .. code-block:: python3
 
     # Changing initial investment:
-    i_1 = .4
-    plt.figure()
-    plt.title('An Increase in Investment on Output')
-    plt.ylabel('$y_t$')
-    plt.xlabel('$t$')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$i=.3$', linestyle='--')
-    plt.plot(np.arange(0, T+1), calculate_y(i_1, b, g_0, T, y_init), label=r'$i=.4$')
-    plt.legend()
-    plt.show()
-    # Changing government spending
-    g_1 = .4
-    plt.figure()
-    plt.title('An Increase in Government Spending on Output')
-    plt.ylabel('$y_t$')
-    plt.xlabel('$t$')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$g=.3$', linestyle='--')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_1, T, y_init), label=r'$g=.4$')
-    plt.legend()
+    i_1 = 0.4
+    g_1 = 0.4
+    titles = ['An Increase in Investment on Output', 
+              'An Increase in Government Spending on Output']
+    
+    fig, axes = plt.subplots(2, 1, figsize=(8, 6), sharex=True)
+    
+    for ax, title in zip(axes, titles):
+        ax.plot(calculate_y(i_0, b, g_0, T, y_init), label=rf'$i={i_0}$')
+        ax.set(xlabel='$t$', ylabel='$y_t$', title=title)
+        ax.legend()
+        
+    # Change investment
+    axes[0].plot(calculate_y(i_1, b, g_0, T, y_init), label=rf'$i={i_1}$')
+    # Change government spending
+    axes[1].plot(calculate_y(i_0, b, g_1, T, y_init), label=rf'$i={g_1}$')
+    
+    plt.tight_layout()
     plt.show()
 
-Notice here, whether government spending increases from .3 to .4 or
-investment increases from .3 to .4, the shifts in the graphs are
+Notice here, whether government spending increases from 0.3 to 0.4 or
+investment increases from 0.3 to 0.4, the shifts in the graphs are
 identical
 
 Please explain why
