@@ -15,11 +15,8 @@ How to Pay for a War: Part 1
 **Co-author: Sebastian Graves**
 
 
-How to Pay for a War: Part 1
-============================
-
 An Application of Markov Jump Linear Quadratic Dynamic Programming
-------------------------------------------------------------------
+==================================================================
 
 
 This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
