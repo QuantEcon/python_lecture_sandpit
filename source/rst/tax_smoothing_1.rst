@@ -12,7 +12,7 @@ How to Pay for a War: Part 1
 
 .. contents:: :depth: 2
 
-**Co-author: Sebastian Graves**
+**Co-author: Sebastian Graves <https://github.com/sebgraves> **
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
@@ -20,7 +20,9 @@ An Application of Markov Jump Linear Quadratic Dynamic Programming
 
 
 This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
-of tax smoothing. Our generalizations are adaptations of extensions of
+of tax smoothing
+
+Our generalizations are adaptations of extensions of
 his 1979 model suggested by Barro (1999, 2003) 
 
 Barro’s original 1979 model is about a government that borrows and lends
@@ -137,15 +139,15 @@ Organization
 
 This notebook describes:
 
--  Markov jump linear quadratic (LQ) dynamic programming
+-  Markov jump linear quadratic (``LQ``) dynamic programming
 
--  An application of Markov jump LQ dynamic programming to a model in
+-  An application of Markov jump ``LQ`` dynamic programming to a model in
    which a government faces exogenous time-varying interest rates for
    issuing one-period risk-free debt
 
 A `sequel to this
 notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_2.ipynb>`__
-describes applies Markov LQ control to settings in which a government
+describes applies Markov ``LQ`` control to settings in which a government
 issues risk-free debt of different maturities
 
 Markov Jump Linear Quadratic Control
@@ -327,10 +329,10 @@ Barro (1979) Model
 ==================
 
 We begin by solving a version of the Barro (1979) :cite:`Barro1979` model by mapping it
-into the original LQ framework
+into the original ``LQ`` framework
 
 As mentioned `in this lecture <http://lectures.quantecon.org/py/perm_income_cons.html>`__, the
-Barro model is mathematically isomorphic with the LQ permanent income
+Barro model is mathematically isomorphic with the ``LQ`` permanent income
 model
 
 Let :math:`T_t` denote tax collections, :math:`\beta` a discount factor,
@@ -366,7 +368,7 @@ variable at time :math:`t`. To begin with, we will assume that
 :math:`p_{t,t+1}` is constant (and equal to :math:`\beta`), but we will
 also extend the model to allow this variable to evolve over time
 
-To map into the LQ framework, we will use
+To map into the ``LQ`` framework, we will use
 :math:`x_t = \begin{bmatrix} b_{t-1,t} \\ z_t \end{bmatrix}` as the
 state vector, and :math:`u_t = b_{t,t+1}` as the control variable.
 Therefore, the :math:`(A, B, C)` matrices are defined by the state-transition law:
@@ -390,7 +392,7 @@ It follows that the :math:`(R, Q, W)` matrices are implicitly defined by:
 .. math::  T_t^2 = x_t'S'Sx_t + u_t'M_t'M_tu_t + 2 u_t'M_t'S x_t 
 
 If we assume that :math:`p_{t,t+1} = \beta`, then :math:`M_t \equiv M = -\beta`. In this case, none of
-the LQ matrices are time varying, and we can use the original LQ
+the ``LQ`` matrices are time varying, and we can use the original ``LQ``
 framework
 
 We will implement this constant interest-rate version first, assuming
@@ -448,7 +450,7 @@ To do this, we set
     # Small penalty on debt required to implement no-ponzi scheme
     R[0, 0] = R[0, 0] + 1e-9
 
-We can now create an instance of an LQ model:
+We can now create an instance of an ``LQ`` model:
 
 .. code-block:: python3
 
@@ -458,7 +460,7 @@ We can now create an instance of an LQ model:
 
 We can see the isomorphism by noting that consumption is a martingale in
 the permanent income model, and that taxation is a martingale in Barro’s
-model. We can check this using the :math:`F` matrix of the LQ model. As
+model. We can check this using the :math:`F` matrix of the ``LQ`` model. As
 :math:`u_t = -F x_t`, we have:
 
 .. math::  T_t = S x_t + M u_t = (S - MF) x_t 
@@ -514,7 +516,7 @@ Python Class to Solve Markov Jump Linear Quadratic Control Problems
 
 To implement the extension to the Barro model in which :math:`p_{t,t+1}`
 varies over time, we must allow the M matrix to be time-varying. From
-the mapping of the Barro model into the LQ framework, this means that
+the mapping of the Barro model into the ``LQ`` framework, this means that
 our :math:`Q` and :math:`W` matrices will now also vary over time. We can solve such a
 model using the LQ_Markov class, which solves Markov jump linear
 quandratic control problems as described above
@@ -523,18 +525,22 @@ The code for the class can be viewed
 `here <https://github.com/QuantEcon/TaxSmoothing/blob/master/lq_markov.py>`__
 
 The class takes a variable number of arguments, to allow for there to be
-an arbitrary :math:`N` states of the world. To accomodate this, the
-matrices for each state of the world must be held in a “namedtuple”. The
-value and policy functions are then found by iterating on the system of
-algebraic matrix Riccati equations. The solutions for :math:`P,F,\rho`
-are stored in Python “dictionaries”
+an arbitrary :math:`N` states of the world
+
+To accomodate this, the
+matrices for each state of the world must be held in a “namedtuple”
+
+ The value and policy functions are then found by iterating on the system of
+algebraic matrix Riccati equations
+
+The solutions for :math:`P,F,\rho` are stored in Python “dictionaries”
 
 The class also contains a “method”, for simulating the model. This is an
-extension of a similar method in the LQ class, adapted to take into
+extension of a similar method in the ``LQ`` class, adapted to take into
 account the fact that the model’s matrices depend on the state of the
 world
 
-Below we import all functionality from this code.
+Below we import all functionality from this code
 
 (You should download `the
 file <https://github.com/QuantEcon/TaxSmoothing/blob/master/lq_markov.py>`__
