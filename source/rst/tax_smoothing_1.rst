@@ -22,9 +22,9 @@ An Application of Markov Jump Linear Quadratic Dynamic Programming
 ------------------------------------------------------------------
 
 
-This notebook constructs generalizations of Barro’s classic 1979 model
+This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
 of tax smoothing. Our generalizations are adaptations of extensions of
-his 1979 model suggested by Barro (1999, 2003) :cite:`Barro1979`
+his 1979 model suggested by Barro (1999, 2003) 
 
 Barro’s original 1979 model is about a government that borrows and lends
 in order to help it minimize an intertemporal measure of distortions
@@ -40,7 +40,7 @@ By using a secret weapon – *Markov jump linear quadratic dynamic
 programming* – we can allow interest rates to move over time in
 empirically interesting ways. Also, by expanding the dimension of the
 state, we can add a maturity composition decision to the government’s
-problem. It is by doing these two things that we extend Barro’s 1979
+problem. It is by doing these two things that we extend Barro’s 1979 :cite:`Barro1979`
 model along lines he suggested in Barro (1999, 2003)
 
 Barro (1979) :cite:`Barro1979` assumed
@@ -66,7 +66,7 @@ Barro’s model can be mapped into a discounted linear quadratic dynamic
 programming problem
 
 Our generalizations of Barro’s (1979) model, partly inspired by Barro
-(1999) and Barro (2003), assume
+(1999) :cite:`barro1999determinants` and Barro (2003) :cite:`barro2003religion`, assume
 
 -  that the government borrows or saves in the form of risk-free bonds
    of maturities :math:`1, 2, \ldots , H`
@@ -119,7 +119,7 @@ Barro’s 1979 model is designed to answer questions such as
    whether the surge in government expenditures can be expected to be
    temporary or permanent?
 
-Barro’s 1999 and 2003 models are designed to answer more fine-grained
+Barro’s 1999 :cite:`barro1999determinants` and 2003 :cite:`barro2003religion` models are designed to answer more fine-grained
 questions such as
 
 -  What determines whether a government wants to issue short-term or
