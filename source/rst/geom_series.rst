@@ -860,7 +860,6 @@ path of output over time
 
 .. code-block:: python3
 
-    # Changing initial investment:
     i_1 = 0.4
     g_1 = 0.4
     titles = ['An Increase in Investment on Output', 
@@ -873,7 +872,7 @@ path of output over time
         ax.set(xlabel='$t$', ylabel='$y_t$', title=title)
         ax.legend()
         
-    # Change investment
+    # Changing initial investment:
     axes[0].plot(calculate_y(i_1, b, g_0, T, y_init), label=rf'$i={i_1}$')
     # Change government spending
     axes[1].plot(calculate_y(i_0, b, g_1, T, y_init), label=rf'$i={g_1}$')
