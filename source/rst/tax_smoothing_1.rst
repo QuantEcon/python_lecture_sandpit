@@ -19,12 +19,12 @@ How to Pay for a War: Part 1
 ============================
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------------
 
 
 This notebook constructs generalizations of Barro’s classic 1979 model
 of tax smoothing. Our generalizations are adaptations of extensions of
-his 1979 model suggested by Barro (1999, 2003)
+his 1979 model suggested by Barro (1999, 2003) :cite:`Barro1979`
 
 Barro’s original 1979 model is about a government that borrows and lends
 in order to help it minimize an intertemporal measure of distortions
@@ -43,7 +43,7 @@ state, we can add a maturity composition decision to the government’s
 problem. It is by doing these two things that we extend Barro’s 1979
 model along lines he suggested in Barro (1999, 2003)
 
-Barro (1979) assumed
+Barro (1979) :cite:`Barro1979` assumed
 
 -  that a government faces an **exogenous sequence** of expenditures
    that it must finance by a tax collection sequence whose expected
@@ -176,7 +176,7 @@ Markov state is in state :math:`j`, the value function and decision rule
 for state :math:`j` prevails
 
 The Ordinary Discounted Linear Quadratic Dynamic Programming Problem
-''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+--------------------------------------------------------------------
 
 It is handy to have the following reminder in mind
 
@@ -236,7 +236,7 @@ and the matrix :math:`F` in the decision rule for :math:`u_t` satisfies
    F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
 
 Markov Jump Coefficients
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The idea is to make the matrices :math:`A, B, C, R, Q, W` fixed
 functions of a finite state :math:`s` that is governed by an :math:`N`
@@ -329,9 +329,10 @@ and the :math:`F_i` in the optimal decision rules are
 Barro (1979) Model
 ==================
 
-We begin by solving a version of the Barro (1979) model by mapping it
-into the original LQ framework. As mentioned `in this
-lecture <http://lectures.quantecon.org/py/perm_income_cons.html>`__, the
+We begin by solving a version of the Barro (1979) :cite:`Barro1979` model by mapping it
+into the original LQ framework
+
+As mentioned `in this lecture <http://lectures.quantecon.org/py/perm_income_cons.html>`__, the
 Barro model is mathematically isomorphic with the LQ permanent income
 model
 
@@ -339,10 +340,12 @@ Let :math:`T_t` denote tax collections, :math:`\beta` a discount factor,
 :math:`b_{t,t+1}` time :math:`t+1` goods that the government promises to
 pay at :math:`t`, :math:`G_t` government purchases, :math:`p_{t,t+1}`
 the number of time :math:`t` goods received per time :math:`t+1` goods
-promised. Evidently, :math:`p_{t, t+1}` is inversely related to
+promised
+
+Evidently, :math:`p_{t, t+1}` is inversely related to
 appropriate corresponding gross interest rates on government debt
 
-In the spirit of Barro (1979), the stochastic process of government
+In the spirit of Barro (1979) :cite:`Barro1979`, the stochastic process of government
 expenditures is exogenous. The government’s problem is to choose a plan
 for taxation and borrowing :math:`\{b_{t+1}, T_t\}_{t=0}^\infty` to
 minimize
@@ -403,14 +406,14 @@ To do this, we set
 
 .. math::  A_{22} = \begin{bmatrix} 1 & 0 \\ \bar G & \rho \end{bmatrix} \hspace{2mm} , \hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix} 
 
-.. code:: ipython3
+.. code-block:: ipython
 
     import quantecon as qe
     import numpy as np
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-.. code:: ipython3
+.. code-block:: python3
 
     # Model parameters 
     β, Gbar, ρ, σ = 0.95, 5, 0.8, 1
@@ -450,7 +453,7 @@ To do this, we set
 
 We can now create an instance of an LQ model:
 
-.. code:: ipython3
+.. code-block:: python3
 
     LQBarro = qe.LQ(Q, R, A, B, C=C, N=W, beta=β)
     P, F, d = LQBarro.stationary_values() 
@@ -478,14 +481,14 @@ Consequently, taxation is a martingale (:math:`E_t T_{t+1} = T_t`) if:
 
 which holds in this case:
 
-.. code:: ipython3
+.. code-block:: python3
 
     S - M @ F, (S - M @ F) @ (A - B @ F)
 
 This explains the gradual fanning out of taxation if we simulate the
 Barro model a large number of times:
 
-.. code:: ipython3
+.. code-block:: python3
 
     T = 500
     for i in range(250):
@@ -499,7 +502,7 @@ We can see a similar, but smoother pattern, if we plot government debt
 over time. Debt is smoother due to the persistence of the government
 spending process
 
-.. code:: ipython3
+.. code-block:: python3
 
     T = 500
     for i in range(250):
@@ -541,7 +544,7 @@ file <https://github.com/QuantEcon/TaxSmoothing/blob/master/lq_markov.py>`__
 and put it in the same directory as this notebook before you execute the
 next line)
 
-.. code:: ipython3
+.. code-block:: python3
 
     from lq_markov import *
 
@@ -572,7 +575,7 @@ The choice of parameters means that the unconditional expectation of
 were to set :math:`p_{t,t+1} = 0.9515` in the version of the model with
 a constant interest rate, government debt would explode
 
-.. code:: ipython3
+.. code-block:: python3
 
     # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
@@ -596,11 +599,11 @@ a constant interest rate, government debt would explode
 
 The decision rules are now dependent on the state of the world:
 
-.. code:: ipython3
+.. code-block:: python3
 
     MJLQBarro.F[1]
 
-.. code:: ipython3
+.. code-block:: python3
 
     MJLQBarro.F[2]
 
@@ -608,7 +611,7 @@ Simulating a large number of such economies over time reveals
 interesting dynamics. Debt tends to stay low and stable, but
 periodically spikes up to high levels
 
-.. code:: ipython3
+.. code-block:: python3
 
     T = 2000
     x0 = np.array([[1000, 1, 25]])
