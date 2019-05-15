@@ -22,6 +22,6 @@
     lss_examples
     Tax_Smoothing_1
     Tax_Smoothing_2
-    Tax_Smoothing_3
+    tax_smoothing_3
 	
     zreferences
