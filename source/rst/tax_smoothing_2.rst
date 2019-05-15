@@ -15,11 +15,8 @@ How to Pay for a War: Part 2
 **Co-author: Sebastian Graves**
 
 
-How to Pay for a War: Part 2
-============================
-
 An Application of Markov Jump Linear Quadratic Dynamic Programming
-------------------------------------------------------------------
+==================================================================
 
 This notebook is a `sequel to an earlier
 notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__
