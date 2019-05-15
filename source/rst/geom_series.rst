@@ -619,11 +619,11 @@ below
     def finite_lease_pv(T, g, r, x_0):
         G = (1 + g)
         R = (1 + r)
-        return (x_0 * (1 - G**(T + 1) * R**(-T - 1)))/(1 - G * R**(-1))
+        return (x_0 * (1 - G**(T + 1) * R**(-T - 1))) / (1 - G * R**(-1))
       
     # First approximation for our finite lease       
     def finite_lease_pv_approx_f(T, g, r, x_0):
-        p = x_0 * (T + 1) + x_0 * r * g * (T + 1)/(r - g)
+        p = x_0 * (T + 1) + x_0 * r * g * (T + 1) / (r - g)
         return p
     
     # Second approximation for our finite lease
@@ -634,7 +634,7 @@ below
     def infinite_lease(g, r, x_0):
         G = (1 + g)
         R = (1 + r)
-        return x_0/(1 - G * R**(-1))
+        return x_0 / (1 - G * R**(-1))
                                  
 
 Now that we have test run our functions, we can plot some outcomes
@@ -776,7 +776,7 @@ After that, we'll use ``SymPy`` to compute derivatives
     g, r, x0 = sp.symbols('g, r, x0')
     G = (1 + g)
     R = (1 + r)
-    p0 = x0/(1 - G * R**(-1))
+    p0 = x0 / (1 - G * R**(-1))
     init_printing()
     print('Our formula is:')
     p0
