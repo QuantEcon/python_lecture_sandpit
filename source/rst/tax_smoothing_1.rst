@@ -12,7 +12,7 @@ How to Pay for a War: Part 1
 
 .. contents:: :depth: 2
 
-**Co-author**: `Sebastian Graves <https://github.com/sebgraves>`__
+**Co-author: `Sebastian Graves <https://github.com/sebgraves>`__**
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
@@ -23,9 +23,9 @@ This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1
 of tax smoothing
 
 Our generalizations are adaptations of extensions of
-his 1979 model suggested by Barro (1999, 2003) :cite:`barro2003religion`
+his 1979 model suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
 
-Barro’s original 1979 model is about a government that borrows and lends
+Barro’s original 1979 :cite:`Barro1979` model is about a government that borrows and lends
 in order to help it minimize an intertemporal measure of distortions
 caused by taxes.
 
@@ -40,7 +40,7 @@ programming* – we can allow interest rates to move over time in
 empirically interesting ways. Also, by expanding the dimension of the
 state, we can add a maturity composition decision to the government’s
 problem. It is by doing these two things that we extend Barro’s 1979 :cite:`Barro1979`
-model along lines he suggested in Barro (1999, 2003) :cite:`barro2003religion`
+model along lines he suggested in Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
 
 Barro (1979) :cite:`Barro1979` assumed
 
@@ -64,7 +64,7 @@ Barro (1979) :cite:`Barro1979` assumed
 Barro’s model can be mapped into a discounted linear quadratic dynamic
 programming problem
 
-Our generalizations of Barro’s (1979) model, partly inspired by Barro
+Our generalizations of Barro’s (1979) :cite:`Barro1979` model, partly inspired by Barro
 (1999) :cite:`barro1999determinants` and Barro (2003) :cite:`barro2003religion`, assume
 
 -  that the government borrows or saves in the form of risk-free bonds
@@ -329,9 +329,9 @@ Barro (1979) Model
 ==================
 
 We begin by solving a version of the Barro (1979) :cite:`Barro1979` model by mapping it
-into the original ``LQ`` framework
+into the original LQ framework
 
-As mentioned `in this lecture <http://lectures.quantecon.org/py/perm_income_cons.html>`__, the
+As mentioned :doc:`in this lecture <perm_income_cons>`, the
 Barro model is mathematically isomorphic with the ``LQ`` permanent income
 model
 
@@ -447,7 +447,7 @@ To do this, we set
     Q = M.T @ M
     W = M.T @ S
     
-    # Small penalty on debt required to implement no-ponzi scheme
+    # Small penalty on debt required to implement no-Ponzi scheme
     R[0, 0] = R[0, 0] + 1e-9
 
 We can now create an instance of an ``LQ`` model:
@@ -516,7 +516,7 @@ Python Class to Solve Markov Jump Linear Quadratic Control Problems
 
 To implement the extension to the Barro model in which :math:`p_{t,t+1}`
 varies over time, we must allow the M matrix to be time-varying. From
-the mapping of the Barro model into the ``LQ`` framework, this means that
+the mapping of the Barro model into the LQ framework, this means that
 our :math:`Q` and :math:`W` matrices will now also vary over time. We can solve such a
 model using the ``LQ_Markov`` class, which solves Markov jump linear
 quandratic control problems as described above
