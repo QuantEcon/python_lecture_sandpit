@@ -223,6 +223,7 @@ government uses those assets to lower taxation toay
     plt.plot(tax)
     plt.title('Taxation')
     plt.xlabel('Time')
+    plt.show()
 
 We can adjust the model so that, rather than having debt fluctuate
 around zero, the government is a debtor in every period we allow it to
@@ -260,6 +261,7 @@ borrow. To accomplish this, we simply raise :math:`p^t_{t+1}` to
     plt.plot(tax)
     plt.title('Taxation')
     plt.xlabel('Time')
+    plt.show()
 
 With the lower interest rate, the government has an incentive to
 increase debt over time. However, with “roll-over risk”, debt is
