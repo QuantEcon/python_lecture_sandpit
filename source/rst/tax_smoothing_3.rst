@@ -12,17 +12,17 @@ How to Pay for a War: Part 3
 
 .. contents:: :depth: 2
 
-**Co-author: Sebastian Graves**
+**Co-author**: `Sebastian Graves <https://github.com/sebgraves>`__
 
 
 Another Application of Markov Jump Linear Quadratic Dynamic Programming
 =======================================================================
 
 This notebook is another `sequel to an earlier
-notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__
+lecture <https://lectures.quantecon.org/py/tax_smoothing_1.html>`__
 
 As earlier, we use Markov jump linear quadratic (LQ) dynamic programming
-problems to implement some suggestions by Barro (1999, 2003) for
+problems to implement some suggestions by Barro (1999, 2003) :cite:`barro2003religion` for
 extending his classic 1979 model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
@@ -60,7 +60,7 @@ where :math:`w_{t+1} \sim {\cal N}(0,I)`. The variables
 while :math:`b_{t-1,t}` is an endogenous state variable inherited from
 the past at time :math:`t` and :math:`p^t_{t+1}` is an exogenous state
 variable at time :math:`t`. This is the same set-up as used `in this
-notebook <http://nbviewer.jupyter.org/github/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__.
+lecture <https://lectures.quantecon.org/py/tax_smoothing_1.html>`__
 We will consider a situation in which the government faces “roll-over
 risk”. Specifically, we shut down the government’s ability to borrow in
 one of the Markov states
