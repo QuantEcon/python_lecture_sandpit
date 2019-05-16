@@ -18,11 +18,10 @@ How to Pay for a War: Part 2
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
-This notebook is a `sequel to an earlier
-notebook <https://lectures.quantecon.org/py/tax_smoothing_1.html>`__
+This notebook is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
-We use Markov jump linear quadratic (``LQ``) dynamic programming problems to
-implement some suggestions by Barro (1999, 2003) for extending his
+We use Markov jump linear quadratic (LQ) dynamic programming problems to
+implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for extending his
 classic 1979 model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
@@ -37,9 +36,7 @@ Tractability induced Barro in 1979 :cite:`Barro1979` to assume that
 
 -  the one-period risk-free interest rate is constant
 
-In our `earlier
-notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__
-we relaxed the second of these assumptions but not the first
+In our :doc:`earlier lecture <tax_smoothing_1>` we relaxed the second of these assumptions but not the first
 
 In particular, we used *Markov jump linear quadratic dynamic programming*
 to allow the exogenous interest rate to vary over time
@@ -227,7 +224,7 @@ issuing debt of different maturities, we have:
 
 .. math::  T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t +  c_1 u_t'Q^c u_t 
 
-where :math:`Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}`. Therefore, the overall :math:`Q` matrix for the Markov jump ``LQ`` problem is:
+where :math:`Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}`. Therefore, the overall :math:`Q` matrix for the Markov jump LQ problem is:
 
 .. math::  Q_t^c = Q_t + c_1Q^c 
 
@@ -255,9 +252,8 @@ on the Markov state at time :math:`t`
 Function to Map Two-period Model into a Markov Jump Linear Quadratic Control Problem
 ====================================================================================
 
-As shown in the `previous
-notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__,
-the ``LQ_Markov`` class can solve Markov jump ``LQ`` problems when given the
+As shown in the :doc:`previous lecture <tax_smoothing_1>,
+the ``LQ_Markov`` class can solve Markov jump LQ problems when given the
 :math:`A, B, C, R, Q, W` matrices for each state of the world. The below
 function maps the primitive matrices and parameters from the above
 two-period model into the matrices that the ``LQ_Markov`` class requires:
@@ -327,7 +323,7 @@ With the above function, we can proceed to solve the model in two steps:
    :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` states of the world
 
 2. Use the **LQ_markov** class to solve the resulting n-state Markov
-   jump ``LQ`` problem
+   jump LQ problem
 
 Example Showing the Importance of the Penalty on Different Issuance Across Maturities
 -------------------------------------------------------------------------------------
@@ -389,7 +385,7 @@ next line)
     A1, B1, C1, R1, Q1, W1 = LQ_markov_mapping(A22, C_2, Ug, p1, p2, c1)
     A2, B2, C2, R2, Q2, W2 = LQ_markov_mapping(A22, C_2, Ug, p3, p4, c1)
     
-    # Small penalties on debt required to implement no-PONZI scheme
+    # Small penalties on debt required to implement no-Ponzi scheme
     R1[0, 0] = R1[0, 0] + 1e-9
     R2[0, 0] = R2[0, 0] + 1e-9
     
@@ -434,7 +430,7 @@ two-period debt:
     A1, B1, C1, R1, Q1, W1 = LQ_markov_mapping(A22, C_2, Ug, p1, p2, c1)
     A2, B2, C2, R2, Q2, W2 = LQ_markov_mapping(A22, C_2, Ug, p3, p4, c1)
     
-    # Small penalties on debt required to implement no-ponzi scheme
+    # Small penalties on debt required to implement no-Ponzi scheme
     R1[0, 0] = R1[0, 0] + 1e-9
     R2[0, 0] = R2[0, 0] + 1e-9
     
@@ -483,7 +479,7 @@ The government’s budget constraint is now:
   T_t + \sum_{j=1}^Hp_{t,t+j} b_{t+j}^t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t,t+j} b_{t+j}^{t-1} + G_t
 
 
-To map this into the Markov Jump ``LQ`` framework, we define state and
+To map this into the Markov Jump LQ framework, we define state and
 control variables
 
 Let:
@@ -582,7 +578,7 @@ where
 
 .. math::  A_t = \begin{bmatrix} 0 & 0 \\ 0 & A_{22,t} \end{bmatrix} , \hspace{5mm} B = \begin{bmatrix} I \\ 0 \end{bmatrix} , \hspace{5mm} C = \begin{bmatrix} 0 \\ C_{2,t} \end{bmatrix} 
 
-This completes the mapping into a Markov jump ``LQ`` problem.
+This completes the mapping into a Markov jump LQ problem.
 
 Function to Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
@@ -672,7 +668,7 @@ above
     A1, B1, C1, R1, Q1, W1 = LQ_markov_mapping_restruct(A22, C_2, Ug, H, p1, c2)
     A2, B2, C2, R2, Q2, W2 = LQ_markov_mapping_restruct(A22, C_2, Ug, H, p2, c2)
     
-    # Small penalties on debt required to implement no-ponzi scheme
+    # Small penalties on debt required to implement no-Ponzi scheme
     R1[0, 0] = R1[0, 0] + 1e-9
     R1[1, 1] = R1[1, 1] + 1e-9
     R1[2, 2] = R1[2, 2] + 1e-9
