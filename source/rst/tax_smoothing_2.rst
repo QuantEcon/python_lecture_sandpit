@@ -12,16 +12,16 @@ How to Pay for a War: Part 2
 
 .. contents:: :depth: 2
 
-**Co-author: Sebastian Graves**
+**Co-author**: `Sebastian Graves <https://github.com/sebgraves>`__
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
 This notebook is a `sequel to an earlier
-notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__
+notebook <https://lectures.quantecon.org/py/tax_smoothing_1.html>`__
 
-We use Markov jump linear quadratic (LQ) dynamic programming problems to
+We use Markov jump linear quadratic (``LQ``) dynamic programming problems to
 implement some suggestions by Barro (1999, 2003) for extending his
 classic 1979 model of tax smoothing
 
@@ -39,8 +39,9 @@ Tractability induced Barro in 1979 :cite:`Barro1979` to assume that
 
 In our `earlier
 notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__
-we relaxed the second of these assumptions but not the first. In
-particular, we used *Markov jump linear quadratic dynamic programming*
+we relaxed the second of these assumptions but not the first
+
+In particular, we used *Markov jump linear quadratic dynamic programming*
 to allow the exogenous interest rate to vary over time
 
 In this notebook, we add a maturity composition decision to the
@@ -226,7 +227,7 @@ issuing debt of different maturities, we have:
 
 .. math::  T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t +  c_1 u_t'Q^c u_t 
 
-where :math:`Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}`. Therefore, the overall :math:`Q` matrix for the Markov jump LQ problem is:
+where :math:`Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}`. Therefore, the overall :math:`Q` matrix for the Markov jump ``LQ`` problem is:
 
 .. math::  Q_t^c = Q_t + c_1Q^c 
 
@@ -256,10 +257,10 @@ Function to Map Two-period Model into a Markov Jump Linear Quadratic Control Pro
 
 As shown in the `previous
 notebook <https://github.com/QuantEcon/TaxSmoothing/blob/master/Tax_Smoothing_1.ipynb>`__,
-the LQ_Markov class can solve Markov jump LQ problems when given the
+the ``LQ_Markov`` class can solve Markov jump ``LQ`` problems when given the
 :math:`A, B, C, R, Q, W` matrices for each state of the world. The below
 function maps the primitive matrices and parameters from the above
-two-period model into the matrices that the LQ_Markov class requires:
+two-period model into the matrices that the ``LQ_Markov`` class requires:
 
 .. code-block:: ipython
 
@@ -313,9 +314,9 @@ two-period model into the matrices that the LQ_Markov class requires:
         
         # Create R, Q, W matrices
         
-        R = S.T.dot(S)
-        Q = M.T.dot(M) + c1 * Qc
-        W = M.T.dot(S)
+        R = S.T @ S
+        Q = M.T @ M + c1 * Qc
+        W = M.T @ S
         
         return A, B, C, R, Q, W
 
@@ -326,9 +327,9 @@ With the above function, we can proceed to solve the model in two steps:
    :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` states of the world
 
 2. Use the **LQ_markov** class to solve the resulting n-state Markov
-   jump LQ problem
+   jump ``LQ`` problem
 
-Example Showing the Importance of the Penalty on Different Issuance across Maturities
+Example Showing the Importance of the Penalty on Different Issuance Across Maturities
 -------------------------------------------------------------------------------------
 
 To implement a simple example of the two-period model, we assume that
@@ -388,7 +389,7 @@ next line)
     A1, B1, C1, R1, Q1, W1 = LQ_markov_mapping(A22, C_2, Ug, p1, p2, c1)
     A2, B2, C2, R2, Q2, W2 = LQ_markov_mapping(A22, C_2, Ug, p3, p4, c1)
     
-    # Small penalties on debt required to implement no-ponzi scheme
+    # Small penalties on debt required to implement no-PONZI scheme
     R1[0, 0] = R1[0, 0] + 1e-9
     R2[0, 0] = R2[0, 0] + 1e-9
     
@@ -415,6 +416,7 @@ next line)
     plt.plot(u[1, :])
     plt.title('Two-period debt issuance')
     plt.xlabel('Time')
+    plt.show()
 
 The above simulations show that when no penalty is imposed on different
 issuances across maturities, the government has an incentive to take
@@ -456,6 +458,7 @@ two-period debt:
     plt.plot(u[1, :])
     plt.title('Two-period debt issuance')
     plt.xlabel('Time')
+    plt.show()
 
 A Model with Restructuring
 ==========================
@@ -480,7 +483,7 @@ The government’s budget constraint is now:
   T_t + \sum_{j=1}^Hp_{t,t+j} b_{t+j}^t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t,t+j} b_{t+j}^{t-1} + G_t
 
 
-To map this into the Markov Jump LQ framework, we define state and
+To map this into the Markov Jump ``LQ`` framework, we define state and
 control variables
 
 Let:
@@ -549,7 +552,7 @@ rewrite this as:
 
 .. math::  T_t^2 + c_2(S_c x_t - u_t)'(S_c x_t - u_t) 
 
-where :math:`S_c = \begin{bmatrix} I & 0 \end{bmatrix}``
+where :math:`S_c = \begin{bmatrix} I & 0 \end{bmatrix}`
 
 Multiplying this out gives:
 
@@ -564,7 +567,7 @@ as follows:
 
 .. math::  W^c_t = W_t - c_2 S_c 
 
-To finish mapping into the Markov jump LQ setup, we need to construct
+To finish mapping into the Markov jump ``LQ`` setup, we need to construct
 the law of motion for the full state. This is simpler than in the
 previous setup, as we now have :math:`\bar b_{t+1} = u_t`
 
@@ -579,13 +582,13 @@ where
 
 .. math::  A_t = \begin{bmatrix} 0 & 0 \\ 0 & A_{22,t} \end{bmatrix} , \hspace{5mm} B = \begin{bmatrix} I \\ 0 \end{bmatrix} , \hspace{5mm} C = \begin{bmatrix} 0 \\ C_{2,t} \end{bmatrix} 
 
-This completes the mapping into a Markov jump LQ problem.
+This completes the mapping into a Markov jump ``LQ`` problem.
 
 Function to Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
 
 As with the previous model, we can use a function to map the primitives
-of the model with restructuring into the matrices that the LQ_Markov
+of the model with restructuring into the matrices that the ``LQ_Markov``
 class requires:
 
 .. code-block:: python3
@@ -614,7 +617,7 @@ class requires:
         tSx = np.zeros((1, T))
         tSx[0, 0] = 1
     
-        S_t = np.hstack((tSx + p_t.T.dot(Ss.T).dot(Sx), Ug))
+        S_t = np.hstack((tSx + p_t.T @ Ss.T @ Sx, Ug))
         
         # Create A,B,C matrices
         A_T = np.hstack((np.zeros((T, T)), np.zeros((T, nz))))
@@ -630,9 +633,9 @@ class requires:
         
         # Create R_t, Q_t, W_t matrices
         
-        R_c = S_t.T.dot(S_t) + c * Sc.T.dot(Sc)
-        Q_c = p_t.dot(p_t.T) + c * np.eye(T)
-        W_c = -p_t.dot(S_t) - c * Sc
+        R_c = S_t.T @ S_t + c * Sc.T @ Sc
+        Q_c = p_t @ p_t.T + c * np.eye(T)
+        W_c = -p_t @ S_t - c * Sc
         
         return A, B, C, R_c, Q_c, W_c
 
@@ -708,6 +711,7 @@ above
     plt.plot(u[0, :] + u[1, :] + u[2, :])
     plt.title('Total debt issuance')
     plt.xlabel('Time')
+    plt.show()
 
 .. code-block:: python3
 
@@ -716,4 +720,5 @@ above
     plt.plot(u[0, :]/(u[0, :]+u[1, :]+u[2, :]))
     plt.title('One-period debt issuance share')
     plt.xlabel('Time')
+    plt.show()
 
