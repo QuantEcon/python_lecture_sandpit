@@ -12,7 +12,7 @@ How to Pay for a War: Part 1
 
 .. contents:: :depth: 2
 
-**Co-author: Sebastian Graves <https://github.com/sebgraves> **
+**Co-author**: `Sebastian Graves <https://github.com/sebgraves>`__
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
@@ -23,7 +23,7 @@ This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1
 of tax smoothing
 
 Our generalizations are adaptations of extensions of
-his 1979 model suggested by Barro (1999, 2003) 
+his 1979 model suggested by Barro (1999, 2003) :cite:`barro2003religion`
 
 Barro’s original 1979 model is about a government that borrows and lends
 in order to help it minimize an intertemporal measure of distortions
@@ -40,7 +40,7 @@ programming* – we can allow interest rates to move over time in
 empirically interesting ways. Also, by expanding the dimension of the
 state, we can add a maturity composition decision to the government’s
 problem. It is by doing these two things that we extend Barro’s 1979 :cite:`Barro1979`
-model along lines he suggested in Barro (1999, 2003)
+model along lines he suggested in Barro (1999, 2003) :cite:`barro2003religion`
 
 Barro (1979) :cite:`Barro1979` assumed
 
@@ -139,9 +139,9 @@ Organization
 
 This notebook describes:
 
--  Markov jump linear quadratic (``LQ``) dynamic programming
+-  Markov jump linear quadratic (LQ) dynamic programming
 
--  An application of Markov jump ``LQ`` dynamic programming to a model in
+-  An application of Markov jump LQ dynamic programming to a model in
    which a government faces exogenous time-varying interest rates for
    issuing one-period risk-free debt
 
@@ -518,7 +518,7 @@ To implement the extension to the Barro model in which :math:`p_{t,t+1}`
 varies over time, we must allow the M matrix to be time-varying. From
 the mapping of the Barro model into the ``LQ`` framework, this means that
 our :math:`Q` and :math:`W` matrices will now also vary over time. We can solve such a
-model using the LQ_Markov class, which solves Markov jump linear
+model using the ``LQ_Markov`` class, which solves Markov jump linear
 quandratic control problems as described above
 
 The code for the class can be viewed
