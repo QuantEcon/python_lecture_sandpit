@@ -21,7 +21,7 @@
     geom_series
     lss_examples
     tax_smoothing_1
-    Tax_Smoothing_2
+    tax_smoothing_2
     Tax_Smoothing_3
 	
     zreferences
