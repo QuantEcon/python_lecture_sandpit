@@ -4,8 +4,8 @@
 
 .. index::
     single: python
-    
-    
+
+
 ****************************
 How to Pay for a War: Part 3
 ****************************
@@ -27,7 +27,9 @@ extending his classic 1979 :cite:`Barro1979` model of tax smoothing
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes. Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
-smoothing model. Our generalizations of his 1979 model will also look
+smoothing model
+
+Our generalizations of his 1979 model will also look
 like a souped up consumption smoothing model
 
 In this notebook, we try to capture the tax-smoothing problem of a
@@ -40,28 +42,33 @@ Let :math:`T_t` denote tax collections, :math:`\beta` a discount factor,
 :math:`b_{t,t+1}` time :math:`t+1` goods that the government promises to
 pay at :math:`t`, :math:`G_t` government purchases, :math:`p^t_{t+1}`
 the number of time :math:`t` goods received per time :math:`t+1` goods
-promised. The stochastic process of government expenditures is
+promised
+
+The stochastic process of government expenditures is
 exogenous. The government’s problem is to choose a plan for borrowing
 and tax collections :math:`\{b_{t+1}, T_t\}_{t=0}^\infty` to minimize
 
-.. math::  E_0 \sum_{t=0}^\infty \beta^t T_t^2  
+.. math::  E_0 \sum_{t=0}^\infty \beta^t T_t^2
 
 subject to the constraints
 
-.. math::  T_t + p^t_{t+1} b_{t,t+1} = G_t + b_{t-1,t} 
+.. math::  T_t + p^t_{t+1} b_{t,t+1} = G_t + b_{t-1,t}
 
-.. math::  G_t = U_{g,t} z_t 
+.. math::  G_t = U_{g,t} z_t
 
-.. math::  z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1} 
+.. math::  z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1}
 
 where :math:`w_{t+1} \sim {\cal N}(0,I)`. The variables
 :math:`T_t, b_{t, t+1}` are *control* variables chosen at :math:`t`,
 while :math:`b_{t-1,t}` is an endogenous state variable inherited from
 the past at time :math:`t` and :math:`p^t_{t+1}` is an exogenous state
-variable at time :math:`t`. This is the same set-up as used `in this
-lecture <https://lectures.quantecon.org/py/tax_smoothing_1.html>`__
+variable at time :math:`t`. This is the same set-up as used :doc:`in this
+lecture <tax_smoothing_1>`
+
 We will consider a situation in which the government faces “roll-over
-risk”. Specifically, we shut down the government’s ability to borrow in
+risk”
+
+Specifically, we shut down the government’s ability to borrow in
 one of the Markov states
 
 A Dead End
@@ -70,13 +77,15 @@ A Dead End
 A first thought for how to implement this might be to allow
 :math:`p^t_{t+1}` to vary over time with:
 
-.. math::  p^t_{t+1} = \beta 
+.. math::  p^t_{t+1} = \beta
 
 in Markov state 1 and
 
-.. math::  p^t_{t+1} = 0 
+.. math::  p^t_{t+1} = 0
 
-\ in Markov state 2. Consequently, in the second Markov state the
+\ in Markov state 2
+
+Consequently, in the second Markov state the
 government is unable to borrow, and the budget constraint becomes
 :math:`T_t = G_t + b_{t-1,t}`
 
@@ -109,7 +118,7 @@ We’ll explain what \``effectively’’ means shortly
 
 We now set
 
-.. math::  p^t_{t+1} = \beta 
+.. math::  p^t_{t+1} = \beta
 
 in all states
 
@@ -127,7 +136,7 @@ The transition matrix for this formulation is:
                             0.95 & 0 & 0.05 & 0 \\
                             0 & 0.9 & 0 & 0.1 \\
                             0 & 0.9 & 0 & 0.1 \\
-   \end{bmatrix} 
+   \end{bmatrix}
 
 This transition matrix ensures that the Markov state cannot move, for
 example, from state 3 to state 1. Because state 3 is “bad today”, the
@@ -143,57 +152,62 @@ next period cannot have “good yesterday”
 
 .. code-block:: python3
 
-    # Model parameters 
-    beta, Gbar, rho, sigma = 0.95, 5, 0.8, 1
-    
+    # Model parameters
+    β, Gbar, ρ, σ = 0.95, 5, 0.8, 1
+
     # Basic model matrices
-    A22 = np.array([[1, 0], [Gbar, rho], ])
-    C2 = np.array([[0], [sigma]])
+    A22 = np.array([[1, 0], [Gbar, ρ], ])
+    C2 = np.array([[0], [σ]])
     Ug = np.array([[0, 1]])
-    
+
     # LQ framework matrices
     A_t = np.zeros((1, 3))
     A_b = np.hstack((np.zeros((2, 1)), A22))
     A = np.vstack((A_t, A_b))
-    
+
     B = np.zeros((3, 1))
     B[0, 0] = 1
-    
+
     C = np.vstack((np.zeros((1, 1)), C2))
-    
+
     Sg = np.hstack((np.zeros((1, 1)), Ug))
     S1 = np.zeros((1, 3))
     S1[0, 0] = 1
     S = S1 + Sg
-    
-    R = np.dot(S.T, S)
-    
+
+    R = S.T @ S
+
     # Large penalty on debt in R2 to prevent borrowing in bad state
     R1 = np.copy(R)
     R2 = np.copy(R)
     R1[0, 0] = R[0, 0] + 1e-9
     R2[0, 0] = R[0, 0] + 1e12
-    
-    M = np.array([[-beta]])
-    Q = np.dot(M.T, M)
-    W = np.dot(M.T, S)
-    
+
+    M = np.array([[-β]])
+    Q = M.T @ M
+    W = M.T @ S
+
     # Create namedtuple to keep the R,Q,A,B,C,W matrices for each state of the world
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
-    
-    Pi = np.array([[0.95, 0, 0.05, 0], [0.95, 0, 0.05, 0], [0, 0.9, 0, 0.1], [0, 0.9, 0, 0.1]])
-    
+
+    Pi = np.array([[0.95, 0, 0.05, 0],
+                   [0.95, 0, 0.05, 0],
+                   [0,  0.9,  0, 0.1],
+                   [0,  0.9,  0, 0.1]])
+
     # Sets up the four states of the world
     v1 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v2 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
     v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
-    
-    MJLQBarro = LQ_Markov(beta, Pi, v1, v2, v3, v4)
+
+    MJLQBarro = LQ_Markov(β, Pi, v1, v2, v3, v4)
 
 This model is simulated below, using the same process for :math:`G_t` as
 in the previous notebook. When :math:`p^t_{t+1} = \beta`
-government debt fluctuates around zero. The spikes in the series for
+government debt fluctuates around zero
+
+The spikes in the series for
 taxation show periods when the government is unable to access financial
 markets: positive spikes occur when debt is positive, and the government
 must raise taxes in the current period
@@ -207,12 +221,12 @@ government uses those assets to lower taxation toay
     x0 = np.array([[0, 1, 25]])
     T = 300
     x, u, w, state = MJLQBarro.compute_sequence(x0, ts_length=T)
-    
+
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])
     for i in range(T):
-        tax[i, :] = S.dot(x[:, i]) + M.dot(u[:, i])
-    
+        tax[i, :] = S @ x[:, i] + M @ u[:, i]
+
     #Plot of debt issuance and taxation
     plt.figure(figsize=(16, 4))
     plt.subplot(121)
@@ -227,30 +241,32 @@ government uses those assets to lower taxation toay
 
 We can adjust the model so that, rather than having debt fluctuate
 around zero, the government is a debtor in every period we allow it to
-borrow. To accomplish this, we simply raise :math:`p^t_{t+1}` to
+borrow
+
+To accomplish this, we simply raise :math:`p^t_{t+1}` to
 :math:`\beta + 0.02 = 0.97`
 
 .. code-block:: python3
 
-    M = np.array([[-beta - 0.02]])
-    
-    Q = np.dot(M.T, M)
-    W = np.dot(M.T, S)
-    
+    M = np.array([[-β - 0.02]])
+
+    Q = M.T @ M
+    W = M.T @ S
+
     # Sets up the four states of the world
     v1 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v2 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
     v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
-    
-    MJLQBarro2 = LQ_Markov(beta, Pi, v1, v2, v3, v4)
+
+    MJLQBarro2 = LQ_Markov(β, Pi, v1, v2, v3, v4)
     x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T)
-    
+
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])
     for i in range(T):
-        tax[i, :] = S.dot(x[:, i]) + M.dot(u[:, i])
-    
+        tax[i, :] = S @ x[:, i] + M @ u[:, i]
+
     # Plot of debt issuance and taxation
     plt.figure(figsize=(16, 4))
     plt.subplot(121)
@@ -265,7 +281,8 @@ borrow. To accomplish this, we simply raise :math:`p^t_{t+1}` to
 
 With the lower interest rate, the government has an incentive to
 increase debt over time. However, with “roll-over risk”, debt is
-periodically reset to zero, and taxes spike up. Consequently, the
+periodically reset to zero, and taxes spike up
+
+Consequently, the
 government is wary of letting debt get too high, due to the high cost of
 a “sudden stop”
-
