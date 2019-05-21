@@ -26,7 +26,9 @@ extending his classic 1979 :cite:`Barro1979` model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
-taxes. Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
+taxes
+
+Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
 smoothing model
 
 Our generalizations of his 1979 model will also look
@@ -124,7 +126,9 @@ in all states
 
 In addition – and this is important because it defines what we mean by
 \``effectively’’ -- we put a large penalty on the :math:`b_{t-1,t}`
-element of the state vector in states 2 and 4. This will prevent the
+element of the state vector in states 2 and 4
+
+This will prevent the
 government from wishing to issue any debt in states 3 or 4 because it
 would experience a large penalty from doing so in the next period
 
@@ -190,10 +194,10 @@ next period cannot have “good yesterday”
     # Create namedtuple to keep the R,Q,A,B,C,W matrices for each state of the world
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
 
-    Pi = np.array([[0.95, 0, 0.05, 0],
-                   [0.95, 0, 0.05, 0],
-                   [0,  0.9,  0, 0.1],
-                   [0,  0.9,  0, 0.1]])
+    Π = np.array([[0.95, 0, 0.05, 0],
+                  [0.95, 0, 0.05, 0],
+                  [0,  0.9,  0, 0.1],
+                  [0,  0.9,  0, 0.1]])
 
     # Sets up the four states of the world
     v1 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
@@ -201,7 +205,7 @@ next period cannot have “good yesterday”
     v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
 
-    MJLQBarro = LQ_Markov(β, Pi, v1, v2, v3, v4)
+    MJLQBarro = LQ_Markov(β, Π, v1, v2, v3, v4)
 
 This model is simulated below, using the same process for :math:`G_t` as
 in the previous notebook. When :math:`p^t_{t+1} = \beta`
@@ -259,7 +263,7 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
     v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
     v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
 
-    MJLQBarro2 = LQ_Markov(β, Pi, v1, v2, v3, v4)
+    MJLQBarro2 = LQ_Markov(β, Π, v1, v2, v3, v4)
     x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T)
 
     # Calculate taxation each period from the budget constraint and the Markov state
@@ -280,7 +284,9 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
     plt.show()
 
 With the lower interest rate, the government has an incentive to
-increase debt over time. However, with “roll-over risk”, debt is
+increase debt over time
+
+However, with “roll-over risk”, debt is
 periodically reset to zero, and taxes spike up
 
 Consequently, the
