@@ -20,8 +20,8 @@
     test_lecture
     geom_series
     lss_examples
-    Tax_Smoothing_1
-    Tax_Smoothing_2
-    tax_smoothing_3
+    tax_smoothing_1
+    tax_smoothing_2
+    tax_Smoothing_3
 	
     zreferences
