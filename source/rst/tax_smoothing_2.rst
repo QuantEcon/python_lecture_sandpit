@@ -26,8 +26,12 @@ classic 1979 model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
-taxes. Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
-smoothing model. Our generalizations of his 1979 :cite:`Barro1979` model will also look
+taxes
+
+Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
+smoothing model
+
+Our generalizations of his 1979 :cite:`Barro1979` model will also look
 like a souped up consumption smoothing model
 
 Tractability induced Barro in 1979 :cite:`Barro1979` to assume that
@@ -59,7 +63,7 @@ We’ll describe two possible specifications
 
 -  In one specification, each period the government issues zero coupon
    bonds of one- and two-period maturities and redeems them only when
-   they mature. In this version, the maturity structure of government
+   they mature -- in this version, the maturity structure of government
    debt is partly inherited from the past at each date
 
 -  In the second specification, the government redesigns the maturity
@@ -106,7 +110,9 @@ subject to the constraints
 
 Here :math:`w_{t+1} \sim {\cal N}(0,I)` and :math:`\Pi_{ij}` is
 the probability that the Markov state moves from state :math:`i` to
-state :math:`j` in one period. The variables
+state :math:`j` in one period
+
+The variables
 :math:`T_t, b_{t, t+1}, b_{t,t+2}` are *control* variables chosen at
 :math:`t`, while the variables :math:`b_{t-1,t}, b_{t-2,t}` are
 endogenous state variables inherited from the past at time :math:`t` and
@@ -114,7 +120,9 @@ endogenous state variables inherited from the past at time :math:`t` and
 :math:`t`
 
 The parameter :math:`c_1` imposes a penalty on the government’s issuing
-different quantities of one and two-period debt. This penalty deters the
+different quantities of one and two-period debt
+
+This penalty deters the
 government from taking large “long-short” positions in debt of different
 maturities. An example below will show this in action
 
@@ -129,8 +137,9 @@ First define
 
 .. math::  \hat b_t = b_{t-1,t} + b_{t-2,t} ,
 
-which is debt due at time :math:`t`. Then define the endogenous part of
-the state:
+which is debt due at time :math:`t`
+
+Then define the endogenous part of the state:
 
 .. math::
 
@@ -252,9 +261,11 @@ on the Markov state at time :math:`t`
 Function to Map Two-period Model into a Markov Jump Linear Quadratic Control Problem
 ====================================================================================
 
-As shown in the :doc:`previous lecture <tax_smoothing_1>,
+As shown in the :doc:`previous lecture <tax_smoothing_1>`,
 the ``LQ_Markov`` class can solve Markov jump LQ problems when given the
-:math:`A, B, C, R, Q, W` matrices for each state of the world. The below
+:math:`A, B, C, R, Q, W` matrices for each state of the world
+
+The below
 function maps the primitive matrices and parameters from the above
 two-period model into the matrices that the ``LQ_Markov`` class requires:
 
@@ -318,11 +329,11 @@ two-period model into the matrices that the ``LQ_Markov`` class requires:
 
 With the above function, we can proceed to solve the model in two steps:
 
-1. Use **LQ_markov_mapping** to map
+1. Use ``LQ_markov_mapping`` to map
    :math:`U_{g,t}, A_{22,t}, C_{2,t}, p_{t,t+1}, p_{t,t+2}` into the
    :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` states of the world
 
-2. Use the **LQ_markov** class to solve the resulting n-state Markov
+2. Use the ``LQ_markov`` class to solve the resulting n-state Markov
    jump LQ problem
 
 Example Showing the Importance of the Penalty on Different Issuance Across Maturities
@@ -352,7 +363,9 @@ and in state 2, prices are:
 .. math::  p^2_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm}  p^2_{t,t+2} = \beta^2 + 0.02
 
 We first solve the model with no penalty parameter on different issuance
-across maturities, i.e. :math:`c_1 = 0`. We also need to specify a
+across maturities, i.e. :math:`c_1 = 0`
+
+We also need to specify a
 transition matrix for the state of the world, we use:
 
 .. math::  \Pi = \begin{bmatrix} 0.9 & 0.1 \\ 0.1 & 0.9 \end{bmatrix} 
@@ -360,26 +373,33 @@ transition matrix for the state of the world, we use:
 Thus, each Markov state is persisent, and there is an equal chance of
 moving from one to the other
 
-(You should download `the file
-lq_markov.py <https://github.com/QuantEcon/TaxSmoothing/blob/master/lq_markov.py>`__
-and put it in the same directory as this notebook before you execute the
-next line)
+The code below runs 
+`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_ 
+containing the class and function we need using QuantEcon.py's
+``fetch_nb_dependencies`` function
+
+.. code-block:: ipython
+
+    from quantecon.util.notebooks import fetch_nb_dependencies
+    fetch_nb_dependencies(['lq_markov.py'], 
+                          repo='https://github.com/QuantEcon/QuantEcon.notebooks',
+                          folder='dependencies')
+    %run lq_markov.py
 
 .. code-block:: python3
 
-    from lq_markov import LQ_Markov
     from collections import namedtuple
     
-    # Create namedtuple to keep the R,Q,A,B,C,W matrices for each state of the world
+    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
     
     # Model parameters 
-    beta, Gbar, rho, sigma, c1 = 0.95, 5, 0.8, 1, 0
-    p1, p2, p3, p4 = beta, beta**2 - 0.02, beta, beta**2 + 0.02
+    β, Gbar, ρ, σ, c1 = 0.95, 5, 0.8, 1, 0
+    p1, p2, p3, p4 = β, β**2 - 0.02, β, β**2 + 0.02
     
     # Basic model matrices
-    A22 = np.array([[1, 0], [Gbar, rho] ,])
-    C_2 = np.array([[0], [sigma]])
+    A22 = np.array([[1, 0], [Gbar, ρ] ,])
+    C_2 = np.array([[0], [σ]])
     Ug = np.array([[0, 1]])
     
     A1, B1, C1, R1, Q1, W1 = LQ_markov_mapping(A22, C_2, Ug, p1, p2, c1)
@@ -393,10 +413,11 @@ next line)
     v1 = world(A=A1, B=B1, C=C1, R=R1, Q=Q1, W=W1)
     v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
     
-    Pi = np.array([[0.9, 0.1], [0.1, 0.9]])
+    Π = np.array([[0.9, 0.1], 
+                  [0.1, 0.9]])
     
     # Solve the model using the LQ_Markov class
-    MJLQBarro = LQ_Markov(beta, Pi, v1, v2)
+    MJLQBarro = LQ_Markov(β, Π, v1, v2)
     
     # Simulate the model
     x0 = np.array([[100, 50, 1, 10]])
@@ -418,7 +439,9 @@ The above simulations show that when no penalty is imposed on different
 issuances across maturities, the government has an incentive to take
 large “long-short” positions in debt of different maturities
 
-To prevent such an outcome, we now set :math:`c_1 = 0.01`. This penalty is enough
+To prevent such an outcome, we now set :math:`c_1 = 0.01`
+
+This penalty is enough
 to ensure that the government issues positive quantities of both one and
 two-period debt:
 
@@ -439,7 +462,7 @@ two-period debt:
     v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
     
     # Solve the model using the LQ_Markov class
-    MJLQBarro2 = LQ_Markov(beta, Pi, v1, v2)
+    MJLQBarro2 = LQ_Markov(β, Π, v1, v2)
     
     # Simulate the model
     x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300)
@@ -487,9 +510,13 @@ Let:
 .. math::  \bar b_t = \begin{bmatrix} b^{t-1}_t \\ b^{t-1}_{t+1} \\ \vdots \\  b^{t-1}_{t+H-1} \end{bmatrix} \hspace{2mm} , \hspace{2mm} u_t = \begin{bmatrix} b^{t}_{t+1} \\ b^{t}_{t+2} \\ \vdots \\  b^{t}_{t+H} \end{bmatrix}  
 
 Thus, :math:`\bar b_t` is the endogenous state (debt issued last period)
-and :math:`u_t` is the control (debt issued today). As before, we will
+and :math:`u_t` is the control (debt issued today)
+
+As before, we will
 also have the exogenous state :math:`z_t`, which determines government
-spending. Therefore, the full state is:
+spending
+
+Therefore, the full state is:
 
 .. math::  x_t = \begin{bmatrix} \bar b_t \\ z_t \end{bmatrix} 
 
@@ -506,7 +533,9 @@ Finally, we define three useful matrices :math:`S_s, S_x, \tilde S_x`:
 
 .. math::  b^{t-1}_t = \tilde S_x \bar b_t \text{ where } \tilde S_x = \begin{bmatrix} 1 & 0 & 0 & \cdots & 0 \end{bmatrix} 
 
-In terms of dimensions, the first two matrices defined above are :math:`(H-1) \times H`. The last is :math:`1 \times H`
+In terms of dimensions, the first two matrices defined above are :math:`(H-1) \times H`
+
+The last is :math:`1 \times H`
 
 We can now write the government’s budget constraint in matrix notation.
 Rearranging the government budget constraint gives:
@@ -563,8 +592,10 @@ as follows:
 
 .. math::  W^c_t = W_t - c_2 S_c 
 
-To finish mapping into the Markov jump ``LQ`` setup, we need to construct
-the law of motion for the full state. This is simpler than in the
+To finish mapping into the Markov jump LQ setup, we need to construct
+the law of motion for the full state
+
+This is simpler than in the
 previous setup, as we now have :math:`\bar b_{t+1} = u_t`
 
 Therefore:
@@ -578,7 +609,7 @@ where
 
 .. math::  A_t = \begin{bmatrix} 0 & 0 \\ 0 & A_{22,t} \end{bmatrix} , \hspace{5mm} B = \begin{bmatrix} I \\ 0 \end{bmatrix} , \hspace{5mm} C = \begin{bmatrix} 0 \\ C_{2,t} \end{bmatrix} 
 
-This completes the mapping into a Markov jump LQ problem.
+This completes the mapping into a Markov jump LQ problem
 
 Function to Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
@@ -592,13 +623,14 @@ class requires:
     def LQ_markov_mapping_restruct(A22, C2, Ug, T, p_t, c=0):
     
         """
-        Function which takes A22, C2, T, p_t,c and returns the required matrices for the LQ_Markov model: A, B, C, R, Q, W
+        Function which takes A22, C2, T, p_t, c and returns the 
+        required matrices for the LQ_Markov model: A, B, C, R, Q, W
         Note, p_t should be a T by 1 matrix
         c is the rescheduling cost (a scalar)
         This version uses the condensed version of the endogenous state
         """
         
-        # Make sure all matrices can be treated as 2D arrays == #
+        # Make sure all matrices can be treated as 2D arrays
         A22 = np.atleast_2d(A22)
         C2 = np.atleast_2d(C2)
         Ug = np.atleast_2d(Ug)
@@ -607,7 +639,7 @@ class requires:
         # Find number of states (z) and shocks (w)
         nz, nw = C2.shape
         
-        # Create Sx,tSx,Ss,S_t matrices (tSx stands for \tilde S_x)
+        # Create Sx, tSx, Ss, S_t matrices (tSx stands for \tilde S_x)
         Ss = np.hstack((np.eye(T-1), np.zeros((T-1, 1))))
         Sx = np.hstack((np.zeros((T-1, 1)), np.eye(T-1)))
         tSx = np.zeros((1, T))
@@ -615,13 +647,12 @@ class requires:
     
         S_t = np.hstack((tSx + p_t.T @ Ss.T @ Sx, Ug))
         
-        # Create A,B,C matrices
+        # Create A, B, C matrices
         A_T = np.hstack((np.zeros((T, T)), np.zeros((T, nz))))
         A_B = np.hstack((np.zeros((nz, T)), A22))
         A = np.vstack((A_T, A_B))
         
         B = np.vstack((np.eye(T), np.zeros((nz, T))))
-        
         C = np.vstack((np.zeros((T, nw)), C2))
     
         # Create cost matrix Sc
@@ -642,7 +673,9 @@ As an example for the model with restructuring, consider this model
 where :math:`H = 3`
 
 We will assume that there are two states of the world, one with a
-flatter yield curve, and one with a steeper yield curve. In state 1,
+flatter yield curve, and one with a steeper yield curve
+
+In state 1,
 prices are:
 
 .. math::  p^1_{t,t+1} = 0.9695 \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = 0.902 \hspace{2mm} , \hspace{2mm} p^1_{t,t+3} = 0.8369
@@ -681,7 +714,7 @@ above
     v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
     
     # Solve the model using the LQ_Markov class
-    MJLQBarro3 = LQ_Markov(beta, Pi, v1, v2)
+    MJLQBarro3 = LQ_Markov(β, Π, v1, v2)
     
     x0 = np.array([[5000, 5000, 5000, 1, 10]])
     x, u, w, t = MJLQBarro3.compute_sequence(x0, ts_length=300)
@@ -707,13 +740,14 @@ above
     plt.plot(u[0, :] + u[1, :] + u[2, :])
     plt.title('Total debt issuance')
     plt.xlabel('Time')
+    plt.tight_layout()
     plt.show()
 
 .. code-block:: python3
 
     # Plot share of debt issuance which is short-term
     
-    plt.plot(u[0, :]/(u[0, :]+u[1, :]+u[2, :]))
+    plt.plot(u[0, :] / (u[0, :] + u[1, :] + u[2, :]))
     plt.title('One-period debt issuance share')
     plt.xlabel('Time')
     plt.show()
