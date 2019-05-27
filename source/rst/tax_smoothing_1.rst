@@ -4,8 +4,8 @@
 
 .. index::
     single: python
-    
-    
+
+
 ****************************
 How to Pay for a War: Part 1
 ****************************
@@ -13,6 +13,21 @@ How to Pay for a War: Part 1
 .. contents:: :depth: 2
 
 **Co-author:** `Sebastian Graves <https://github.com/sebgraves>`__
+
+
+Reader's Guide
+===================
+
+This lecture ------------
+
+
+  1. :doc:`How to Pay for a War: Part 2 <tax_smoothing_2>`
+
+  2. :doc:`How to Pay for a War: Part 3 <tax_smoothing_3>`
+
+  3. :doc:` < >`
+
+  4. :doc:` < >`
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
@@ -82,8 +97,7 @@ ordinary linear quadratic dynamic programming problem in which matrices
 defining the quadratic objective function and the state transition
 function are **time-varying** and **stochastic**
 
-This
-generalization,known as a **Markov jump linear quadratic dynamic
+This generalization, known as a **Markov jump linear quadratic dynamic
 program** combines
 
 -  the computational simplicity of **linear quadratic dynamic
@@ -124,7 +138,7 @@ Barro’s 1979 :cite:`Barro1979` model is designed to answer questions such as
    whether the surge in government expenditures can be expected to be
    temporary or permanent?
 
-Barro’s 1999 :cite:`barro1999determinants` and 2003 :cite:`barro2003religion` 
+Barro’s 1999 :cite:`barro1999determinants` and 2003 :cite:`barro2003religion`
 models are designed to answer more fine-grained
 questions such as
 
@@ -179,8 +193,8 @@ matrix Riccati equations that determine :math:`N` optimal value
 functions and :math:`N` linear decision rules
 
 These value functions and
-decision rules apply in the :math:`N` Markov states: i.e., when the
-Markov state is in state :math:`j`, the value function and decision rule
+decision rules apply in the :math:`N` Markov states: i.e. when the
+Markov state is in state :math:`j`, the value function and the decision rule
 for state :math:`j` prevails
 
 The Ordinary Discounted Linear Quadratic Dynamic Programming Problem
@@ -197,29 +211,29 @@ matrices:
 
 -  A triple of matrices :math:`(R, Q, W)` defining a loss function
 
-.. math::  r(x_t, u_t) = x_t' R x_t + u_t' Q u_t + 2 u_t' W x_t 
+.. math::  r(x_t, u_t) = x_t' R x_t + u_t' Q u_t + 2 u_t' W x_t
 
 -  a triple of matrices :math:`(A, B, C)` defining a state-transition
    law
 
-.. math::  x_{t+1} = A x_t + B u_t + C w_{t+1} 
+.. math::  x_{t+1} = A x_t + B u_t + C w_{t+1}
 
 The problem is
 
 .. math::
 
 
-   -x_0' P x_0 - \rho = \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, u_t)  
+   -x_0' P x_0 - \rho = \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, u_t)
 
 subject to the transition law for the state
 
-The optimal decision rule for this problem have the form
+The optimal decision rule for this problem has the form
 
-.. math::  u_t = - F x_t 
+.. math::  u_t = - F x_t
 
 and the optimal value function is of the form
 
-.. math::  -\left( x_t' P x_t  + \rho \right) 
+.. math::  -\left( x_t' P x_t  + \rho \right)
 
 where :math:`P` solves the algebraic matrix Riccati equation
 
@@ -263,7 +277,7 @@ typical element :math:`\Pi_{ij}`
 Here :math:`i` denotes today and
 :math:`j` denotes tomorrow and
 
-.. math::  \Pi_{ij} = {\rm Prob}(s_{t+1} = j |s_t = i) 
+.. math::  \Pi_{ij} = {\rm Prob}(s_{t+1} = j |s_t = i)
 
 We’ll switch between labeling today’s state as :math:`s(t)` and
 :math:`i` and between labeling tomorrow’s state as :math:`s(t+1)` or
@@ -271,17 +285,17 @@ We’ll switch between labeling today’s state as :math:`s(t)` and
 
 The decision maker solves the minimization problem:
 
-.. math::  
+.. math::
 
-  \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, s(t), u_t) 
-  
-  
+  \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, s(t), u_t)
+
+
 with
- 
-.. math::  
+
+.. math::
 
   r(x_t, s(t), u_t) = -( x_t' R(s_t) x_t + u_t' Q(s_t) u_t + 2 u_t' W(s_t) x_t)
-    
+
 
 subject to linear laws of motion with matrices :math:`(A,B,C)` each
 possibly dependent on the Markov-state-\ :math:`s_t`:
@@ -289,35 +303,35 @@ possibly dependent on the Markov-state-\ :math:`s_t`:
 .. math::
 
 
-    x_{t+1} = A(s_t) x_t + B(s_t) u_t + C(s_t) w_{t+1} 
+    x_{t+1} = A(s_t) x_t + B(s_t) u_t + C(s_t) w_{t+1}
 
 where :math:`\{w_{t+1}\}` is an i.i.d. stochatic process with
 :math:`w_{t+1} \sim {\cal N}(0,I)`
 
-The optimal decision rule for this problem have the form
+The optimal decision rule for this problem has the form
 
-.. math::  u_t = - F(s_t) x_t 
+.. math::  u_t = - F(s_t) x_t
 
 and the optimal value functions are of the form
 
-.. math::  -\left( x_t' P(s_t) x_t  + \rho(s_t) \right) 
+.. math::  -\left( x_t' P(s_t) x_t  + \rho(s_t) \right)
 
 or equivalently
 
-.. math::  -x_t' P_i x_t - \rho_i 
+.. math::  -x_t' P_i x_t - \rho_i
 
 The optimal value functions :math:`- x' P_i x - \rho_i` for
-:math:`i = 1, \ldots, n` satisfy the :math:`N` 
+:math:`i = 1, \ldots, n` satisfy the :math:`N`
 interrelated Bellman equations
 
 .. math::
 
     -x' P_i x - \rho_i  = \max_u - \biggl[ x'R_i x + u' Q_i u + 2 u' W_i x \\
-                    \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j 
+                    \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
                     (A_i x + B_i u + C_i w) x + \rho_j) \biggr]
-                    
 
-The matrices :math:`P(s(t)) = P_i` and the scalars 
+
+The matrices :math:`P(s(t)) = P_i` and the scalars
 :math:`\rho(s_t) = \rho_i, i = 1, \ldots`, n satisfy the following stacked system of
 **algebraic matrix Riccati** equations:
 
@@ -326,7 +340,7 @@ The matrices :math:`P(s(t)) = P_i` and the scalars
 
    P_i = R_i + \beta \sum_j A_i' P_j A_i
     \Pi_{ij}
-             -\sum_j \Pi_{ij}[ (\beta B_i'  P_j A_i + W_i)' (Q + \beta B_i' P_j B_i)^{-1} 
+             -\sum_j \Pi_{ij}[ (\beta B_i'  P_j A_i + W_i)' (Q + \beta B_i' P_j B_i)^{-1}
              (\beta B_i' P_j A_i + W_i)]
 
 .. math::
@@ -339,7 +353,7 @@ and the :math:`F_i` in the optimal decision rules are
 .. math::
 
 
-   F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1} 
+   F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
    (\beta \sum_j \Pi_{ij}(B_i' P_j A_i )+ W_i)
 
 
@@ -370,15 +384,15 @@ for taxation and borrowing :math:`\{b_{t+1}, T_t\}_{t=0}^\infty` to
 minimize
 
 
-.. math::  E_0 \sum_{t=0}^\infty \beta^t T_t^2  
+.. math::  E_0 \sum_{t=0}^\infty \beta^t T_t^2
 
 subject to the constraints
 
-.. math::  T_t + p_{t,t+1} b_{t,t+1} = G_t + b_{t-1,t} 
+.. math::  T_t + p_{t,t+1} b_{t,t+1} = G_t + b_{t-1,t}
 
-.. math:: G_t = U_{g,t} z_t 
+.. math:: G_t = U_{g,t} z_t
 
-.. math::  z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1} 
+.. math::  z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1}
 
 where :math:`w_{t+1} \sim {\cal N}(0,I)`
 
@@ -404,17 +418,17 @@ To find the appropriate :math:`(R, Q, W)` matrices, we note that :math:`G_t` and
 :math:`b_{t-1,t}` can be written as appropriately defined functions of
 the current state:
 
-.. math::  G_t = S_G x_t \hspace{2mm}, \hspace{2mm} b_{t-1,t} = S_1 x_t 
+.. math::  G_t = S_G x_t \hspace{2mm}, \hspace{2mm} b_{t-1,t} = S_1 x_t
 
 If we define :math:`M_t = - p_{t,t+1}`, and let $S = S_G + S_1 $, then
 we can write taxation as a function of the states and control using the
 government’s budget constraint:
 
-.. math::  T_t = S x_t + M_t u_t 
+.. math::  T_t = S x_t + M_t u_t
 
 It follows that the :math:`(R, Q, W)` matrices are implicitly defined by:
 
-.. math::  T_t^2 = x_t'S'Sx_t + u_t'M_t'M_tu_t + 2 u_t'M_t'S x_t 
+.. math::  T_t^2 = x_t'S'Sx_t + u_t'M_t'M_tu_t + 2 u_t'M_t'S x_t
 
 If we assume that :math:`p_{t,t+1} = \beta`, then :math:`M_t \equiv M = -\beta`
 
@@ -425,15 +439,15 @@ framework
 We will implement this constant interest-rate version first, assuming
 that :math:`G_t` follows an AR(1) process:
 
-.. math::  G_{t+1} = \bar G + \rho G_t + \sigma w_{t+1} 
+.. math::  G_{t+1} = \bar G + \rho G_t + \sigma w_{t+1}
 
 To do this, we set
 :math:`z_t = \begin{bmatrix} 1 \\ G_t \end{bmatrix}`, and consequently:
 
-.. math::  
-  
-  A_{22} = \begin{bmatrix} 1 & 0 \\ \bar G & \rho \end{bmatrix} \hspace{2mm} , 
-  \hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix} 
+.. math::
+
+  A_{22} = \begin{bmatrix} 1 & 0 \\ \bar G & \rho \end{bmatrix} \hspace{2mm} ,
+  \hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix}
 
 .. code-block:: ipython
 
@@ -444,40 +458,40 @@ To do this, we set
 
 .. code-block:: python3
 
-    # Model parameters 
+    # Model parameters
     β, Gbar, ρ, σ = 0.95, 5, 0.8, 1
-    
+
     # Basic model matrices
-    A22 = np.array([[1,    0], 
+    A22 = np.array([[1,    0],
                     [Gbar, ρ],])
-    
-    C2 = np.array([[0], 
+
+    C2 = np.array([[0],
                    [σ]])
-    
+
     Ug = np.array([[0, 1]])
-    
+
     # LQ framework matrices
     A_t = np.zeros((1, 3))
     A_b = np.hstack((np.zeros((2, 1)), A22))
     A = np.vstack((A_t, A_b))
-    
+
     B = np.zeros((3, 1))
     B[0, 0] = 1
-    
+
     C = np.vstack((np.zeros((1, 1)), C2))
-    
+
     Sg = np.hstack((np.zeros((1, 1)), Ug))
     S1 = np.zeros((1, 3))
     S1[0, 0] = 1
     S = S1 + Sg
-    
+
     M = np.array([[-β]])
-    
+
     R = S.T @ S
     Q = M.T @ M
     W = M.T @ S
-    
-    # Small penalty on debt required to implement no-Ponzi scheme
+
+    # Small penalty on the debt required to implement the no-Ponzi scheme
     R[0, 0] = R[0, 0] + 1e-9
 
 We can now create an instance of ``LQ``:
@@ -485,18 +499,18 @@ We can now create an instance of ``LQ``:
 .. code-block:: python3
 
     LQBarro = qe.LQ(Q, R, A, B, C=C, N=W, beta=β)
-    P, F, d = LQBarro.stationary_values() 
+    P, F, d = LQBarro.stationary_values()
     x0 = np.array([[100, 1, 25]])
 
 We can see the isomorphism by noting that consumption is a martingale in
-the permanent income model, and that taxation is a martingale in Barro’s
+the permanent income model and that taxation is a martingale in Barro’s
 model
 
 We can check this using the :math:`F` matrix of the LQ model
 
 As :math:`u_t = -F x_t`, we have:
 
-.. math::  T_t = S x_t + M u_t = (S - MF) x_t 
+.. math::  T_t = S x_t + M u_t = (S - MF) x_t
 
 and
 
@@ -505,7 +519,7 @@ and
 Therefore, the conditional expectation of :math:`T_{t+1}` at time
 :math:`t` is:
 
-.. math::  E_t T_{t+1} = (S-MF)(A-BF)x_t 
+.. math::  E_t T_{t+1} = (S-MF)(A-BF)x_t
 
 Consequently, taxation is a martingale (:math:`E_t T_{t+1} = T_t`) if:
 
@@ -530,7 +544,7 @@ Barro model a large number of times:
     plt.ylabel('Taxation')
     plt.show()
 
-We can see a similar, but smoother pattern, if we plot government debt
+We can see a similar, but a smoother pattern, if we plot government debt
 over time
 
 Debt is smoother due to the persistence of the government
@@ -580,19 +594,19 @@ This is an
 extension of a similar method in the ``LQ`` class, adapted to take into
 account the fact that the model’s matrices depend on the Markov  state
 
-The code below runs 
-`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_ 
+The code below runs
+`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
 containing the class and function we need using QuantEcon.py's
 ``fetch_nb_dependencies`` function
 
 .. code-block:: ipython
 
     from quantecon.util.notebooks import fetch_nb_dependencies
-    fetch_nb_dependencies(['lq_markov.py'], 
+    fetch_nb_dependencies(['lq_markov.py'],
                           repo='https://github.com/QuantEcon/QuantEcon.notebooks',
                           folder='dependencies')
     %run lq_markov.py
-    
+
 
 Barro Model with a Time-varying Interest Rate
 =============================================
@@ -605,14 +619,14 @@ is to allow the interest rate to take two possible values. We set:
 
 .. math::  p^2_{t,t+1} = \beta - 0.017 = 0.933
 
-Thus, the first Markov state  has a low interest rate, and the
-second Markov state has a high interest rate
+Thus, the first Markov state  has a low-interest rate, and the
+second Markov state has a high-interest rate
 
 We also need to specify a transition matrix for the Markov state
 
 we use:
 
-.. math::  \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix} 
+.. math::  \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix}
 
 (so each Markov state is persisent, and there is an equal chance
 of moving from one state to the other)
@@ -626,24 +640,24 @@ a constant interest rate, government debt would explode
 
 .. code-block:: python3
 
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each Markov state 
+    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each Markov state
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
-    
-    Π = np.array([[0.8, 0.2], 
+
+    Π = np.array([[0.8, 0.2],
                   [0.2, 0.8]])
-    
+
     M1 = np.array([[-β - 0.02]])
     M2 = np.array([[-β + 0.017]])
-    
+
     Q1 = M1.T @ M1
     Q2 = M2.T @ M2
     W1 = M1.T @ S
     W2 = M2.T @ S
-    
+
     # Sets up the two states of the world
     v1 = world(A=A, B=B, C=C, R=R, Q=Q1, W=W1)
     v2 = world(A=A, B=B, C=C, R=R, Q=Q2, W=W2)
-    
+
     MJLQBarro = LQ_Markov(β, Π, v1, v2)
 
 The decision rules are now dependent on the Markov state:
@@ -672,4 +686,3 @@ periodically spikes up to high levels
     plt.xlabel('Time')
     plt.ylabel('Taxation')
     plt.show()
-
