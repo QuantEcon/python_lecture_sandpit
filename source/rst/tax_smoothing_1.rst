@@ -18,30 +18,36 @@ How to Pay for a War: Part 1
 Reader's Guide
 ===================
 
-This lecture ------------
+This lecture has two purposes
 
+First, we describe how **Markov jump linear quadratic dynamic programming**, a powerful extension of the method described in
+:doc:`LQ dynamic programming <lqcontrol>` 
+
+Second, we describe how the method can be used to extend the :cite:`Barro1979` model of optimal tax-smoothing and government debt in a 
+particular direction
+
+This lecture has two sequels that offer further extensions of the Barro model
 
   1. :doc:`How to Pay for a War: Part 2 <tax_smoothing_2>`
 
   2. :doc:`How to Pay for a War: Part 3 <tax_smoothing_3>`
 
-  3. :doc:` < >`
-
-  4. :doc:` < >`
+  
 
 
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
 
-This lecture constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
+This lecture and the two subsequent ones, namely,:doc:`How to Pay for a War: Part 2 <tax_smoothing_2>` and :doc:`How to Pay for a War: Part 3 <tax_smoothing_3>`, construct
+generalizations of Barro’s classic 1979 :cite:`Barro1979` model
 of tax smoothing
 
 Our generalizations are adaptations of extensions of
 his 1979 model suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
 
 Barro’s original 1979 :cite:`Barro1979` model is about a government that borrows and lends
-in order to help it minimize an intertemporal measure of distortions
+in order to minimize an intertemporal measure of distortions
 caused by taxes
 
 Technical tractability induced Barro to assume that
