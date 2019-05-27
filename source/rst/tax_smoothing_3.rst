@@ -91,7 +91,7 @@ in Markov state 1 and
 
 in Markov state 2
 
-Consequently, in the second Markov state the
+Consequently, in the second Markov state, the
 government is unable to borrow, and the budget constraint becomes
 :math:`T_t = G_t + b_{t-1,t}`
 
@@ -158,15 +158,15 @@ Because state 3 is “bad today”, the next period cannot have “good yesterda
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-The code below runs 
-`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_ 
+The code below runs
+`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
 containing the class and function we need using QuantEcon.py's
 ``fetch_nb_dependencies`` function
 
 .. code-block:: ipython
 
     from quantecon.util.notebooks import fetch_nb_dependencies
-    fetch_nb_dependencies(['lq_markov.py'], 
+    fetch_nb_dependencies(['lq_markov.py'],
                           repo='https://github.com/QuantEcon/QuantEcon.notebooks',
                           folder='dependencies')
     %run lq_markov.py
@@ -198,7 +198,7 @@ containing the class and function we need using QuantEcon.py's
 
     R = S.T @ S
 
-    # Large penalty on debt in R2 to prevent borrowing in bad state
+    # Large penalty on debt in R2 to prevent borrowing in a bad state
     R1 = np.copy(R)
     R2 = np.copy(R)
     R1[0, 0] = R[0, 0] + 1e-9
@@ -208,7 +208,7 @@ containing the class and function we need using QuantEcon.py's
     Q = M.T @ M
     W = M.T @ S
 
-    # Create namedtuple to keep the R,Q,A,B,C,W matrices for each state of the world
+    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
 
     Π = np.array([[0.95,   0, 0.05,   0],
@@ -238,7 +238,7 @@ must raise taxes in the current period
 Negative spikes occur when the government has positive asset holdings
 
 An inability to use financial markets in the next period means that the
-government uses those assets to lower taxation toay
+government uses those assets to lower taxation today
 
 .. code-block:: python3
 
