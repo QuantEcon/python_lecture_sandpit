@@ -19,7 +19,7 @@ An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
 
-This notebook constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
+This lecture constructs generalizations of Barro’s classic 1979 :cite:`Barro1979` model
 of tax smoothing
 
 Our generalizations are adaptations of extensions of
@@ -144,7 +144,7 @@ pay for a war*
 Organization
 ^^^^^^^^^^^^
 
-This notebook describes:
+This lecture describes:
 
 -  Markov jump linear quadratic (LQ) dynamic programming
 
@@ -564,10 +564,10 @@ The code for the class can be viewed
 `here <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`__
 
 The class takes a variable number of arguments, to allow for there to be
-an arbitrary :math:`N` states of the world
+an arbitrary :math:`N` Markov states
 
 To accomodate this, the
-matrices for each state of the world must be held in a ``namedtuple``
+matrices for each Markov state must be held in a ``namedtuple``
 
 The value and policy functions are then found by iterating on the system of
 algebraic matrix Riccati equations
@@ -578,8 +578,7 @@ The class also contains a “method”, for simulating the model
 
 This is an
 extension of a similar method in the ``LQ`` class, adapted to take into
-account the fact that the model’s matrices depend on the state of the
-world
+account the fact that the model’s matrices depend on the Markov  state
 
 The code below runs 
 `this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_ 
@@ -606,16 +605,17 @@ is to allow the interest rate to take two possible values. We set:
 
 .. math::  p^2_{t,t+1} = \beta - 0.017 = 0.933
 
-Thus, the first state of the world has a low interest rate, and the
-second state of the world has a high interest rate
+Thus, the first Markov state  has a low interest rate, and the
+second Markov state has a high interest rate
 
-We also need to specify a transition matrix for the state of the world,
+We also need to specify a transition matrix for the Markov state
+
 we use:
 
 .. math::  \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix} 
 
-(so each state of the world is persisent, and there is an equal chance
-of moving from one to the other)
+(so each Markov state is persisent, and there is an equal chance
+of moving from one state to the other)
 
 The choice of parameters means that the unconditional expectation of
 :math:`p_{t,t+1}` is 0.9515, higher than :math:`\beta (=0.95)`
@@ -626,7 +626,7 @@ a constant interest rate, government debt would explode
 
 .. code-block:: python3
 
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
+    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each Markov state 
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
     
     Π = np.array([[0.8, 0.2], 
@@ -646,7 +646,7 @@ a constant interest rate, government debt would explode
     
     MJLQBarro = LQ_Markov(β, Π, v1, v2)
 
-The decision rules are now dependent on the state of the world:
+The decision rules are now dependent on the Markov state:
 
 .. code-block:: python3
 

@@ -18,7 +18,7 @@ How to Pay for a War: Part 3
 Another Application of Markov Jump Linear Quadratic Dynamic Programming
 =======================================================================
 
-This notebook is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This lecture is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
 As earlier, we use Markov jump linear quadratic (LQ) dynamic programming
 problems to implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for
@@ -34,7 +34,7 @@ smoothing model
 Our generalizations of his 1979 model will also look
 like a souped up consumption smoothing model
 
-In this notebook, we try to capture the tax-smoothing problem of a
+In this lecture, we try to capture the tax-smoothing problem of a
 government that faces **roll-over risk**
 
 Roll-over Risk
@@ -225,7 +225,7 @@ containing the class and function we need using QuantEcon.py's
     MJLQBarro = LQ_Markov(β, Π, v1, v2, v3, v4)
 
 This model is simulated below, using the same process for :math:`G_t` as
-in the previous notebook
+in :doc:`this lecture <tax_smoothing_2>`
 
 When :math:`p^t_{t+1} = \beta`
 government debt fluctuates around zero

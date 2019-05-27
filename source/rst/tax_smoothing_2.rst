@@ -18,7 +18,7 @@ How to Pay for a War: Part 2
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
-This notebook is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This lecture is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
 We use Markov jump linear quadratic (LQ) dynamic programming problems to
 implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for extending his
@@ -45,7 +45,7 @@ In our :doc:`earlier lecture <tax_smoothing_1>` we relaxed the second of these a
 In particular, we used *Markov jump linear quadratic dynamic programming*
 to allow the exogenous interest rate to vary over time
 
-In this notebook, we add a maturity composition decision to the
+In this lecture, we add a maturity composition decision to the
 government’s problem by expanding the dimension of the state
 
 We assume
@@ -57,16 +57,17 @@ We assume
    governed by a jointly stationary stochastic process
 
 Two example specifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
                           
 
 We’ll describe two possible specifications
 
--  In one specification, each period the government issues zero coupon
+-  In one, each period the government issues zero coupon
    bonds of one- and two-period maturities and redeems them only when
    they mature -- in this version, the maturity structure of government
-   debt is partly inherited from the past at each date
+   debt at each date is partly inherited from the past 
 
--  In the second specification, the government redesigns the maturity
+-  In the second, the government redesigns the maturity
    structure of the debt each period
 
 A Model with Two-period Debt and No Restructuring
@@ -258,15 +259,14 @@ where
 Thus, in this problem all the matrices apart from :math:`B` may depend
 on the Markov state at time :math:`t`
 
-Function to Map Two-period Model into a Markov Jump Linear Quadratic Control Problem
+Map Two-period Model into a Markov Jump Linear Quadratic Control Problem
 ====================================================================================
 
 As shown in the :doc:`previous lecture <tax_smoothing_1>`,
 the ``LQ_Markov`` class can solve Markov jump LQ problems when given the
-:math:`A, B, C, R, Q, W` matrices for each state of the world
+:math:`A, B, C, R, Q, W` matrices for each Markov state
 
-The below
-function maps the primitive matrices and parameters from the above
+The function below maps the primitive matrices and parameters from the above
 two-period model into the matrices that the ``LQ_Markov`` class requires:
 
 .. code-block:: ipython
@@ -331,7 +331,7 @@ With the above function, we can proceed to solve the model in two steps:
 
 1. Use ``LQ_markov_mapping`` to map
    :math:`U_{g,t}, A_{22,t}, C_{2,t}, p_{t,t+1}, p_{t,t+2}` into the
-   :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` states of the world
+   :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` Markov states 
 
 2. Use the ``LQ_markov`` class to solve the resulting n-state Markov
    jump LQ problem
@@ -352,7 +352,7 @@ and consequently:
 Therefore, in this example, :math:`A_{22}, C_2` and :math:`U_g` are not
 time-varying
 
-We will assume that there are two states of the world, one with a
+We will assume that there are two Markov states, one with a
 flatter yield curve, and one with a steeper yield curve. In state 1,
 prices are:
 
@@ -366,7 +366,7 @@ We first solve the model with no penalty parameter on different issuance
 across maturities, i.e. :math:`c_1 = 0`
 
 We also need to specify a
-transition matrix for the state of the world, we use:
+transition matrix for the Markov state, we use:
 
 .. math::  \Pi = \begin{bmatrix} 0.9 & 0.1 \\ 0.1 & 0.9 \end{bmatrix} 
 
@@ -390,7 +390,7 @@ containing the class and function we need using QuantEcon.py's
 
     from collections import namedtuple
     
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
+    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state 
     world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
     
     # Model parameters 
@@ -611,7 +611,7 @@ where
 
 This completes the mapping into a Markov jump LQ problem
 
-Function to Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
+Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
 
 As with the previous model, we can use a function to map the primitives
@@ -672,7 +672,7 @@ Example Model with Restructuring
 As an example for the model with restructuring, consider this model
 where :math:`H = 3`
 
-We will assume that there are two states of the world, one with a
+We will assume that there are two Markov states, one with a
 flatter yield curve, and one with a steeper yield curve
 
 In state 1,
