@@ -7,21 +7,21 @@
     
     
 ******************************************
-Geometric Series for High School Economics 
+Geometric Series for Elementary Economics 
 ******************************************
 
 
 .. contents:: :depth: 2
 
 
-In addition what's in Anaconda, this lecture will need the following libraries
+In addition what's in Anaconda, this lecture uses the following libraries
 
 .. code-block:: ipython
   :class: hide-output
 
   !pip install quantecon
 
-The lecture describes some  important  elementary ideas in economics that use the mathematics of geometric series
+The lecture describes important ideas in economics that use the mathematics of geometric series
 
 Among these are
 
@@ -890,6 +890,6 @@ Notice here, whether government spending increases from .3 to .4 or
 investment increases from .3 to .4, the shifts in the graphs are
 identical
 
-Please explain why
+
 
 

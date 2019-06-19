@@ -18,7 +18,7 @@ How to Pay for a War: Part 2
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
-This lecture is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
 We use Markov jump linear quadratic (LQ) dynamic programming problems to
 implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for extending his
@@ -34,7 +34,7 @@ smoothing model
 Our generalizations of his 1979 :cite:`Barro1979` model will also look
 like a souped-up consumption smoothing model
 
-Tractability induced Barro in 1979 :cite:`Barro1979` to assume that
+Wanting tractability induced Barro in 1979 :cite:`Barro1979` to assume that
 
 -  the government trades only one-period risk-free debt, and
 
@@ -53,7 +53,7 @@ We assume
 -  that the government borrows or saves in the form of risk-free bonds
    of maturities :math:`1, 2, \ldots , H`
 
--  that interest rates on those bonds are time-varying and in particular,
+-  that interest rates on those bonds are time-varying and in particular are
    governed by a jointly stationary stochastic process
 
 Two example specifications
@@ -84,8 +84,8 @@ time :math:`t` goods received per time :math:`t+2` goods promised
 Evidently, :math:`p_{t, t+1}, p_{t,t+2}` are inversely related to
 appropriate corresponding gross interest rates on government debt
 
-In the spirit of Barro (1979) :cite:`Barro1979`, the stochastic process of government
-expenditures is exogenous
+In the spirit of Barro (1979) :cite:`Barro1979`, government
+expenditures are governed by an exogenous stochastic process
 
 Given initial conditions :math:`b_{-2,0}, b_{-1,0}, z_0, i_0`, where
 :math:`i_0` is the initial Markov state, the government chooses a
@@ -132,7 +132,7 @@ government debt, we can also in principle allow the matrices
 :math:`U_{g,t}, A_{22,t}, C_{2,t}` to depend on the Markov state
 
 Mapping the Two-period Model into an LQ Markov Jump Problem
------------------------------------------------------------
+==============================================================
 
 First, define
 
@@ -259,8 +259,6 @@ where
 Thus, in this problem all the matrices apart from :math:`B` may depend
 on the Markov state at time :math:`t`
 
-Map Two-period Model into a Markov Jump Linear Quadratic Control Problem
-====================================================================================
 
 As shown in the :doc:`previous lecture <tax_smoothing_1>`,
 the ``LQ_Markov`` class can solve Markov jump LQ problems when given the
@@ -611,7 +609,7 @@ where
 
 This completes the mapping into a Markov jump LQ problem
 
-Map Model with Restructuring into a Markov Jump Linear Quadratic Control Problem
+Model with Restructuring as a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
 
 As with the previous model, we can use a function to map the primitives
@@ -745,7 +743,7 @@ above
 
 .. code-block:: python3
 
-    # Plot share of debt issuance which is short-term
+    # Plot share of debt issuance that is short-term
 
     plt.plot(u[0, :] / (u[0, :] + u[1, :] + u[2, :]))
     plt.title('One-period debt issuance share')
