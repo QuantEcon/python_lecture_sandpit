@@ -14,12 +14,10 @@ Geometric Series for Elementary Economics
 .. contents:: :depth: 2
 
 
-In addition what's in Anaconda, this lecture uses the following libraries
 
-.. code-block:: ipython
-  :class: hide-output
+Overview
+================
 
-  !pip install quantecon
 
 The lecture describes important ideas in economics that use the mathematics of geometric series
 
@@ -42,19 +40,28 @@ These and other applications prove the truth of the wise crack that
 
     "in economics, a little knowledge of geometric series goes a long way "
 
-Geometric Series: Key Formulas
+
+Below we'll use the following imports
+
+.. code-block:: python3
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+
+
+Key Formulas
 ===============================
 
-To start, we let :math:`c` be a real number that lies strictly between
+To start, let :math:`c` be a real number that lies strictly between
 :math:`-1` and :math:`1`
 
 -  We often write this as :math:`c \in (-1,1)`
 
--  here :math:`(-1,1)` denotes the collection of all real numbers that
-   are strictly less than :math:`1` and strictly greater
-   than\ :math:`-1`
+-  Here :math:`(-1,1)` denotes the collection of all real numbers that
+   are strictly less than :math:`1` and strictly greater than :math:`-1`
 
--  the symbol :math:`\in` means *in* or *belongs to the set after the symbol*
+-  The symbol :math:`\in` means *in* or *belongs to the set after the symbol*
 
 We want to evaluate geometric series of two types -- infinite and finite
 
@@ -95,20 +102,22 @@ The key formula here is
 :math:`c`. We don't have to restrict :math:`c` to be in the
 set :math:`(-1,1)`
 
-Three Examples
-===============
+
+
 
 We now move on to describe some famuous economic applications of
 geometric series
 
-The Money Multiplier in Fractional Reserve Banking
---------------------------------------------------
+
+
+Example: The Money Multiplier in Fractional Reserve Banking
+============================================================
 
 In a fractional reserve banking system, banks hold only a fraction
 :math:`r \in (0,1)` of cash behind each **deposit receipt** that they
 issue
 
--  in recent times
+*  In recent times
 
    -  cash consists of pieces of paper issued by the government and
       called dollars or pounds or :math:`\ldots`
@@ -116,7 +125,7 @@ issue
    -  a *deposit* is a balance in a checking or savings account that
       entitles the owner to ask the bank for immediate payment in cash
 
--  when the UK and France and the US were on either a gold or silver
+*  When the UK and France and the US were on either a gold or silver
    standard (before 1914, for example)
 
    -  cash was a gold or silver coin
@@ -129,19 +138,18 @@ Economists and financiers often define the **supply of money** as an
 economy-wide sum of **cash** plus **deposits**
 
 In a **fractional reserve banking system** (one in which the reserve
-ratio :math:`r` satisfying :math:`0 < r < 1`), **banks create money** by issuing deposits
-*backed* by fractional reserves plus loans that they make to their
-customers
+ratio :math:`r` satisfying :math:`0 < r < 1`), **banks create money** by issuing deposits *backed* by fractional reserves plus loans that they make to their customers
 
 A geometric series is a key tool for understanding how banks create
 money (i.e., deposits) in a fractional reserve system
 
-The geometric series formula :eq:`infinite` is at the heart of the classic model of
-the money creation process -- one that leads us to the celebrated
+The geometric series formula :eq:`infinite` is at the heart of the classic model of the money creation process -- one that leads us to the celebrated
 **money multiplier**
 
+
+
 A Simple Model
-~~~~~~~~~~~~~~
+---------------
 
 There is a set of banks named :math:`i = 0, 1, 2, \ldots`
 
@@ -236,7 +244,9 @@ Therefore, the sum of all deposits in our banking system
   
   \sum_{i=0}^\infty (1-r)^i D_0 =  \frac{D_0}{1 - (1-r)} = \frac{D_0}{r}
 
-**Money multiplier**
+
+Money Multiplier
+--------------------
 
 The **money multiplier** is a number that tells the multiplicative
 factor by which an exogenous injection of cash into bank :math:`0` leads
@@ -256,11 +266,8 @@ Equation :eq:`sumdeposits` asserts that the **money multiplier** is
 .. experiments like lowering reserve requirements? Or others you may suggest?
 
 
-Keynesian Multiplier
---------------------
-
-Static Version
-----------------
+Example: The Keynesian Multiplier
+====================================
 
 The famous economist John Maynard Keynes and his followers created a
 simple model intended to determine national income :math:`y` in
@@ -273,6 +280,11 @@ circumstances in which
    equal demand** (e.g., prices and interest rates are frozen)
 
 -  national income is entirely determined by aggregate demand
+
+
+Static Version
+------------------
+
 
 An elementary Keynesian model of national income determination consists
 of three equations that describe aggegate demand for :math:`y` and its
@@ -324,8 +336,8 @@ The expression :math:`\sum_{t=0}^\infty b^t` motivates an interpretation
 of the multiplier as the outcome of a dynamic process that we describe
 next
 
-Dynamic Version of Keynesian Multiplier
----------------------------------------
+Dynamic Version 
+-------------------
 
 We arrive at a dynamic version by interpreting the nonnegative integer
 :math:`t` as indexing time and changing our specification of the
@@ -403,8 +415,8 @@ in government expenditures
 .. illustrate basic concepts, maybe the idea of a "difference equation" and how we solve it?
 
 
-Interest Rates and Present Values
----------------------------------
+Example: Interest Rates and Present Values
+============================================
 
 We can apply our formula for geometric series to study how interest
 rates affect values of streams of dollar payments that extend over time
@@ -494,8 +506,7 @@ tells how our account accumulates at dates :math:`t=0, 1, 2, \ldots`
 Discounting
 ------------
 
-Geometric sequence :eq:`geom2` tells us how much future dollars are worth in
-terms of today's dollars
+Geometric sequence :eq:`geom2` tells us how much future dollars are worth in terms of today's dollars
 
 Remember that the units of :math:`R` are dollars at :math:`t+1` per
 dollar at :math:`t`
@@ -511,6 +522,8 @@ It follows that
 
 So if someone has a claim on :math:`x` dollars at time :math:`t+j`, it
 is worth :math:`x R^{-j}` dollars at time :math:`t` (e.g., today)
+
+
 
 Application to Asset Pricing
 -----------------------------
@@ -609,31 +622,26 @@ below
 
 .. code-block:: python3
 
-    # Basic imports
-    get_ipython().system('pip install quantecon')
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import scipy as sp
-    get_ipython().run_line_magic('matplotlib', 'inline')
-    
     # True present value of a finite lease
     def finite_lease_pv(T, g, r, x_0):
-      G = (1 + g)
-      R = (1 + r)
-      return (x_0 * (1 - G**(T + 1) * R**(-T - 1)))/(1 - G * R**(-1))
+        G = (1 + g)
+        R = (1 + r)
+        return (x_0 * (1 - G**(T + 1) * R**(-T - 1)))/(1 - G * R**(-1))
     # First approximation for our finite lease
            
     def finite_lease_pv_approx_f(T, g, r, x_0):
-      p = x_0 * (T + 1) + x_0 * r * g * (T + 1)/(r - g)
-      return p
+        p = x_0 * (T + 1) + x_0 * r * g * (T + 1)/(r - g)
+        return p
+
     # Second approximation for our finite lease
     def finite_lease_pv_approx_s(T, g, r, x_0):
-      return (x_0 * (T + 1)) 
+        return (x_0 * (T + 1)) 
+
     # Infinite lease
     def infinite_lease(g, r, x_0):
-      G = (1 + g)
-      R = (1 + r)
-      return x_0/(1 - G * R**(-1))
+        G = (1 + g)
+        R = (1 + r)
+        return x_0/(1 - G * R**(-1))
                                  
 
 Now that we have test run our functions, we can plot some outcomes
@@ -756,23 +764,23 @@ visualization!
 We can use a little calculus to study how the present value :math:`p_0`
 of a lease varies with :math:`r` and :math:`g`
 
-We will use a library called ``SymPy``
+We will use a library called `SymPy <https://www.sympy.org/>`__
 
-``SymPy`` enables us to do symbolic math calculations including
+SymPy enables us to do symbolic math calculations including
 computing derivatives of algebraic equations.
 
 We will illustrate how it works by creating a symbolic expression that
 represents our present value formula for an infinite lease
 
-After that, we'll use ``SymPy`` to compute derivatives
+After that, we'll use SymPy to compute derivatives
 
 .. code-block:: python3
 
-    import sympy as sp
+    import sympy as sym
     from sympy import init_printing
     
     # Creates algebraic symbols that can be used in an algebraic expression
-    g, r, x0 = sp.symbols('g, r, x0')
+    g, r, x0 = sym.symbols('g, r, x0')
     G = (1 + g)
     R = (1 + r)
     p0 = x0/(1 - G * R**(-1))
@@ -783,28 +791,30 @@ After that, we'll use ``SymPy`` to compute derivatives
 .. code-block:: python3
 
     print('dp0/dg is:')
-    dp_dg = sp.diff(p0, g)
+    dp_dg = sym.diff(p0, g)
     dp_dg
 
 .. code-block:: python3
 
     print('dp0/dr is:')
-    dp_dr = sp.diff(p0, r)
+    dp_dr = sym.diff(p0, r)
     dp_dr
 
 We can see that for :math:`\frac{\partial p_0}{\partial r}<0` as long as
 :math:`r>g`, :math:`r>0` and :math:`g>0` and :math:`x_0` is positive,
-this equation will always be negative. Similarly,
-:math:`\frac{\partial p_0}{\partial g}>0` as long as :math:`r>g`,
-:math:`r>0` and :math:`g>0` and :math:`x_0` is positive, this equation
-will always be postive.
+this equation will always be negative 
 
-Back to Keynesian Multiplier
-----------------------------
+Similarly, :math:`\frac{\partial p_0}{\partial g}>0` as long as :math:`r>g`, :math:`r>0` and :math:`g>0` and :math:`x_0` is positive, this equation
+will always be postive
+
+
+
+Back to the Keynesian Multiplier
+===================================
 
 We will now go back to the case of the Keynesian multiplier and plot the
 time path of :math:`y_t`, given that consumption is a constant fraction
-of national income, and investment is fixed.
+of national income, and investment is fixed
 
 .. code-block:: python3
 
@@ -815,6 +825,7 @@ of national income, and investment is fixed.
         for t in range(1, T+1):
             y[t] = b * y[t-1] + i + g
         return y    
+
     # Helper function for plotting
     #def plotter_y(i, b, g, T, y_init):
     #    y = calculate_y(i, b, g, T, y_init)
@@ -828,8 +839,6 @@ of national income, and investment is fixed.
     y_init = 0
     T = 100
     
-    
-    
     plt.figure()
     plt.title('Path of Aggregate Output Over Time')
     plt.xlabel('$t$')
@@ -840,7 +849,9 @@ of national income, and investment is fixed.
     plt.show()
 
 In this model, income grows over time, until it gradually converges to
-the infinite geometric series sum of income. We now examine what will
+the infinite geometric series sum of income
+
+We now examine what will
 happen if we vary the so-called **marginal propensity to consume**,
 i.e., the fraction of income that is consumed
 
@@ -851,6 +862,7 @@ i.e., the fraction of income that is consumed
     b_1 = 2/3
     b_2 = 5/6
     b_3 = .9
+
     plt.figure()
     plt.title('Changing Consumption as a Fraction of Income')
     plt.ylabel('$y_t$')
@@ -871,8 +883,8 @@ path of output over time
     plt.title('An Increase in Investment on Output')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$i=.3$', linestyle='--')
-    plt.plot(np.arange(0, T+1), calculate_y(i_1, b, g_0, T, y_init), label=r'$i=.4$')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$i=0.3$', linestyle='--')
+    plt.plot(np.arange(0, T+1), calculate_y(i_1, b, g_0, T, y_init), label=r'$i=0.4$')
     plt.legend()
     plt.show()
     # Changing government spending
@@ -881,13 +893,13 @@ path of output over time
     plt.title('An Increase in Government Spending on Output')
     plt.ylabel('$y_t$')
     plt.xlabel('$t$')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$g=.3$', linestyle='--')
-    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_1, T, y_init), label=r'$g=.4$')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_0, T, y_init), label=r'$g=0.3$', linestyle='--')
+    plt.plot(np.arange(0, T+1), calculate_y(i_0, b, g_1, T, y_init), label=r'$g=0.4$')
     plt.legend()
     plt.show()
 
-Notice here, whether government spending increases from .3 to .4 or
-investment increases from .3 to .4, the shifts in the graphs are
+Notice here, whether government spending increases from 0.3 to 0.4 or
+investment increases from 0.3 to 0.4, the shifts in the graphs are
 identical
 
 
