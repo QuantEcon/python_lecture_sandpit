@@ -74,9 +74,40 @@ The issue of why firms exist is a binary question: should firms have positive si
 
 A better and more general question is: **what determines the size of firms**?
 
-This is the question that Coase sought to answer.
+The answer Coase came up with was that "a firm will tend to expand until the costs of organizing an extra
+transaction within the firm become equal to the costs of carrying out the same
+transaction by means of an exchange on the open market..." (:cite:`coase1937nature`, p. 395).
 
-His insight
+But what are these internal and external costs?
+
+In short, Coase envisaged a trade-off between
+
+* transaction costs, which add to the expense of operating *between* firms, and
+
+* diminishing returns to management, which adds to the expense of operating *within* firms.
+
+
+We discussed an example of transaction costs above (contracts).
+
+The other cost, diminishing returns to management, is a catch-all for the idea
+that big operations are increasingly costly to manage.
+
+For example, you could think of management as a pyramid, so hiring more workers to implement more tasks
+requires expansion of the pyramid, and hence labor costs grow at a rate more than
+proportional to the range of tasks.
+
+Diminishing returns to management makes in-house production expensive, favoring small firms.  
+
+
+Summary
+----------
+
+Thus, firms grow because transaction costs encourage them to take some operations in house.
+
+But as they get large, in-house operations become costly too.
+
+The size of firms is determined by balancing these effects, thereby equalizing the marginal costs of each form of operation.
+
 
 
 A Quantitative Interpretation
@@ -84,7 +115,7 @@ A Quantitative Interpretation
 
 Coases ideas were expressed purely verbally, without any mathematics.
 
-In fact his essay is a great example of how far you can go with clear thinking and plain English.
+In fact his essay is a wonderful example of how far you can get with clear thinking and plain English.
 
 However, plain English is not good for quantitative analysis, or for plugging into a computer.
 
@@ -107,6 +138,71 @@ the sequential completion of a large number of processing stages
 
 The stages are indexed by :math:`t \in [0,1]`, with :math:`t=0` indicating that no tasks
 have been undertaken and :math:`t=1` indicating that the good is complete.  
+
+Subcontracting
+------------------
+
+The subcontracting scheme by which tasks are allocated across firms is illustrated in the figure below.
+
+[add fig here]
+
+In this example,
+
+* Firm 1 receives a contract to sell one unit of the completed good to a final buyer.  
+  
+* Firm 1 then forms a contract with firm 2 to purchase the partially completed good at stage :math:`t_1`, with the intention of implementing the
+remaining $1 - t_1$ tasks in-house (i.e., processing from stage $t_1$ to stage
+$1$).  
+
+* Firm~2 repeats this procedure, forming a contract with firm~3 to purchase the good at stage $t_2$.  
+
+* firm~3 decides to complete the chain, selecting $t_3 = 0$.  
+
+At this point, production unfolds in the opposite direction (i.e., from upstream to downstream).  
+
+* Firm 3 completes processing stages from $t_3 = 0$ up to $t_2$ and transfers the good to firm 2.  
+  
+* Firm 2 then processes from $t_2$ up to $t_1$ and transfers the good to firm 1, 
+  
+* Firm 1 processes from $t_1$ to $1$ and delivers the completed good to the final buyer.
+
+The length of the interval of stages (range of tasks) carried out by firm $i$ is denoted by $\ell_i$
+
+[add fig 2 here]
+
+Each firm chooses only its upstream boundary, treating its downstream boundary as given.
+
+The benefit of this formulation is that it implies a recursive structure for the decision problem for each firm.
+
+In choosing how many processing stages to subcontract, each successive firm faces essentially the same decision problem as the firm above it in the chain, with the only difference being that the decision space is a subinterval of the decision space for the firm above.  
+
+We exploit this recursive structure in our study of equilibrium.
+
+
+
+Summary of Costs
+-----------------------------
+
+Diminishing returns to management means rising costs per task when a firm expands the range of productive activities coordinated by its managers.  
+
+We represent these ideas by taking the cost of carrying out :math:`\ell` tasks in-house to be :math:`c(\ell)`, where :math:`c` is increasing and strictly convex.   
+
+Thus, average cost per task rises with the range of tasks performed in-house.
+
+We also assume that :math:`c` is continuously differentiable, with :math:`c(0)=0` and :math:`c'(0) > 0`.
+
+Transaction costs are represented as a wedge between the buyer's and seller's prices. 
+
+It matters little for us whether the transaction cost is borne by the buyer or the seller.  
+
+Here we assume that the cost is borne only by the buyer.  
+
+In particular, when two firms agree to a trade at face value :math:`v`, the buyer's total outlay is :math:`\delta v`, where :math:`\delta > 1`.  
+
+The seller receives only :math:`v`, and the difference is paid to agents outside the model.
+
+
+
 
 
 
