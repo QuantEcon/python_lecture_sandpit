@@ -599,7 +599,7 @@ Exercise 1
 
 The number of firms is endogenously determined by the primitives
 
-What do you think will happen in terms of the number of firms as $\delta$ increases?  Why?
+What do you think will happen in terms of the number of firms as :math:`\delta` increases?  Why?
 
 Check your intuition by computing the number of firms at `delta in (1.01, 1.05, 1.1)`
 
