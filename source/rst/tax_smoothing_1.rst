@@ -39,11 +39,11 @@ An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
 
-This lecture and the two subsequent ones, namely,:doc:`How to Pay for a War: Part 2 <tax_smoothing_2>` and :doc:`How to Pay for a War: Part 3 <tax_smoothing_3>`, construct
-generalizations of Barro’s classic 1979 :cite:`Barro1979` model
+This lecture and the two subsequent ones -- :doc:`How to Pay for a War: Part 2 <tax_smoothing_2>` and 
+:doc:`How to Pay for a War: Part 3 <tax_smoothing_3>` --  extend  Barro’s classic 1979 :cite:`Barro1979` model
 of tax smoothing
 
-Our generalizations are adaptations of extensions of
+The extensions are modified versions of
 his 1979 model suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
 
 Barro’s original 1979 :cite:`Barro1979` model is about a government that borrows and lends
@@ -57,7 +57,7 @@ Technical tractability induced Barro to assume that
 -  the one-period risk-free interest rate is constant
 
 By using a secret weapon – *Markov jump linear quadratic dynamic
-programming* – we can allow interest rates to move over time in
+programming* – we  allow interest rates to move over time in
 empirically interesting ways
 
 Also, by expanding the dimension of the
@@ -177,8 +177,8 @@ lecture <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
 issues risk-free debt of different maturities
 
-Markov Jump Linear Quadratic Control
-====================================
+Markov Jump Linear Quadratic Dynamic Programming
+=================================================
 
 **Markov jump linear quadratic dynamic programming** combines advantages
 of
@@ -246,7 +246,7 @@ where :math:`P` solves the algebraic matrix Riccati equation
 .. math::
 
 
-   P = R+ \beta A' P A_i
+   P = R+ \beta A' P A
              -(\beta B'  P A + W)' (Q + \beta B P B )^{-1} (\beta B P A + W)
 
 and the constant :math:`\rho` satisfies
@@ -271,13 +271,13 @@ functions of a finite state :math:`s` that is governed by an :math:`N`
 state Markov chain
 
 This makes decision rules depend on the Markov
-state, and so fluctuate through time restricted ways
+state, and so fluctuate through time in limited ways
 
 In particular, we use the following extension of a discrete time linear
 quadratic dynamic programming problem
 
 We let :math:`s(t) \equiv s_t \in [1, 2, \ldots, N]` be a time :math:`t` realization of an
-:math:`N` state Markov chain with transition matrix :math:`\Pi` having
+:math:`N`-state Markov chain with transition matrix :math:`\Pi` having
 typical element :math:`\Pi_{ij}`
 
 Here :math:`i` denotes today and
@@ -408,11 +408,12 @@ while :math:`b_{t-1,t}` is an endogenous state variable inherited from
 the past at time :math:`t` and :math:`p_{t,t+1}` is an exogenous state
 variable at time :math:`t`
 
-To begin with, we will assume that
-:math:`p_{t,t+1}` is constant (and equal to :math:`\beta`), but we will
-also extend the model to allow this variable to evolve over time
+To begin, we  assume that
+:math:`p_{t,t+1}` is constant (and equal to :math:`\beta`) 
 
-To map into the LQ framework, we will use
+   * later  we will  extend the model to allow :math:`p_{t,t+1}` to vary over time
+
+To map into the LQ framework, we use
 :math:`x_t = \begin{bmatrix} b_{t-1,t} \\ z_t \end{bmatrix}` as the
 state vector, and :math:`u_t = b_{t,t+1}` as the control variable
 
@@ -572,21 +573,19 @@ Python Class to Solve Markov Jump Linear Quadratic Control Problems
 To implement the extension to the Barro model in which :math:`p_{t,t+1}`
 varies over time, we must allow the M matrix to be time-varying
 
-From
-the mapping of the Barro model into the LQ framework, this means that
-our :math:`Q` and :math:`W` matrices will now also vary over time
+Our :math:`Q` and :math:`W` matrices must also vary over time
 
 We can solve such a
-model using the ``LQ_Markov`` class, which solves Markov jump linear
+model using the ``LQ_Markov`` class that solves Markov jump linear
 quandratic control problems as described above
 
 The code for the class can be viewed
 `here <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`__
 
-The class takes a variable number of arguments, to allow for there to be
+The class takes a variable number of arguments that allow there to be
 an arbitrary :math:`N` Markov states
 
-To accomodate this, the
+To accommodate this, the
 matrices for each Markov state must be held in a ``namedtuple``
 
 The value and policy functions are then found by iterating on the system of
@@ -594,11 +593,11 @@ algebraic matrix Riccati equations
 
 The solutions for :math:`P,F,\rho` are stored in Python “dictionaries”
 
-The class also contains a “method”, for simulating the model
+The class also contains a “method” for simulating the model
 
 This is an
-extension of a similar method in the ``LQ`` class, adapted to take into
-account the fact that the model’s matrices depend on the Markov  state
+extension of a similar method in the LQ class from lqcontrol.py, adapted to let
+state-space matrices depend on the Markov  state
 
 The code below runs
 `this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
@@ -680,7 +679,7 @@ Simulating a large number of such economies over time reveals
 interesting dynamics
 
 Debt tends to stay low and stable, but
-periodically spikes up to high levels
+recurrently surges temporarily to higher levels
 
 .. code-block:: python3
 

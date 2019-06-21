@@ -15,14 +15,14 @@ How to Pay for a War: Part 3
 **Co-author**: `Sebastian Graves <https://github.com/sebgraves>`__
 
 
-Another Application of Markov Jump Linear Quadratic Dynamic Programming
+Roll-Over Risk: Another Application of Markov Jump Linear Quadratic Dynamic Programming
 =======================================================================
 
-This lecture is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
 As earlier, we use Markov jump linear quadratic (LQ) dynamic programming
-problems to implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for
-extending his classic 1979 :cite:`Barro1979` model of tax smoothing
+problems to implement some ideas Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) that
+extend his classic 1979 :cite:`Barro1979` model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
@@ -307,8 +307,8 @@ With the lower interest rate, the government has an incentive to
 increase debt over time
 
 However, with “roll-over risk”, debt is
-periodically reset to zero, and taxes spike up
+recurrently reset to zero and taxes spike up
 
 Consequently, the
-government is wary of letting debt get too high, due to the high cost of
+government is wary of letting debt get too high, due to the high costs of
 a “sudden stop”

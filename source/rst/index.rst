@@ -18,11 +18,10 @@
     :titlesonly:
 
     test_lecture
-    geom_series
     lss_examples
     tax_smoothing_1
     tax_smoothing_2
     tax_smoothing_3
     coase
-
+    
     zreferences
