@@ -4,7 +4,7 @@
 
     ****
     Home
-    ****   
+    ****
 
 .. only:: latex
 
@@ -22,5 +22,6 @@
     tax_smoothing_1
     tax_smoothing_2
     tax_smoothing_3
-	
+    coase
+    
     zreferences
