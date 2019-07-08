@@ -18,12 +18,9 @@ How to Pay for a War: Part 1
 Reader's Guide
 ===================
 
-This lecture has two purposes
-
-First, we describe how **Markov jump linear quadratic dynamic programming**, a powerful extension of the method described in
-:doc:`LQ dynamic programming <lqcontrol>` 
-
-Second, we describe how the method can be used to extend the :cite:`Barro1979` model of optimal tax-smoothing and government debt in a 
+This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture
+:doc:`Markov Jump LQ dynamic programming <markov_jump_lq>` 
+to extend the :cite:`Barro1979` model of optimal tax-smoothing and government debt in a 
 particular direction
 
 This lecture has two sequels that offer further extensions of the Barro model
@@ -33,18 +30,8 @@ This lecture has two sequels that offer further extensions of the Barro model
   2. :doc:`How to Pay for a War: Part 3 <tax_smoothing_3>`
 
   
-
-
-An Application of Markov Jump Linear Quadratic Dynamic Programming
-==================================================================
-
-
-This lecture and the two subsequent ones -- :doc:`How to Pay for a War: Part 2 <tax_smoothing_2>` and 
-:doc:`How to Pay for a War: Part 3 <tax_smoothing_3>` --  extend  Barro’s classic 1979 :cite:`Barro1979` model
-of tax smoothing
-
 The extensions are modified versions of
-his 1979 model suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
+his 1979 model later suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
 
 Barro’s original 1979 :cite:`Barro1979` model is about a government that borrows and lends
 in order to minimize an intertemporal measure of distortions
@@ -56,8 +43,8 @@ Technical tractability induced Barro to assume that
 
 -  the one-period risk-free interest rate is constant
 
-By using a secret weapon – *Markov jump linear quadratic dynamic
-programming* – we  allow interest rates to move over time in
+By using  *Markov jump linear quadratic dynamic
+programming* we  can allow interest rates to move over time in
 empirically interesting ways
 
 Also, by expanding the dimension of the
@@ -89,8 +76,9 @@ Barro (1979) :cite:`Barro1979` assumed
 Barro’s model can be mapped into a discounted linear quadratic dynamic
 programming problem
 
-Our generalizations of Barro’s (1979) :cite:`Barro1979` model, partly inspired by Barro
-(1999) :cite:`barro1999determinants` and Barro (2003) :cite:`barro2003religion`, assume
+Partly inspired by Barro
+(1999) :cite:`barro1999determinants` and Barro (2003) :cite:`barro2003religion`,
+our generalizations of Barro’s (1979) :cite:`Barro1979` model assume
 
 -  that the government borrows or saves in the form of risk-free bonds
    of maturities :math:`1, 2, \ldots , H`
@@ -121,7 +109,8 @@ dynamic programming problem to represent variation over time in
 
 -  roll over risks
 
-The idea underlying **Markov jump linear quadratic dynamic programming**
+As described in :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>`,
+the idea underlying **Markov jump linear quadratic dynamic programming**
 is to replace the constant matrices defining a **linear quadratic
 dynamic programming problem** with matrices that are fixed functions of
 an :math:`N` state Markov chain
@@ -161,12 +150,8 @@ Thus, both the simple and the more fine-grained versions of Barro’s
 models are ways of precisely formulating the classic issue of *How to
 pay for a war*
 
-Organization
-^^^^^^^^^^^^
 
 This lecture describes:
-
--  Markov jump linear quadratic (LQ) dynamic programming
 
 -  An application of Markov jump LQ dynamic programming to a model in
    which a government faces exogenous time-varying interest rates for
@@ -176,191 +161,6 @@ A :doc:`sequel to this
 lecture <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
 issues risk-free debt of different maturities
-
-Markov Jump Linear Quadratic Dynamic Programming
-=================================================
-
-**Markov jump linear quadratic dynamic programming** combines advantages
-of
-
--  the computational simplicity of **linear quadratic dynamic
-   programming**, and
-
--  the ability of **finite state Markov chains** to represent
-   interesting patterns of random variation
-
-The idea underlying **Markov jump linear quadratic dynamic programming**
-is to replace the constant matrices defining a **linear quadratic
-dynamic programming problem** with matrices that are fixed functions of
-an :math:`N` state Markov chain
-
-For infinite horizon problems, this leads to :math:`N` interrelated
-matrix Riccati equations that determine :math:`N` optimal value
-functions and :math:`N` linear decision rules
-
-These value functions and
-decision rules apply in the :math:`N` Markov states: i.e. when the
-Markov state is in state :math:`j`, the value function and the decision rule
-for state :math:`j` prevails
-
-The Ordinary Discounted Linear Quadratic Dynamic Programming Problem
---------------------------------------------------------------------
-
-It is handy to have the following reminder in mind
-
-A **linear quadratic dynamic programming problem** consists of a scalar
-discount factor :math:`\beta \in (0,1)`, an :math:`n\times 1` state
-vector :math:`x_t`, an initial condition for :math:`x_0`, a
-:math:`k \times 1` control vector :math:`u_t`, a :math:`p \times 1`
-random shock vector :math:`w_{t+1}` and the following two triples of
-matrices:
-
--  A triple of matrices :math:`(R, Q, W)` defining a loss function
-
-.. math::  r(x_t, u_t) = x_t' R x_t + u_t' Q u_t + 2 u_t' W x_t
-
--  a triple of matrices :math:`(A, B, C)` defining a state-transition
-   law
-
-.. math::  x_{t+1} = A x_t + B u_t + C w_{t+1}
-
-The problem is
-
-.. math::
-
-
-   -x_0' P x_0 - \rho = \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, u_t)
-
-subject to the transition law for the state
-
-The optimal decision rule for this problem has the form
-
-.. math::  u_t = - F x_t
-
-and the optimal value function is of the form
-
-.. math::  -\left( x_t' P x_t  + \rho \right)
-
-where :math:`P` solves the algebraic matrix Riccati equation
-
-.. math::
-
-
-   P = R+ \beta A' P A
-             -(\beta B'  P A + W)' (Q + \beta B P B )^{-1} (\beta B P A + W)
-
-and the constant :math:`\rho` satisfies
-
-.. math::
-
-   \rho = \beta
-     \left( \rho + {\rm trace}(P C C') \right)
-
-and the matrix :math:`F` in the decision rule for :math:`u_t` satisfies
-
-.. math::
-
-
-   F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
-
-Markov Jump Coefficients
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-The idea is to make the matrices :math:`A, B, C, R, Q, W` fixed
-functions of a finite state :math:`s` that is governed by an :math:`N`
-state Markov chain
-
-This makes decision rules depend on the Markov
-state, and so fluctuate through time in limited ways
-
-In particular, we use the following extension of a discrete time linear
-quadratic dynamic programming problem
-
-We let :math:`s(t) \equiv s_t \in [1, 2, \ldots, N]` be a time :math:`t` realization of an
-:math:`N`-state Markov chain with transition matrix :math:`\Pi` having
-typical element :math:`\Pi_{ij}`
-
-Here :math:`i` denotes today and
-:math:`j` denotes tomorrow and
-
-.. math::  \Pi_{ij} = {\rm Prob}(s_{t+1} = j |s_t = i)
-
-We’ll switch between labeling today’s state as :math:`s(t)` and
-:math:`i` and between labeling tomorrow’s state as :math:`s(t+1)` or
-:math:`j`
-
-The decision maker solves the minimization problem:
-
-.. math::
-
-  \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, s(t), u_t)
-
-
-with
-
-.. math::
-
-  r(x_t, s(t), u_t) = -( x_t' R(s_t) x_t + u_t' Q(s_t) u_t + 2 u_t' W(s_t) x_t)
-
-
-subject to linear laws of motion with matrices :math:`(A,B,C)` each
-possibly dependent on the Markov-state-\ :math:`s_t`:
-
-.. math::
-
-
-    x_{t+1} = A(s_t) x_t + B(s_t) u_t + C(s_t) w_{t+1}
-
-where :math:`\{w_{t+1}\}` is an i.i.d. stochatic process with
-:math:`w_{t+1} \sim {\cal N}(0,I)`
-
-The optimal decision rule for this problem has the form
-
-.. math::  u_t = - F(s_t) x_t
-
-and the optimal value functions are of the form
-
-.. math::  -\left( x_t' P(s_t) x_t  + \rho(s_t) \right)
-
-or equivalently
-
-.. math::  -x_t' P_i x_t - \rho_i
-
-The optimal value functions :math:`- x' P_i x - \rho_i` for
-:math:`i = 1, \ldots, n` satisfy the :math:`N`
-interrelated Bellman equations
-
-.. math::
-
-    -x' P_i x - \rho_i  = \max_u - \biggl[ x'R_i x + u' Q_i u + 2 u' W_i x \\
-                    \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
-                    (A_i x + B_i u + C_i w) x + \rho_j) \biggr]
-
-
-The matrices :math:`P(s(t)) = P_i` and the scalars
-:math:`\rho(s_t) = \rho_i, i = 1, \ldots`, n satisfy the following stacked system of
-**algebraic matrix Riccati** equations:
-
-.. math::
-
-
-   P_i = R_i + \beta \sum_j A_i' P_j A_i
-    \Pi_{ij}
-             -\sum_j \Pi_{ij}[ (\beta B_i'  P_j A_i + W_i)' (Q + \beta B_i' P_j B_i)^{-1}
-             (\beta B_i' P_j A_i + W_i)]
-
-.. math::
-
-   \rho_i = \beta
-    \sum_j \Pi_{ij} ( \rho_j + {\rm trace}(P_j C_i C_i') )
-
-and the :math:`F_i` in the optimal decision rules are
-
-.. math::
-
-
-   F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
-   (\beta \sum_j \Pi_{ij}(B_i' P_j A_i )+ W_i)
 
 
 Barro (1979) Model
