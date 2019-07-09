@@ -18,7 +18,7 @@ Markov Jump Linear Quadratic Dynamic Programming
 Overview
 =========
 
-This lecture describes infinite-horizon **Markov jump linear quadratic dynamic programming**, a powerful extension of the method described in
+This lecture describes infinite-horizon  a powerful extension of the method described in
 :doc:`LQ dynamic programming <lqcontrol>` 
 
 
@@ -34,6 +34,8 @@ of
 The idea is to replace the constant matrices that define a **linear quadratic
 dynamic programming problem** with :math:`N` sets of matrices that are fixed functions of
 the state of an :math:`N` state Markov chain
+
+The state of the Markov chain joints  the continuous :math:`n \times 1` state vector :math:`x_t` to form the state of the system 
 
 For the class of infinite horizon problems being studied in this lecture, this leads to :math:`N` interrelated
 matrix Riccati equations that determine :math:`N` optimal value
@@ -106,7 +108,7 @@ and the matrix :math:`F` in the decision rule for :math:`u_t` satisfies
    F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
 
 
-With the preceding formulas in mind, we are ready to approach Markov Jump LQ dynamic programming
+With the preceding formulas in mind, we are ready to approach Markov Jump linear quadratic dynamic programming
 
 
 Linked Ricatti equations for Markov LQ dynamic programming
