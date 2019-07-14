@@ -56,7 +56,7 @@ and the transition law for continous state variable :math:`k_t` is
 .. math::
 
 
-   k_{t+1}-k_{t}=u_{t}.
+   k_{t+1}-k_{t}=u_{t}
 
 We can think of :math:`k_t` as the decision maker’s capital and
 :math:`u_t` as costs of adjusting the level of capital.
@@ -70,7 +70,7 @@ Denote the state transition matrix for Markov state
 .. math::
 
 
-   \Pr \left(s_{t+1}=\bar{s}_{j}\mid s_{t}=\bar{s}_{i}\right)=\Pi_{ij}.
+   \Pr \left(s_{t+1}=\bar{s}_{j}\mid s_{t}=\bar{s}_{i}\right)=\Pi_{ij}
 
 Let :math:`x_{t}=\begin{bmatrix} k_{t}\\ 1 \end{bmatrix}`
 
@@ -159,12 +159,12 @@ Markov state :math:`s_t`
 .. math::
 
 
-   f_1(\bar{s_1})=f_1(\bar{s_2})=1,
+   f_1(\bar{s_1})=f_1(\bar{s_2}) = 1,
 
 .. math::
 
 
-   f_2(\bar{s_1})=f_2(\bar{s_2})=1.
+   f_2(\bar{s_1})=f_2(\bar{s_2}) = 1
 
 In contrast to :math:`f_1(s_t)` and :math:`f_2(s_t)`, we make the
 adjustment cost :math:`d(s_t)` vary across Markov states :math:`s_t`.
@@ -174,7 +174,7 @@ We the adjustment cost to be lower in Markov state :math:`\bar{s}_2`
 .. math::
 
 
-   d(\bar{s_1})=1, d(\bar{s_2})=0.5.
+   d(\bar{s_1})=1, d(\bar{s_2}) = 0.5
 
 The following code forms a Markov switching LQ problem and computes the
 optimal value functions and optimal decision rules for each Markov state
@@ -226,19 +226,21 @@ Now we’ll plot the decision rules and see if they make sense
     # optimal choice in state s2
     u2_star = - ex1_a.Fs[1, 0, 1] - ex1_a.Fs[1, 0, 0] * k_grid
 
-    plt.plot(k_grid, k_grid + u1_star, label="$\overline{s}_1$ (high)")
-    plt.plot(k_grid, k_grid + u2_star, label="$\overline{s}_2$ (low)")
+    fig, ax = plt.subplots()
+    ax.plot(k_grid, k_grid + u1_star, label="$\overline{s}_1$ (high)")
+    ax.plot(k_grid, k_grid + u2_star, label="$\overline{s}_2$ (low)")
 
     # the optimal k*
-    plt.scatter([0.5, 0.5], [0.5, 0.5], marker="*")
-    plt.plot([k_star[0], k_star[0]], [0., 1.0], '--')
+    ax.scatter([0.5, 0.5], [0.5, 0.5], marker="*")
+    ax.plot([k_star[0], k_star[0]], [0., 1.0], '--')
 
     # 45 degree line
-    plt.plot([0., 1.], [0., 1.], '--', label="45 degree line")
+    ax.plot([0., 1.], [0., 1.], '--', label="45 degree line")
 
-    plt.xlabel("$k_t$")
-    plt.ylabel("$k_{t+1}$")
-    plt.legend()
+    ax.set_xlabel("$k_t$")
+    ax.set_ylabel("$k_{t+1}$")
+    ax.legend()
+    plt.show()
 
 The above graph plots $k_{t+1}= k_t + u_t = k_t - F x_t $ as an affine
 (i.e., linear in :math:`k_t` plus a constant) function of :math:`k_t`
@@ -266,10 +268,11 @@ the Markov state :math:`s_t` takes a value that makes it cheaper.
     x0 = np.array([[0., 1.]]).T
     x_path = ex1_a.compute_sequence(x0, ts_length=T)[0]
 
-    plt.plot(range(T), x_path[0, :-1])
-    plt.xlabel("$t$")
-    plt.ylabel("$k_t$")
-    plt.title("Optimal path of $k_t$")
+    fig, ax = plt.subplots()
+    ax.plot(range(T), x_path[0, :-1])
+    ax.set_xlabel("$t$")
+    ax.set_ylabel("$k_t$")
+    ax.set_title("Optimal path of $k_t$")
     plt.show()
 
 Now we’ll depart from the preceding transition matrix that made the
@@ -326,13 +329,14 @@ We can plot optimal decision rules associated with different
 .. code-block:: python3
 
     for i, state_var in enumerate(state_vec1):
-        plt.plot(λ_vals, F1[:, i], label="$\overline{s}_1$", color="b")
-        plt.plot(λ_vals, F2[:, i], label="$\overline{s}_2$", color="r")
+        fig, ax = plt.subplots()
+        ax.plot(λ_vals, F1[:, i], label="$\overline{s}_1$", color="b")
+        ax.plot(λ_vals, F2[:, i], label="$\overline{s}_2$", color="r")
 
-        plt.xlabel("$\lambda$")
-        plt.ylabel("$F(s_t)$")
-        plt.title(f"Coefficient on {state_var}")
-        plt.legend()
+        ax.set_xlabel("$\lambda$")
+        ax.set_ylabel("$F(s_t)$")
+        ax.set_title(f"Coefficient on {state_var}")
+        ax.legend()
         plt.show()
 
 Notice how the decision rules’ constants and slopes behave as functions
@@ -412,14 +416,14 @@ decision rules for cases with different Markov transition matrices
     def run(construct_func, vals_dict, state_vec):
         """
         A Wrapper function that repeat the computation above,
-        for different cases.
+        for different cases
         """
 
         Qs, Rs, Ns, As, Bs, Cs, k_star = construct_func(**vals_dict)
 
         # symmetric Π
         # notice that pure periodic transition is a special case
-        # when λ=1.
+        # when λ=1
         print("symmetric Π case:\n")
         λ_vals = np.linspace(0., 1., 10)
         F1 = np.empty((λ_vals.size, len(state_vec)))
@@ -435,14 +439,15 @@ decision rules for cases with different Markov transition matrices
             F2[i, :] = mplq.Fs[1, 0, :]
 
         for i, state_var in enumerate(state_vec):
-            plt.figure()
-            plt.plot(λ_vals, F1[:, i], label="$\overline{s}_1$", color="b")
-            plt.plot(λ_vals, F2[:, i], label="$\overline{s}_2$", color="r")
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            ax.plot(λ_vals, F1[:, i], label="$\overline{s}_1$", color="b")
+            ax.plot(λ_vals, F2[:, i], label="$\overline{s}_2$", color="r")
 
-            plt.xlabel("$\lambda$")
-            plt.ylabel("$F(\overline{s}_t)$")
-            plt.title(f"coefficient on {state_var}")
-            plt.legend()
+            ax.set_xlabel("$\lambda$")
+            ax.set_ylabel("$F(\overline{s}_t)$")
+            ax.set_title(f"coefficient on {state_var}")
+            ax.legend()
             plt.show()
 
         # plot optimal k*(s_t) and k that optimal policies are targeting
@@ -453,18 +458,18 @@ decision rules for cases with different Markov transition matrices
                 F = [F1, F2][i]
                 c = ["b", "r"][i]
                 plt.plot([0, 1], [k_star[i], k_star[i]], "--", color=c, label="$k^*(\overline{s}_"+str(i+1)+")$")
-                # k + (- Fk * k - Fc) = k
-                # k = - Fc / Fk
                 plt.plot(λ_vals, - F[:, 1] / F[:, 0], color=c, label="$k^{target}(\overline{s}_"+str(i+1)+")$")
 
             # plot a vertical line at λ=0.5
-            plt.plot([0.5, 0.5], [min(k_star), max(k_star)], "-.")
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            ax.plot([0.5, 0.5], [min(k_star), max(k_star)], "-.")
 
-            plt.xlabel("$\lambda$")
-            plt.ylabel("$k$")
-            plt.title("Optimal k levels and k targets")
-            plt.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, "$\lambda=0.5$")
-            plt.legend(bbox_to_anchor=(1., 1.))
+            ax.set_xlabel("$\lambda$")
+            ax.set_ylabel("$k$")
+            ax.set_title("Optimal k levels and k targets")
+            ax.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, "$\lambda=0.5$")
+            ax.legend(bbox_to_anchor=(1., 1.))
             plt.show()
 
         # asymmetric Π
@@ -557,7 +562,7 @@ Set :math:`f_1(s_t)` and :math:`d(s_t)` as constant functions and
 .. math::
 
 
-   f_2(\bar{s}_1) = 0.5, f_2(\bar{s}_2) = 1.
+   f_2(\bar{s}_1) = 0.5, f_2(\bar{s}_2) = 1
 
 .. code-block:: python3
 
@@ -572,7 +577,7 @@ that follows the evolution law
 .. math::
 
 
-   w_{t+1}=\alpha_{0}\left(s_{t}\right)+\rho\left(s_{t}\right)w_{t}+\sigma\left(s_{t}\right)\epsilon_{t+1},\quad\epsilon_{t+1}\sim N\left(0,1\right).
+   w_{t+1}=\alpha_{0}\left(s_{t}\right)+\rho\left(s_{t}\right)w_{t}+\sigma\left(s_{t}\right)\epsilon_{t+1},\quad\epsilon_{t+1}\sim N\left(0,1\right)
 
 We think of :math:`w_t` as a rental rate or tax rate that the decision
 maker pays each period for :math:`k_t`.
@@ -623,7 +628,7 @@ and
    0\\
    0\\
    \sigma\left(s_{t}\right)
-   \end{bmatrix}}}\epsilon_{t+1}.
+   \end{bmatrix}}}\epsilon_{t+1}
 
 .. code-block:: python3
 
