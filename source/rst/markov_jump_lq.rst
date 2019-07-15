@@ -245,6 +245,10 @@ To begin, we import these Python modules
 Example 1
 =========
 
+This example is a version of a classic problem of optimally adjusting a variable :math:`k_t` to a target level in the face of costly adjustment
+
+This provides a  model of gradual adjustment 
+
 Given :math:`k_{0}`, the objective function is
 
 .. math::
@@ -619,14 +623,14 @@ We can plot optimal decision rules for different :math:`\lambda` and
         ax.set_title(f"coefficient on {state_var}")
         plt.show()
 
-The following code defined a wrapper function that computes optimal
+The following code defines a wrapper function that computes optimal
 decision rules for cases with different Markov transition matrices
 
 .. code-block:: python3
 
     def run(construct_func, vals_dict, state_vec):
         """
-        A Wrapper function that repeat the computation above,
+        A Wrapper function that repeats the computation above
         for different cases
         """
 
@@ -765,8 +769,7 @@ levels change as :math:`\lambda` changes.
 
     run(construct_arrays1, {"f1_vals":[0.5, 1.]}, state_vec1)
 
-d
-~
+
 
 Set :math:`f_1(s_t)` and :math:`d(s_t)` as constant functions and
 
@@ -890,8 +893,7 @@ and
 
     state_vec2 = ["k", "constant term", "w"]
 
-a
-~
+
 
 Only :math:`d(s_t)` depends on :math:`s_t`.
 
@@ -899,8 +901,7 @@ Only :math:`d(s_t)` depends on :math:`s_t`.
 
     run(construct_arrays2, {"d_vals":[1., 0.5]}, state_vec2)
 
-b
-~
+
 
 Only :math:`f_1(s_t)` depends on :math:`s_t`.
 
@@ -908,8 +909,7 @@ Only :math:`f_1(s_t)` depends on :math:`s_t`.
 
     run(construct_arrays2, {"f1_vals":[0.5, 1.]}, state_vec2)
 
-c
-~
+
 
 Only :math:`f_2(s_t)` depends on :math:`s_t`.
 
@@ -917,8 +917,7 @@ Only :math:`f_2(s_t)` depends on :math:`s_t`.
 
     run(construct_arrays2, {"f2_vals":[0.5, 1.]}, state_vec2)
 
-d
-~
+
 
 Only :math:`\alpha_0(s_t)` depends on :math:`s_t`.
 
@@ -926,8 +925,7 @@ Only :math:`\alpha_0(s_t)` depends on :math:`s_t`.
 
     run(construct_arrays2, {"α0_vals":[0.5, 1.]}, state_vec2)
 
-e
-~
+
 
 Only :math:`\rho(s_t)` depends on :math:`s_t`.
 
@@ -935,8 +933,7 @@ Only :math:`\rho(s_t)` depends on :math:`s_t`.
 
     run(construct_arrays2, {"ρ_vals":[0.5, 0.9]}, state_vec2)
 
-f
-~
+
 
 Only :math:`\sigma(s_t)` depends on :math:`s_t`.
 
@@ -949,7 +946,7 @@ Only :math:`\sigma(s_t)` depends on :math:`s_t`.
 
 
 More examples
-^^^^^^^^^^^^^^
+==============
 
 The following  lectures describe how Markov jump  linear quadratic dynamic programming  can be used to extend the :cite:`Barro1979` model
 of optimal tax-smoothing and government debt in several interesting directions

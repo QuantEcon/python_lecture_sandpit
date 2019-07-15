@@ -88,11 +88,11 @@ our generalizations of Barro’s (1979) :cite:`Barro1979` model assume
 
 Our generalizations are designed to fit within a generalization of an
 ordinary linear quadratic dynamic programming problem in which matrices
-defining the quadratic objective function and the state transition
+that define the quadratic objective function and the state transition
 function are **time-varying** and **stochastic**
 
 This generalization, known as a **Markov jump linear quadratic dynamic
-program** combines
+program**, combines
 
 -  the computational simplicity of **linear quadratic dynamic
    programming**, and
@@ -121,7 +121,7 @@ matrix Riccati equations that pin down :math:`N` value functions and
 states
 
 Public Finance Questions
-^^^^^^^^^^^^^^^^^^^^^^^^
+=========================
 
 Barro’s 1979 :cite:`Barro1979` model is designed to answer questions such as
 
@@ -315,7 +315,7 @@ model
 
 We can check this using the :math:`F` matrix of the LQ model
 
-As :math:`u_t = -F x_t`, we have:
+Because :math:`u_t = -F x_t`, we have
 
 .. math::  T_t = S x_t + M u_t = (S - MF) x_t
 
@@ -324,13 +324,13 @@ and
 .. math::  T_{t+1} = (S-MF)x_{t+1} = (S-MF)(Ax_t + B u_t + C w_{t+1}) = (S-MF)((A-BF)x_t + C w_{t+1})
 
 Therefore, the conditional expectation of :math:`T_{t+1}` at time
-:math:`t` is:
+:math:`t` is
 
 .. math::  E_t T_{t+1} = (S-MF)(A-BF)x_t
 
-Consequently, taxation is a martingale (:math:`E_t T_{t+1} = T_t`) if:
+Consequently, taxation is a martingale (:math:`E_t T_{t+1} = T_t`) if
 
-.. math:: (S-MF)(A-BF) = (S-MF)
+.. math:: (S-MF)(A-BF) = (S-MF) ,
 
 which holds in this case:
 
