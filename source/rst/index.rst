@@ -22,7 +22,6 @@
     tax_smoothing_1
     tax_smoothing_2
     tax_smoothing_3
-    coase
     markov_jump_lq
     mj_lq_dp
 
