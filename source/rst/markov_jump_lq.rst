@@ -21,9 +21,9 @@ Overview
 This lecture describes **Markov jump linear quadratic dynamic programming**, an extension of the method described in
 :doc:`LQ dynamic programming <lqcontrol>` 
 
-Markov jump linear quadratic dynamic programming is  described and analyzed in :cite:`DGC1999` and the references cited there
+Markov jump linear quadratic dynamic programming is  described and analyzed in :cite:`do1999solutions` and the references cited there
 
-The method has been applied to problems in  macroeconomics and monetary economiccs by :cite:`SvenssonWilliams2008` and :cite:`SvenssonWilliamd2009`
+The method has been applied to problems in  macroeconomics and monetary economiccs by :cite:`svensson2008optimal` and :cite:`SvenssonWilliams2009`
 
 The periodic models of seasonality described in chapter 14 of :cite:`HS2013` are a special case of Markov jump linear quadratic problems
 
