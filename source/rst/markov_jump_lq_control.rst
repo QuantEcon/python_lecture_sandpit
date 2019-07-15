@@ -14,7 +14,7 @@ Markov Jump LQ Control
 
 
 Subtitle
-============================
+========
 
 
 .. code-block:: ipython
