@@ -1,4 +1,4 @@
-.. _mj_lq_dp:
+.. _markov_jump_lq_control:
 
 .. include:: /_static/includes/lecture_howto_py.raw
 
@@ -6,9 +6,9 @@
     single: python
 
 
-**********
-Title
-**********
+**********************
+Markov Jump LQ Control
+**********************
 
 .. contents:: :depth: 2
 
