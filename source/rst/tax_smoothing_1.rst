@@ -376,41 +376,20 @@ varies over time, we must allow the M matrix to be time-varying
 Our :math:`Q` and :math:`W` matrices must also vary over time
 
 We can solve such a
-model using the ``LQ_Markov`` class that solves Markov jump linear
+model using the ``LQMarkov`` class that solves Markov jump linear
 quandratic control problems as described above
 
 The code for the class can be viewed
-`here <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`__
+`here <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334>`__
 
-The class takes a variable number of arguments that allow there to be
-an arbitrary :math:`N` Markov states
-
-To accommodate this, the
-matrices for each Markov state must be held in a ``namedtuple``
+The class takes lists of matrices that corresponds to :math:`N` Markov states
 
 The value and policy functions are then found by iterating on the system of
 algebraic matrix Riccati equations
 
-The solutions for :math:`P,F,\rho` are stored in Python “dictionaries”
+The solutions for :math:`Ps,Fs,ds` are stored as attributes
 
 The class also contains a “method” for simulating the model
-
-This is an
-extension of a similar method in the LQ class from lqcontrol.py, adapted to let
-state-space matrices depend on the Markov  state
-
-The code below runs
-`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
-containing the class and function we need using QuantEcon.py's
-``fetch_nb_dependencies`` function
-
-.. code-block:: ipython
-
-    from quantecon.util.notebooks import fetch_nb_dependencies
-    fetch_nb_dependencies(['lq_markov.py'],
-                          repo='https://github.com/QuantEcon/QuantEcon.notebooks',
-                          folder='dependencies')
-    %run lq_markov.py
 
 
 Barro Model with a Time-varying Interest Rate
@@ -445,35 +424,38 @@ a constant interest rate, government debt would explode
 
 .. code-block:: python3
 
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each Markov state
-    world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
-
+    # Create list of matrices that corresponds to each Markov state
     Π = np.array([[0.8, 0.2],
                   [0.2, 0.8]])
+
+    As = [A, A]
+    Bs = [B, B]
+    Cs = [C, C]
+    Rs = [R, R]
 
     M1 = np.array([[-β - 0.02]])
     M2 = np.array([[-β + 0.017]])
 
     Q1 = M1.T @ M1
     Q2 = M2.T @ M2
+    Qs = [Q1, Q2]
     W1 = M1.T @ S
     W2 = M2.T @ S
+    Ws = [W1, W2]
 
-    # Sets up the two states of the world
-    v1 = world(A=A, B=B, C=C, R=R, Q=Q1, W=W1)
-    v2 = world(A=A, B=B, C=C, R=R, Q=Q2, W=W2)
-
-    MJLQBarro = LQ_Markov(β, Π, v1, v2)
+    # create Markov Jump LQ DP problem instance
+    MJLQBarro = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    MJLQBarro.stationary_values();
 
 The decision rules are now dependent on the Markov state:
 
 .. code-block:: python3
 
-    MJLQBarro.F[1]
+    MJLQBarro.Fs[0]
 
 .. code-block:: python3
 
-    MJLQBarro.F[2]
+    MJLQBarro.Fs[1]
 
 Simulating a large number of such economies over time reveals
 interesting dynamics
@@ -486,7 +468,7 @@ recurrently surges temporarily to higher levels
     T = 2000
     x0 = np.array([[1000, 1, 25]])
     for i in range(250):
-        x, u, w, s = MJLQBarro.compute_sequence(x0, ts_length=T)
+        x, u, w, s = MJLQBarro.compute_sequence(x0, ts_length=T, random_state=i)
         plt.plot(list(range(T+1)), x[0, :])
     plt.xlabel('Time')
     plt.ylabel('Taxation')
