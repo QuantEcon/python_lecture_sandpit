@@ -20,8 +20,8 @@ Roll-Over Risk: Another Application of Markov Jump Linear Quadratic Dynamic Prog
 
 This is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
-As earlier, we use Markov jump linear quadratic (LQ) dynamic programming
-problems to implement some ideas Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) that
+As earlier, we use method introduced in lecture :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>`
+to implement some ideas Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) that
 extend his classic 1979 :cite:`Barro1979` model of tax smoothing
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
@@ -158,19 +158,6 @@ Because state 3 is “bad today”, the next period cannot have “good yesterda
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-The code below runs
-`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
-containing the class and function we need using QuantEcon.py's
-``fetch_nb_dependencies`` function
-
-.. code-block:: ipython
-
-    from quantecon.util.notebooks import fetch_nb_dependencies
-    fetch_nb_dependencies(['lq_markov.py'],
-                          repo='https://github.com/QuantEcon/QuantEcon.notebooks',
-                          folder='dependencies')
-    %run lq_markov.py
-
 .. code-block:: python3
 
     # Model parameters
@@ -208,21 +195,21 @@ containing the class and function we need using QuantEcon.py's
     Q = M.T @ M
     W = M.T @ S
 
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state of the world
-    world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
-
     Π = np.array([[0.95,   0, 0.05,   0],
                   [0.95,   0, 0.05,   0],
                   [0,    0.9,    0, 0.1],
                   [0,    0.9,    0, 0.1]])
 
-    # Sets up the four states of the world
-    v1 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
-    v2 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
-    v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
-    v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
+    # Construct lists of matrices that correspond to each state
+    As = [A, A, A, A]
+    Bs = [B, B, B, B]
+    Cs = [C, C, C, C]
+    Rs = [R1, R2, R1, R2]
+    Qs = [Q, Q, Q, Q]
+    Ws = [W, W, W, W]
 
-    MJLQBarro = LQ_Markov(β, Π, v1, v2, v3, v4)
+    MJLQBarro = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    MJLQBarro.stationary_values();
 
 This model is simulated below, using the same process for :math:`G_t` as
 in :doc:`this lecture <tax_smoothing_2>`
@@ -244,7 +231,7 @@ government uses those assets to lower taxation today
 
     x0 = np.array([[0, 1, 25]])
     T = 300
-    x, u, w, state = MJLQBarro.compute_sequence(x0, ts_length=T)
+    x, u, w, state = MJLQBarro.compute_sequence(x0, ts_length=T, random_state=1234)
 
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])
@@ -277,14 +264,16 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
     Q = M.T @ M
     W = M.T @ S
 
-    # Sets up the four states of the world
-    v1 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
-    v2 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
-    v3 = world(A=A, B=B, C=C, R=R1, Q=Q, W=W)
-    v4 = world(A=A, B=B, C=C, R=R2, Q=Q, W=W)
+    # construct lists of matrices
+    As = [A, A, A, A]
+    Bs = [B, B, B, B]
+    Cs = [C, C, C, C]
+    Rs = [R1, R2, R1, R2]
+    Qs = [Q, Q, Q, Q]
+    Ws = [W, W, W, W]
 
-    MJLQBarro2 = LQ_Markov(β, Π, v1, v2, v3, v4)
-    x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T)
+    MJLQBarro2 = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T, random_state=1234)
 
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])
