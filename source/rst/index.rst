@@ -23,6 +23,5 @@
     tax_smoothing_2
     tax_smoothing_3
     markov_jump_lq
-    markov_jump_lq_control
 
     zreferences

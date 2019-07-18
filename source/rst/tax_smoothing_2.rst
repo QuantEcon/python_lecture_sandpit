@@ -422,15 +422,13 @@ containing the class and function we need using QuantEcon.py's
     x, u, w, t = MJLQBarro.compute_sequence(x0, ts_length=300)
 
     # Plot of one and two-period debt issuance
-    plt.figure(figsize=(12, 4))
-    plt.subplot(121)
-    plt.plot(u[0, :])
-    plt.title('One-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(122)
-    plt.plot(u[1, :])
-    plt.title('Two-period debt issuance')
-    plt.xlabel('Time')
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+    ax1.plot(u[0, :])
+    ax1.set_title('One-period debt issuance')
+    ax1.set_xlabel('Time')
+    ax2.plot(u[1, :])
+    ax2.set_title('Two-period debt issuance')
+    ax2.set_xlabel('Time')
     plt.show()
 
 The above simulations show that when no penalty is imposed on different
@@ -466,15 +464,13 @@ two-period debt:
     x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300)
 
     # Plot of one and two-period debt issuance
-    plt.figure(figsize=(12, 4))
-    plt.subplot(121)
-    plt.plot(u[0, :])
-    plt.title('One-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(122)
-    plt.plot(u[1, :])
-    plt.title('Two-period debt issuance')
-    plt.xlabel('Time')
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+    ax1.plot(u[0, :])
+    ax1.set_title('One-period debt issuance')
+    ax1.set_xlabel('Time')
+    ax2.plot(u[1, :])
+    ax2.set_title('Two-period debt issuance')
+    ax2.set_xlabel('Time')
     plt.show()
 
 A Model with Restructuring
@@ -721,23 +717,19 @@ above
 
     # Plots of different maturities debt issuance
 
-    plt.figure(figsize=(16, 4))
-    plt.subplot(141)
-    plt.plot(u[0, :])
-    plt.title('One-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(142)
-    plt.plot(u[1, :])
-    plt.title('Two-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(143)
-    plt.plot(u[2, :])
-    plt.title('Three-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(144)
-    plt.plot(u[0, :] + u[1, :] + u[2, :])
-    plt.title('Total debt issuance')
-    plt.xlabel('Time')
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize=(16, 4))
+    ax1.plot(u[0, :])
+    ax1.set_title('One-period debt issuance')
+    ax1.set_xlabel('Time')
+    ax2.plot(u[1, :])
+    ax2.set_title('Two-period debt issuance')
+    ax2.set_xlabel('Time')
+    ax3.plot(u[2, :])
+    ax3.set_title('Three-period debt issuance')
+    ax3.set_xlabel('Time')
+    ax4.plot(u[0, :] + u[1, :] + u[2, :])
+    ax4.set_title('Total debt issuance')
+    ax4.set_xlabel('Time')
     plt.tight_layout()
     plt.show()
 
@@ -745,7 +737,8 @@ above
 
     # Plot share of debt issuance that is short-term
 
-    plt.plot(u[0, :] / (u[0, :] + u[1, :] + u[2, :]))
-    plt.title('One-period debt issuance share')
-    plt.xlabel('Time')
+    fig, ax = plt.subplots()
+    ax.plot((u[0, :] / (u[0, :] + u[1, :] + u[2, :])))
+    ax.set_title('One-period debt issuance share')
+    ax.set_xlabel('Time')
     plt.show()
