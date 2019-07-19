@@ -20,7 +20,7 @@ An Application of Markov Jump Linear Quadratic Dynamic Programming
 
 This is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
 
-We use Markov jump linear quadratic (LQ) dynamic programming problems to
+We use method introduced in lecture :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>` to
 implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for extending his
 classic 1979 model of tax smoothing
 
@@ -261,11 +261,11 @@ on the Markov state at time :math:`t`
 
 
 As shown in the :doc:`previous lecture <tax_smoothing_1>`,
-the ``LQ_Markov`` class can solve Markov jump LQ problems when given the
+the ``LQMarkov`` class can solve Markov jump LQ problems when given the
 :math:`A, B, C, R, Q, W` matrices for each Markov state
 
 The function below maps the primitive matrices and parameters from the above
-two-period model into the matrices that the ``LQ_Markov`` class requires:
+two-period model into the matrices that the ``LQMarkov`` class requires:
 
 .. code-block:: ipython
 
@@ -278,7 +278,7 @@ two-period model into the matrices that the ``LQ_Markov`` class requires:
 
         """
         Function which takes A22, C2, Ug, p_{t, t+1}, p_{t, t+2} and penalty parameter c1, and returns the
-        required matrices for the LQ_Markov model: A, B, C, R, Q, W
+        required matrices for the LQMarkov model: A, B, C, R, Q, W
         This version uses the condensed version of the endogenous state
         """
 
@@ -331,7 +331,7 @@ With the above function, we can proceed to solve the model in two steps:
    :math:`U_{g,t}, A_{22,t}, C_{2,t}, p_{t,t+1}, p_{t,t+2}` into the
    :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` Markov states
 
-2. Use the ``LQ_markov`` class to solve the resulting n-state Markov
+2. Use the ``LQMarkov`` class to solve the resulting n-state Markov
    jump LQ problem
 
 Example Showing the Importance of the Penalty on Different Issuance Across Maturities
@@ -371,25 +371,7 @@ transition matrix for the Markov state, we use:
 Thus, each Markov state is persistent, and there is an equal chance of
 moving from one to the other
 
-The code below runs
-`this file <https://github.com/QuantEcon/QuantEcon.notebooks/blob/master/dependencies/lq_markov.py>`_
-containing the class and function we need using QuantEcon.py's
-``fetch_nb_dependencies`` function
-
-.. code-block:: ipython
-
-    from quantecon.util.notebooks import fetch_nb_dependencies
-    fetch_nb_dependencies(['lq_markov.py'],
-                          repo='https://github.com/QuantEcon/QuantEcon.notebooks',
-                          folder='dependencies')
-    %run lq_markov.py
-
 .. code-block:: python3
-
-    from collections import namedtuple
-
-    # Create namedtuple to keep the R, Q, A, B, C, W matrices for each state
-    world = namedtuple('world', ['A', 'B', 'C', 'R', 'Q', 'W'])
 
     # Model parameters
     β, Gbar, ρ, σ, c1 = 0.95, 5, 0.8, 1, 0
@@ -407,19 +389,24 @@ containing the class and function we need using QuantEcon.py's
     R1[0, 0] = R1[0, 0] + 1e-9
     R2[0, 0] = R2[0, 0] + 1e-9
 
-    # Sets up the two states of the world
-    v1 = world(A=A1, B=B1, C=C1, R=R1, Q=Q1, W=W1)
-    v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
+    # Construct lists of matrices correspond to each state
+    As = [A1, A2]
+    Bs = [B1, B2]
+    Cs = [C1, C2]
+    Rs = [R1, R2]
+    Qs = [Q1, Q2]
+    Ws = [W1, W2]
 
     Π = np.array([[0.9, 0.1],
                   [0.1, 0.9]])
 
-    # Solve the model using the LQ_Markov class
-    MJLQBarro = LQ_Markov(β, Π, v1, v2)
+    # Construct and solve the model using the LQMarkov class
+    MJLQBarro = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    MJLQBarro.stationary_values()
 
     # Simulate the model
     x0 = np.array([[100, 50, 1, 10]])
-    x, u, w, t = MJLQBarro.compute_sequence(x0, ts_length=300)
+    x, u, w, t = MJLQBarro.compute_sequence(x0, ts_length=300, random_state=1234)
 
     # Plot of one and two-period debt issuance
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
@@ -453,15 +440,20 @@ two-period debt:
     R1[0, 0] = R1[0, 0] + 1e-9
     R2[0, 0] = R2[0, 0] + 1e-9
 
-    # Sets up the two states of the world
-    v1 = world(A=A1, B=B1, C=C1, R=R1, Q=Q1, W=W1)
-    v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
+    # Construct lists of matrices
+    As = [A1, A2]
+    Bs = [B1, B2]
+    Cs = [C1, C2]
+    Rs = [R1, R2]
+    Qs = [Q1, Q2]
+    Ws = [W1, W2]
 
-    # Solve the model using the LQ_Markov class
-    MJLQBarro2 = LQ_Markov(β, Π, v1, v2)
+    # Construct and solve the model using the LQMarkov class
+    MJLQBarro2 = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    MJLQBarro2.stationary_values()
 
     # Simulate the model
-    x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300)
+    x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300, random_state=1234)
 
     # Plot of one and two-period debt issuance
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
@@ -609,7 +601,7 @@ Model with Restructuring as a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
 
 As with the previous model, we can use a function to map the primitives
-of the model with restructuring into the matrices that the ``LQ_Markov``
+of the model with restructuring into the matrices that the ``LQMarkov``
 class requires:
 
 .. code-block:: python3
@@ -618,7 +610,7 @@ class requires:
 
         """
         Function which takes A22, C2, T, p_t, c and returns the
-        required matrices for the LQ_Markov model: A, B, C, R, Q, W
+        required matrices for the LQMarkov model: A, B, C, R, Q, W
         Note, p_t should be a T by 1 matrix
         c is the rescheduling cost (a scalar)
         This version uses the condensed version of the endogenous state
@@ -703,15 +695,20 @@ above
     R2[1, 1] = R2[1, 1] + 1e-9
     R2[2, 2] = R2[2, 2] + 1e-9
 
-    # Sets up the two states of the world
-    v1 = world(A=A1, B=B1, C=C1, R=R1, Q=Q1, W=W1)
-    v2 = world(A=A2, B=B2, C=C2, R=R2, Q=Q2, W=W2)
+    # Construct lists of matrices
+    As = [A1, A2]
+    Bs = [B1, B2]
+    Cs = [C1, C2]
+    Rs = [R1, R2]
+    Qs = [Q1, Q2]
+    Ws = [W1, W2]
 
-    # Solve the model using the LQ_Markov class
-    MJLQBarro3 = LQ_Markov(β, Π, v1, v2)
+    # Construct and solve the model using the LQMarkov class
+    MJLQBarro3 = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
+    MJLQBarro3.stationary_values()
 
     x0 = np.array([[5000, 5000, 5000, 1, 10]])
-    x, u, w, t = MJLQBarro3.compute_sequence(x0, ts_length=300)
+    x, u, w, t = MJLQBarro3.compute_sequence(x0, ts_length=300, random_state=1234)
 
 .. code-block:: python3
 
