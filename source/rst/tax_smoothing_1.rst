@@ -71,7 +71,7 @@ Barro (1979) :cite:`Barro1979` assumed
 
 -  that the gross interest rate on the one-period bond is constant and
    equal to :math:`\beta^{-1}`, the reciprocal of the factor
-   :math:`\beta` at which the government discounts future tax disortions.
+   :math:`\beta` at which the government discounts future tax distortions.
 
 Barro’s model can be mapped into a discounted linear quadratic dynamic
 programming problem.
@@ -83,7 +83,7 @@ our generalizations of Barro’s (1979) :cite:`Barro1979` model assume
 -  that the government borrows or saves in the form of risk-free bonds
    of maturities :math:`1, 2, \ldots , H`.
 
--  that interest rates on those bonds are time-varying and in particular
+-  that interest rates on those bonds are time-varying and in particular,
    governed by a jointly stationary stochastic process.
 
 Our generalizations are designed to fit within a generalization of an
@@ -237,7 +237,7 @@ It follows that the :math:`(R, Q, W)` matrices are implicitly defined by:
 
 .. math::  T_t^2 = x_t'S'Sx_t + u_t'M_t'M_tu_t + 2 u_t'M_t'S x_t
 
-If we assume that :math:`p_{t,t+1} = \beta`, then :math:`M_t \equiv M = -\beta`
+If we assume that :math:`p_{t,t+1} = \beta`, then :math:`M_t \equiv M = -\beta`.
 
 In this case, none of
 the LQ matrices are time varying, and we can use the original LQ
@@ -380,7 +380,7 @@ model using the ``LQMarkov`` class that solves Markov jump linear
 quandratic control problems as described above.
 
 The code for the class can be viewed
-`here <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334>`__
+`here <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334>`__.
 
 The class takes lists of matrices that corresponds to :math:`N` Markov states.
 
@@ -412,7 +412,7 @@ We use:
 
 .. math::  \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix}
 
-(so each Markov state is persisent, and there is an equal chance
+(so each Markov state is persistent, and there is an equal chance
 of moving from one state to the other)
 
 The choice of parameters means that the unconditional expectation of
@@ -460,7 +460,7 @@ The decision rules are now dependent on the Markov state:
 Simulating a large number of such economies over time reveals
 interesting dynamics.
 
-Debt tends to stay low and stable, but
+Debt tends to stay low and stable but
 recurrently surges temporarily to higher levels.
 
 .. code-block:: python3

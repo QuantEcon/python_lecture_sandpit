@@ -32,7 +32,7 @@ Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumpti
 smoothing model.
 
 Our generalizations of his 1979 model will also look
-like a souped up consumption smoothing model.
+like a souped-up consumption smoothing model.
 
 In this lecture, we try to capture the tax-smoothing problem of a
 government that faces **roll-over risk**.
@@ -89,7 +89,7 @@ in Markov state 1 and
 
 .. math::  p^t_{t+1} = 0
 
-in Markov state 2
+in Markov state 2.
 
 Consequently, in the second Markov state, the
 government is unable to borrow, and the budget constraint becomes
@@ -288,7 +288,7 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
     ax2.set_xlabel('Time')
     plt.show()
 
-With the lower interest rate, the government has an incentive to
+With a lower interest rate, the government has an incentive to
 increase debt over time.
 
 However, with “roll-over risk”, debt is
