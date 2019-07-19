@@ -406,7 +406,7 @@ moving from one to the other
 
     # Simulate the model
     x0 = np.array([[100, 50, 1, 10]])
-    x, u, w, t = MJLQBarro.compute_sequence(x0, ts_length=300, random_state=1234)
+    x, u, w, t = MJLQBarro.compute_sequence(x0, ts_length=300)
 
     # Plot of one and two-period debt issuance
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
@@ -453,7 +453,7 @@ two-period debt:
     MJLQBarro2.stationary_values()
 
     # Simulate the model
-    x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300, random_state=1234)
+    x, u, w, t = MJLQBarro2.compute_sequence(x0, ts_length=300)
 
     # Plot of one and two-period debt issuance
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
@@ -708,7 +708,7 @@ above
     MJLQBarro3.stationary_values()
 
     x0 = np.array([[5000, 5000, 5000, 1, 10]])
-    x, u, w, t = MJLQBarro3.compute_sequence(x0, ts_length=300, random_state=1234)
+    x, u, w, t = MJLQBarro3.compute_sequence(x0, ts_length=300)
 
 .. code-block:: python3
 

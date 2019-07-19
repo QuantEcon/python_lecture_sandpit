@@ -231,7 +231,7 @@ government uses those assets to lower taxation today
 
     x0 = np.array([[0, 1, 25]])
     T = 300
-    x, u, w, state = MJLQBarro.compute_sequence(x0, ts_length=T, random_state=1234)
+    x, u, w, state = MJLQBarro.compute_sequence(x0, ts_length=T)
 
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])
@@ -273,7 +273,7 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
     Ws = [W, W, W, W]
 
     MJLQBarro2 = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
-    x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T, random_state=1234)
+    x, u, w, state = MJLQBarro2.compute_sequence(x0, ts_length=T)
 
     # Calculate taxation each period from the budget constraint and the Markov state
     tax = np.zeros([T, 1])

@@ -468,7 +468,7 @@ recurrently surges temporarily to higher levels
     T = 2000
     x0 = np.array([[1000, 1, 25]])
     for i in range(250):
-        x, u, w, s = MJLQBarro.compute_sequence(x0, ts_length=T, random_state=i)
+        x, u, w, s = MJLQBarro.compute_sequence(x0, ts_length=T)
         plt.plot(list(range(T+1)), x[0, :])
     plt.xlabel('Time')
     plt.ylabel('Taxation')
