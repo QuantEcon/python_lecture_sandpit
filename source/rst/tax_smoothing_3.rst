@@ -16,26 +16,26 @@ How to Pay for a War: Part 3
 
 
 Roll-Over Risk: Another Application of Markov Jump Linear Quadratic Dynamic Programming
-=======================================================================
+=======================================================================================
 
-This is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This is another :doc:`sequel to an earlier lecture <tax_smoothing_1>`.
 
 As earlier, we use method introduced in lecture :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>`
 to implement some ideas Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) that
-extend his classic 1979 :cite:`Barro1979` model of tax smoothing
+extend his classic 1979 :cite:`Barro1979` model of tax smoothing.
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
-taxes
+taxes.
 
 Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
-smoothing model
+smoothing model.
 
 Our generalizations of his 1979 model will also look
-like a souped up consumption smoothing model
+like a souped up consumption smoothing model.
 
 In this lecture, we try to capture the tax-smoothing problem of a
-government that faces **roll-over risk**
+government that faces **roll-over risk**.
 
 Roll-over Risk
 --------------
@@ -44,10 +44,10 @@ Let :math:`T_t` denote tax collections, :math:`\beta` a discount factor,
 :math:`b_{t,t+1}` time :math:`t+1` goods that the government promises to
 pay at :math:`t`, :math:`G_t` government purchases, :math:`p^t_{t+1}`
 the number of time :math:`t` goods received per time :math:`t+1` goods
-promised
+promised.
 
 The stochastic process of government expenditures is
-exogenous
+exogenous.
 
 The government’s problem is to choose a plan for borrowing
 and tax collections :math:`\{b_{t+1}, T_t\}_{t=0}^\infty` to minimize
@@ -66,16 +66,16 @@ where :math:`w_{t+1} \sim {\cal N}(0,I)`. The variables
 :math:`T_t, b_{t, t+1}` are *control* variables chosen at :math:`t`,
 while :math:`b_{t-1,t}` is an endogenous state variable inherited from
 the past at time :math:`t` and :math:`p^t_{t+1}` is an exogenous state
-variable at time :math:`t`
+variable at time :math:`t`.
 
 This is the same set-up as used :doc:`in this
-lecture <tax_smoothing_1>`
+lecture <tax_smoothing_1>`.
 
 We will consider a situation in which the government faces “roll-over
-risk”
+risk”.
 
 Specifically, we shut down the government’s ability to borrow in
-one of the Markov states
+one of the Markov states.
 
 A Dead End
 ^^^^^^^^^^
@@ -93,18 +93,18 @@ in Markov state 2
 
 Consequently, in the second Markov state, the
 government is unable to borrow, and the budget constraint becomes
-:math:`T_t = G_t + b_{t-1,t}`
+:math:`T_t = G_t + b_{t-1,t}`.
 
 However, if this is the only adjustment we make in our linear-quadratic
 model, the government will not set :math:`b_{t,t+1} = 0`, which is the
-outcome we want to express *roll-over* risk in period :math:`t`
+outcome we want to express *roll-over* risk in period :math:`t`.
 
 Instead, the government would have an incentive to set :math:`b_{t,t+1}`
 to a large negative number in state 2 – it would accumulate large
 amounts of *assets* to bring into period :math:`t+1` because that is
-cheap (Our Riccati equations will discover this for us!)
+cheap (Our Riccati equations will discover this for us!).
 
-Thus, we must represent “roll-over risk” some other way
+Thus, we must represent “roll-over risk” some other way.
 
 A Better Representation of Roll-over Risk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -118,23 +118,23 @@ extend the model to have four Markov states:
 4. Bad today, bad yesterday
 
 where good is a state in which effectively the government can issue debt
-and bad is a state in which effectively the government can’t issue debt
+and bad is a state in which effectively the government can’t issue debt.
 
-We’ll explain what *effectively* means shortly
+We’ll explain what *effectively* means shortly.
 
 We now set
 
 .. math::  p^t_{t+1} = \beta
 
-in all states
+in all states.
 
 In addition – and this is important because it defines what we mean by
 *effectively* -- we put a large penalty on the :math:`b_{t-1,t}`
-element of the state vector in states 2 and 4
+element of the state vector in states 2 and 4.
 
 This will prevent the
 government from wishing to issue any debt in states 3 or 4 because it
-would experience a large penalty from doing so in the next period
+would experience a large penalty from doing so in the next period.
 
 The transition matrix for this formulation is:
 
@@ -147,9 +147,9 @@ The transition matrix for this formulation is:
    \end{bmatrix}
 
 This transition matrix ensures that the Markov state cannot move, for
-example, from state 3 to state 1
+example, from state 3 to state 1.
 
-Because state 3 is “bad today”, the next period cannot have “good yesterday”
+Because state 3 is “bad today”, the next period cannot have “good yesterday”.
 
 .. code-block:: ipython
 
@@ -212,20 +212,20 @@ Because state 3 is “bad today”, the next period cannot have “good yesterda
     MJLQBarro.stationary_values();
 
 This model is simulated below, using the same process for :math:`G_t` as
-in :doc:`this lecture <tax_smoothing_2>`
+in :doc:`this lecture <tax_smoothing_2>`.
 
 When :math:`p^t_{t+1} = \beta`
-government debt fluctuates around zero
+government debt fluctuates around zero.
 
 The spikes in the series for
 taxation show periods when the government is unable to access financial
 markets: positive spikes occur when debt is positive, and the government
-must raise taxes in the current period
+must raise taxes in the current period.
 
-Negative spikes occur when the government has positive asset holdings
+Negative spikes occur when the government has positive asset holdings.
 
 An inability to use financial markets in the next period means that the
-government uses those assets to lower taxation today
+government uses those assets to lower taxation today.
 
 .. code-block:: python3
 
@@ -239,23 +239,21 @@ government uses those assets to lower taxation today
         tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
     # Plot of debt issuance and taxation
-    plt.figure(figsize=(16, 4))
-    plt.subplot(121)
-    plt.plot(x[0, :])
-    plt.title('One-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(122)
-    plt.plot(tax)
-    plt.title('Taxation')
-    plt.xlabel('Time')
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 4))
+    ax1.plot(x[0, :])
+    ax1.set_title('One-period debt issuance')
+    ax1.set_xlabel('Time')
+    ax2.plot(tax)
+    ax2.set_title('Taxation')
+    ax2.set_xlabel('Time')
     plt.show()
 
 We can adjust the model so that, rather than having debt fluctuate
 around zero, the government is a debtor in every period we allow it to
-borrow
+borrow.
 
 To accomplish this, we simply raise :math:`p^t_{t+1}` to
-:math:`\beta + 0.02 = 0.97`
+:math:`\beta + 0.02 = 0.97`.
 
 .. code-block:: python3
 
@@ -281,23 +279,21 @@ To accomplish this, we simply raise :math:`p^t_{t+1}` to
         tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
     # Plot of debt issuance and taxation
-    plt.figure(figsize=(16, 4))
-    plt.subplot(121)
-    plt.plot(x[0, :])
-    plt.title('One-period debt issuance')
-    plt.xlabel('Time')
-    plt.subplot(122)
-    plt.plot(tax)
-    plt.title('Taxation')
-    plt.xlabel('Time')
+    fig, (ax1, ax2) =  plt.subplots(1, 2, figsize=(16, 4))
+    ax1.plot(x[0, :])
+    ax1.set_title('One-period debt issuance')
+    ax1.set_xlabel('Time')
+    ax2.plot(tax)
+    ax2.set_title('Taxation')
+    ax2.set_xlabel('Time')
     plt.show()
 
 With the lower interest rate, the government has an incentive to
-increase debt over time
+increase debt over time.
 
 However, with “roll-over risk”, debt is
-recurrently reset to zero and taxes spike up
+recurrently reset to zero and taxes spike up.
 
 Consequently, the
 government is wary of letting debt get too high, due to the high costs of
-a “sudden stop”
+a “sudden stop”.
