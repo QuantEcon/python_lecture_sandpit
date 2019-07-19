@@ -51,10 +51,10 @@ government’s problem by expanding the dimension of the state.
 We assume
 
 -  that the government borrows or saves in the form of risk-free bonds
-   of maturities :math:`1, 2, \ldots , H`
+   of maturities :math:`1, 2, \ldots , H`.
 
 -  that interest rates on those bonds are time-varying and in particular are
-   governed by a jointly stationary stochastic process
+   governed by a jointly stationary stochastic process.
 
 Two example specifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,7 +62,7 @@ Two example specifications
 
 We’ll describe two possible specifications
 
--  In one, each period the government issues zero coupon
+-  In one, each period the government issues zero-coupon
    bonds of one- and two-period maturities and redeems them only when
    they mature -- in this version, the maturity structure of government
    debt at each date is partly inherited from the past.
@@ -329,10 +329,10 @@ With the above function, we can proceed to solve the model in two steps:
 
 1. Use ``LQ_markov_mapping`` to map
    :math:`U_{g,t}, A_{22,t}, C_{2,t}, p_{t,t+1}, p_{t,t+2}` into the
-   :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` Markov states
+   :math:`A, B, C, R, Q, W` matrices for each of the :math:`n` Markov states.
 
 2. Use the ``LQMarkov`` class to solve the resulting n-state Markov
-   jump LQ problem
+   jump LQ problem.
 
 Example Showing the Importance of the Penalty on Different Issuance Across Maturities
 -------------------------------------------------------------------------------------
@@ -471,10 +471,10 @@ A Model with Restructuring
 This model alters two features of the previous model:
 
 1. The maximum horizon of government debt is now extended to a general
-   *H* periods
+   *H* periods.
 
 2. The government is able to redesign the maturity structure of debt
-   every period
+   every period.
 
 We impose a cost on adjusting issuance of each maturity by amending the
 payoff function to become:
