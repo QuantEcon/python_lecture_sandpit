@@ -21,7 +21,7 @@ Reader's Guide
 This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture
 :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>` 
 to extend the :cite:`Barro1979` model of optimal tax-smoothing and government debt in a 
-particular direction
+particular direction.
 
 This lecture has two sequels that offer further extensions of the Barro model
 
@@ -31,11 +31,11 @@ This lecture has two sequels that offer further extensions of the Barro model
 
   
 The extensions are modified versions of
-his 1979 model later suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
+his 1979 model later suggested by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`).
 
 Barro’s original 1979 :cite:`Barro1979` model is about a government that borrows and lends
 in order to minimize an intertemporal measure of distortions
-caused by taxes
+caused by taxes.
 
 Technical tractability induced Barro to assume that
 
@@ -45,51 +45,51 @@ Technical tractability induced Barro to assume that
 
 By using  *Markov jump linear quadratic dynamic
 programming* we  can allow interest rates to move over time in
-empirically interesting ways
+empirically interesting ways.
 
 Also, by expanding the dimension of the
 state, we can add a maturity composition decision to the government’s
-problem
+problem.
 
 It is by doing these two things that we extend Barro’s 1979 :cite:`Barro1979`
-model along lines he suggested in Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`)
+model along lines he suggested in Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`).
 
 Barro (1979) :cite:`Barro1979` assumed
 
 -  that a government faces an **exogenous sequence** of expenditures
    that it must finance by a tax collection sequence whose expected
    present value equals the initial debt it owes plus the expected
-   present value of those expenditures
+   present value of those expenditures.
 
 -  that the government wants to minimize the following measure of tax
    distortions: :math:`E_0 \sum_{t=0}^{\infty} \beta^t T_t^2`, where :math:`T_t` are total tax collections and :math:`E_0`
    is a mathematical expectation conditioned on time :math:`0`
-   information
+   information.
 
 -  that the government trades only one asset, a risk-free one-period
-   bond
+   bond.
 
 -  that the gross interest rate on the one-period bond is constant and
    equal to :math:`\beta^{-1}`, the reciprocal of the factor
-   :math:`\beta` at which the government discounts future tax disortions
+   :math:`\beta` at which the government discounts future tax disortions.
 
 Barro’s model can be mapped into a discounted linear quadratic dynamic
-programming problem
+programming problem.
 
 Partly inspired by Barro
 (1999) :cite:`barro1999determinants` and Barro (2003) :cite:`barro2003religion`,
 our generalizations of Barro’s (1979) :cite:`Barro1979` model assume
 
 -  that the government borrows or saves in the form of risk-free bonds
-   of maturities :math:`1, 2, \ldots , H`
+   of maturities :math:`1, 2, \ldots , H`.
 
 -  that interest rates on those bonds are time-varying and in particular
-   governed by a jointly stationary stochastic process
+   governed by a jointly stationary stochastic process.
 
 Our generalizations are designed to fit within a generalization of an
 ordinary linear quadratic dynamic programming problem in which matrices
 that define the quadratic objective function and the state transition
-function are **time-varying** and **stochastic**
+function are **time-varying** and **stochastic**.
 
 This generalization, known as a **Markov jump linear quadratic dynamic
 program**, combines
@@ -98,7 +98,7 @@ program**, combines
    programming**, and
 
 -  the ability of **finite state Markov chains** to represent
-   interesting patterns of random variation
+   interesting patterns of random variation.
 
 We want the stochastic time variation in the matrices defining the
 dynamic programming problem to represent variation over time in
@@ -113,12 +113,12 @@ As described in :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>`,
 the idea underlying **Markov jump linear quadratic dynamic programming**
 is to replace the constant matrices defining a **linear quadratic
 dynamic programming problem** with matrices that are fixed functions of
-an :math:`N` state Markov chain
+an :math:`N` state Markov chain.
 
 For infinite horizon problems, this leads to :math:`N` interrelated
 matrix Riccati equations that pin down :math:`N` value functions and
 :math:`N` linear decision rules, applying to the :math:`N` Markov
-states
+states.
 
 Public Finance Questions
 =========================
@@ -148,42 +148,42 @@ questions such as
 
 Thus, both the simple and the more fine-grained versions of Barro’s
 models are ways of precisely formulating the classic issue of *How to
-pay for a war*
+pay for a war*.
 
 
 This lecture describes:
 
 -  An application of Markov jump LQ dynamic programming to a model in
    which a government faces exogenous time-varying interest rates for
-   issuing one-period risk-free debt
+   issuing one-period risk-free debt.
 
 A :doc:`sequel to this
 lecture <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
-issues risk-free debt of different maturities
+issues risk-free debt of different maturities.
 
 
 Barro (1979) Model
 ==================
 
 We begin by solving a version of the Barro (1979) :cite:`Barro1979` model by mapping it
-into the original LQ framework
+into the original LQ framework.
 
 As mentioned :doc:`in this lecture <perm_income_cons>`, the
 Barro model is mathematically isomorphic with the LQ permanent income
-model
+model.
 
 Let :math:`T_t` denote tax collections, :math:`\beta` a discount factor,
 :math:`b_{t,t+1}` time :math:`t+1` goods that the government promises to
 pay at :math:`t`, :math:`G_t` government purchases, :math:`p_{t,t+1}`
 the number of time :math:`t` goods received per time :math:`t+1` goods
-promised
+promised.
 
 Evidently, :math:`p_{t, t+1}` is inversely related to
-appropriate corresponding gross interest rates on government debt
+appropriate corresponding gross interest rates on government debt.
 
 In the spirit of Barro (1979) :cite:`Barro1979`, the stochastic process of government
-expenditures is exogenous
+expenditures is exogenous.
 
 The government’s problem is to choose a plan
 for taxation and borrowing :math:`\{b_{t+1}, T_t\}_{t=0}^\infty` to
@@ -206,7 +206,7 @@ The variables
 :math:`T_t, b_{t, t+1}` are *control* variables chosen at :math:`t`,
 while :math:`b_{t-1,t}` is an endogenous state variable inherited from
 the past at time :math:`t` and :math:`p_{t,t+1}` is an exogenous state
-variable at time :math:`t`
+variable at time :math:`t`.
 
 To begin, we  assume that
 :math:`p_{t,t+1}` is constant (and equal to :math:`\beta`) 
@@ -215,7 +215,7 @@ To begin, we  assume that
 
 To map into the LQ framework, we use
 :math:`x_t = \begin{bmatrix} b_{t-1,t} \\ z_t \end{bmatrix}` as the
-state vector, and :math:`u_t = b_{t,t+1}` as the control variable
+state vector, and :math:`u_t = b_{t,t+1}` as the control variable.
 
 Therefore, the :math:`(A, B, C)` matrices are defined by the state-transition law:
 
@@ -241,7 +241,7 @@ If we assume that :math:`p_{t,t+1} = \beta`, then :math:`M_t \equiv M = -\beta`
 
 In this case, none of
 the LQ matrices are time varying, and we can use the original LQ
-framework
+framework.
 
 We will implement this constant interest-rate version first, assuming
 that :math:`G_t` follows an AR(1) process:
@@ -311,9 +311,9 @@ We can now create an instance of ``LQ``:
 
 We can see the isomorphism by noting that consumption is a martingale in
 the permanent income model and that taxation is a martingale in Barro’s
-model
+model.
 
-We can check this using the :math:`F` matrix of the LQ model
+We can check this using the :math:`F` matrix of the LQ model.
 
 Because :math:`u_t = -F x_t`, we have
 
@@ -352,10 +352,10 @@ Barro model a large number of times:
     plt.show()
 
 We can see a similar, but a smoother pattern, if we plot government debt
-over time
+over time.
 
 Debt is smoother due to the persistence of the government
-spending process
+spending process.
 
 .. code-block:: python3
 
@@ -371,25 +371,25 @@ Python Class to Solve Markov Jump Linear Quadratic Control Problems
 ===================================================================
 
 To implement the extension to the Barro model in which :math:`p_{t,t+1}`
-varies over time, we must allow the M matrix to be time-varying
+varies over time, we must allow the M matrix to be time-varying.
 
-Our :math:`Q` and :math:`W` matrices must also vary over time
+Our :math:`Q` and :math:`W` matrices must also vary over time.
 
 We can solve such a
 model using the ``LQMarkov`` class that solves Markov jump linear
-quandratic control problems as described above
+quandratic control problems as described above.
 
 The code for the class can be viewed
 `here <https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334>`__
 
-The class takes lists of matrices that corresponds to :math:`N` Markov states
+The class takes lists of matrices that corresponds to :math:`N` Markov states.
 
 The value and policy functions are then found by iterating on the system of
-algebraic matrix Riccati equations
+algebraic matrix Riccati equations.
 
-The solutions for :math:`Ps,Fs,ds` are stored as attributes
+The solutions for :math:`Ps,Fs,ds` are stored as attributes.
 
-The class also contains a “method” for simulating the model
+The class also contains a “method” for simulating the model.
 
 
 Barro Model with a Time-varying Interest Rate
@@ -404,11 +404,11 @@ is to allow the interest rate to take two possible values. We set:
 .. math::  p^2_{t,t+1} = \beta - 0.017 = 0.933
 
 Thus, the first Markov state  has a low-interest rate, and the
-second Markov state has a high-interest rate
+second Markov state has a high-interest rate.
 
-We also need to specify a transition matrix for the Markov state
+We also need to specify a transition matrix for the Markov state.
 
-we use:
+We use:
 
 .. math::  \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix}
 
@@ -416,11 +416,11 @@ we use:
 of moving from one state to the other)
 
 The choice of parameters means that the unconditional expectation of
-:math:`p_{t,t+1}` is 0.9515, higher than :math:`\beta (=0.95)`
+:math:`p_{t,t+1}` is 0.9515, higher than :math:`\beta (=0.95)`.
 
 If we
 were to set :math:`p_{t,t+1} = 0.9515` in the version of the model with
-a constant interest rate, government debt would explode
+a constant interest rate, government debt would explode.
 
 .. code-block:: python3
 
@@ -458,10 +458,10 @@ The decision rules are now dependent on the Markov state:
     MJLQBarro.Fs[1]
 
 Simulating a large number of such economies over time reveals
-interesting dynamics
+interesting dynamics.
 
 Debt tends to stay low and stable, but
-recurrently surges temporarily to higher levels
+recurrently surges temporarily to higher levels.
 
 .. code-block:: python3
 

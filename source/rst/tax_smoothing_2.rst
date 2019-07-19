@@ -18,21 +18,21 @@ How to Pay for a War: Part 2
 An Application of Markov Jump Linear Quadratic Dynamic Programming
 ==================================================================
 
-This is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`
+This is a :doc:`sequel to an earlier lecture <tax_smoothing_1>`.
 
 We use method introduced in lecture :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>` to
 implement some suggestions by Barro (1999 :cite:`barro1999determinants`, 2003 :cite:`barro2003religion`) for extending his
-classic 1979 model of tax smoothing
+classic 1979 model of tax smoothing.
 
 Barro’s 1979 :cite:`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
-taxes
+taxes.
 
 Technically, Barro’s 1979 :cite:`Barro1979` model looks a lot like a consumption
-smoothing model
+smoothing model.
 
 Our generalizations of his 1979 :cite:`Barro1979` model will also look
-like a souped-up consumption smoothing model
+like a souped-up consumption smoothing model.
 
 Wanting tractability induced Barro in 1979 :cite:`Barro1979` to assume that
 
@@ -40,13 +40,13 @@ Wanting tractability induced Barro in 1979 :cite:`Barro1979` to assume that
 
 -  the one-period risk-free interest rate is constant
 
-In our :doc:`earlier lecture<tax_smoothing_1>`, we relaxed the second of these assumptions but not the first
+In our :doc:`earlier lecture<tax_smoothing_1>`, we relaxed the second of these assumptions but not the first.
 
 In particular, we used *Markov jump linear quadratic dynamic programming*
-to allow the exogenous interest rate to vary over time
+to allow the exogenous interest rate to vary over time.
 
 In this lecture, we add a maturity composition decision to the
-government’s problem by expanding the dimension of the state
+government’s problem by expanding the dimension of the state.
 
 We assume
 
@@ -65,10 +65,10 @@ We’ll describe two possible specifications
 -  In one, each period the government issues zero coupon
    bonds of one- and two-period maturities and redeems them only when
    they mature -- in this version, the maturity structure of government
-   debt at each date is partly inherited from the past
+   debt at each date is partly inherited from the past.
 
 -  In the second, the government redesigns the maturity
-   structure of the debt each period
+   structure of the debt each period.
 
 A Model with Two-period Debt and No Restructuring
 =================================================
@@ -79,18 +79,18 @@ pay at :math:`t`, :math:`b_{t,t+2}` time :math:`t+2` goods that the
 government promises to pay at time :math:`t`, :math:`G_t` government
 purchases, :math:`p_{t,t+1}` the number of time :math:`t` goods received
 per time :math:`t+1` goods promised, and :math:`p_{t,t+2}` the number of
-time :math:`t` goods received per time :math:`t+2` goods promised
+time :math:`t` goods received per time :math:`t+2` goods promised.
 
 Evidently, :math:`p_{t, t+1}, p_{t,t+2}` are inversely related to
-appropriate corresponding gross interest rates on government debt
+appropriate corresponding gross interest rates on government debt.
 
 In the spirit of Barro (1979) :cite:`Barro1979`, government
-expenditures are governed by an exogenous stochastic process
+expenditures are governed by an exogenous stochastic process.
 
 Given initial conditions :math:`b_{-2,0}, b_{-1,0}, z_0, i_0`, where
 :math:`i_0` is the initial Markov state, the government chooses a
 contingency plan for :math:`\{b_{t, t+1}, b_{t,t+2}, T_t\}_{t=0}^\infty`
-to maximize
+to maximize.
 
 .. math::  - E_0 \sum_{t=0}^\infty \beta^t \left[ T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 \right]
 
@@ -111,25 +111,25 @@ subject to the constraints
 
 Here :math:`w_{t+1} \sim {\cal N}(0,I)` and :math:`\Pi_{ij}` is
 the probability that the Markov state moves from state :math:`i` to
-state :math:`j` in one period
+state :math:`j` in one period.
 
 The variables
 :math:`T_t, b_{t, t+1}, b_{t,t+2}` are *control* variables chosen at
 :math:`t`, while the variables :math:`b_{t-1,t}, b_{t-2,t}` are
 endogenous state variables inherited from the past at time :math:`t` and
 :math:`p_{t,t+1}, p_{t,t+2}` are exogenous state variables at time
-:math:`t`
+:math:`t`.
 
 The parameter :math:`c_1` imposes a penalty on the government’s issuing
-different quantities of one and two-period debt
+different quantities of one and two-period debt.
 
 This penalty deters the
 government from taking large “long-short” positions in debt of different
-maturities. An example below will show this in action
+maturities. An example below will show this in action.
 
 As well as extending the model to allow for a maturity decision for
 government debt, we can also in principle allow the matrices
-:math:`U_{g,t}, A_{22,t}, C_{2,t}` to depend on the Markov state
+:math:`U_{g,t}, A_{22,t}, C_{2,t}` to depend on the Markov state.
 
 Mapping the Two-period Model into an LQ Markov Jump Problem
 ==============================================================
@@ -138,7 +138,7 @@ First, define
 
 .. math::  \hat b_t = b_{t-1,t} + b_{t-2,t} ,
 
-which is debt due at time :math:`t`
+which is debt due at time :math:`t`.
 
 Then define the endogenous part of the state:
 
@@ -207,7 +207,7 @@ and
 
 where :math:`p_{t,t+1}` is the discount on one period loans in the
 discrete Markov state at time :math:`t` and :math:`p_{t,t+2}` is the
-discount on two-period loans in the discrete Markov state
+discount on two-period loans in the discrete Markov state.
 
 Define
 
@@ -257,12 +257,12 @@ where
             C_t = \begin{bmatrix} 0 \cr C_{2,t} \end{bmatrix}
 
 Thus, in this problem all the matrices apart from :math:`B` may depend
-on the Markov state at time :math:`t`
+on the Markov state at time :math:`t`.
 
 
 As shown in the :doc:`previous lecture <tax_smoothing_1>`,
 the ``LQMarkov`` class can solve Markov jump LQ problems when given the
-:math:`A, B, C, R, Q, W` matrices for each Markov state
+:math:`A, B, C, R, Q, W` matrices for each Markov state.
 
 The function below maps the primitive matrices and parameters from the above
 two-period model into the matrices that the ``LQMarkov`` class requires:
@@ -348,7 +348,7 @@ and consequently:
 .. math::  A_{22} = \begin{bmatrix} 1 & 0 \\ \bar G & \rho \end{bmatrix} \hspace{2mm} , \hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix} \hspace{2mm} , \hspace{2mm} U_g = \begin{bmatrix} 0 & 1 \end{bmatrix}
 
 Therefore, in this example, :math:`A_{22}, C_2` and :math:`U_g` are not
-time-varying
+time-varying.
 
 We will assume that there are two Markov states, one with a
 flatter yield curve, and one with a steeper yield curve. In state 1,
@@ -361,7 +361,7 @@ and in state 2, prices are:
 .. math::  p^2_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm}  p^2_{t,t+2} = \beta^2 + 0.02
 
 We first solve the model with no penalty parameter on different issuance
-across maturities, i.e. :math:`c_1 = 0`
+across maturities, i.e. :math:`c_1 = 0`.
 
 We also need to specify a
 transition matrix for the Markov state, we use:
@@ -369,7 +369,7 @@ transition matrix for the Markov state, we use:
 .. math::  \Pi = \begin{bmatrix} 0.9 & 0.1 \\ 0.1 & 0.9 \end{bmatrix}
 
 Thus, each Markov state is persistent, and there is an equal chance of
-moving from one to the other
+moving from one to the other.
 
 .. code-block:: python3
 
@@ -420,9 +420,9 @@ moving from one to the other
 
 The above simulations show that when no penalty is imposed on different
 issuances across maturities, the government has an incentive to take
-large “long-short” positions in debt of different maturities
+large “long-short” positions in debt of different maturities.
 
-To prevent such an outcome, we now set :math:`c_1 = 0.01`
+To prevent such an outcome, we now set :math:`c_1 = 0.01`.
 
 This penalty is enough
 to ensure that the government issues positive quantities of both one and
@@ -489,18 +489,18 @@ The government’s budget constraint is now:
 
 
 To map this into the Markov Jump LQ framework, we define state and
-control variables
+control variables.
 
 Let:
 
 .. math::  \bar b_t = \begin{bmatrix} b^{t-1}_t \\ b^{t-1}_{t+1} \\ \vdots \\  b^{t-1}_{t+H-1} \end{bmatrix} \hspace{2mm} , \hspace{2mm} u_t = \begin{bmatrix} b^{t}_{t+1} \\ b^{t}_{t+2} \\ \vdots \\  b^{t}_{t+H} \end{bmatrix}
 
 Thus, :math:`\bar b_t` is the endogenous state (debt issued last period)
-and :math:`u_t` is the control (debt issued today)
+and :math:`u_t` is the control (debt issued today).
 
 As before, we will
 also have the exogenous state :math:`z_t`, which determines government
-spending
+spending.
 
 Therefore, the full state is:
 
@@ -519,7 +519,7 @@ Finally, we define three useful matrices :math:`S_s, S_x, \tilde S_x`:
 
 .. math::  b^{t-1}_t = \tilde S_x \bar b_t \text{ where } \tilde S_x = \begin{bmatrix} 1 & 0 & 0 & \cdots & 0 \end{bmatrix}
 
-In terms of dimensions, the first two matrices defined above are :math:`(H-1) \times H`
+In terms of dimensions, the first two matrices defined above are :math:`(H-1) \times H`.
 
 The last is :math:`1 \times H`
 
@@ -539,7 +539,7 @@ If we want to write this in terms of the full state, we have:
 
 .. math::  T_t = \begin{bmatrix}  (\tilde S_x + p_t'S_s'S_x) & Ug \end{bmatrix} x_t - p_t' u_t
 
-To simplify the notation, let :math:`S_t = \begin{bmatrix}  (\tilde S_x + p_t’S_s’S_x) & Ug \end{bmatrix}`
+To simplify the notation, let :math:`S_t = \begin{bmatrix}  (\tilde S_x + p_t’S_s’S_x) & Ug \end{bmatrix}`.
 
 Then
 
@@ -579,10 +579,10 @@ as follows:
 .. math::  W^c_t = W_t - c_2 S_c
 
 To finish mapping into the Markov jump LQ setup, we need to construct
-the law of motion for the full state
+the law of motion for the full state.
 
 This is simpler than in the
-previous setup, as we now have :math:`\bar b_{t+1} = u_t`
+previous setup, as we now have :math:`\bar b_{t+1} = u_t`.
 
 Therefore:
 
@@ -595,7 +595,7 @@ where
 
 .. math::  A_t = \begin{bmatrix} 0 & 0 \\ 0 & A_{22,t} \end{bmatrix} , \hspace{5mm} B = \begin{bmatrix} I \\ 0 \end{bmatrix} , \hspace{5mm} C = \begin{bmatrix} 0 \\ C_{2,t} \end{bmatrix}
 
-This completes the mapping into a Markov jump LQ problem
+This completes the mapping into a Markov jump LQ problem.
 
 Model with Restructuring as a Markov Jump Linear Quadratic Control Problem
 ============================================================================================
@@ -656,10 +656,10 @@ Example Model with Restructuring
 --------------------------------
 
 As an example of the model with restructuring, consider this model
-where :math:`H = 3`
+where :math:`H = 3`.
 
 We will assume that there are two Markov states, one with a
-flatter yield curve, and one with a steeper yield curve
+flatter yield curve, and one with a steeper yield curve.
 
 In state 1,
 prices are:
