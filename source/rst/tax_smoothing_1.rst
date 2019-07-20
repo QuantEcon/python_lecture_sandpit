@@ -16,7 +16,7 @@ How to Pay for a War: Part 1
 
 
 Reader's Guide
-===================
+==============
 
 This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture
 :doc:`Markov Jump LQ dynamic programming <markov_jump_lq>` 
@@ -121,7 +121,7 @@ matrix Riccati equations that pin down :math:`N` value functions and
 states.
 
 Public Finance Questions
-=========================
+========================
 
 Barro’s 1979 :cite:`Barro1979` model is designed to answer questions such as
 

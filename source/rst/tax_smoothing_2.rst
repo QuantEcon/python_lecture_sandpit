@@ -132,7 +132,7 @@ government debt, we can also in principle allow the matrices
 :math:`U_{g,t}, A_{22,t}, C_{2,t}` to depend on the Markov state.
 
 Mapping the Two-period Model into an LQ Markov Jump Problem
-==============================================================
+===========================================================
 
 First, define
 
