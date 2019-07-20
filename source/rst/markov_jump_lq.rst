@@ -16,7 +16,7 @@ Markov Jump Linear Quadratic Dynamic Programming
 
 
 Overview
-=========
+========
 
 This lecture describes **Markov jump linear quadratic dynamic programming**, an extension of the method described in
 :doc:`LQ dynamic programming <lqcontrol>` 
@@ -54,7 +54,7 @@ for state :math:`j` prevails
 
 
 Review of useful LQ dynamic programming formulas
-=================================================
+================================================
 
 To begin,it is handy to have the following reminder in mind
 
@@ -118,7 +118,7 @@ With the preceding formulas in mind, we are ready to approach Markov Jump linear
 
 
 Linked Ricatti equations for Markov LQ dynamic programming
-===========================================================
+==========================================================
 
 The key idea is to make the matrices :math:`A, B, C, R, Q, W` fixed
 functions of a finite state :math:`s` that is governed by an :math:`N`
@@ -219,7 +219,7 @@ and the :math:`F_i` in the optimal decision rules are
 
 
 Applications
-==============
+============
 
 We now describe some Python code and a few examples that put the code to work
 
@@ -945,7 +945,7 @@ Only :math:`\sigma(s_t)` depends on :math:`s_t`.
 
 
 More examples
-==============
+=============
 
 The following  lectures describe how Markov jump  linear quadratic dynamic programming  can be used to extend the :cite:`Barro1979` model
 of optimal tax-smoothing and government debt in several interesting directions
