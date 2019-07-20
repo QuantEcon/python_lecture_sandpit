@@ -19,13 +19,13 @@ Overview
 ========
 
 This lecture describes **Markov jump linear quadratic dynamic programming**, an extension of the method described in
-:doc:`LQ dynamic programming <lqcontrol>` 
+:doc:`LQ dynamic programming <lqcontrol>`.
 
-Markov jump linear quadratic dynamic programming is  described and analyzed in :cite:`do1999solutions` and the references cited there
+Markov jump linear quadratic dynamic programming is  described and analyzed in :cite:`do1999solutions` and the references cited there.
 
-The method has been applied to problems in  macroeconomics and monetary economiccs by :cite:`svensson2008optimal` and :cite:`SvenssonWilliams2009`
+The method has been applied to problems in  macroeconomics and monetary economics by :cite:`svensson2008optimal` and :cite:`SvenssonWilliams2009`.
 
-The periodic models of seasonality described in chapter 14 of :cite:`HS2013` are a special case of Markov jump linear quadratic problems
+The periodic models of seasonality described in chapter 14 of :cite:`HS2013` are a special case of Markov jump linear quadratic problems.
 
 
 **Markov jump linear quadratic dynamic programming** combines advantages
@@ -35,28 +35,28 @@ of
    programming**, with
 
 -  the ability of **finite state Markov chains** to represent
-   interesting patterns of random variation
+   interesting patterns of random variation.
 
 The idea is to replace the constant matrices that define a **linear quadratic dynamic programming problem** 
 with :math:`N` sets of matrices that are fixed functions of
-the state of an :math:`N` state Markov chain
+the state of an :math:`N` state Markov chain.
 
-The state of the Markov chain together with   the continuous :math:`n \times 1` state vector :math:`x_t` form the state of the system 
+The state of the Markov chain together with   the continuous :math:`n \times 1` state vector :math:`x_t` form the state of the system.
 
 For the class of infinite horizon problems being studied in this lecture, we obtain  :math:`N` interrelated
 matrix Riccati equations that determine :math:`N` optimal value
-functions and :math:`N` linear decision rules
+functions and :math:`N` linear decision rules.
 
-One of these value functions and one of these decision rules apply in each of the :math:`N` Markov states
+One of these value functions and one of these decision rules apply in each of the :math:`N` Markov states.
 
 That is,  when the Markov state is in state :math:`j`, the value function and the decision rule
-for state :math:`j` prevails
+for state :math:`j` prevails.
 
 
 Review of useful LQ dynamic programming formulas
 ================================================
 
-To begin,it is handy to have the following reminder in mind
+To begin,it is handy to have the following reminder in mind.
 
 A **linear quadratic dynamic programming problem** consists of a scalar
 discount factor :math:`\beta \in (0,1)`, an :math:`n\times 1` state
@@ -81,7 +81,7 @@ The problem is
 
    -x_0' P x_0 - \rho = \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, u_t)
 
-subject to the transition law for the state
+subject to the transition law for the state.
 
 The optimal decision rule for this problem has the form
 
@@ -114,7 +114,7 @@ and the matrix :math:`F` in the decision rule for :math:`u_t` satisfies
    F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
 
 
-With the preceding formulas in mind, we are ready to approach Markov Jump linear quadratic dynamic programming
+With the preceding formulas in mind, we are ready to approach Markov Jump linear quadratic dynamic programming.
 
 
 Linked Ricatti equations for Markov LQ dynamic programming
@@ -122,17 +122,17 @@ Linked Ricatti equations for Markov LQ dynamic programming
 
 The key idea is to make the matrices :math:`A, B, C, R, Q, W` fixed
 functions of a finite state :math:`s` that is governed by an :math:`N`
-state Markov chain
+state Markov chain.
 
 This makes decision rules depend on the Markov
-state, and so fluctuate through time in limited ways
+state, and so fluctuate through time in limited ways.
 
-In particular, we use the following extension of a discrete time linear
-quadratic dynamic programming problem
+In particular, we use the following extension of a discrete-time linear
+quadratic dynamic programming problem.
 
 We let :math:`s(t) \equiv s_t \in [1, 2, \ldots, N]` be a time :math:`t` realization of an
 :math:`N`-state Markov chain with transition matrix :math:`\Pi` having
-typical element :math:`\Pi_{ij}`
+typical element :math:`\Pi_{ij}`.
 
 Here :math:`i` denotes today and
 :math:`j` denotes tomorrow and
@@ -141,9 +141,9 @@ Here :math:`i` denotes today and
 
 We’ll switch between labeling today’s state as :math:`s(t)` and
 :math:`i` and between labeling tomorrow’s state as :math:`s(t+1)` or
-:math:`j`
+:math:`j`.
 
-The decision maker solves the minimization problem:
+The decision-maker solves the minimization problem:
 
 .. math::
 
@@ -165,8 +165,8 @@ possibly dependent on the Markov-state-\ :math:`s_t`:
 
     x_{t+1} = A(s_t) x_t + B(s_t) u_t + C(s_t) w_{t+1}
 
-where :math:`\{w_{t+1}\}` is an i.i.d. stochatic process with
-:math:`w_{t+1} \sim {\cal N}(0,I)`
+where :math:`\{w_{t+1}\}` is an i.i.d. stochastic process with
+:math:`w_{t+1} \sim {\cal N}(0,I)`.
 
 The optimal decision rule for this problem has the form
 
@@ -221,7 +221,7 @@ and the :math:`F_i` in the optimal decision rules are
 Applications
 ============
 
-We now describe some Python code and a few examples that put the code to work
+We now describe some Python code and a few examples that put the code to work.
 
 To begin, we import these Python modules
 
@@ -245,9 +245,9 @@ To begin, we import these Python modules
 Example 1
 =========
 
-This example is a version of a classic problem of optimally adjusting a variable :math:`k_t` to a target level in the face of costly adjustment
+This example is a version of a classic problem of optimally adjusting a variable :math:`k_t` to a target level in the face of costly adjustment.
 
-This provides a  model of gradual adjustment 
+This provides a  model of gradual adjustment.
 
 Given :math:`k_{0}`, the objective function is
 
@@ -266,14 +266,14 @@ where the one-period payoff function is
 :math:`E_0` is a mathematical expectation conditioned on time :math:`0`
 information :math:`x_0, s_0`
 
-and the transition law for continous state variable :math:`k_t` is
+and the transition law for continuous state variable :math:`k_t` is
 
 .. math::
 
 
    k_{t+1}-k_{t}=u_{t}
 
-We can think of :math:`k_t` as the decision maker’s capital and
+We can think of :math:`k_t` as the decision-maker’s capital and
 :math:`u_t` as costs of adjusting the level of capital.
 
 We assume that :math:`f_{1}\left(s_{t}\right)>0`,
@@ -473,7 +473,7 @@ function of :math:`k_t` in Markov state :math:`\bar{s}_2`.
 
 This happens because when :math:`k_t` is not at its fixed point,
 :math:`\left| u_t(\bar{s}_2)\right| > \left| u_t(\bar{s}_1)\right|`, so
-that the decision maker adjusts toward the fixed point faster when when
+that the decision-maker adjusts toward the fixed point faster when
 the Markov state :math:`s_t` takes a value that makes it cheaper.
 
 .. code-block:: python3
@@ -726,7 +726,7 @@ To illustrate the code with another example, we shall set
 
    f_1(\bar{s}_1) = 0.5, f_1(\bar{s}_2) = 1
 
-Thus, the sole role of the Markov jump state :math:`s_t` is to indentify
+Thus, the sole role of the Markov jump state :math:`s_t` is to identify
 times in which capital is very productive and other times in which it is
 less productive.
 
@@ -749,7 +749,7 @@ We call :math:`k^{target}(s_t)` a “target” because in each Markov state
 :math:`k_t` towards a fixed point :math:`k^{target}(s_t)`.
 
 When :math:`\lambda \rightarrow 0`, each Markov state becomes close to
-absorbing state and cosequently
+absorbing state and consequently
 :math:`k^{target}(s_t) \rightarrow k^*(s_t)`.
 
 But when :math:`\lambda \rightarrow 1`, the Markov transition matrix
@@ -795,7 +795,7 @@ that follows the evolution law
 We think of :math:`w_t` as a rental rate or tax rate that the decision
 maker pays each period for :math:`k_t`.
 
-To capture this idea, we add to the decision maker’s one-period payoff
+To capture this idea, we add to the decision-maker’s one-period payoff
 function the product of :math:`w_t` and :math:`k_t`
 
 .. math::
