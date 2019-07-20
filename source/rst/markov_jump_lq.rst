@@ -668,16 +668,15 @@ decision rules for cases with different Markov transition matrices
         # plot optimal k*(s_t) and k that optimal policies are targeting
         # only for example 1
         if state_vec == ["k", "constant term"]:
-            plt.figure()
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
             for i in range(2):
                 F = [F1, F2][i]
                 c = ["b", "r"][i]
-                plt.plot([0, 1], [k_star[i], k_star[i]], "--", color=c, label="$k^*(\overline{s}_"+str(i+1)+")$")
-                plt.plot(λ_vals, - F[:, 1] / F[:, 0], color=c, label="$k^{target}(\overline{s}_"+str(i+1)+")$")
+                ax.plot([0, 1], [k_star[i], k_star[i]], "--", color=c, label="$k^*(\overline{s}_"+str(i+1)+")$")
+                ax.plot(λ_vals, - F[:, 1] / F[:, 0], color=c, label="$k^{target}(\overline{s}_"+str(i+1)+")$")
 
             # plot a vertical line at λ=0.5
-            fig = plt.figure()
-            ax = fig.add_subplot(111)
             ax.plot([0.5, 0.5], [min(k_star), max(k_star)], "-.")
 
             ax.set_xlabel("$\lambda$")
