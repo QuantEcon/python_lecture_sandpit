@@ -384,7 +384,7 @@ Markov state :math:`s_t`
 In contrast to :math:`f_1(s_t)` and :math:`f_2(s_t)`, we make the
 adjustment cost :math:`d(s_t)` vary across Markov states :math:`s_t`.
 
-We the adjustment cost to be lower in Markov state :math:`\bar{s}_2`
+We set the adjustment cost to be lower in Markov state :math:`\bar{s}_2`
 
 .. math::
 
