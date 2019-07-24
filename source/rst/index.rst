@@ -19,9 +19,5 @@
 
     test_lecture
     lss_examples
-    tax_smoothing_1
-    tax_smoothing_2
-    tax_smoothing_3
-    markov_jump_lq
 
     zreferences
