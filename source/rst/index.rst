@@ -19,5 +19,6 @@
 
     test_lecture
     lss_examples
+    multiplicative_functionals
 
     zreferences
