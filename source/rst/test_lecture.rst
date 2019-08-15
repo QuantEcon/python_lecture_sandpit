@@ -76,7 +76,7 @@ Here's a numbered list
 
 Here is how we include code
 
-.. literalinclude:: /_static/code/test_lecture/test_python_file.py
+.. literalinclude:: /_static/lecture_specific/test_lecture/test_python_file.py
 
 
 New Section
