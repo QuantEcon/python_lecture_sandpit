@@ -50,7 +50,7 @@ To introduce components of the model, let
    demand shock at time :math:`t`
 -  :math:`\pi\_t = p_t S_t - c(Q_t) - d(I_t, S_t)` be the firm’s
    profits at time :math:`t`
--  :math:`\sum\_{t=0}\ :sup:`\infty \beta`\ t \pi\_t` 
+-  :math:`\sum_{t=0}^\infty \beta^t \pi_t` 
    be the present value of the firm’s profits at
    time :math:`0`
 -  :math:`I_{t+1} = I_t + Q_t - S_t` be the law of motion of inventories
@@ -443,7 +443,7 @@ Here the optimal production plan is
 
    Q_{t}^{h}=\frac{a_{0}+\nu_{t}-c_{1}}{c_{2}+a_{1}+d_{2}}.
 
-We introduce this **:math:`I_t` is hardwired to zero** specification in
+We introduce this :math:`I_t` **is hardwired to zero** specification in
 order to shed light on the role inventories play by comparing outcomes
 with those under the two other versions of the problem
 
