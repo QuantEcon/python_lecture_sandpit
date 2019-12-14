@@ -1,6 +1,29 @@
+.. _Inventory_sales_smoothing-v6:
 
+.. include:: /_static/includes/header.raw
+
+.. highlight:: python3
+
+
+************************************
 Production Smoothing via Inventories
-------------------------------------
+************************************
+
+
+.. contents:: :depth: 2
+
+**Co-authors: Thomas J. Sargent and Zejin**
+
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+.. code-block:: ipython
+  :class: hide-output
+
+  !pip install --upgrade quantecon
+
+
+Overview
+=========
 
 This notebook formulates a discounted dynamic program for a firm that
 chooses a production schedule to balance
@@ -303,7 +326,7 @@ values
 In the examples below, we alter some or all of these parameter values
 
 Example 1
-~~~~~~~~~
+=========
 
 In this example, the demand shock follows AR(1) process:
 
@@ -374,7 +397,7 @@ These two concepts correspond to these distinct altered firm problems.
    always
 
 Inventories not useful
-~~~~~~~~~~~~~~~~~~~~~~
+=======================
 
 Notice how the gap between the two production series grows as the stock
 of inventories grows
@@ -411,7 +434,7 @@ The optimum decision rule is
    Q_{t}^{ni}=\frac{a_{0}+\nu_{t}-c_{1}}{c_{2}+a_{1}}.
 
 Inventories Useful but we Hardwire them to be Zero Always
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==========================================================
 
 Next we turn to a distinct problem in which inventories are useful –
 meaning that there are costs of :math:`d_2 (I_t - S_t)^2` associated
@@ -487,7 +510,7 @@ confine the graphs to the first 10 periods:
 
 
 Example 2
-~~~~~~~~~
+=========
 
 Next we shut down randomness in demand and assume that the sdemand shock
 :math:`\nu_t` follows a deterministic path:
@@ -512,7 +535,7 @@ Again, we’ll compute and display outcomes in some figures
 
 
 Example 3
-~~~~~~~~~
+=========
 
 Now we’ll put randomness back into the demand shock process and also
 assume that there are zero costs of holding holding inventories
@@ -537,7 +560,7 @@ the following figures confirm
 
 
 Example 4
-~~~~~~~~~
+=========
 
 To bring out some features of the an optimal policy that are related to
 some tetechnical issues in linear control theory, we’ll now temporarily
@@ -600,8 +623,8 @@ We’ll set the horizon :math:`T =30` with the following code
 
 
 
-Example 5:
-~~~~~~~~~~
+Example 5
+==========
 
 Now we’ll assume that the demand shock that follows a linear time trend
 
@@ -641,7 +664,7 @@ To represent this, we set
 
 
 Example 6
-~~~~~~~~~
+==========
 
 Now we’ll assume a deterministically seasonal demand shock
 

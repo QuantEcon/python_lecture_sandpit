@@ -1,6 +1,26 @@
+.. _information_consumption_smoothing-v3:
 
+.. include:: /_static/includes/header.raw
+
+.. highlight:: python3
+
+*************************************
 Information and Consumption Smoothing
--------------------------------------
+*************************************
+
+.. contents:: :depth: 2
+
+**Co-authors: Thomas J. Sargent and Zejin**
+
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+.. code-block:: ipython
+  :class: hide-output
+
+  !pip install --upgrade quantecon
+
+Overview
+========
 
 This notebook describes two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear quadratic
@@ -50,7 +70,7 @@ We compare behaviors of our two consumers as a way to learn about
    https://python.quantecon.org/classical_filtering.html
 
 Two Representations of the **Same** Nonfinancial Income Process
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+================================================================
 
 Where :math:`\beta \in (0,1)`, we study consequences of endowing a
 consumer with one of the two alternative representations for the change
@@ -366,7 +386,7 @@ whose behavior sharply illustrates the behavior assumed in a classic
 Ricardian equivalence experiment?
 
 State Space Representations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+============================
 
 We can cast our two representations in terms of the following two state
 space systems
@@ -852,10 +872,10 @@ End of Lecture
 --------------
 
 Stuff Below is Left Over, Possibly to be Used in Extensions to be Done Later
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=============================================================================
 
 Values functions
-^^^^^^^^^^^^^^^^
+-----------------
 
 After doing this, we compute the discounted expected values obtained for
 the two consumers by using the pairs :math:`P, d` that we have computed
@@ -939,7 +959,7 @@ income sequence.
 
 
 Calculating Innovations in Another Way
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 Here we use formula (3) above to compute :math:`a_{t+1}` as a function
 of the history
@@ -1157,8 +1177,8 @@ Now let us compute the discounted expected values.
 Stop Here – The Remaining Cells are Things to be Deleted or Edited
 ------------------------------------------------------------------
 
-Zejin Nov 21: Consider the expected total wealth in each state
---------------------------------------------------------------
+Zejin Nov 21: Consider the Expected Total Wealth in Each State
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For “original representation” consumers, given :math:`y_{t}`,
 :math:`\epsilon_{t}`, and :math:`b_{t}`:
@@ -1208,8 +1228,8 @@ For “innovations representation” consumers, given :math:`y_{t}`,
 
 
 
-Zejin Nov 21: try to simulate consumption with the same debts
--------------------------------------------------------------
+Zejin Nov 21: Try to Simulate Consumption with the Same Debts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python3
 
@@ -1238,8 +1258,8 @@ Zejin Nov 21: try to simulate consumption with the same debts
 
 
 
-compare consumptions, expected discounted wealth, and expected utility (resized)
---------------------------------------------------------------------------------
+Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python3
 
@@ -1354,8 +1374,8 @@ compare consumptions, expected discounted wealth, and expected utility (resized)
 
 
 
-more income does not make consumers worse off?
-----------------------------------------------
+More Income does not Make Consumers Worse Off?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python3
 
@@ -1387,7 +1407,7 @@ more income does not make consumers worse off?
     -2000.0000000003936 -2004.002631579302
 
 
-Equation numbering from Zejin
+Equation Numbering from Zejin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Hi Tom, if you want to modify the ipython notebook directly, you would
