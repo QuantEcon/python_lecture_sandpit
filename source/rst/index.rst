@@ -20,5 +20,7 @@
     test_lecture
     lss_examples
     multiplicative_functionals
+    information_consumption_smoothing-v3
+    Inventory_sales_smoothing-v6
 
     zreferences

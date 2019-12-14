@@ -201,7 +201,7 @@ theory of optimally predicting nonfinancial income based solely on the
 information contained solely in **past** levels of growth in
 nonfinancial income.
 
-**Fundamental for the :math:`{y_t}` process** means that the shock
+**Fundamental for the** :math:`{y_t}` **process** means that the shock
 :math:`a_t` can be expressed as a square-summable linear combination of
 :math:`y_t, y_{t-1}, \ldots`.
 
@@ -287,8 +287,8 @@ Solving forward we eventually obtain
 
 This equation shows that :math:`\epsilon * t` equals
 :math:`\beta` times the one-step-backwards error in
-optimally*\ **backcasting**\ * :math:`y_t` based on
-the*\ **future**\ * :math:`y^t*\ + \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal backcasting formula
+optimally  **backcasting** :math:`y_t` based on
+the **future** :math:`y^t*\ + \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal backcasting formula
 
 .. math::  E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} 
 
