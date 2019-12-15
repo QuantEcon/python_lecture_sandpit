@@ -12,7 +12,7 @@ Production Smoothing via Inventories
 
 .. contents:: :depth: 2
 
-**Co-authors: Thomas J. Sargent and Zejin**
+**Co-authors: Thomas J. Sargent and Zejin Shi**
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
