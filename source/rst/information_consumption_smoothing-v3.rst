@@ -10,7 +10,7 @@ Information and Consumption Smoothing
 
 .. contents:: :depth: 2
 
-**Co-authors: Thomas J. Sargent and Zejin**
+**Co-authors: Thomas J. Sargent and Zejin Shi**
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
@@ -23,7 +23,7 @@ Overview
 ========
 
 This notebook describes two consumers who have exactly the same
-nonfinancial income process and who both conform to the linear quadratic
+nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in the
 :doc:`quantecon lecture<perm_income_cons>`
 
@@ -36,12 +36,12 @@ altered present value of future nonfinancial income.
 
 The other, less well informed, consumer each period receives a shock
 consisting of the part of today’s nonfinancial income that could not be
-forecasts from the all past values of nonfinancial income.
+forecasts from all the past values of nonfinancial income.
 
 Even though they receive exactly the same nonfinancial incomes each
 period, our two consumers respond to time :math:`t` shocks differently.
 
-The do this because, while they receive exactly the same histories of
+They do this because, while they receive exactly the same histories of
 nonfinancial income, they receive different **shocks** or **news** about
 their **future** nonfinancial incomes.
 
@@ -263,7 +263,7 @@ This pattern precisely describes the following mental experiment:
 -  In each future period, the government **rolls over** the one-period
    bond and so continues to borrow :math:`\epsilon_t` forever
 
--  The government imposes a lump sum tax on the consumer in order to pay
+-  The government imposes a lump-sum tax on the consumer in order to pay
    just the current interest on the original bond and its successors
    created by the roll-over operation
 
@@ -316,12 +316,12 @@ Representation in Terms of :math:`a_t` Shocks
 ---------------------------------------------
 
 Next notice that representation (2), namely, :math:`y_{t+1} - y_t = -
-\beta a_t + a_{t+1}` iimplies the linear difference
+\beta a_t + a_{t+1}` implies the linear difference
 equation
 
 .. math::  a_{t+1} = \beta a_t + (y_{t+1} - y_t) 
 
-Solving this equation backwards establishes that the one-step-prediction
+Solving this equation backward establishes that the one-step-prediction
 error :math:`a_{t+1}` is
 
 .. math::  a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}  
@@ -546,7 +546,7 @@ As usual, we start by importing packages.
     
     R = 1 / β
     
-    # payoff matrices are the same for two representations
+    # Payoff matrices are the same for two representations
     RLQ = np.array([[0, 0, 0],
                     [0, 0, 0],
                     [0, 0, 1e-12]]) # put penalty on debt
@@ -554,20 +554,20 @@ As usual, we start by importing packages.
 
 .. code-block:: python3
 
-    # original representation state transition matrices
+    # Original representation state transition matrices
     ALQ1 = np.array([[1, -R, 0],
                      [0, 0, 0],
                      [-R, 0, R]])
     BLQ1 = np.array([[0, 0, R]]).T
     CLQ1 = np.array([[σϵ, σϵ, 0]]).T
     
-    # construct and solve the LQ problem
+    # Construct and solve the LQ problem
     LQ1 = qe.LQ(QLQ, RLQ, ALQ1, BLQ1, C=CLQ1, beta=β)
     P1, F1, d1 = LQ1.stationary_values()
 
 .. code-block:: python3
 
-    # the optimal decision rule for c
+    # The optimal decision rule for c
     -F1
 
 
@@ -594,7 +594,7 @@ having news representation (1) are
 
 .. code-block:: python3
 
-    # innovations representation
+    # Innovations representation
     ALQ2 = np.array([[1, -β, 0],
                      [0,  0, 0],
                      [-R, 0, R]])
@@ -668,7 +668,7 @@ case, we can simply replace the corresponding matrices.
 
 .. code-block:: python3
 
-    # construct two Linear State Space models
+    # Construct two Linear State Space models
     Sb = np.array([0, 0, 1])
     
     ABF1 = ALQ1 - BLQ1 @ F1
@@ -684,7 +684,7 @@ In the following we compute the impulse response functions of
 
 .. code-block:: python3
 
-    J = 5 # number of coefficients that we want
+    J = 5 # Number of coefficients that we want
     
     x_res1, y_res1 = LSS1.impulse_response(j=J)
     b_res1 = np.array([x_res1[i][2, 0] for i in range(J)])
@@ -786,7 +786,7 @@ of consumers while always presenting both types with the same
 
 .. code-block:: python3
 
-    # set time length for simulation
+    # Set time length for simulation
     T = 100
 
 .. code-block:: python3
@@ -885,7 +885,7 @@ hypothetical consumer in the following peculiar way.
 
 We give each consumer the same income :math:`y_t` and the pertinent
 shock :math:`a_t` or :math:`\epsilon_t`, depending on whether it is the
-“innovation representation” or the “orginal representation” consumer.
+“innovation representation” or the “original representation” consumer.
 
 But we give **both** of these hypothetical consumers the :math:`b_t` of
 the “innovation representation” consumer. We then record the discounted
@@ -910,7 +910,7 @@ informed) consumer sees :math:`\epsilon_t` – they both have the same
 
 .. code-block:: python3
 
-    # calculate innovations
+    # Calculate innovations
     a_seq = np.zeros(T+1)
     for i in range(1, T+1):
         a_seq[i] += β ** i * a_seq[0]
@@ -983,7 +983,8 @@ computed earlier.
 
     a_seq2 = np.zeros(T+1)
     for i in range(T):
-        a_seq2[i+1] += β ** (i + 1) * a_seq2[0] + ϵ_seq[i+1] - β ** (i - 1) * ϵ_seq[0]
+        a_seq2[i+1] += β ** (i + 1) * a_seq2[0] + ϵ_seq[i+1] \
+                    - β ** (i - 1) * ϵ_seq[0]
         for j in range(i):
             a_seq2[i+1] += (β - 1 / β) * β ** j * ϵ_seq[i-j]
 
@@ -1008,7 +1009,7 @@ the valuable **news** :math:`a_t`.
 
 .. code-block:: python3
 
-    # set the initial state
+    # Set the initial state
     c1 = np.empty(T-S)
     b1 = np.empty(T-S)
     c2 = np.empty(T-S)
@@ -1121,7 +1122,7 @@ Now let us compute the discounted expected values.
 
 .. code-block:: python3
 
-    # construct state vectors
+    # Construct state vectors
     x1 = np.empty((3, T-S))
     x1[0, :] = y_seq[S+1:]
     x1[1, :] = ϵ_seq[S+1:]
@@ -1133,7 +1134,7 @@ Now let us compute the discounted expected values.
     x2[1, :] = a_seq[S+1:]
     x2[2, :] = b2[:]
     
-    # compute discounted present values
+    # Compute discounted present values
     ev1 = np.diagonal(x1.T @ P1 @ x1) + d1
     ev2 = np.diagonal(x2.T @ P2 @ x2) + d2
 
@@ -1230,12 +1231,12 @@ Zejin Nov 21: Try to Simulate Consumption with the Same Debts
 
 .. code-block:: python3
 
-    # set the initial state
+    # Set the initial state
     c1_hypo = np.empty(T-S)
     
     for i in range(T-S):
     
-        # orginal representation
+        # Orginal representation
         c1_hypo[i] = y_seq[S+i+1] - ϵ_seq[S+i+1] - (1 - β) * b2[i]
 
 .. code-block:: python3
@@ -1297,7 +1298,8 @@ Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
 
 .. code-block:: python3
 
-    # construct b1 so that two types of consumers have the same expected discounted wealth
+    # Construct b1 so that two types of consumers have the same
+    # expected discounted wealth
     x1_hypo = x1.copy()
     
     x1_hypo[2, :] = x1[0, :] / (1 - β) - x1[1, :] / (1 - β) - ew2
@@ -1408,7 +1410,7 @@ Equation Numbering from Zejin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Hi Tom, if you want to modify the ipython notebook directly, you would
-need to add HTML tags. For example, you may check the sourse code of the
+need to add HTML tags. For example, you may check the source code of the
 following equation by double-clicking this cell, and do copying and
 pasting.
 
@@ -1476,7 +1478,8 @@ utilities) at the initial condition.
 .. code-block:: python3
 
     a_seq = np.arange(-100, 1000)
-    plt.plot(a_seq, [np.array([10, 0, a]) @ P1 @ np.array([10, 0, a]) + d1 for a in a_seq])
+    plt.plot(a_seq, [np.array([10, 0, a]) @ P1 @ np.array([10, 0, a]) \
+                     + d1 for a in a_seq])
 
 
 

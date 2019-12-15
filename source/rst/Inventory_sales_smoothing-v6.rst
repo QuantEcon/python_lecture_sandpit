@@ -163,7 +163,7 @@ where :math:`S_{c}=\left[1,0\right]`.
 **Remark on notation:** The notation for cross product term in the
 QuantEcon library is :math:`N` instead of :math:`H`
 
-The firms’s optimum decision rule takes the form
+The firms’ optimum decision rule takes the form
 
 .. math::  u_t = - F x_t 
 
@@ -186,16 +186,16 @@ its consequences
     class smoothing_example:
         """
         Class for constructing, solving, and plotting results for
-        an inventories and sales smoothing problem.
+        inventories and sales smoothing problem.
         """
     
         def __init__(self,
-                     β=0.96,           # discount factor
-                     c1=1,             # cost-of-production
+                     β=0.96,           # Discount factor
+                     c1=1,             # Cost-of-production
                      c2=1,
-                     d1=1,             # cost-of-holding inventories
+                     d1=1,             # Cost-of-holding inventories
                      d2=1,
-                     a0=10,            # inverse demand function
+                     a0=10,            # Inverse demand function
                      a1=1,
                      A22=[[1,   0],    # z process
                           [1, 0.9]],
@@ -210,15 +210,15 @@ its consequences
             self.C2 = np.atleast_2d(C2)
             self.G = np.atleast_2d(G)
     
-            # dimensions
-            k, j = self.C2.shape        # dimensions for randomness part
-            n = k + 1                   # number of states
-            m = 2                       # number of controls
+            # Dimensions
+            k, j = self.C2.shape        # Dimensions for randomness part
+            n = k + 1                   # Number of states
+            m = 2                       # Number of controls
             
             Sc = np.zeros(k)
             Sc[0] = 1
     
-            # construct matrices of transition law
+            # Construct matrices of transition law
             A = np.zeros((n, n))
             A[0, 0] = 1
             A[1:, 1:] = A22
@@ -231,7 +231,7 @@ its consequences
     
             self.A, self.B, self.C = A, B, C
     
-            # construct matrices of one peirod profit function
+            # Construct matrices of one period profit function
             R = np.zeros((n, n))
             R[0, 0] = d2
             R[1:, 0] = d1 / 2 * Sc
@@ -248,7 +248,7 @@ its consequences
     
             self.R, self.Q, self.N = R, Q, N
     
-            # construct LQ instance
+            # Construct LQ instance
             self.LQ = qe.LQ(Q, R, A, B, C, N, beta=β)
             self.LQ.stationary_values()
     
@@ -304,8 +304,10 @@ its consequences
             ax[1, 0].set_title("profits decomposition")
     
             ax[1, 1].plot(range(T), Q_path, label="production")
-            ax[1, 1].plot(range(T), Q_hardwired, label='production when  $I_t$ forced to be zero')
-            ax[1, 1].plot(range(T), Q_no_inventory, label='production when inventories not useful')
+            ax[1, 1].plot(range(T), Q_hardwired, label='production when  $I_t$ \
+                forced to be zero')
+            ax[1, 1].plot(range(T), Q_no_inventory, label='production when \
+                inventories not useful')
             ax[1, 1].legend(loc=1)
             ax[1, 1].set_title('three production concepts')
     
@@ -380,7 +382,7 @@ demand shocks.
 Optimal decisions evidently respond to demand shocks.
 
 Inventories are always less than sales, so some sales come from current
-production, a consequence of the cost , :math:`d_1 I_t` of holding
+production, a consequence of the cost, :math:`d_1 I_t` of holding
 inventories.
 
 The lower right panel shows differences between optimal production and
@@ -414,7 +416,7 @@ solves a sequence of static problems
 
 
 
-When inventories aren’t required for making sales sales equal
+When inventories aren’t required for making sales equal
 production.
 
 This simplifies the problem and the optimal no-inventory production
@@ -435,7 +437,7 @@ The optimum decision rule is
 Inventories Useful but we Hardwire them to be Zero Always
 ==========================================================
 
-Next we turn to a distinct problem in which inventories are useful –
+Next, we turn to a distinct problem in which inventories are useful –
 meaning that there are costs of :math:`d_2 (I_t - S_t)^2` associated
 with having sales not equal inventories – but we simply force the firm
 never to hold inventories.
@@ -487,7 +489,7 @@ Thus, if we look closely, we notice that for small :math:`t`, the green
 “production when inventories aren’t useful” line in the lower right
 panel is below optimal production in the original model.
 
-High opmtal production in the original model early on occurs because the
+High optimal production in the original model early on occurs because the
 firm wants to accumulate inventories quickly in order to push
 inventories high for later periods.
 
@@ -495,7 +497,7 @@ But how the green line compares to the blue line early on depends on the
 evolution of the demand shock, as we will see in the second
 deterministically seasonal demand shock case analyzed below.
 
-There the original firms optimally accumulates inventories slowly
+There the original firms optimally accumulate inventories slowly
 because the next positive demand shock is in the distant future.
 
 To make the green-blue model production comparison easier to see, let’s
@@ -511,7 +513,7 @@ confine the graphs to the first 10 periods:
 Example 2
 =========
 
-Next we shut down randomness in demand and assume that the sdemand shock
+Next, we shut down randomness in demand and assume that the demand shock
 :math:`\nu_t` follows a deterministic path:
 
 .. math::
@@ -537,12 +539,12 @@ Example 3
 =========
 
 Now we’ll put randomness back into the demand shock process and also
-assume that there are zero costs of holding holding inventories
+assume that there are zero costs of holding inventories
 
 In particular, we’ll look at a situation in which :math:`d_1=0` but
 :math:`d_2>0`
 
-Now it is becomes optimal to set sales approximately equal to
+Now it becomes optimal to set sales approximately equal to
 inventories and to use inventories to smooth production quite well, as
 the following figures confirm
 
@@ -561,8 +563,8 @@ the following figures confirm
 Example 4
 =========
 
-To bring out some features of the an optimal policy that are related to
-some tetechnical issues in linear control theory, we’ll now temporarily
+To bring out some features of the optimal policy that are related to
+some technical issues in linear control theory, we’ll now temporarily
 assume that it is costless to hold inventories.
 
 When we completely shut down the cost of holding inventories by setting
@@ -647,7 +649,7 @@ To represent this, we set
 
 .. code-block:: python3
 
-    # set parameters
+    # Set parameters
     a = 0.5
     b = 3.
 
@@ -692,7 +694,7 @@ where :math:`a > 0, b>0` and
                             C2=[[0], [0], [0], [0], [0]],
                             G=[b, a, 0, 0, 0])
     
-    x00 = [0, 1, 0, 1, 0, 0] # set the initial inventory as 0
+    x00 = [0, 1, 0, 1, 0, 0] # Set the initial inventory as 0
     ex5.simulate(x00, T=20)
 
 
