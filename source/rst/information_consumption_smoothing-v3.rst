@@ -25,7 +25,7 @@ Overview
 This notebook describes two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear quadratic
 permanent income of consumption smoothing model described in the
-quantecon :doc:`lecture<perm_income_cons>`
+:doc:`quantecon lecture<perm_income_cons>`
 
 The consumers differ only in having different information about their
 future nonfinancial incomes
@@ -131,7 +131,7 @@ identity operator, and
 Let :math:`c_j \equiv E z_t z_{t-j}` be the :math:`j`\ th autocovariance
 of the :math:`\{y_t - y_{t-1}\}` process.
 
-Using calculations in the quantecon :doc:`lecture<classical_filtering>`, where
+Using calculations in the :doc:`quantecon lecture<classical_filtering>`, where
 :math:`z \in C` is a complex variable, the covariance generating
 function :math:`g (z) =
 \sum\_{j=\infty}^\infty c_j z^j`
@@ -336,7 +336,7 @@ Permanent Income Consumption-Smoothing Model
 
 When we computed optimal consumption-saving policies for the two
 representations using formulas obtained with the difference equation
-approach described in the quantecon :doc:`lecture<perm_income_cons>`,
+approach described in the :doc:`quantecon lecture<perm_income_cons>`,
 we obtain:
 
 **for a consumer having the information assumed in the news
@@ -407,7 +407,7 @@ univariate standardized normal random variables.
 
 These two alternative income processes are ready to be used in the
 framework presented in the section “Comparison with the Difference
-Equation Approach” in the quantecon :doc:`lecture<perm_income_cons>`:
+Equation Approach” in the :doc:`quantecon  lecture<perm_income_cons>`:
 
 
 All the code that we shall use below is presented in that lecture.

@@ -36,8 +36,7 @@ In the tradition of the classic book by Holt, Modigliani, Muth, and
 Simon (**Planning Production, Inventories, and Work Force**,
 Prentice-Hall International Series in Management, 1960), we simplify the
 firm’s problem by formulating it as a linear quadratic discounted
-dynamic programming problem of the type studied in this quantecon
-:doc:`lecture<lqcontrol>`
+dynamic programming problem of the type studied in :doc:`this<lqcontrol>` quantecon
 
 Because its costs of production are increasing and quadratic in
 production, the firm wants to smooth production across time provided
