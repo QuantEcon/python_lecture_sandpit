@@ -37,7 +37,7 @@ Simon (**Planning Production, Inventories, and Work Force**,
 Prentice-Hall International Series in Management, 1960), we simplify the
 firm’s problem by formulating it as a linear quadratic discounted
 dynamic programming problem of the type studied in this quantecon
-lecture: https://python.quantecon.org/lqcontrol.html
+:doc:`lecture<lqcontrol>`
 
 Because its costs of production are increasing and quadratic in
 production, the firm wants to smooth production across time provided

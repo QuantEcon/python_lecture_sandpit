@@ -25,7 +25,7 @@ Overview
 This notebook describes two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear quadratic
 permanent income of consumption smoothing model described in the
-quantecon lecture https://python.quantecon.org/perm_income_cons.html
+quantecon :doc:`lecture<perm_income_cons>`
 
 The consumers differ only in having different information about their
 future nonfinancial incomes
@@ -50,10 +50,10 @@ We compare behaviors of our two consumers as a way to learn about
 -  operating characteristics of the linear-quadratic permanent income
    model, and
 
--  how the Kalman filter introduced in this lecture
-   https://python.quantecon.org/kalman.html and/or the theory of optimal
-   forecasting introduced in this lecture
-   https://python.quantecon.org/classical_filtering.html embody lessons
+-  how the Kalman filter introduced in :doc:`this lecture<kalman>
+   and/or the theory of optimal
+   forecasting introduced in :doc:`this lecture<classical_filtering>`
+   embody lessons
    that can be applied to the **news** and **noise** literature
 
 -  various ways of representing and computing optimal decision rules in
@@ -66,8 +66,7 @@ We compare behaviors of our two consumers as a way to learn about
    the tax cut
 
 -  a simple application of alternative ways to factor a covariance
-   generating function along lines described in this lecture
-   https://python.quantecon.org/classical_filtering.html
+   generating function along lines described in :doc:`this lecture<classical_filtering>`
 
 Two Representations of the **Same** Nonfinancial Income Process
 ================================================================
@@ -132,8 +131,7 @@ identity operator, and
 Let :math:`c_j \equiv E z_t z_{t-j}` be the :math:`j`\ th autocovariance
 of the :math:`\{y_t - y_{t-1}\}` process.
 
-Using calculations in the quantecon lecture
-https://python.quantecon.org/classical_filtering.html, where
+Using calculations in the quantecon :doc:`lecture<classical_filtering>`, where
 :math:`z \in C` is a complex variable, the covariance generating
 function :math:`g (z) =
 \sum\_{j=\infty}^\infty c_j z^j`
@@ -196,8 +194,7 @@ computed that
 and :math:`\Sigma = (1-\beta^2) \sigma_\epsilon`
 
 We can also obtain these formulas via the classical filtering theory
-described in this lecture
-https://python.quantecon.org/classical_filtering.html
+described in :doc:`this lecture<classical_filtering>`
 
 News Shocks and Less Informative Shocks
 ---------------------------------------
@@ -339,8 +336,8 @@ Permanent Income Consumption-Smoothing Model
 
 When we computed optimal consumption-saving policies for the two
 representations using formulas obtained with the difference equation
-approach described in the quantecon lecture
-https://python.quantecon.org/perm_income_cons.html, we obtain:
+approach described in the quantecon :doc:`lecture<perm_income_cons>`,
+we obtain:
 
 **for a consumer having the information assumed in the news
 representation (1):**
@@ -410,8 +407,8 @@ univariate standardized normal random variables.
 
 These two alternative income processes are ready to be used in the
 framework presented in the section “Comparison with the Difference
-Equation Approach” in the quantecon lecture:
-https://python.quantecon.org/perm_income_cons.html
+Equation Approach” in the quantecon :doc:`lecture<perm_income_cons>`:
+
 
 All the code that we shall use below is presented in that lecture.
 
@@ -422,11 +419,11 @@ We shall use Python to form **both** of the above two state-space
 representations, using the following parameter values
 :math:`\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}`
 where :math:`\beta` is the **same** value as the discount factor in the
-household’s problem in the LQ savings problem in the lecture
-https://python.quantecon.org/perm_income_cons.html
+household’s problem in the LQ savings problem in the :doc:`lecture<perm_income_cons>`
+
 
 For these two representations, we use the code in the
-https://python.quantecon.org/perm_income_cons.html lecture to
+:doc:`lecture<perm_income_cons>` to
 
 -  compute optimal decision rules for :math:`c_t, b_t` for the two types
    of consumers associated with our two representations of nonfinancial
