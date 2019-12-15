@@ -50,7 +50,7 @@ We compare behaviors of our two consumers as a way to learn about
 -  operating characteristics of the linear-quadratic permanent income
    model, and
 
--  how the Kalman filter introduced in :doc:`this lecture<kalman>
+-  how the Kalman filter introduced in :doc:`this lecture<kalman>`
    and/or the theory of optimal
    forecasting introduced in :doc:`this lecture<classical_filtering>`
    embody lessons
@@ -79,7 +79,10 @@ We’ll call the **original representation**.
 
 It is
 
-.. math::  y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  \quad (1) 
+.. math::
+  :label: eqn_1
+
+    y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  \quad
 
 where :math:`\{\epsilon_t\}` is an i.i.d. normally distributed scalar
 process with means of zero and variances
@@ -92,14 +95,19 @@ This representation of the process is used by a consumer who at time
 
 The second representation (of the **same** :math:`\{y_t\}` process) is
 
-.. math::  y_{t+1} - y_t =  a_{t+1} - \beta  a_t \quad (2) 
+.. math::
+  :label: eqn_2
+
+    y_{t+1} - y_t =  a_{t+1} - \beta  a_t \quad
 
 where :math:`\{a_t\}` is another i.i.d. normally distributed scalar
 process, with means of zero and now variances :math:`\sigma_a^2`.
 
 The two i.i.d. shock variances are related by
 
-.. math::  \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 >  \sigma_\epsilon^2  
+.. math::  
+
+    \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 >  \sigma_\epsilon^2  
 
 so that the variance of the innovation exceeds the variance of the
 original shock by a multiplicative factor :math:`\beta^{-2}`.
@@ -107,26 +115,35 @@ original shock by a multiplicative factor :math:`\beta^{-2}`.
 The second representation is the **innovations representation** from
 Kalman filtering theory.
 
-To see how this works, note that equating the two representations (1)
-and (2) for :math:`y_{t+1} - y_t` implies
+To see how this works, note that equating the two representations :eq:`eqn_1`
+and :eq:`eqn_2` for :math:`y_{t+1} - y_t` implies
 :math:`\epsilon_{t+1} - \beta^{-1} \epsilon_t = a_{t+1} - \beta a_t`,
 which in turn implies
 
-.. math::  a_{t+1} = \beta a_t + \epsilon_{t+1} - \beta^{-1} \epsilon_t . 
+.. math::
+
+    a_{t+1} = \beta a_t + \epsilon_{t+1} - \beta^{-1} \epsilon_t . 
 
 Solving this difference equation backwards for :math:`a_{t+1}` gives,
 after a few lines of algebra,
 
-.. math::  a_{t+1} = \epsilon_{t+1} + (\beta - \beta^{-1}) \sum_{j=0}^\infty \beta^j \epsilon_{t-j} \quad (3) 
+.. math::
+  :label: eqn_3
+
+    a_{t+1} = \epsilon_{t+1} + (\beta - \beta^{-1}) \sum_{j=0}^\infty \beta^j \epsilon_{t-j} \quad
 
 which we can also write as
 
-.. math::  a_{t+1} = \sum_{j=0}^\infty \epsilon_{t+1 -j} \equiv h(L) \epsilon_{t+1}  
+.. math::
+
+    a_{t+1} = \sum_{j=0}^\infty \epsilon_{t+1 -j} \equiv h(L) \epsilon_{t+1}  
 
 where :math:`L` is the one-period lag operator, :math:`I` is the
 identity operator, and
 
-.. math::  h(L) = \frac{ I -\beta^{-1} L}{ I - \beta L} 
+.. math::
+
+    h(L) = \frac{ I -\beta^{-1} L}{ I - \beta L} 
 
 Let :math:`c_j \equiv E z_t z_{t-j}` be the :math:`j`\ th autocovariance
 of the :math:`\{y_t - y_{t-1}\}` process.
@@ -137,12 +154,16 @@ function :math:`g (z) =
 \sum\_{j=\infty}^\infty c_j z^j`
 of the :math:`\{(y_t - y_{t-1})\}` process equals
 
-.. math::  g(z) = \sigma_\epsilon^2  h(z) h(z^{-1}) = \beta^{-2} \sigma_\epsilon^2 > \sigma_\epsilon^2 , 
+.. math::
+
+    g(z) = \sigma_\epsilon^2  h(z) h(z^{-1}) = \beta^{-2} \sigma_\epsilon^2 > \sigma_\epsilon^2 , 
 
 which verifies that :math:`\{a_t\}` is a **serially uncorrelated**
 process with variance
 
-.. math::  \sigma_a^2 = \beta^{-1} \sigma_\epsilon^2 .
+.. math::
+
+    \sigma_a^2 = \beta^{-1} \sigma_\epsilon^2 .
 
 To verify these claims, just notice that
 :math:`g(z) = \beta^{-2} \sigma_\epsilon^2` implies that the coefficient
@@ -151,7 +172,7 @@ To verify these claims, just notice that
 
 Alternatively, if you are uncomfortable with covariance generating
 functions, note that we can directly calculate :math:`\sigma_a^2` from
-formula (3) according to
+formula :eq:`eqn_3` according to
 
 .. math::
 
@@ -161,7 +182,7 @@ formula (3) according to
 Application of Kalman filter
 ----------------------------
 
-We can also obtain representation (2) from representation (1) by using
+We can also obtain representation :eq:`eqn_2` from representation :eq:`eqn_1` by using
 the **Kalman filter**.
 
 Thus, from equations associated with the **Kalman filter**, it can be
@@ -185,7 +206,9 @@ innovation
 
 The innovations representation is
 
-.. math:: \begin{aligned} \hat \epsilon_{t+1} & = 0 \hat \epsilon_t + K a_{t+1} \cr
+.. math::
+
+    \begin{aligned} \hat \epsilon_{t+1} & = 0 \hat \epsilon_t + K a_{t+1} \cr
                z_{t+1} & = - \beta^{-1} a_t + a_{t+1} \end{aligned}
 
 By applying formulas for the steady-state Kalman filter, by hand we
@@ -199,17 +222,17 @@ described in :doc:`this lecture<classical_filtering>`
 News Shocks and Less Informative Shocks
 ---------------------------------------
 
-Representation (1) is cast in terms of a **news shock**
+Representation :eq:`eqn_1` is cast in terms of a **news shock**
 :math:`\epsilon_{t+1}` that represents a shock to nonfinancial income
 coming from taxes, transfers, and other random sources of income changes
 known to a well-informed person having all sorts of information about
 the income process.
 
-Representation (2) for the **same** income process is driven by shocks
+Representation :eq:`eqn_2` for the **same** income process is driven by shocks
 :math:`a_t` that contain less information than the news shock
 :math:`\epsilon_t`
 
-Representation (2) is called the **innovations** representation for the
+Representation :eq:`eqn_2` is called the **innovations** representation for the
 :math:`\{y_t - y_{t-1}\}` process.
 
 It is cast in terms of what time series statisticians call the
@@ -226,20 +249,22 @@ The shock :math:`\epsilon_t` is **not fundamental** and has more
 information about the future of the :math:`\{y_t - y_{t-1}\}` process
 than is contained in :math:`a_t`.
 
-Representation (3) reveals the important fact that the **original
+Representation :eq:`eqn_3` reveals the important fact that the **original
 shock** :math:`\epsilon_t` contains more information about future
 :math:`y`\ ’s than is contained in the semi-infinite history
 :math:`y^t = [y_t, y_{t-1}, \ldots ]` of current and past :math:`y`\ ’s.
 
-Staring at representation (3) for :math:`a_{t+1}` shows that it consists
+Staring at representation :eq:`eqn_3` for :math:`a_{t+1}` shows that it consists
 both of **new news** :math:`\epsilon_{t+1}` as well as a long moving
 average :math:`(\beta - \beta^{-1})\sum\ *{j=0}\infty \beta\ j\epsilon*\ {t-j}` of **old news**.
 
-The **better informed** representation (1) asserts that a shock
+The **better informed** representation :eq:`eqn_1` asserts that a shock
 :math:`\epsilon_{t}` results in an impulse response to nonfinancial
 income of :math:`\epsilon_t` times the sequence
 
-.. math::  1, 1- \beta^{-1}, 1- \beta^{-1}, \ldots 
+.. math::
+
+    1, 1- \beta^{-1}, 1- \beta^{-1}, \ldots 
 
 so that a shock that **increases** nonfinancial income :math:`y_t` by
 :math:`\epsilon_t` at time :math:`t` is followed by an **increase** in
@@ -275,39 +300,47 @@ The **present value** of the impulse response or moving average
 coefficients equals :math:`d\_\epsilon(L) = \frac{0}{1 -\beta } =0`, a fact that we’ll see again
 below.
 
-Representation (2), i.e., the innovation representation, asserts that a
+Representation :eq:`eqn_2`, i.e., the innovation representation, asserts that a
 shock :math:`a_{t}` results in an impulse response to nonfinancial
 income of :math:`a_t` times
 
-.. math::  1, 1 -\beta, 1 - \beta, \ldots 
+.. math::
+
+    1, 1 -\beta, 1 - \beta, \ldots 
 
 so that a shock that increases income :math:`y_t` by :math:`a_t` at time
 :math:`t` can be expected to be followed by an **increase** in :math:`y_{t+j}`
 of :math:`a_t` times :math:`1 - \beta > 0` in all future periods :math:`j=1, 2, \ldots`.
 
 The present value of the impulse response or moving average coefficients
-for representation (2) is
+for representation :eq:`eqn_2` is
 :math:`d_a(L) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)`, another
 fact that will be important below.
 
 Representation of :math:`\epsilon_t` in Terms of Future :math:`y`\ ’s
 ---------------------------------------------------------------------
 
-Notice that reprentation (1), namely, :math:`y_{t+1} - y_t = -\beta^{-1} \epsilon\ *t + \epsilon*\ {t+1}`
+Notice that reprentation :eq:`eqn_1`, namely, :math:`y_{t+1} - y_t = -\beta^{-1} \epsilon\ *t + \epsilon*\ {t+1}`
 implies the linear difference equation
 
-.. math::  \epsilon_t = \beta \epsilon_{t+1} - \beta (y_{t+1} - y_t ). 
+.. math::
+
+    \epsilon_t = \beta \epsilon_{t+1} - \beta (y_{t+1} - y_t ). 
 
 Solving forward we eventually obtain
 
-.. math::  \epsilon_t = \beta ( y_t - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} ) 
+.. math::
+
+    \epsilon_t = \beta ( y_t - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} ) 
 
 This equation shows that :math:`\epsilon * t` equals
 :math:`\beta` times the one-step-backwards error in
 optimally  **backcasting** :math:`y_t` based on
 the **future** :math:`y^t*\ + \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal backcasting formula
 
-.. math::  E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} 
+.. math::
+
+    E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} 
 
 Thus, :math:`\epsilon_t` contains **exact** information about an
 important linear combination of **future** nonfinancial income
@@ -315,21 +348,27 @@ important linear combination of **future** nonfinancial income
 Representation in Terms of :math:`a_t` Shocks
 ---------------------------------------------
 
-Next notice that representation (2), namely, :math:`y_{t+1} - y_t = -
+Next notice that representation :eq:`eqn_2`, namely, :math:`y_{t+1} - y_t = -
 \beta a_t + a_{t+1}` implies the linear difference
 equation
 
-.. math::  a_{t+1} = \beta a_t + (y_{t+1} - y_t) 
+.. math::
+
+    a_{t+1} = \beta a_t + (y_{t+1} - y_t) 
 
 Solving this equation backward establishes that the one-step-prediction
 error :math:`a_{t+1}` is
 
-.. math::  a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}  
+.. math::
+
+    a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}  
 
 and where the information set is :math:`y^t = [y_t, y_{t-1}, \ldots ]`,
 the one step-ahead optimal prediction is
 
-.. math::  E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}  
+.. math::
+
+    E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}  
 
 Permanent Income Consumption-Smoothing Model
 --------------------------------------------
@@ -340,7 +379,7 @@ approach described in the :doc:`quantecon lecture<perm_income_cons>`,
 we obtain:
 
 **for a consumer having the information assumed in the news
-representation (1):**
+representation :eq:`eqn_1`:**
 
 .. math:: 
 
@@ -366,13 +405,13 @@ programmings
 Evidently the two consumers behave differently though they receive
 exactly the same histories of nonfinancial income.
 
-The consumer with information associated with representation (1)
+The consumer with information associated with representation :eq:`eqn_1`
 responds to each shock :math:`\epsilon_{t+1}` by leaving his consumption
 unaltered and **saving** all of :math:`a_{t+1}` in anticipation of the
 permanently increased taxes that he will bear to pay for the addition
 :math:`a_{t+1}` to his time :math:`t+1` nonfinancial income.
 
-The consumer with information associated with representation (2)
+The consumer with information associated with representation :eq:`eqn_2`
 responds to a shock :math:`a_{t+1}` by increasing his consumption by
 what he perceives to be the **permanent** part of the increase in
 consumption and by increasing his **saving** by what he perceives to be
@@ -388,19 +427,23 @@ State Space Representations
 We can cast our two representations in terms of the following two state
 space systems
 
-.. math:: \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &= 
+.. math:: 
+
+    \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &= 
           \begin{bmatrix} 1 & - \beta^{-1} \cr 0 & 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix}
            + \begin{bmatrix} \sigma_\epsilon \cr \sigma_\epsilon \end{bmatrix} 
            v_{t+1} \cr
- y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
+    y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
 
 and
 
-.. math:: \begin{aligned}  \begin{bmatrix} y_{t+1} \cr a_{t+1} \end{bmatrix}  &= 
+.. math:: 
+
+    \begin{aligned}  \begin{bmatrix} y_{t+1} \cr a_{t+1} \end{bmatrix}  &= 
           \begin{bmatrix} 1 & - \beta \cr 0 & 0 \end{bmatrix} \begin{bmatrix} y_t \cr a_t \end{bmatrix}
            + \begin{bmatrix} \sigma_a \cr \sigma_a \end{bmatrix} 
            u_{t+1} \cr
- y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr a_t \end{bmatrix} \end{aligned}
+    y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr a_t \end{bmatrix} \end{aligned}
 
 where :math:`\{v_t\}` and :math:`\{u_t\}` are both i.i.d. sequences of
 univariate standardized normal random variables.
@@ -580,7 +623,7 @@ As usual, we start by importing packages.
 
 
 Evidently optimal consumption and debt decision rules for the consumer
-having news representation (1) are
+having news representation :eq:`eqn_1` are
 
 .. math::
 
@@ -618,7 +661,7 @@ having news representation (1) are
 
 
 For a consumer having access only to the information associated with the
-innovations representation (2), the optimal decision rules are
+innovations representation :eq:`eqn_2`, the optimal decision rules are
 
 .. math::
 
@@ -843,7 +886,9 @@ We accomplish this in the following steps.
    integer :math:`\epsilon_t = \sigma_\epsilon v_t`, :math:`v_t` is a
    standard normal scalar, :math:`y_0 =100`, and
 
-.. math::  y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} . 
+.. math::
+
+    y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} . 
 
 2. We take the **same** :math:`\{y_t\}` realization generated in step 1
    and form an innovation process :math:`\{a_t\}` from the formulas
@@ -958,7 +1003,7 @@ income sequence.
 Calculating Innovations in Another Way
 ---------------------------------------
 
-Here we use formula (3) above to compute :math:`a_{t+1}` as a function
+Here we use formula :eq:`eqn_3` above to compute :math:`a_{t+1}` as a function
 of the history
 :math:`\epsilon_{t+1}, \epsilon_t, \epsilon_{t-1}, \ldots`
 
