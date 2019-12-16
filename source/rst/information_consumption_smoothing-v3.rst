@@ -621,12 +621,6 @@ As usual, we start by importing packages.
 
 
 
-.. parsed-literal::
-
-    array([[ 1.  , -1.  , -0.05]])
-
-
-
 Evidently optimal consumption and debt decision rules for the consumer
 having news representation :eq:`eqn_1` are
 
@@ -656,12 +650,6 @@ having news representation :eq:`eqn_1` are
 
     -F2
 
-
-
-
-.. parsed-literal::
-
-    array([[ 1.    , -0.9025, -0.05  ]])
 
 
 
@@ -749,14 +737,6 @@ In the following we compute the impulse response functions of
 
 
 
-.. parsed-literal::
-
-    (array([1.99997796e-11, 1.89473992e-11, 1.78947621e-11, 1.68421319e-11,
-            1.57894947e-11]),
-     array([ 0.        , -1.05263158, -1.05263158, -1.05263158, -1.05263158]))
-
-
-
 .. code-block:: python3
 
     plt.title("original representation")
@@ -764,12 +744,6 @@ In the following we compute the impulse response functions of
     plt.plot(range(J), b_res1 / σϵ, label="b impulse response function")
     plt.legend()
 
-
-
-
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b66bab50>
 
 
 
@@ -789,13 +763,6 @@ permanently **decreases** by :math:`\beta^{-1}`
 
 
 
-.. parsed-literal::
-
-    (array([0.0975, 0.0975, 0.0975, 0.0975, 0.0975]),
-     array([ 0.  , -0.95, -0.95, -0.95, -0.95]))
-
-
-
 .. code-block:: python3
 
     plt.title("innovations representation")
@@ -803,13 +770,6 @@ permanently **decreases** by :math:`\beta^{-1}`
     plt.plot(range(J), b_res2 / σa, label="b impulse response function")
     plt.plot([0, J-1], [0, 0], '--', color='k')
     plt.legend()
-
-
-
-
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b5d2dcd0>
 
 
 
@@ -849,13 +809,6 @@ of consumers while always presenting both types with the same
 
 
 
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b5c7c150>
-
-
-
-
 
 .. code-block:: python3
 
@@ -866,12 +819,6 @@ of consumers while always presenting both types with the same
     plt.title("innovations representation")
     plt.legend()
 
-
-
-
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b5bf7cd0>
 
 
 
@@ -976,13 +923,6 @@ informed) consumer sees :math:`\epsilon_t` – they both have the same
 
 
 
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b5b80950>
-
-
-
-
 
 Here we confirm that the constructed innovations generate the same
 income sequence.
@@ -995,13 +935,6 @@ income sequence.
         ya_seq[i+1] = ya_seq[i] + a_seq[i+1] - β * a_seq[i]
         
     np.max(np.abs(ya_seq - y_seq)) < 1e-10
-
-
-
-
-.. parsed-literal::
-
-    True
 
 
 
@@ -1042,12 +975,6 @@ computed earlier.
 
     np.max(np.abs(a_seq2 - a_seq)) < 1e-12
 
-
-
-
-.. parsed-literal::
-
-    True
 
 
 
@@ -1101,13 +1028,6 @@ the valuable **news** :math:`a_t`.
 
 
 
-.. parsed-literal::
-
-    (96.13958337866825, 101.5440423640776)
-
-
-
-
 
 
 .. code-block:: python3
@@ -1129,12 +1049,6 @@ the valuable **news** :math:`a_t`.
 
 
 
-.. parsed-literal::
-
-    (96.13958337866825, 101.5440423640776)
-
-
-
 
 
 
@@ -1147,26 +1061,10 @@ Now let us compute the discounted expected values.
 
 
 
-.. parsed-literal::
-
-    array([[ 20.  , -20.  ,  -1.  ],
-           [-20.  ,  20.  ,   1.  ],
-           [ -1.  ,   1.  ,   0.05]])
-
-
-
 .. code-block:: python3
 
     P2
 
-
-
-
-.. parsed-literal::
-
-    array([[ 20.      , -18.05    ,  -1.      ],
-           [-18.05    ,  16.290125,   0.9025  ],
-           [ -1.      ,   0.9025  ,   0.05    ]])
 
 
 
@@ -1267,13 +1165,6 @@ For “innovations representation” consumers, given :math:`y_{t}`,
 
 
 
-.. parsed-literal::
-
-    [<matplotlib.lines.Line2D at 0x7f08b5f427d0>]
-
-
-
-
 
 
 Zejin Nov 21: Try to Simulate Consumption with the Same Debts
@@ -1297,12 +1188,6 @@ Zejin Nov 21: Try to Simulate Consumption with the Same Debts
 
 
 
-.. parsed-literal::
-
-    [<matplotlib.lines.Line2D at 0x7f08b5ab7e90>]
-
-
-
 
 
 
@@ -1319,13 +1204,6 @@ Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
 
 
 
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b58e3e50>
-
-
-
-
 
 
 .. code-block:: python3
@@ -1334,13 +1212,6 @@ Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
     plt.plot(range(T-S), ew2 / ew2.max(), label='ew')
     plt.plot(range(T-S), ev2 / ev2.max(), label='ev')
     plt.legend()
-
-
-
-
-.. parsed-literal::
-
-    <matplotlib.legend.Legend at 0x7f08b589bad0>
 
 
 
@@ -1359,14 +1230,6 @@ Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
 
     plt.plot(range(T-S), x1_hypo[2, :], label="original")
     plt.plot(range(T-S), x2[2, :], label="innovations")
-
-
-
-
-.. parsed-literal::
-
-    [<matplotlib.lines.Line2D at 0x7f08b57a1d10>]
-
 
 
 
@@ -1399,30 +1262,6 @@ Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
 
 
 
-
-.. parsed-literal::
-
-    array([-4.00263157, -4.00263157, -4.00263157, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263157, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263157, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263157, -4.00263158,
-           -4.00263158, -4.00263157, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263157, -4.00263158,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158,
-           -4.00263157, -4.00263158, -4.00263157, -4.00263157, -4.00263157,
-           -4.00263158, -4.00263158, -4.00263158, -4.00263158, -4.00263158])
-
-
-
 More Income does not Make Consumers Worse Off?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1430,13 +1269,6 @@ More Income does not Make Consumers Worse Off?
 
     y_seq = np.arange(-1000, 1000)
     plt.plot(y_seq, [np.array([y, 0, 0]) @ P1 @ np.array([y, 0, 0]) + d1 for y in y_seq])
-
-
-
-
-.. parsed-literal::
-
-    [<matplotlib.lines.Line2D at 0x7f08b5689110>]
 
 
 
@@ -1449,11 +1281,6 @@ More Income does not Make Consumers Worse Off?
     x0 = np.array([10, 0, 0])
     
     print(- x0 @ P1 @ x0 - d1, - x0 @ P2 @ x0 - d2)
-
-
-.. parsed-literal::
-
-    -2000.0000000003936 -2004.002631579302
 
 
 Equation Numbering from Zejin
@@ -1531,13 +1358,6 @@ utilities) at the initial condition.
     plt.plot(a_seq, [np.array([10, 0, a]) @ P1 @ np.array([10, 0, a]) \
                      + d1 for a in a_seq])
 
-
-
-
-
-.. parsed-literal::
-
-    [<matplotlib.lines.Line2D at 0x7f08b5600050>]
 
 
 
