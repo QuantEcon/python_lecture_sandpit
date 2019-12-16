@@ -36,20 +36,20 @@ In the tradition of the classic book by Holt, Modigliani, Muth, and
 Simon (**Planning Production, Inventories, and Work Force**,
 Prentice-Hall International Series in Management, 1960), we simplify the
 firm’s problem by formulating it as a linear quadratic discounted
-dynamic programming problem of the type studied in :doc:`this<lqcontrol>` quantecon
+dynamic programming problem of the type studied in :doc:`this<lqcontrol>` quantecon.
 
 Because its costs of production are increasing and quadratic in
 production, the firm wants to smooth production across time provided
-that holding inventories is not too costly
+that holding inventories is not too costly.
 
 But the firm also prefers to sell out of existing inventories, a
 preference that we represent by a cost that is quadratic in the
 difference between sales in a period and the firm’s beginning of period
-inventories
+inventories.
 
 We compute examples designed to indicate how the firm optimally chooses
 to smooth production and manage inventories while keeping inventories
-close to sales
+close to sales.
 
 To introduce components of the model, let
 
@@ -161,7 +161,7 @@ time :math:`t` function can be expressed
 where :math:`S_{c}=\left[1,0\right]`.
 
 **Remark on notation:** The notation for cross product term in the
-QuantEcon library is :math:`N` instead of :math:`H`
+QuantEcon library is :math:`N` instead of :math:`H`.
 
 The firms’ optimum decision rule takes the form
 
@@ -172,7 +172,7 @@ and the evolution of the state under the optimal decision rule is
 .. math::  x_{t+1} = (A - BF ) x_t + C \epsilon_{t+1} 
 
 Here is code for computing an optimal decision rule and for analyzing
-its consequences
+its consequences.
 
 .. code-block:: ipython
 
@@ -324,7 +324,7 @@ values
 
 -  costs of holding inventories :math:`d1=1, d2=1`
 
-In the examples below, we alter some or all of these parameter values
+In the examples below, we alter some or all of these parameter values.
 
 Example 1
 =========
@@ -355,10 +355,10 @@ which implies
    1
    \end{array}\right]\epsilon_{t+1}.
 
-We set :math:`\alpha=1` and :math:`\rho=0.9`, their default values
+We set :math:`\alpha=1` and :math:`\rho=0.9`, their default values.
 
 We’ll calculate and display outcomes, then discuss them below the
-pertinent figures
+pertinent figures.
 
 .. code-block:: python3
 
@@ -412,7 +412,7 @@ value of
 
 It turns out that the optimal plan for :math:`Q_t` for this problem also
 solves a sequence of static problems
-:math:`\max_{Q_t}\{p_t Q_t - c(Q_t)\}`
+:math:`\max_{Q_t}\{p_t Q_t - c(Q_t)\}`.
 
 
 
@@ -469,7 +469,7 @@ Here the optimal production plan is
 
 We introduce this :math:`I_t` **is hardwired to zero** specification in
 order to shed light on the role inventories play by comparing outcomes
-with those under the two other versions of the problem
+with those under the two other versions of the problem.
 
 The bottom right panel displays an production path for the original
 problem that we are interested in (the blue line) as well with an
@@ -539,10 +539,10 @@ Example 3
 =========
 
 Now we’ll put randomness back into the demand shock process and also
-assume that there are zero costs of holding inventories
+assume that there are zero costs of holding inventories.
 
 In particular, we’ll look at a situation in which :math:`d_1=0` but
-:math:`d_2>0`
+:math:`d_2>0`.
 
 Now it becomes optimal to set sales approximately equal to
 inventories and to use inventories to smooth production quite well, as
@@ -578,7 +578,7 @@ The firm finds it optimal to set
 :math:`Q_t \equiv Q^* = \frac{-c_1}{2c_2}`, an output level that sets
 the costs of production to zero (when :math:`c_1 >0`, as it is with our
 default settings, then it is optimal to set production negative,
-whatever that means!)
+whatever that means!).
 
 Recall the law of motion for inventories
 
@@ -590,7 +590,7 @@ So when :math:`d_1=d_2= 0` so that the firm finds it optimal to set
 .. math::  I_{t+1} - I_t = \frac{-c_1}{2c_2} - S_t < 0 
 
 for almost all values of :math:`S_t` under our default parameters that
-keep demand positive almost all of the time
+keep demand positive almost all of the time.
 
 The dynamic program instructs the firm to set production costs to zero
 and to **run a Ponzi scheme** by running inventories down forever.
@@ -611,7 +611,7 @@ The following figures confirm that inventories head south without limit
 
 
 Let’s shorten the time span displayed in order to highlight what is
-going on
+going on.
 
 We’ll set the horizon :math:`T =30` with the following code
 
@@ -667,7 +667,7 @@ To represent this, we set
 Example 6
 ==========
 
-Now we’ll assume a deterministically seasonal demand shock
+Now we’ll assume a deterministically seasonal demand shock.
 
 To represent this we’ll set
 

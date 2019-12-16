@@ -25,10 +25,10 @@ Overview
 This notebook describes two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in the
-:doc:`quantecon lecture<perm_income_cons>`
+:doc:`quantecon lecture<perm_income_cons>`.
 
 The consumers differ only in having different information about their
-future nonfinancial incomes
+future nonfinancial incomes.
 
 One consumer each period receives **news** in the form of a shock that
 changes today’s income and also contains exact information about an
@@ -91,12 +91,12 @@ It is
 
 where :math:`\{\epsilon_t\}` is an i.i.d. normally distributed scalar
 process with means of zero and variances
-:math:`\sigma_\epsilon^2`
+:math:`\sigma_\epsilon^2`.
 
 This representation of the process is used by a consumer who at time
 :math:`t` knows both :math:`y_t` and the original shock
 :math:`\epsilon_t` and can use both of them to forecast future
-:math:`y_{t+j}`\ ’s
+:math:`y_{t+j}`\ ’s.
 
 The second representation (of the **same** :math:`\{y_t\}` process) is
 
@@ -207,7 +207,7 @@ and assume that :math:`\sigma_\epsilon = 1` for convenience
 
 Compute the steady-state Kalman filter for this system and let :math:`K`
 be the steady-state gain and :math:`a_{t+1}` the one-step ahead
-innovation
+innovation.
 
 The innovations representation is
 
@@ -219,10 +219,10 @@ The innovations representation is
 By applying formulas for the steady-state Kalman filter, by hand we
 computed that
 :math:`K = \beta^2, \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 = \beta^{-2},`
-and :math:`\Sigma = (1-\beta^2) \sigma_\epsilon`
+and :math:`\Sigma = (1-\beta^2) \sigma_\epsilon`.
 
 We can also obtain these formulas via the classical filtering theory
-described in :doc:`this lecture<classical_filtering>`
+described in :doc:`this lecture<classical_filtering>`.
 
 News Shocks and Less Informative Shocks
 ---------------------------------------
@@ -235,7 +235,7 @@ the income process.
 
 Representation :eq:`eqn_2` for the **same** income process is driven by shocks
 :math:`a_t` that contain less information than the news shock
-:math:`\epsilon_t`
+:math:`\epsilon_t`.
 
 Representation :eq:`eqn_2` is called the **innovations** representation for the
 :math:`\{y_t - y_{t-1}\}` process.
@@ -348,7 +348,7 @@ the **future** :math:`y^t*\ + \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal
     E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} 
 
 Thus, :math:`\epsilon_t` contains **exact** information about an
-important linear combination of **future** nonfinancial income
+important linear combination of **future** nonfinancial income.
 
 Representation in Terms of :math:`a_t` Shocks
 ---------------------------------------------
@@ -405,7 +405,7 @@ innovations representation:**
 
 These formulas agree with outcomes from the Python programs to be
 reported below using state-space representations and dynamic
-programmings
+programmings.
 
 Evidently the two consumers behave differently though they receive
 exactly the same histories of nonfinancial income.
@@ -455,7 +455,7 @@ univariate standardized normal random variables.
 
 These two alternative income processes are ready to be used in the
 framework presented in the section “Comparison with the Difference
-Equation Approach” in the :doc:`quantecon  lecture<perm_income_cons>`:
+Equation Approach” in the :doc:`quantecon  lecture<perm_income_cons>`.
 
 
 All the code that we shall use below is presented in that lecture.
@@ -467,7 +467,7 @@ We shall use Python to form **both** of the above two state-space
 representations, using the following parameter values
 :math:`\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}`
 where :math:`\beta` is the **same** value as the discount factor in the
-household’s problem in the LQ savings problem in the :doc:`lecture<perm_income_cons>`
+household’s problem in the LQ savings problem in the :doc:`lecture<perm_income_cons>`.
 
 
 For these two representations, we use the code in the
@@ -751,7 +751,7 @@ The above two impulse response functions show that when the consumer has
 the information assumed in the original representation, his response to
 receiving a positive shock of :math:`\epsilon_t` is to leave his
 consumption unchanged and to save the entire amount of his extra income
-and then forever roll over the extra bonds that he holds
+and then forever roll over the extra bonds that he holds.
 
 To see this notice, that starting from next period on, his debt
 permanently **decreases** by :math:`\beta^{-1}`
@@ -1347,7 +1347,7 @@ would be much simpler. You can use the ``label`` tag:
     E_0 \sum_{t=0}^\infty \beta^t u(c_t)
 
 and then you can use ``eq`` to refer to it: “the consumer maximizes
-:eq:`equation_name` by choosing a consumption…"
+:eq:`equation_name` by choosing a consumption…".
 
 The following cell evaluates optimal values (maximized expected sum of
 utilities) at the initial condition.
