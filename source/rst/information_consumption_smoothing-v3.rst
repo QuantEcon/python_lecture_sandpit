@@ -22,27 +22,32 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 ========
 
-This notebook describes two consumers who have exactly the same
+This studies two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in the
 :doc:`quantecon lecture<perm_income_cons>`.
 
-The consumers differ only in having different information about their
+The two consumers differ only in having different information about their
 future nonfinancial incomes.
 
 One consumer each period receives **news** in the form of a shock that
 changes today’s income and also contains exact information about an
-altered present value of future nonfinancial income.
+altered present value of future nonfinancial incomes.
 
 The other, less well informed, consumer each period receives a shock
 consisting of the part of today’s nonfinancial income that could not be
 forecasts from all the past values of nonfinancial income.
 
-Even though they receive exactly the same nonfinancial incomes each
-period, our two consumers respond to time :math:`t` shocks differently.
+The second consumer receives less information about future incomes in a sense that we shall make precise below.
 
-They do this because, while they receive exactly the same histories of
-nonfinancial income, they receive different **shocks** or **news** about
+Even though they receive exactly the same nonfinancial incomes each
+period, our two consumers behave differently because they have different information about their future nonfinancial incomes.
+
+This difference in their information sets manifests itself in their responding differently to what they regard as time :math:`t` information 
+shocks.
+
+Thus, while they receive exactly the same histories of
+nonfinancial income, our two consumers receive different **shocks** or **news** about
 their **future** nonfinancial incomes.
 
 We compare behaviors of our two consumers as a way to learn about
