@@ -68,6 +68,11 @@ We compare behaviors of our two consumers as a way to learn about
 -  a simple application of alternative ways to factor a covariance
    generating function along lines described in :doc:`this lecture<classical_filtering>`
 
+This lecture can be regarded as an introduction to some of the **invertibility** issues that take center stage in
+the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang :cite:`Leeper_Walker_Yang`.
+
+
+
 Two Representations of the **Same** Nonfinancial Income Process
 ================================================================
 
@@ -86,7 +91,7 @@ It is
 
 where :math:`\{\epsilon_t\}` is an i.i.d. normally distributed scalar
 process with means of zero and variances
-:math:`\sigma\_\epsilon^2`
+:math:`\sigma_\epsilon^2`
 
 This representation of the process is used by a consumer who at time
 :math:`t` knows both :math:`y_t` and the original shock
