@@ -56,7 +56,7 @@ their **future** nonfinancial incomes.
 We compare behaviors of our two consumers as a way to learn about
 
 -  operating characteristics of the linear-quadratic permanent income
-   model, and
+   model
 
 -  how the Kalman filter introduced in :doc:`this lecture<kalman>`
    and/or the theory of optimal 
@@ -88,9 +88,7 @@ Where :math:`\beta \in (0,1)`, we study consequences of endowing a
 consumer with one of the two alternative representations for the change
 in the consumer’s nonfinancial income :math:`y_{t+1} - y_t`.
 
-We’ll call the **original representation**.
-
-It is
+The first representation, which we shall refer to as the **original representation**, is
 
 .. math::
   :label: eqn_1
@@ -98,7 +96,7 @@ It is
     y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  \quad
 
 where :math:`\{\epsilon_t\}` is an i.i.d. normally distributed scalar
-process with means of zero and variances
+process with means of zero and contemporaneous variances
 :math:`\sigma_\epsilon^2`.
 
 This representation of the process is used by a consumer who at time
@@ -110,7 +108,7 @@ Furthermore, as we'll see below, representation :eq:`eqn_1` has the peculiar pro
 :math:`\epsilon_{t+1}` leaves the discounted present value of the consumer's financial income at time :math:`t+1`
 unaltered.  
 
-The second representation (of the **same** :math:`\{y_t\}` process) is
+The second representation of the **same** :math:`\{y_t\}` process is
 
 .. math::
   :label: eqn_2
@@ -132,7 +130,7 @@ original shock by a multiplicative factor :math:`\beta^{-2}`.
 The second representation is the **innovations representation** from
 Kalman filtering theory.
 
-To see how this works, note that equating the two representations :eq:`eqn_1`
+To see how this works, note that equating representations :eq:`eqn_1`
 and :eq:`eqn_2` for :math:`y_{t+1} - y_t` implies
 :math:`\epsilon_{t+1} - \beta^{-1} \epsilon_t = a_{t+1} - \beta a_t`,
 which in turn implies
@@ -168,14 +166,14 @@ of the :math:`\{y_t - y_{t-1}\}` process.
 Using calculations in the :doc:`quantecon lecture<classical_filtering>`, where
 :math:`z \in C` is a complex variable, the covariance generating
 function :math:`g (z) =
-\sum\_{j=\infty}^\infty c_j z^j`
+\sum_{j=-\infty}^\infty c_j z^j`
 of the :math:`\{(y_t - y_{t-1})\}` process equals
 
 .. math::
 
     g(z) = \sigma_\epsilon^2  h(z) h(z^{-1}) = \beta^{-2} \sigma_\epsilon^2 > \sigma_\epsilon^2 , 
 
-which verifies that :math:`\{a_t\}` is a **serially uncorrelated**
+which confirms that :math:`\{a_t\}` is a **serially uncorrelated**
 process with variance
 
 .. math::
@@ -273,7 +271,7 @@ shock** :math:`\epsilon_t` contains more information about future
 
 Staring at representation :eq:`eqn_3` for :math:`a_{t+1}` shows that it consists
 both of **new news** :math:`\epsilon_{t+1}` as well as a long moving
-average :math:`(\beta - \beta^{-1})\sum_{j=0}^infty \beta^j\epsilon_{t-j}` of **old news**.
+average :math:`(\beta - \beta^{-1})\sum_{j=0}^\infty \beta^j\epsilon_{t-j}` of **old news**.
 
 The **better informed** representation :eq:`eqn_1` asserts that a shock
 :math:`\epsilon_{t}` results in an impulse response to nonfinancial
@@ -300,14 +298,14 @@ This pattern precisely describes the following mental experiment:
 
 -  The government finances the transfer by issuing a one-period bond on
    which it pays a gross one-period risk-free interest rate equal to
-   :math:`\beta^{-1}`
+   :math:`\beta^{-1}`.
 
 -  In each future period, the government **rolls over** the one-period
-   bond and so continues to borrow :math:`\epsilon_t` forever
+   bond and so continues to borrow :math:`\epsilon_t` forever.
 
 -  The government imposes a lump-sum tax on the consumer in order to pay
    just the current interest on the original bond and its successors
-   created by the roll-over operation
+   created by the roll-over operation.
 
 -  In all future periods :math:`t+1, t+2, \ldots`, the government levies
    a lump-sum tax on the consumer of :math:`\beta^{-1} -1` that is just
@@ -331,7 +329,7 @@ of :math:`a_t` times :math:`1 - \beta > 0` in all future periods :math:`j=1, 2, 
 
 The present value of the impulse response or moving average coefficients
 for representation :eq:`eqn_2` is
-:math:`d_a(L) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)`, another
+:math:`d_a(\beta) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)`, another
 fact that will be important below.
 
 Representation of :math:`\epsilon_t` in Terms of Future :math:`y`\ ’s
@@ -350,10 +348,10 @@ Solving forward we eventually obtain
 
     \epsilon_t = \beta ( y_t - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} ) 
 
-This equation shows that :math:`\epsilon * t` equals
+This equation shows that :math:`\epsilon_t` equals
 :math:`\beta` times the one-step-backwards error in
 optimally  **backcasting** :math:`y_t` based on
-the **future** :math:`y^t*\ + \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal backcasting formula
+the **future** :math:`y^t_+ \equiv y_{t+1}, y_{t+2}, \ldots ]` via the optimal backcasting formula
 
 .. math::
 
@@ -406,7 +404,7 @@ representation** :eq:`eqn_1`:
     \end{aligned}
 
 **for a consumer having the more limited information associated with the
-innovations representation:**
+innovations representation** :eq:`eqn_2`:
 
 .. math:: 
 
@@ -417,7 +415,7 @@ innovations representation:**
 
 These formulas agree with outcomes from the Python programs to be
 reported below using state-space representations and dynamic
-programmings.
+programming.
 
 Evidently the two consumers behave differently though they receive
 exactly the same histories of nonfinancial income.
@@ -434,9 +432,9 @@ what he perceives to be the **permanent** part of the increase in
 consumption and by increasing his **saving** by what he perceives to be
 the temporary part.
 
-Do you think it is appropriate to regard the first consumer as someone
+We can regard the first consumer as someone
 whose behavior sharply illustrates the behavior assumed in a classic
-Ricardian equivalence experiment?
+Ricardian equivalence experiment.
 
 State Space Representations
 ============================
@@ -839,13 +837,13 @@ of consumers while always presenting both types with the same
 Simulating the Income Process and Two Associated Shock Processes
 ----------------------------------------------------------------
 
-We now describe how we form a **single** :math:`{y_t}_{t=0}^T` realization
+We now describe how we form a **single** :math:`\{y_t\}_{t=0}^T` realization
 that we will use to simulate the two different decision rules associated
 with our two types of consumer.
 
 We accomplish this in the following steps.
 
-1. We form a :math:`y_t, \epsilon_t` realization by drawing a long
+1. We form a :math:`\{y_t, \epsilon_t\}` realization by drawing a long
    simulation of :math:`\{\epsilon_t\}_{t=0}^T` where :math:`T` is a big
    integer :math:`\epsilon_t = \sigma_\epsilon v_t`, :math:`v_t` is a
    standard normal scalar, :math:`y_0 =100`, and
@@ -874,79 +872,6 @@ The above steps implement the experiment of comparing decisions made by
 two consumers having **identical** incomes at each date but at each date
 having **different** information about their future incomes.
 
-End of Lecture
---------------
-
-Stuff Below is Left Over, Possibly to be Used in Extensions to be Done Later
-=============================================================================
-
-Values functions
------------------
-
-After doing this, we compute the discounted expected values obtained for
-the two consumers by using the pairs :math:`P, d` that we have computed
-for the value functions.
-
-We compute the value functions :math:`x_t' P x_t + d` (I might have a
-sign off here!) for the two :math:`P,d` pairs at the **same** dates
-along the income simulation. But we choose the states for two
-hypothetical consumer in the following peculiar way.
-
-We give each consumer the same income :math:`y_t` and the pertinent
-shock :math:`a_t` or :math:`\epsilon_t`, depending on whether it is the
-“innovation representation” or the “original representation” consumer.
-
-But we give **both** of these hypothetical consumers the :math:`b_t` of
-the “innovation representation” consumer. We then record the discounted
-present values for these two.
-
-Thus, the **state** vectors :math:`x_t` are different for the two
-consumers **only** because one sees :math:`a_t` while the other (better
-informed) consumer sees :math:`\epsilon_t` – they both have the same
-:math:`b_t`, namely, that of the “innovations representation” consumer.
-
-.. code-block:: python3
-
-    S, T = 10, 100
-    
-    ν_seq = np.random.normal(size=T+1)
-    ϵ_seq = σϵ * ν_seq
-    
-    y_seq = np.empty(T+1)
-    y_seq[0] = 100 # initial state
-    for i in range(T):
-        y_seq[i+1] = y_seq[i] + ϵ_seq[i+1] - ϵ_seq[i] /  β
-
-.. code-block:: python3
-
-    # Calculate innovations
-    a_seq = np.zeros(T+1)
-    for i in range(1, T+1):
-        a_seq[i] += β ** i * a_seq[0]
-        for j in range(i):
-            a_seq[i] += β ** j * (y_seq[i-j] - y_seq[i-j-1])
-
-.. code-block:: python3
-
-    plt.plot(range(T+1), ϵ_seq, label="ϵ")
-    plt.plot(range(T+1), a_seq, label="a")
-    plt.legend()
-
-
-
-
-
-Here we confirm that the constructed innovations generate the same
-income sequence.
-
-.. code-block:: python3
-
-    ya_seq = np.empty(T+1)
-    ya_seq[0] = 100 # initial state
-    for i in range(T):
-        ya_seq[i+1] = ya_seq[i] + a_seq[i+1] - β * a_seq[i]
-        
-    np.max(np.abs(ya_seq - y_seq)) < 1e-10
 
 
 
@@ -971,408 +896,6 @@ Thus, we compute
        &=\beta^{t+1}a_{0}+\epsilon_{t+1}+\left(\beta-\beta^{-1}\right)\sum_{j=0}^{t-1}\beta^{j}\epsilon_{t-j}-\beta^{t-1}\epsilon_{0}.
    \end{aligned}
 
-We then verify that we recover the same :math:`\{a_t\}` sequence
+We can verify that we recover the same :math:`\{a_t\}` sequence
 computed earlier.
-
-.. code-block:: python3
-
-    a_seq2 = np.zeros(T+1)
-    for i in range(T):
-        a_seq2[i+1] += β ** (i + 1) * a_seq2[0] + ϵ_seq[i+1] \
-                    - β ** (i - 1) * ϵ_seq[0]
-        for j in range(i):
-            a_seq2[i+1] += (β - 1 / β) * β ** j * ϵ_seq[i-j]
-
-.. code-block:: python3
-
-    np.max(np.abs(a_seq2 - a_seq)) < 1e-12
-
-
-
-
-Now let’s take two consumers with exactly the **same** :math:`\{y_t\}`
-sequence and construct paths of :math:`c_t` and :math:`b_t` for our two
-types of consumers who are distinguished not by their histories of
-current and past :math:`y_t`\ ’s but rather by whether or note they see
-the valuable **news** :math:`a_t`.
-
-.. code-block:: python3
-
-    # Set the initial state
-    c1 = np.empty(T-S)
-    b1 = np.empty(T-S)
-    c2 = np.empty(T-S)
-    b2 = np.empty(T-S)
-    
-    # initial debt
-    b1[0] = 0
-    b2[0] = 0
-    
-    for i in range(T-S-1):
-    
-        # orginal representation
-        c1[i] = y_seq[S+i+1] - ϵ_seq[S+i+1] - (1 - β) * b1[i]
-        b1[i+1] = b1[i] - ϵ_seq[S+i+1] / β
-        
-        # innovations representation
-        c2[i] = y_seq[S+i+1] - β ** 2 * a_seq[S+i+1] - (1 - β) * b2[i]
-        b2[i+1] = b2[i] - β * a_seq[S+i+1]
-    
-    c1[T-S-1] = y_seq[T] - ϵ_seq[T] - (1 - β) * b1[T-S-1]
-    c2[T-S-1] = y_seq[T] - β ** 2 * a_seq[T] - (1 - β) * b2[T-S-1]
-
-.. code-block:: python3
-
-    fig, ax = plt.subplots()
-    
-    ax.plot(range(S+1, T+1), c1, label="c1")
-    ax.plot(range(S+1, T+1), c2, label="c2")
-    ax.legend()
-    ax.set_title("consumptions");
-    
-    ax1_ = ax.twinx()
-    ax1_.plot(range(S+1, T+1), y_seq[S+1:], color='g', label="income", alpha=0.4)
-    ax1_.set_ylabel("income", color='g')
-    span = (max(y_seq[S+1:]) - min(y_seq[S+1:])) / 2
-    center = (max(y_seq[S+1:]) + min(y_seq[S+1:])) / 2
-    ax1_.set_ylim(center-span*1.1, center+span*1.1)
-
-
-
-
-
-
-.. code-block:: python3
-
-    fig, ax = plt.subplots()
-    
-    ax.plot(range(S+1, T+1), b1, label="b1")
-    ax.plot(range(S+1, T+1), b2, label="b2")
-    ax.legend()
-    ax.set_title("debts")
-    
-    ax1_ = ax.twinx()
-    ax1_.plot(range(S+1, T+1), y_seq[S+1:], color='g', label="income", alpha=0.4)
-    ax1_.set_ylabel("income", color='g')
-    span = (max(y_seq[S+1:]) - min(y_seq[S+1:])) / 2
-    center = (max(y_seq[S+1:]) + min(y_seq[S+1:])) / 2
-    ax1_.set_ylim(center-span*1.1, center+span*1.1)
-
-
-
-
-
-
-
-Now let us compute the discounted expected values.
-
-.. code-block:: python3
-
-    P1
-
-
-
-
-.. code-block:: python3
-
-    P2
-
-
-
-
-.. code-block:: python3
-
-    # Construct state vectors
-    x1 = np.empty((3, T-S))
-    x1[0, :] = y_seq[S+1:]
-    x1[1, :] = ϵ_seq[S+1:]
-    # use debt of "innovation representation" consumer
-    x1[2, :] = b2[:]
-    
-    x2 = np.empty((3, T-S))
-    x2[0, :] = y_seq[S+1:]
-    x2[1, :] = a_seq[S+1:]
-    x2[2, :] = b2[:]
-    
-    # Compute discounted present values
-    ev1 = np.diagonal(x1.T @ P1 @ x1) + d1
-    ev2 = np.diagonal(x2.T @ P2 @ x2) + d2
-
-.. code-block:: python3
-
-    # double check that state sequences are well prepared
-    var_names = ['y', 'shock', 'b']
-    for i, var_name in enumerate(var_names):
-        plt.plot(range(T-S), x1[i, :], label="original")
-        plt.plot(range(T-S), x2[i, :], label="innovations")
-        plt.title(f"{var_name}")
-        plt.legend()
-        plt.show()
-
-
-
-
-.. code-block:: python3
-
-    fig, ax = plt.subplots()
-    
-    ax.plot(range(S+1, T+1), ev1, label="original representation")
-    ax.plot(range(S+1, T+1), ev2, label="innovation representation")
-    ax.legend()
-    ax.set_title("discounted expected values")
-    
-    ax1_ = ax.twinx()
-    ax1_.plot(range(S+1, T+1), y_seq[S+1:], color='g', label="income", alpha=0.4)
-    ax1_.set_ylabel("income", color='g')
-    span = (max(y_seq[S+1:]) - min(y_seq[S+1:])) / 2
-    center = (max(y_seq[S+1:]) + min(y_seq[S+1:])) / 2
-    ax1_.set_ylim(center-span*1.1, center+span*1.1);
-
-
-
-
-
-Stop Here – The Remaining Cells are Things to be Deleted or Edited
-------------------------------------------------------------------
-
-Zejin Nov 21: Consider the Expected Total Wealth in Each State
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For “original representation” consumers, given :math:`y_{t}`,
-:math:`\epsilon_{t}`, and :math:`b_{t}`:
-
-.. math::
-
-
-   \begin{aligned}
-   \sum_{j=0}^{\infty}\beta^{j}E_{t}\left[y_{t+j}\right]-b_{t} &=y_{t}+\sum_{j=1}^{\infty}\beta^{j}E_{t}\left[y_{t+j}\right]-b_{t} \\
-       &=y_{t}+\sum_{j=1}^{\infty}\beta^{j}\left(y_{t}-\beta^{-1}\epsilon_{t}\right)-b_{t} \\
-       &=\sum_{j=0}^{\infty}\left(y_{t}-\epsilon_{t}\right)-b_{t} \\
-       &=\frac{y_{t}}{1-\beta}-\frac{\epsilon_{t}}{1-\beta}-b_{t}. 
-   \end{aligned}
-
-For “innovations representation” consumers, given :math:`y_{t}`,
-:math:`a_{t}`, and :math:`b_{t}`:
-
-.. math::
-
-
-   \begin{aligned}
-   \sum_{j=0}^{\infty}\beta^{j}E_{t}\left[y_{t+j}\right]-b_{t} &=y_{t}+\sum_{j=1}^{\infty}\beta^{j}E_{t}\left[y_{t+j}\right]-b_{t} \\
-       &=y_{t}+\sum_{j=1}^{\infty}\beta^{j}\left(y_{t}-\beta a_{t}\right)-b_{t} \\
-       &=\sum_{j=0}^{\infty}y_{t}-\sum_{j=0}^{\infty}\beta^{2}a_{t}-b_{t} \\
-       &=\frac{y_{t}}{1-\beta}-\frac{\beta^{2}a_{t}}{1-\beta}-b_{t}.
-   \end{aligned}
-
-.. code-block:: python3
-
-    ew1 = x1[0, :] / (1 - β) - x1[1, :] / (1 - β) - x1[2, :]
-    ew2 = x2[0, :] / (1 - β) - β ** 2 * x2[1, :] / (1 - β) - x2[2, :]
-
-.. code-block:: python3
-
-    plt.plot(range(T-S), ew1)
-    plt.plot(range(T-S), ew2)
-
-
-
-
-
-
-Zejin Nov 21: Try to Simulate Consumption with the Same Debts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python3
-
-    # Set the initial state
-    c1_hypo = np.empty(T-S)
-    
-    for i in range(T-S):
-    
-        # Orginal representation
-        c1_hypo[i] = y_seq[S+i+1] - ϵ_seq[S+i+1] - (1 - β) * b2[i]
-
-.. code-block:: python3
-
-    plt.plot(range(S+1, T+1), c1_hypo, label="original representation")
-    plt.plot(range(S+1, T+1), c2, label="innovation representation")
-
-
-
-
-
-
-
-Compare Consumptions, Expected Discounted Wealth, and Expected Utility (resized)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python3
-
-    plt.plot(range(T-S), c1_hypo / c1_hypo.max(), label='$c_t$')
-    plt.plot(range(T-S), ew1 / ew1.max(), label='ew')
-    plt.plot(range(T-S), ev1 / ev1.max(), label='ev')
-    plt.legend()
-
-
-
-
-
-
-.. code-block:: python3
-
-    plt.plot(range(T-S), c2 / c2.max(), label='$c_t$')
-    plt.plot(range(T-S), ew2 / ew2.max(), label='ew')
-    plt.plot(range(T-S), ev2 / ev2.max(), label='ev')
-    plt.legend()
-
-
-
-
-
-.. code-block:: python3
-
-    # Construct b1 so that two types of consumers have the same
-    # expected discounted wealth
-    x1_hypo = x1.copy()
-    
-    x1_hypo[2, :] = x1[0, :] / (1 - β) - x1[1, :] / (1 - β) - ew2
-    ev1_hypo = np.diagonal(x1_hypo.T @ P1 @ x1_hypo) + d1
-
-.. code-block:: python3
-
-    plt.plot(range(T-S), x1_hypo[2, :], label="original")
-    plt.plot(range(T-S), x2[2, :], label="innovations")
-
-
-
-
-
-.. code-block:: python3
-
-    fig, ax = plt.subplots()
-    
-    ax.plot(range(S+1, T+1), ev1_hypo, label="original representation")
-    ax.plot(range(S+1, T+1), ev2, label="innovation representation")
-    ax.legend()
-    ax.set_title("discounted expected values")
-    
-    ax1_ = ax.twinx()
-    ax1_.plot(range(S+1, T+1), y_seq[S+1:], color='g', label="income", alpha=0.4)
-    ax1_.set_ylabel("income", color='g')
-    span = (max(y_seq[S+1:]) - min(y_seq[S+1:])) / 2
-    center = (max(y_seq[S+1:]) + min(y_seq[S+1:])) / 2
-    ax1_.set_ylim(center-span*1.1, center+span*1.1);
-
-
-
-
-
-.. code-block:: python3
-
-    # the gain of information
-    ev1_hypo - ev2
-
-
-
-More Income does not Make Consumers Worse Off?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python3
-
-    y_seq = np.arange(-1000, 1000)
-    plt.plot(y_seq, [np.array([y, 0, 0]) @ P1 @ np.array([y, 0, 0]) + d1 for y in y_seq])
-
-
-
-
-
-.. code-block:: python3
-
-    # the initial state
-    # the last entry is the initial state of debt
-    x0 = np.array([10, 0, 0])
-    
-    print(- x0 @ P1 @ x0 - d1, - x0 @ P2 @ x0 - d2)
-
-
-Equation Numbering from Zejin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Hi Tom, if you want to modify the ipython notebook directly, you would
-need to add HTML tags. For example, you may check the source code of the
-following equation by double-clicking this cell, and do copying and
-pasting.
-
-.. raw:: html
-
-   <table width="100%">
-
-.. raw:: html
-
-   <tr style="background-color: #FFFFFF !important;">
-
-.. raw:: html
-
-   <td width="10%">
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td width="80%">
-
-.. math::
-
-
-   \text{equation here}
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td width="10%" style="text-align:center !important;">
-
-(1) 
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   </table>
-
-If you want to use equation numbers when you construct .rst files, it
-would be much simpler. You can use the ``label`` tag:
-
-.. math::
-    :label: equation_name
-
-    E_0 \sum_{t=0}^\infty \beta^t u(c_t)
-
-and then you can use ``eq`` to refer to it: “the consumer maximizes
-:eq:`equation_name` by choosing a consumption…".
-
-The following cell evaluates optimal values (maximized expected sum of
-utilities) at the initial condition.
-
-.. code-block:: python3
-
-    a_seq = np.arange(-100, 1000)
-    plt.plot(a_seq, [np.array([10, 0, a]) @ P1 @ np.array([10, 0, a]) \
-                     + d1 for a in a_seq])
-
-
-
-
-
-
 
