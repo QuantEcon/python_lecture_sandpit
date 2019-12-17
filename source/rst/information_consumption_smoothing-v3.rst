@@ -12,7 +12,7 @@ Information and Consumption Smoothing
 
 **Co-authors: Thomas J. Sargent and Zejin Shi**
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+In addition to what's in Anaconda, this lecture employs the following libraries:
 
 .. code-block:: ipython
   :class: hide-output
@@ -22,26 +22,29 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 ========
 
-This studies two consumers who have exactly the same
+This lecture studies two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in the
 :doc:`quantecon lecture<perm_income_cons>`.
 
-The two consumers differ only in having different information about their
+The two consumers  have different information about 
 future nonfinancial incomes.
 
-One consumer each period receives **news** in the form of a shock that
-changes today’s income and also contains exact information about an
-altered present value of future nonfinancial incomes.
+One consumer each period receives **news** in the form of a shock that simultaneously
+affects both **today’s** nonfinancial income and  the 
+present value of **future** nonfinancial incomes in a particular way.
 
 The other, less well informed, consumer each period receives a shock
-consisting of the part of today’s nonfinancial income that could not be
-forecasts from all the past values of nonfinancial income.
-
-The second consumer receives less information about future incomes in a sense that we shall make precise below.
+that equals  the part of today’s nonfinancial income that could not be
+forecast from all  past values of nonfinancial income.
 
 Even though they receive exactly the same nonfinancial incomes each
-period, our two consumers behave differently because they have different information about their future nonfinancial incomes.
+period, our two consumers behave differently because they have different information about 
+their future nonfinancial incomes.
+
+
+The second consumer receives less information about future nonfinancial 
+incomes in a sense that we shall make precise below.
 
 This difference in their information sets manifests itself in their responding differently to what they regard as time :math:`t` information 
 shocks.
@@ -56,7 +59,7 @@ We compare behaviors of our two consumers as a way to learn about
    model, and
 
 -  how the Kalman filter introduced in :doc:`this lecture<kalman>`
-   and/or the theory of optimal
+   and/or the theory of optimal 
    forecasting introduced in :doc:`this lecture<classical_filtering>`
    embody lessons
    that can be applied to the **news** and **noise** literature
@@ -66,8 +69,8 @@ We compare behaviors of our two consumers as a way to learn about
 
 -  a **Ricardian equivalence** outcome describing effects on optimal
    consumption of a tax cut at time :math:`t` accompanied by a foreseen
-   permanent increases in taxes just sufficient to finance the interest
-   payments used to service risk-free government bonds issued to finance
+   permanent increases in taxes that is just sufficient to cover the interest
+   payments used to service the risk-free government bonds that are issued to finance
    the tax cut
 
 -  a simple application of alternative ways to factor a covariance
@@ -102,6 +105,10 @@ This representation of the process is used by a consumer who at time
 :math:`t` knows both :math:`y_t` and the original shock
 :math:`\epsilon_t` and can use both of them to forecast future
 :math:`y_{t+j}`\ ’s.
+
+Furthermore, as we'll see below, representation :eq:`eqn_1` has the peculiar property that a positive shock
+:math:`\epsilon_{t+1}` leaves the discounted present value of the consumer's financial income at time :math:`t+1`
+unaltered.  
 
 The second representation (of the **same** :math:`\{y_t\}` process) is
 
@@ -224,7 +231,7 @@ The innovations representation is
 By applying formulas for the steady-state Kalman filter, by hand we
 computed that
 :math:`K = \beta^2, \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 = \beta^{-2},`
-and :math:`\Sigma = (1-\beta^2) \sigma_\epsilon`.
+and :math:`\Sigma = (1-\beta^2) \sigma_\epsilon^2`.
 
 We can also obtain these formulas via the classical filtering theory
 described in :doc:`this lecture<classical_filtering>`.
@@ -266,7 +273,7 @@ shock** :math:`\epsilon_t` contains more information about future
 
 Staring at representation :eq:`eqn_3` for :math:`a_{t+1}` shows that it consists
 both of **new news** :math:`\epsilon_{t+1}` as well as a long moving
-average :math:`(\beta - \beta^{-1})\sum\ *{j=0}\infty \beta\ j\epsilon*\ {t-j}` of **old news**.
+average :math:`(\beta - \beta^{-1})\sum_{j=0}^infty \beta^j\epsilon_{t-j}` of **old news**.
 
 The **better informed** representation :eq:`eqn_1` asserts that a shock
 :math:`\epsilon_{t}` results in an impulse response to nonfinancial
@@ -307,7 +314,7 @@ This pattern precisely describes the following mental experiment:
    enough to pay the interest on the bond.
 
 The **present value** of the impulse response or moving average
-coefficients equals :math:`d\_\epsilon(L) = \frac{0}{1 -\beta } =0`, a fact that we’ll see again
+coefficients equals :math:`d_\epsilon(L) = \frac{0}{1 -\beta } =0`, a fact that we’ll see again
 below.
 
 Representation :eq:`eqn_2`, i.e., the innovation representation, asserts that a
@@ -330,7 +337,7 @@ fact that will be important below.
 Representation of :math:`\epsilon_t` in Terms of Future :math:`y`\ ’s
 ---------------------------------------------------------------------
 
-Notice that reprentation :eq:`eqn_1`, namely, :math:`y_{t+1} - y_t = -\beta^{-1} \epsilon\ *t + \epsilon*\ {t+1}`
+Notice that reprentation :eq:`eqn_1`, namely, :math:`y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}`
 implies the linear difference equation
 
 .. math::
@@ -389,7 +396,7 @@ approach described in the :doc:`quantecon lecture<perm_income_cons>`,
 we obtain:
 
 **for a consumer having the information assumed in the news
-representation :eq:`eqn_1`:**
+representation** :eq:`eqn_1`:
 
 .. math:: 
 
