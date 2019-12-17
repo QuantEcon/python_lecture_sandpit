@@ -14,7 +14,7 @@ Production Smoothing via Inventories
 
 **Co-authors: Thomas J. Sargent and Zejin Shi**
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+In addition to what's in Anaconda, this lecture employs the following library:
 
 .. code-block:: ipython
   :class: hide-output
@@ -25,18 +25,19 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 =========
 
-This notebook formulates a discounted dynamic program for a firm that
+This lecture can be viewed as an application of the :doc:`quantecon lecture<lqcontrol>`.
+
+It formulates a discounted dynamic program for a firm that
 chooses a production schedule to balance
 
--  a wish to minimize costs of production across time, and
+-  minimizing costs of production across time, against
 
--  a wish to keep costs of holding inventories low
+-  keeping costs of holding inventories low
 
-In the tradition of the classic book by Holt, Modigliani, Muth, and
-Simon (**Planning Production, Inventories, and Work Force**,
-Prentice-Hall International Series in Management, 1960), we simplify the
+In the tradition of a classic book by Holt, Modigliani, Muth, and
+Simon :cite:`Holt_Modigliani_Muth_Simon`, we simplify the
 firm’s problem by formulating it as a linear quadratic discounted
-dynamic programming problem of the type studied in :doc:`this<lqcontrol>` quantecon.
+dynamic programming problem of the type studied in this :doc:`quantecon<lqcontrol>`.
 
 Because its costs of production are increasing and quadratic in
 production, the firm wants to smooth production across time provided
@@ -397,15 +398,14 @@ These two concepts correspond to these distinct altered firm problems.
    firm from holding inventories by forcing it to set :math:`I_t=0`
    always
 
-Inventories not useful
-=======================
+We use these two alternative production concepts in order to shed light on the baseline model.   
 
-Notice how the gap between the two production series grows as the stock
-of inventories grows
+Inventories Not Useful
+=======================
 
 Let’s turn first to the setting in which inventories aren’t needed.
 
-In this problem, the forms an output plan that maximizes the expected
+In this problem, the firm forms an output plan that maximizes the expected
 value of
 
 .. math::  \sum_{t=0}^\infty \beta^t \{ p_t Q_t - C(Q_t) \} 
@@ -416,7 +416,7 @@ solves a sequence of static problems
 
 
 
-When inventories aren’t required for making sales equal
+When inventories aren’t required or used,  sales always equal
 production.
 
 This simplifies the problem and the optimal no-inventory production
@@ -434,13 +434,13 @@ The optimum decision rule is
 
    Q_{t}^{ni}=\frac{a_{0}+\nu_{t}-c_{1}}{c_{2}+a_{1}}.
 
-Inventories Useful but we Hardwire them to be Zero Always
+Inventories Useful but are Hardwired to be Zero Always
 ==========================================================
 
 Next, we turn to a distinct problem in which inventories are useful –
 meaning that there are costs of :math:`d_2 (I_t - S_t)^2` associated
-with having sales not equal inventories – but we simply force the firm
-never to hold inventories.
+with having sales not equal to inventories – but we arbitrarily impose on the firm
+the costly restriction that it never hold inventories.
 
 Here the firm’s maximization problem is
 
@@ -468,8 +468,8 @@ Here the optimal production plan is
    Q_{t}^{h}=\frac{a_{0}+\nu_{t}-c_{1}}{c_{2}+a_{1}+d_{2}}.
 
 We introduce this :math:`I_t` **is hardwired to zero** specification in
-order to shed light on the role inventories play by comparing outcomes
-with those under the two other versions of the problem.
+order to shed light on the role that inventories play by comparing outcomes
+with those under our two other versions of the problem.
 
 The bottom right panel displays an production path for the original
 problem that we are interested in (the blue line) as well with an
@@ -490,14 +490,14 @@ Thus, if we look closely, we notice that for small :math:`t`, the green
 panel is below optimal production in the original model.
 
 High optimal production in the original model early on occurs because the
-firm wants to accumulate inventories quickly in order to push
-inventories high for later periods.
+firm wants to accumulate inventories quickly in order to acquire high 
+inventories for use in later periods.
 
 But how the green line compares to the blue line early on depends on the
-evolution of the demand shock, as we will see in the second
-deterministically seasonal demand shock case analyzed below.
+evolution of the demand shock, as we will see in a
+deterministically seasonal demand shock example to be analyzed below.
 
-There the original firms optimally accumulate inventories slowly
+In that example,  the original firm optimally accumulates inventories slowly
 because the next positive demand shock is in the distant future.
 
 To make the green-blue model production comparison easier to see, let’s
