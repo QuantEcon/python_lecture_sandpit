@@ -733,4 +733,118 @@ initial **season** of the year in which we begin the demand shock
 
 
 
+Exercises
+==============
+
+Please try to analyze some inventory sales smoothing problems using the
+``smoothing_example`` class.
+
+Exercise 1
+~~~~~~~~~~
+
+Assume that the demand shock follows AR(2) process below:
+
+.. math::
+
+
+   \nu_{t}=\alpha+\rho_{1}\nu_{t-1}+\rho_{2}\nu_{t-2}+\epsilon_{t}.
+
+You need to construct :math:`A22`, :math:`C`, and :math:`G` matrices
+properly and then to input them as the keyword arguments of
+``smoothing_example`` class. Simulate paths starting from the initial
+condition :math:`x_0 = \left[0, 1, 0, 0\right]^\prime`.
+
+After this, try to construct a very similar ``smoothing_example`` with
+the same demand shock process but exclude the randomness
+:math:`\epsilon_t`. Compute the stationary states :math:`\bar{x}` by
+simulating for a long period. Then try to add shocks with different
+magnitude to :math:`\bar{\nu}_t` and simulate paths. You should see how
+firms respond differently by staring at the production plans.
+
+Exercise 2
+~~~~~~~~~~
+
+Change parameters of :math:`C(Q_t)` and :math:`d(I_t, S_t)`.
+
+1. Make production more costly, by setting :math:`c_2=5`.
+2. Increase the cost of having inventories deviate from sales, by
+   setting :math:`d_2=5`.
+
+Solution 1
+~~~~~~~~~~
+
+.. code-block:: python3
+
+    # set parameters
+    α = 1
+    ρ1 = 1.2
+    ρ2 = -.3
+
+.. code-block:: python3
+
+    # construct matrices
+    A22 =[[1,  0,  0],
+              [1, ρ1, ρ2],
+              [0,  1, 0]]
+    C2 = [[0], [1], [0]]
+    G = [0, 1, 0]
+
+.. code-block:: python3
+
+    ex1 = smoothing_example(A22=A22, C2=C2, G=G)
+    
+    x0 = [0, 1, 0, 0] # initial condition
+    ex1.simulate(x0)
+
+.. code-block:: python3
+
+    # now silence the noise
+    ex1_no_noise = smoothing_example(A22=A22, C2=[[0], [0], [0]], G=G)
+    
+    # initial condition
+    x0 = [0, 1, 0, 0]
+    
+    # compute stationary states
+    x_bar = ex1_no_noise.LQ.compute_sequence(x0, ts_length=250)[0][:, -1]
+    x_bar
+
+In the following, we add small and large shocks to :math:`\bar{\nu}_t`
+and compare how firm responds differently in quantity. As the shock is
+not very persistent under the parameterization we are using, we focus on
+a short period response.
+
+.. code-block:: python3
+
+    T = 40
+
+.. code-block:: python3
+
+    # small shock
+    x_bar1 = x_bar.copy()
+    x_bar1[2] += 2
+    ex1_no_noise.simulate(x_bar1, T=T)
+
+.. code-block:: python3
+
+    # large shock
+    x_bar1 = x_bar.copy()
+    x_bar1[2] += 10
+    ex1_no_noise.simulate(x_bar1, T=T)
+
+Solution 2
+~~~~~~~~~~
+
+.. code-block:: python3
+
+    x0 = [0, 1, 0]
+
+.. code-block:: python3
+
+    smoothing_example(c2=5).simulate(x0)
+
+.. code-block:: python3
+
+    smoothing_example(d2=5).simulate(x0)
+
+
 
