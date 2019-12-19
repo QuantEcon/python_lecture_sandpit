@@ -94,7 +94,7 @@ rewards.
 Parameterization
 ~~~~~~~~~~~~~~~~
 
-Following section 6.6 of :cite:`ljungqvist2012`,
+Following section 6.6 of :cite:`Ljungqvist2012`,
 our baseline parameterization will be
 
 -  :math:`f` is :math:`\operatorname{Beta} (1, 1)`
