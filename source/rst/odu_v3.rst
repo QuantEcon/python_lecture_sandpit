@@ -1,17 +1,9 @@
+.. _odu_v3:
 
-.. raw:: html
+.. include:: /_static/includes/header.raw
 
-   <div id="qe-notebook-header" align="right" style="text-align:right;">
+.. highlight:: python3
 
-::
-
-       <a href="https://quantecon.org/" title="quantecon.org">
-               <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
-       </a>
-
-.. raw:: html
-
-   </div>
 
 Job Search III: Search with Learning
 ====================================
@@ -86,15 +78,14 @@ we can express the value function for the unemployed worker recursively
 as follows
 
 .. math::
-    :label: eqn_3
+  :label: equation_3
 
-
-   v(w, \pi)
-   = \max \left\{
-   \frac{w}{1 - \beta}, \, c + \beta \int v(w', \pi') \, q_{\pi}(w') \, dw'
-   \right\}
-   \quad \text{where} \quad
-   \pi' = \kappa(w', \pi)
+    \begin{aligned}
+    v(w, \pi) = \max \left\{\frac{w}{1 - \beta}, \, c + \beta \int v(w', \pi') \, q_{\pi}(w') \, dw'
+    \right\}
+    \quad \text{where} \quad
+    \pi' = \kappa(w', \pi)
+    \end{aligned}
 
 Notice that the current guess :math:`\pi` is a state variable,
 since it affects the worker’s perception of probabilities for future
@@ -103,7 +94,7 @@ rewards.
 Parameterization
 ~~~~~~~~~~~~~~~~
 
-Following section 6.6 of `[LS18] <zreferences.ipynb#ljungqvist2012>`__,
+Following section 6.6 of :cite:`ljungqvist2012`,
 our baseline parameterization will be
 
 -  :math:`f` is :math:`\operatorname{Beta} (1, 1)`
@@ -168,10 +159,10 @@ sequence :math:`W_0, W_1, \ldots` is
 
 .. math::  g(W_0) g(W_1) \cdots 
 
-Notice that **conditional on nature having selected :math:`F`**, the
+Notice that **conditional on nature having selected** :math:`F`, the
 sequence :math:`W_0, W_1, \ldots` is independently and
 identically distributed; and that **conditional on nature having
-selected :math:`G`**, the sequence :math:`W_0, W_1, \ldots` is
+selected** :math:`G`, the sequence :math:`W_0, W_1, \ldots` is
 independently and identically distributed.
 
 The unconditional distribution of :math:`W_0, W_1, \ldots` is
@@ -298,7 +289,7 @@ I’ll break it into steps to be put immediately below this cell.
    :math:`\{\pi_t\}_{t=0}^T` starting from initial condition
    :math:`\tilde \pi = 0`. I want then to display long panels – e.g.,
    histograms – for the :math:`\pi_t` series sort of like those
-   displayed near the end of :doc:`this <linear_models> quantecon lecture:
+   displayed near the end of :doc:`this <linear_models>` quantecon lecture.
 
 
 4. I’ll then use the sequences of sample distributions of :math:`\pi_t`

@@ -1,8 +1,16 @@
+.. _information_sales_exercises:
+
+.. include:: /_static/includes/header.raw
+
+.. highlight:: python3
+
 
 Exercises for Production Smoothing via Inventories
 --------------------------------------------------
 
-**Co-authors: Thomas J. Sargent and Zejin Shi**
+.. contents:: :depth: 2
+
+**Co-authors: Thomas J. Sargent**
 
 
 In addition to what's in Anaconda, this lecture will need the following libraries:

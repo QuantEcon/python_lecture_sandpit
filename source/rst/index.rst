@@ -21,6 +21,9 @@
     lss_examples
     multiplicative_functionals
     information_consumption_smoothing-v3
-    Inventory_sales_smoothing-v6
+    inventory_sales_smoothing-v6
+    likelihood_ratio_process
+    inventory_sales_exercises
+    odu_v3
 
     zreferences
