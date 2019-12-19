@@ -434,8 +434,10 @@ where :math:`\omega=f,g`.
     
         π_grid = np.linspace(0.02, 0.98, 100)
     
-        plt.plot(π_grid, [integrate.quad(integrand_f, 0, 1, args=(π,))[0] for π in π_grid], label="f generates")
-        plt.plot(π_grid, [integrate.quad(integrand_g, 0, 1, args=(π,))[0] for π in π_grid], label="g generates")
+        plt.plot(π_grid, [integrate.quad(integrand_f, 0, 1, args=(π,))[0] \
+                for π in π_grid], label="f generates")
+        plt.plot(π_grid, [integrate.quad(integrand_g, 0, 1, args=(π,))[0] \
+                for π in π_grid], label="g generates")
         plt.hlines(1, 0, 1, linestyle="--")
         plt.xlabel("$π_t$")
         plt.ylabel("$E[\pi_{t+1}/\pi_t]$")
@@ -518,12 +520,14 @@ given parameters of :math:`f` and :math:`g`.
         area2 = integrate.quad(g, roots[0], roots[1])[0]
         area3 = integrate.quad(f, roots[1], 1)[0]
     
-        ax2.text(np.mean([f(0), f(roots[0])])/2, np.mean([0, roots[0]]), f"{area1: .3g}")
+        ax2.text(np.mean([f(0), f(roots[0])])/2, np.mean([0, roots[0]]), \
+                                                         f"{area1: .3g}")
         ax2.fill_between([0, 1], 0, roots[0], color='blue', alpha=0.15)
         ax2.text(np.mean(g(roots))/2, np.mean(roots), f"{area2: .3g}")
         w_roots = np.linspace(roots[0], roots[1], 20)
         ax2.fill_betweenx(w_roots, 0, g(w_roots), color='orange', alpha=0.15)
-        ax2.text(np.mean([f(roots[1]), f(1)])/2, np.mean([roots[1], 1]), f"{area3: .3g}")
+        ax2.text(np.mean([f(roots[1]), f(1)])/2, np.mean([roots[1], 1]), \
+                                                        f"{area3: .3g}")
         ax2.fill_between([0, 1], roots[1], 1, color='blue', alpha=0.15)
     
         W = np.arange(0.01, 0.99, 0.08)

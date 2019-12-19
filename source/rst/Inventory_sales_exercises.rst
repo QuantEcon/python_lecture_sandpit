@@ -154,8 +154,10 @@ its consequences
             ax[1, 0].set_title("profits decomposition")
     
             ax[1, 1].plot(range(T), Q_path, label="production")
-            ax[1, 1].plot(range(T), Q_hardwired, label='production when  $I_t$ forced to be zero')
-            ax[1, 1].plot(range(T), Q_no_inventory, label='production when inventories not useful')
+            ax[1, 1].plot(range(T), Q_hardwired, label='production when \
+                         $I_t$ forced to be zero')
+            ax[1, 1].plot(range(T), Q_no_inventory, label='production when \
+                         inventories not useful')
             ax[1, 1].legend(loc=1)
             ax[1, 1].set_title('three production concepts')
     
