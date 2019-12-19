@@ -33,7 +33,7 @@ employment.
                        N=10000, T=600):
         """
         Simulates population for computing empirical cumulative
-        distribution of unempoyment duration and π at time when
+        distribution of unemployment duration and π at time when
         the worker accepts the wage offer. For each job searching
         problem, we simulate for two cases that either f or g is
         the true offer distribution.
@@ -112,7 +112,7 @@ In addition, it computes empirical cumulative distributions.
         """
         Given the parameters that specify F and G distributions,
         calculate and display the rejection and acceptance area,
-        the evolution of belief π, and the probabiilty of accepting
+        the evolution of belief π, and the probability of accepting
         an offer at different π level, and simulate and calculate
         the empirical cumulative distribution of the duration of
         unemployment and π at the time the worker accepts the offer.
@@ -238,7 +238,7 @@ The magnitude is small if
 
 One question of interest is whether worker will get employed earlier or
 not, when the actual ruling distribution is :math:`g` instead of
-:math:`f`? The argument has two aspects that go in the oppsite
+:math:`f`? The argument has two aspects that go in the opposite
 directions.
 
 -  if f generates, then w is more likely to be low, but we also expect

@@ -81,7 +81,7 @@ its consequences
     
             self.A, self.B, self.C = A, B, C
     
-            # construct matrices of one peirod profit function
+            # construct matrices of one period profit function
             R = np.zeros((n, n))
             R[0, 0] = d2
             R[1:, 0] = d1 / 2 * Sc
@@ -164,7 +164,7 @@ its consequences
 Exercises
 ---------
 
-Please try to analyze some inventory sales smoonthing problems using the
+Please try to analyze some inventory sales smoothing problems using the
 ``smoothing_example`` class.
 
 Exercise 1
@@ -239,7 +239,7 @@ Solution 1
 In the following, we add small and large shocks to :math:`\bar{\nu}_t`
 and compare how firm responds differently in quantity. As the shock is
 not very persistent under the parameterization we are using, we focus on
-a short period repsonse.
+a short period response.
 
 .. code-block:: python3
 
