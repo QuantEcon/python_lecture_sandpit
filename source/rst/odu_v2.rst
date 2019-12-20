@@ -84,7 +84,7 @@ The worker aims to maximize the expected discounted sum of earnings
 :math:`\mathbb{E} \sum\_{t=0}^{\infty}\beta^t y_t` The function :math:`V` satisfies the recursion
 
 .. math::
-  :label: eqn_1
+    :label: tag_1
 
 
    v(w)
@@ -121,7 +121,7 @@ Update rule: worker’s time :math:`t` estimate of the distribution is
 :math:`\pi\_t` updates via
 
 .. math::
-  :label: eqn_2
+    :label: eqn_2
 
 
    \pi_{t+1}
@@ -154,7 +154,7 @@ we can express the value function for the unemployed worker recursively
 as follows
 
 .. math::
-  :label: odu_mvf
+    :label: odu_mvf
 
 
    v(w, \pi)
@@ -420,7 +420,9 @@ Let’s look at solutions computed from value function iteration
     
     plt.show()
 
- We will also plot the optimal policy
+
+We will also plot the optimal policy
+
 
 .. code-block:: python3
 
@@ -470,7 +472,7 @@ Hence the two choices on the right-hand side of
 :eq:`odu_mvf` have equal value:
 
 .. math::
-  :label: odu_mvf2
+    :label: odu_mvf2
 
 
    \frac{\bar w(\pi)}{1 - \beta}
@@ -480,7 +482,7 @@ Together, :eq:`odu_mvf` and :eq:`odu_mvf2`
 give
 
 .. math::
-  :label: odu_mvf3
+    :label: odu_mvf3
 
 
    v(w, \pi) =
@@ -506,7 +508,7 @@ Multiplying by :math:`1 - \beta`, substituting in
 using :math:`\circ` for composition of functions yields
 
 .. math::
-  :label: odu_mvf4
+    :label: odu_mvf4
 
 
    \bar w(\pi)
@@ -537,7 +539,7 @@ Consider the operator :math:`Q` mapping
 :math:`Q\omega \in b[0,1]` via
 
 .. math::
-  :label: odu_dq
+    :label: odu_dq
 
 
    (Q \omega)(\pi)
@@ -556,7 +558,7 @@ Moreover, for any :math:`\omega, \omega’ \in b[0,1]`, basic algebra and the tr
 integrals tells us that
 
 .. math::
-  :label: odu_nt
+    :label: odu_nt
 
 
    |(Q \omega)(\pi) - (Q \omega')(\pi)|
@@ -570,7 +572,7 @@ integrals tells us that
 Working case by case, it is easy to check that for real numbers :math:`a, b, c` we always have
 
 .. math::
-  :label: odu_nt2
+    :label: odu_nt2
 
 
    | \max\{a, b\} - \max\{a, c\}| \leq | b - c|
@@ -579,7 +581,7 @@ Combining ::eq:`odu_nt` and ::eq:`odu_nt2`
 yields
 
 .. math::
-  :label: eqn_10
+    :label: eqn_10
 
 
    |(Q \omega)(\pi) - (Q \omega')(\pi)|
@@ -591,7 +593,7 @@ yields
 Taking the supremum over :math:`\pi` now gives us
 
 .. math::
-  :label: eqn_11
+    :label: eqn_11
 
 
    \|Q \omega - Q \omega'\|
@@ -873,10 +875,10 @@ sequence :math:`W_0, W_1, \ldots` is
 
 .. math::  g(W_0) g(W_1) \cdots 
 
-Notice that **conditional on nature having selected :math:`F`**, the
+Notice that **conditional on nature having selected** :math:`F`, the
 sequence :math:`W_0, W_1, \ldots` is independently and
 identically distributed; and that **conditional on nature having
-selected :math:`G`**, the sequence :math:`W_0, W_1, \ldots` is
+selected** :math:`G`, the sequence :math:`W_0, W_1, \ldots` is
 independently and identically distributed.
 
 The unconditional distribution of :math:`W_0, W_1, \ldots` is
@@ -929,7 +931,7 @@ The distribution of :math:`w_{t+1}` conditional on :math:`w^t` is then
 Bayes’ rule for updating :math:`\pi_{t+1}` is
 
 .. math::
-  :label: odu-pi-rec
+    :label: odu_pi_rec
 
 
    \pi_{t+1}
