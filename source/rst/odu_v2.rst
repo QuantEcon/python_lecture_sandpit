@@ -26,6 +26,10 @@ In this lecture, we consider an extension of the :doc:`previously
 studied <mccall_model>`  job search model of McCall
 :cite:`McCall1970`.
 
+We'll build on a model of Bayesian learning discussed in :doc:`this
+lecture <exchangeable>` on the topic of exchangeability and its relationship to
+the concept of IID (identically and independently distributed) random variables and to  Bayesian updating. 
+
 In the McCall model, an unemployed worker decides when to accept a
 permanent position at a specified wage, given
 
@@ -733,8 +737,8 @@ The solution can be plotted as follows
     ax.grid()
     plt.show()
 
-Appendix
---------
+Appendix A
+-----------
 
 The next piece of code is just a fun simulation to see what the effect
 of a change in the underlying distribution on the unemployment rate is.
@@ -821,16 +825,17 @@ As a result, the unemployment rate spikes
     plt.show()
 
 
-More Details about Bayes' Law and the Likelihood Function
-===========================================================
+Appendix B
+------------
 
+In this appendix we provide more Details about how Bayes' Law contributes to the workings of the model.
 
-Here we present some graphs that bring out additional insights about how learning works.
+We present some graphs that bring out additional insights about how learning works.
 
 We build on graphs presented in:doc:`previously
-studied <mccall_model>`  XXXX  TOM AND JOHN: PUT IN THE CORRECT NEW LECTURE title
+studied <exchangeable>`  
 
-In particular, we'll superimpose the decision making made by our searching worker a key graph 
+In particular, we'll add actions of  our searching worker to a key graph 
 presented in that lecture.
 
 

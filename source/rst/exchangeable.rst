@@ -16,110 +16,13 @@ In addition to what's in Anaconda, this lecture employs the following libraries:
   !pip install --upgrade quantecon
   !pip install interpolation
 
-    from numba import njit, prange, vectorize
-    from interpolation import mlinterp, interp
-    from math import gamma
-    import numpy as np
-    import matplotlib.pyplot as plt
-    %matplotlib inline
-    from matplotlib import cm
-
-A Learning Problem
-~~~~~~~~~~~~~~~~~~
-
-There are two possible distributions :math:`F` and :math:`G` — with densities
-:math:`f` and :math:`g`.
-
-At the start of time, “nature” selects :math:`q` to be either :math:`f` or :math:`g`
-— the wage distribution from which the entire sequence :math:`{W_t}` will be
-drawn.
-
-This choice is not observed by the worker, who puts prior probability
-:math:`\pi\_0` on :math:f` being chosen.
-
-Update rule: worker’s time :math:`t` estimate of the distribution is
-:math:`\pi\_t f + (1 - \pi\_t) g`, where
-:math:`\pi\_t` updates via
-
-.. math::
-  :label: odu_pi_rec
-
-
-   \pi_{t+1}
-   = \frac{\pi_t f(w_{t+1})}{\pi_t f(w_{t+1}) + (1 - \pi_t) g(w_{t+1})}
-
-This last expression follows from Bayes’ rule, which tells us that
-
-.. math::
-
-
-   \mathbb{P}\{q = f \,|\, W = w\}
-   = \frac{\mathbb{P}\{W = w \,|\, q = f\}\mathbb{P}\{q = f\}}
-   {\mathbb{P}\{W = w\}}
-   \quad \text{and} \quad
-   \mathbb{P}\{W = w\} = \sum_{\omega \in \{f, g\}} \mathbb{P}\{W = w \,|\, q = \omega\} \mathbb{P}\{q = \omega\}
-
-The fact that :eq:`odu_pi_rec` is recursive allows us to
-progress to a recursive solution method.
-
-Letting
-
-.. math::
-
-
-   q_{\pi}(w) := \pi f(w) + (1 - \pi) g(w)
-   \quad \text{and} \quad
-   \kappa(w, \pi) := \frac{\pi f(w)}{\pi f(w) + (1 - \pi) g(w)}
-
-we can express the value function for the unemployed worker recursively
-as follows
-
-.. math::
-  :label: equation_3
-
-    \begin{aligned}
-    v(w, \pi) = \max \left\{\frac{w}{1 - \beta}, \, c + \beta \int v(w', \pi') \, q_{\pi}(w') \, dw'
-    \right\}
-    \quad \text{where} \quad
-    \pi' = \kappa(w', \pi)
-    \end{aligned}
-
-Notice that the current guess :math:`\pi` is a state variable,
-since it affects the worker’s perception of probabilities for future
-rewards.
-
-Parameterization
-~~~~~~~~~~~~~~~~
-
-Following section 6.6 of :cite:`Ljungqvist2012`,
-our baseline parameterization will be
-
--  :math:`f` is :math:`\operatorname{Beta} (1, 1)`
--  :math:`g` is :math:`\operatorname{Beta} (3, 1.2)`
--  :math:`\beta = 0.95` and :math:`c = 0.3`
-
-The densities :math:`f` and :math:`g` have the following shape
-
-.. code-block:: python3
-
-    @vectorize
-    def p(x, a, b):
-        r = gamma(a + b) / (gamma(a) * gamma(b))
-        return r * x**(a-1) * (1 - x)**(b-1)
-    
-    
-    x_grid = np.linspace(0, 1, 100)
-    f = lambda x: p(x, 1, 1)
-    g = lambda x: p(x, 3, 1.2)
-    
-    fig, ax = plt.subplots(figsize=(10, 8))
-    ax.plot(x_grid, f(x_grid), label='$f$', lw=2)
-    ax.plot(x_grid, g(x_grid), label='$g$', lw=2)
-    
-    ax.legend()
-    plt.show()
-
-
+  from numba import njit, prange, vectorize
+  from interpolation import mlinterp, interp
+  from math import gamma
+  import numpy as np
+  import matplotlib.pyplot as plt
+  %matplotlib inline
+  from matplotlib import cm
 
 .. code-block:: python3
 
@@ -129,7 +32,7 @@ The densities :math:`f` and :math:`g` have the following shape
 Exchangeable but not i.i.d.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let :math:`{W_t}_{t=0}^\infty` be a sequence of nonnegative
+Let :math:`\{W_t\}_{t=0}^\infty` be a sequence of nonnegative
 scalar random variables with a joint probability distribution
 constructed as follows.
 
@@ -229,6 +132,13 @@ tells us that
    \quad \text{and} \quad
    \mathbb{P}\{W = w\} = \sum_{\omega \in \{f, g\}} \mathbb{P}\{W = w \,|\, q = \omega\} \mathbb{P}\{q = \omega\}
 
+Define the **likelihood ratio** 
+
+.. math::
+
+   l(w) = \frac{f(w)}{g(w)}
+
+
 It is convenient for us to rewrite the updating rule :eq:`odu_pi_rec` as
 
 .. math::
@@ -252,65 +162,103 @@ We’ll plot :math:`l\left(w\right)` as a way to enlighten us about how
 learning – i.e., Bayesian updating of the probability :math:`\pi` that
 nature has chosen distribution :math:`f` – works.
 
-Nov 28 requests for Zejin
--------------------------
 
-Hi. What you have done below is great. I would like to extract more
-benefits from what you have already done by subdividing some of it and
-presenting parts of it in steps.
+Below we define a wrapper function that displays informative graphs
+given parameters of :math:`f` and :math:`g`.
 
-Here is what I’d like to do.
+.. code-block:: python3
 
-Before doing what appears in the following cells, I’d like you to insert
-some additional cells that do the following based on calculations and
-graphs that you already have created so well.
+    def learning_example(F_a=1, F_b=1, G_a=3, G_b=1.2):
+        """
+        Given the parameters that specify F and G distributions,
+        display the updating rule of belief π.
+        """
+    
+        f = njit(lambda x: p(x, F_a, F_b))
+        g = njit(lambda x: p(x, G_a, G_b))
+    
+        # l(w) = f(w) / g(w)
+        l = lambda w: f(w) / g(w)
+        # objective function for solving l(w) = 1
+        obj = lambda w: l(w) - 1
+    
+        x_grid = np.linspace(0, 1, 100)
+        π_grid = np.linspace(1e-3, 1-1e-3, 100)
+        
+        w_max = 1
+        w_grid = np.linspace(1e-12, w_max-1e-12, 100)
+    
+        # the mode of beta distribution
+        # use this to divide w into two intervals for root finding
+        G_mode = (G_a - 1) / (G_a + G_b - 2)
+        roots = np.empty(2)
+        roots[0] = op.root_scalar(obj, bracket=[1e-10, G_mode]).root
+        roots[1] = op.root_scalar(obj, bracket=[G_mode, 1-1e-10]).root
+    
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5))
+    
+        ax1.plot(l(w_grid), w_grid, label='$l$', lw=2)
+        ax1.vlines(1., 0., 1., linestyle="--")
+        ax1.hlines(roots, 0., 2., linestyle="--")
+        ax1.set_xlim([0., 2.])
+        ax1.legend(loc=4)
+        ax1.set(xlabel='$l(w)=f(w)/g(w)$', ylabel='$w$')
+    
+        ax2.plot(f(x_grid), x_grid, label='$f$', lw=2)
+        ax2.plot(g(x_grid), x_grid, label='$g$', lw=2)
+        ax2.vlines(1., 0., 1., linestyle="--")
+        ax2.hlines(roots, 0., 2., linestyle="--")
+        ax2.legend(loc=4)
+        ax2.set(xlabel='$f(w), g(w)$', ylabel='$w$')
+    
+        area1 = integrate.quad(f, 0, roots[0])[0]
+        area2 = integrate.quad(g, roots[0], roots[1])[0]
+        area3 = integrate.quad(f, roots[1], 1)[0]
+    
+        ax2.text(np.mean([f(0), f(roots[0])])/2, np.mean([0, roots[0]]), \
+                                                         f"{area1: .3g}")
+        ax2.fill_between([0, 1], 0, roots[0], color='blue', alpha=0.15)
+        ax2.text(np.mean(g(roots))/2, np.mean(roots), f"{area2: .3g}")
+        w_roots = np.linspace(roots[0], roots[1], 20)
+        ax2.fill_betweenx(w_roots, 0, g(w_roots), color='orange', alpha=0.15)
+        ax2.text(np.mean([f(roots[1]), f(1)])/2, np.mean([roots[1], 1]), \
+                                                        f"{area3: .3g}")
+        ax2.fill_between([0, 1], roots[1], 1, color='blue', alpha=0.15)
+    
+        W = np.arange(0.01, 0.99, 0.08)
+        Π = np.arange(0.01, 0.99, 0.08)
+    
+        ΔW = np.zeros((len(W), len(Π)))
+        ΔΠ = np.empty((len(W), len(Π)))
+        for i, w in enumerate(W):
+            for j, π in enumerate(Π):
+                lw = l(w)
+                ΔΠ[i, j] = π * (lw / (π * lw + 1 - π) - 1)
+    
+        q = ax3.quiver(Π, W, ΔΠ, ΔW, scale=2, color='r', alpha=0.8)
+    
+        ax3.fill_between(π_grid, 0, roots[0], color='blue', alpha=0.15)
+        ax3.fill_between(π_grid, roots[0], roots[1], color='green', alpha=0.15)
+        ax3.fill_between(π_grid, roots[1], w_max, color='blue', alpha=0.15)
+        ax3.hlines(roots, 0., 1., linestyle="--")
+        ax3.set(xlabel='$\pi$', ylabel='$w$')
+        ax3.grid()
+    
+        plt.show()
 
-I’ll break it into steps to be put immediately below this cell.
+.. code-block:: python3
 
-1. Please look at the great “six panel” graph that you use repeatedly in
-   the revealing examples section below. I want to build up to this six
-   panel presentation with some preliminary and intermediate steps.
+    learning_example()
 
-2. Please created a “stripped down” version of your six panel graph that
-   includes only three panels based on the top two subgraphs and the one
-   on the second row, left side only. Please remove all references to
-   the “search model”, namely the “reject” and “accept” labels on the
-   upper right panel so that the graphs are just for teaching about
-   Bayes’ law. (I love the arrows and the way you have stacked the
-   graphs).
+.. code-block:: python3
 
-3. Perhaps prepare one of your magic “wrappers” that will allow us to
-   choose repeatedly simulate long sample paths :math:`\{w_t\}_{t=0}^T`
-   for a big :math:`T` we’ll choose under (a) f and then (b) g, and in
-   each case generate repeated long samples (a “panel”) of
-   :math:`\{\pi_t\}_{t=0}^T` starting from initial condition
-   :math:`\tilde \pi = 0`. I want then to display long panels – e.g.,
-   histograms – for the :math:`\pi_t` series sort of like those
-   displayed near the end of :doc:`this <linear_models>` quantecon lecture.
+    learning_example(G_a=2, G_b=1.6)
 
 
-4. I’ll then use the sequences of sample distributions of :math:`\pi_t`
-   to teach about martingale convergence and the sense in which
-   :math:`\pi_t \rightarrow 0` or :math:`\pi_t \rightarrow 1`.
 
-5. After you do this, then I’ll smooth out and continue with presenting
-   and interpreting your great graphs as you do below.
 
-I’d be happy to discuss this with you in person if things aren’t clear.
-Thanks so much Zejin!
-
-Self Contained Learning Lecture Notebook (Dec 10)
-=================================================
-
-.. code-block:: ipython
-
-    import scipy.integrate as integrate
-    import scipy.optimize as op
-    from numba import njit, vectorize
-    from math import gamma
-    import numpy as np
-    import matplotlib.pyplot as plt
-    %matplotlib inline
+TOM EDIT MORE BELOW 
+---------------------
 
 .. code-block:: python3
 
@@ -464,94 +412,3 @@ different, and nor identical. :math:`F_a=2, F_b=1` and
 .. code-block:: python3
 
     expected_ratio(F_a=2, F_b=1, G_a=3, G_b=1.2)
-
-Below we define a wrapper function that displays informative graphs
-given parameters of :math:`f` and :math:`g`.
-
-.. code-block:: python3
-
-    def learning_example(F_a=1, F_b=1, G_a=3, G_b=1.2):
-        """
-        Given the parameters that specify F and G distributions,
-        display the updating rule of belief π.
-        """
-    
-        f = njit(lambda x: p(x, F_a, F_b))
-        g = njit(lambda x: p(x, G_a, G_b))
-    
-        # l(w) = f(w) / g(w)
-        l = lambda w: f(w) / g(w)
-        # objective function for solving l(w) = 1
-        obj = lambda w: l(w) - 1
-    
-        x_grid = np.linspace(0, 1, 100)
-        π_grid = np.linspace(1e-3, 1-1e-3, 100)
-        
-        w_max = 1
-        w_grid = np.linspace(1e-12, w_max-1e-12, 100)
-    
-        # the mode of beta distribution
-        # use this to divide w into two intervals for root finding
-        G_mode = (G_a - 1) / (G_a + G_b - 2)
-        roots = np.empty(2)
-        roots[0] = op.root_scalar(obj, bracket=[1e-10, G_mode]).root
-        roots[1] = op.root_scalar(obj, bracket=[G_mode, 1-1e-10]).root
-    
-        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5))
-    
-        ax1.plot(l(w_grid), w_grid, label='$l$', lw=2)
-        ax1.vlines(1., 0., 1., linestyle="--")
-        ax1.hlines(roots, 0., 2., linestyle="--")
-        ax1.set_xlim([0., 2.])
-        ax1.legend(loc=4)
-        ax1.set(xlabel='$l(w)=f(w)/g(w)$', ylabel='$w$')
-    
-        ax2.plot(f(x_grid), x_grid, label='$f$', lw=2)
-        ax2.plot(g(x_grid), x_grid, label='$g$', lw=2)
-        ax2.vlines(1., 0., 1., linestyle="--")
-        ax2.hlines(roots, 0., 2., linestyle="--")
-        ax2.legend(loc=4)
-        ax2.set(xlabel='$f(w), g(w)$', ylabel='$w$')
-    
-        area1 = integrate.quad(f, 0, roots[0])[0]
-        area2 = integrate.quad(g, roots[0], roots[1])[0]
-        area3 = integrate.quad(f, roots[1], 1)[0]
-    
-        ax2.text(np.mean([f(0), f(roots[0])])/2, np.mean([0, roots[0]]), \
-                                                         f"{area1: .3g}")
-        ax2.fill_between([0, 1], 0, roots[0], color='blue', alpha=0.15)
-        ax2.text(np.mean(g(roots))/2, np.mean(roots), f"{area2: .3g}")
-        w_roots = np.linspace(roots[0], roots[1], 20)
-        ax2.fill_betweenx(w_roots, 0, g(w_roots), color='orange', alpha=0.15)
-        ax2.text(np.mean([f(roots[1]), f(1)])/2, np.mean([roots[1], 1]), \
-                                                        f"{area3: .3g}")
-        ax2.fill_between([0, 1], roots[1], 1, color='blue', alpha=0.15)
-    
-        W = np.arange(0.01, 0.99, 0.08)
-        Π = np.arange(0.01, 0.99, 0.08)
-    
-        ΔW = np.zeros((len(W), len(Π)))
-        ΔΠ = np.empty((len(W), len(Π)))
-        for i, w in enumerate(W):
-            for j, π in enumerate(Π):
-                lw = l(w)
-                ΔΠ[i, j] = π * (lw / (π * lw + 1 - π) - 1)
-    
-        q = ax3.quiver(Π, W, ΔΠ, ΔW, scale=2, color='r', alpha=0.8)
-    
-        ax3.fill_between(π_grid, 0, roots[0], color='blue', alpha=0.15)
-        ax3.fill_between(π_grid, roots[0], roots[1], color='green', alpha=0.15)
-        ax3.fill_between(π_grid, roots[1], w_max, color='blue', alpha=0.15)
-        ax3.hlines(roots, 0., 1., linestyle="--")
-        ax3.set(xlabel='$\pi$', ylabel='$w$')
-        ax3.grid()
-    
-        plt.show()
-
-.. code-block:: python3
-
-    learning_example()
-
-.. code-block:: python3
-
-    learning_example(G_a=2, G_b=1.6)
