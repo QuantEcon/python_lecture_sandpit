@@ -29,8 +29,119 @@ In addition to what's in Anaconda, this lecture employs the following libraries:
     import scipy.optimize as op
     from scipy.stats import cumfreq, beta
 
-Exchangeable but not i.i.d.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Overview
+---------
+
+This lecture studies a simple learning problem that we use to introduce some of the foundations of learning 
+via Bayes' Law.
+
+We touch on foundations of Bayesian statistical inference invented by Bruno DeFinetti :cite:`definetti` whose meaning for economists is discussed 
+in chapter 11 of :cite:`kreps` by David Kreps.
+
+The problem  that we study in this lecture  is a component of :doc:`this lecture<odu>` that augments the 
+:doc:`classic  <mccall_model>`  job search model of McCall
+:cite:`McCall1970`.classic McCall search model by presenting 
+an unemployed worker with an inference problem. 
+
+The present lecture  presents  graphs that illustrate the role of a  likelihood ratio  
+in determining how Bayes' Law drives statitical  inferences.
+
+Later  we'll use these same types of graphs 
+to provide insights into the mechanics driving outcomes in :doc:`this lecture<odu>` about learning in an augmented McCall job
+search model.
+
+Among other things, this lecture will discuss the connection between the statistical concepts of sequences of random variables
+that are
+
+- independently and identically distributed
+
+- exchangeable
+
+This distinction is a component of Bayesian updating as a method of statistical inference.
+
+
+Below, we'll often use 
+
+ - :math:`W` to denote a random variable
+
+ - :math:`w` to denote a particular realization of a random variable :math:`W` 
+
+
+Independently and Identically Distributed 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let's look at the notion of an  **independently and identically  distributed sequence**.
+
+An idenpendently and identically distributed sequence is often referred to as IID.
+
+A sequence :math:`W_0, W_1, \ldots` is **independently distributed** if the joint probability density
+of the sequence is the **product** of the densities of the  components of the sequence. 
+
+The sequence :math:`W_0, W_1, \ldots` is **independently and identically distributed** if the marginal
+density of :math:`W_t` is the same for all :math:`t =0, 1, \ldots`.  
+
+For example,   let :math:`f(W_t)` be the density for :math:`W_t` for all :math:`t =0, 1, \ldots`.
+
+Then the joint density of the
+sequence :math:`W_0, W_1, \ldots` is
+
+.. math::  f(W_0) f(W_1) \cdots 
+
+
+IID Means Past Observations Don't Tell Us Anything About Future Draws 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If a sequence is random variables is IID, past information provides no information about future realizations.
+
+In this sense, there is **nothing to learn**  about the future from the past.  
+
+
+
+To understand these statements, let the joint distribution of a sequence of random variables :math:`\{W_t\}_{t=0}^T`
+that is not necessarily IID, be
+
+.. math::  p(W_T, W_{T-1}, \ldots, W_1, W_0)
+
+
+Using the laws of probability, we can always factor such a joint density into a product of conditional densities:
+
+.. math::
+
+   \begin{align}
+     p(W_T, W_{T-1}, \ldots, W_1, W_0)    = & p(W_T | W_{t-1}, \ldots, W_0) p(W_{T-1} | W_{T-2}, \ldots, W_0) \cdots  \cr
+     & p(W_1 | W_0) p(W_0) 
+   \end{align}
+
+
+
+In general,   
+
+ .. math::  p(W_t | W_{t-1}, \ldots, W_0)   \neq   p(W_t)             
+
+which states that the **conditional density** on the left does not equal the **marginal density** on the right side.
+
+In the special IID case, 
+
+.. math::  p(W_t | W_{t-1}, \ldots, W_0)   =  p(W_t)
+
+and partial history :math:`W_{t-1}, \ldots, W_0` contains no information about the probability of :math:`W_t`.
+
+So in the IID case, there is **nothing to learn** from past data.   
+ 
+
+In the general case, there is something go learn from past data.
+
+We turn next to an instance of this general case in which there is something to learn from past data. 
+
+Please keep your eye out for **what** there is to learn from past data. 
+
+
+
+A Setting in Which Past Observations Are Informative
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We now turn to a setting in which there **is** something to learn.  
 
 Let :math:`\{W_t\}_{t=0}^\infty` be a sequence of nonnegative
 scalar random variables with a joint probability distribution
@@ -45,9 +156,32 @@ all selects **either** :math:`f` **or** :math:`g` — and thereafter at each tim
 :math:`t \geq 0` draws a random :math:`W` from the selected
 distribution.
 
-In particular, assume that nature selects :math:`F` with probability
+To motivate our statistical learning procedure, let's assume that nature selects :math:`F` with probability
 :math:`\tilde \pi \in (0,1)` and
 :math:`G` with probability :math:`1 - \tilde \pi`.
+
+We'll also assume that 
+
+ - we **know** both :math:`F` and :math:`G`
+
+ - we **don't know** which of these two distributions that nature has drawn 
+
+ - we **think** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
+   :math:`G` with probability :math:`1 - \tilde \pi` 
+
+
+ - at date :math:`t \geq 0` we have observed a  the partial history :math:`w_t, w_{t-1}, \ldots, w_0` of draws from the appropriate joint
+   density of the partial history
+
+But what do we mean by the *appropriate joint distribution*?
+
+We'll discuss that next and in the process describe the concept of **exchangeability**
+
+Relationship Between IID and Exchangeable 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
 
 Conditional on nature selecting :math:`F`, the joint density of the
 sequence :math:`W_0, W_1, \ldots` is
