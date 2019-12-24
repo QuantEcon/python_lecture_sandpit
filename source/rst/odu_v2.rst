@@ -740,7 +740,7 @@ The solution can be plotted as follows
 Appendix A
 -----------
 
-The next piece of code is just a fun simulation to see what the effect
+The next piece of code generates a fun simulation to see what the effect
 of a change in the underlying distribution on the unemployment rate is.
 
 At a point in the simulation, the distribution becomes significantly
@@ -828,12 +828,11 @@ As a result, the unemployment rate spikes
 Appendix B
 ------------
 
-In this appendix we provide more Details about how Bayes' Law contributes to the workings of the model.
+In this appendix we provide more details about how Bayes' Law contributes to the workings of the model.
 
 We present some graphs that bring out additional insights about how learning works.
 
-We build on graphs presented in:doc:`previously
-studied <exchangeable>`  
+We build on graphs proposed in :doc:`this lecture<exchangeable>`. 
 
 In particular, we'll add actions of  our searching worker to a key graph 
 presented in that lecture.
@@ -1046,8 +1045,19 @@ Example 1 (Baseline)
 The red arrows in the upper right figure show how :math:`\pi_t` is updated in response to the
 new information :math:`w_t`. 
 
-GGHH  As the formula above
-implies, the direction is determined by the relationship between
+
+Recall the following formula from :doc:`this lecture<exchangeable>`
+
+
+.. math::
+
+   \frac{\pi_{t+1}}{\pi_{t}}=\frac{l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}\begin{cases}
+   >1 & \text{if }l\left(w_{t+1}\right)>1\\
+   \leq1 & \text{if }l\left(w_{t+1}\right)\leq1
+   \end{cases}
+
+
+The formula implies that  the direction of motion of :math:`\pi_t` is determined by the relationship between
 :math:`l(w_t)` and :math:`1`.
 
 The magnitude is small if
