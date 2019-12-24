@@ -33,64 +33,69 @@ In addition to what's in Anaconda, this lecture employs the following libraries:
 Overview
 ---------
 
-This lecture studies a simple learning problem that we use to introduce some of the foundations of learning 
+This lecture studies an example  of learning 
 via Bayes' Law.
 
-We touch on foundations of Bayesian statistical inference invented by Bruno DeFinetti :cite:`definetti` whose meaning for economists is discussed 
+We touch on foundations of Bayesian statistical inference invented by Bruno DeFinetti :cite:`definetti`.
+
+The relevance of DeFinetti's work for economists is presented forcefully 
 in chapter 11 of :cite:`kreps` by David Kreps.
 
-The problem  that we study in this lecture  is a component of :doc:`this lecture<odu>` that augments the 
+The example  that we study in this lecture  is a key component of :doc:`this lecture<odu>` that augments the 
 :doc:`classic  <mccall_model>`  job search model of McCall
-:cite:`McCall1970`.classic McCall search model by presenting 
-an unemployed worker with an inference problem. 
+:cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
 
-The present lecture  presents  graphs that illustrate the role of a  likelihood ratio  
-in determining how Bayes' Law drives statitical  inferences.
+Here we create  graphs that illustrate the role that  a  likelihood ratio  
+plays in  Bayes' Law.
 
-Later  we'll use these same types of graphs 
-to provide insights into the mechanics driving outcomes in :doc:`this lecture<odu>` about learning in an augmented McCall job
+We'll use such graphs to provide insights into the mechanics driving outcomes in :doc:`this lecture<odu>` about learning in an augmented McCall job
 search model.
 
-Among other things, this lecture will discuss the connection between the statistical concepts of sequences of random variables
+Among other things, this lecture discusses  connections between the statistical concepts of sequences of random variables
 that are
 
 - independently and identically distributed
 
 - exchangeable
 
-This distinction is a component of Bayesian updating as a method of statistical inference.
+Under standing the distinction between these concepts is essential for appreciating how Bayesian updating 
+works in our example.
 
 
 Below, we'll often use 
 
- - :math:`W` to denote a random variable
+- :math:`W` to denote a random variable
 
- - :math:`w` to denote a particular realization of a random variable :math:`W` 
+- :math:`w` to denote a particular realization of a random variable :math:`W` 
 
 
 Independently and Identically Distributed 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's look at the notion of an  **independently and identically  distributed sequence**.
+We begin by looking at the notion of an  **independently and identically  distributed sequence** of random variables.
 
-An idenpendently and identically distributed sequence is often referred to as IID.
+An independently and identically distributed sequence is often abbreviated as IID.
+
+Two notions are involved, **independently** and **identically** distributed.
 
 A sequence :math:`W_0, W_1, \ldots` is **independently distributed** if the joint probability density
 of the sequence is the **product** of the densities of the  components of the sequence. 
 
-The sequence :math:`W_0, W_1, \ldots` is **independently and identically distributed** if the marginal
+The sequence :math:`W_0, W_1, \ldots` is **independently and identically distributed** if in addition the marginal
 density of :math:`W_t` is the same for all :math:`t =0, 1, \ldots`.  
 
-For example,   let :math:`f(W_t)` be the density for :math:`W_t` for all :math:`t =0, 1, \ldots`.
+For example,  let :math:`p(W_0, W_1, \ldots)` be the **joint density** of the sequence and
+let :math:`p(W_t)` be the **marginal density** for a particular :math:`W_t` for all :math:`t =0, 1, \ldots`.
 
-Then the joint density of the
-sequence :math:`W_0, W_1, \ldots` is
+Then the joint density of the sequence :math:`W_0, W_1, \ldots` is IID if 
 
-.. math::  f(W_0) f(W_1) \cdots 
+.. math:: p(W_0, W_1, \ldots) =  p(W_0) p(W_1) \cdots 
+
+so that the joint density is the product of a sequence of identical marginal densities.
 
 
-IID Means Past Observations Don't Tell Us Anything About Future Draws 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IID Means Past Observations Don't Tell Us Anything About Future Observations 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If a sequence is random variables is IID, past information provides no information about future realizations.
 
@@ -117,9 +122,9 @@ Using the laws of probability, we can always factor such a joint density into a 
 
 In general,   
 
- .. math::  p(W_t | W_{t-1}, \ldots, W_0)   \neq   p(W_t)             
+.. math::  p(W_t | W_{t-1}, \ldots, W_0)   \neq   p(W_t)             
 
-which states that the **conditional density** on the left does not equal the **marginal density** on the right side.
+which states that the **conditional density** on the left side does not equal the **marginal density** on the right side.
 
 In the special IID case, 
 
@@ -127,9 +132,8 @@ In the special IID case,
 
 and partial history :math:`W_{t-1}, \ldots, W_0` contains no information about the probability of :math:`W_t`.
 
-So in the IID case, there is **nothing to learn** from past data.   
+So in the IID case, there is **nothing to learn** about the densities of future random variables from past data.   
  
-
 In the general case, there is something go learn from past data.
 
 We turn next to an instance of this general case in which there is something to learn from past data. 
@@ -151,31 +155,43 @@ There are two distinct cumulative distribution functions :math:`F` and :math:`G`
 — with densities :math:`f` and :math:`g` for a nonnegative scalar random
 variable :math:`W`.
 
-Before the start of time, say at time :math:`t-1`, “nature” once and for
+Before the start of time, say at time :math:`t= -1`, “nature” once and for
 all selects **either** :math:`f` **or** :math:`g` — and thereafter at each time
 :math:`t \geq 0` draws a random :math:`W` from the selected
 distribution.
 
-To motivate our statistical learning procedure, let's assume that nature selects :math:`F` with probability
+So  the data are permanently generated as independently and identically distributed (IID) draws from **either** :math:`F` **or**
+:math:`G`.
+
+We could say that *objectively* the probability that the data are generated as draws from :math:`F` is either :math:`0`
+or :math:`1`.  
+
+We now drop into this setting a decision maker who knows :math:`F` and :math:`G` and that nature picked one 
+of them once and for all and then drew an IID sequence of draws from that distribution.
+
+But our decision maker does not know which of the two distributions nature selected.  
+
+The decision maker summarizes his ignorance about this by picking a **subjective probability** 
+:math:`\tilde \pi` and reasons as if  nature had selected :math:`F` with probability
 :math:`\tilde \pi \in (0,1)` and
 :math:`G` with probability :math:`1 - \tilde \pi`.
 
-We'll also assume that 
+Thus, we  assume that the decision maker
 
- - we **know** both :math:`F` and :math:`G`
+ - **knows** both :math:`F` and :math:`G`
 
- - we **don't know** which of these two distributions that nature has drawn 
+ - **doesnt't know** which of these two distributions that nature has drawn 
 
- - we **think** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
+ - summarizing his ignorance by acting  as if or **thinking** that nature chose distribution :math:`F` with probability :math:`\tilde \pi \in (0,1)` and distribution
    :math:`G` with probability :math:`1 - \tilde \pi` 
 
 
- - at date :math:`t \geq 0` we have observed a  the partial history :math:`w_t, w_{t-1}, \ldots, w_0` of draws from the appropriate joint
+ - at date :math:`t \geq 0` has observed  the partial history :math:`w_t, w_{t-1}, \ldots, w_0` of draws from the appropriate joint
    density of the partial history
 
 But what do we mean by the *appropriate joint distribution*?
 
-We'll discuss that next and in the process describe the concept of **exchangeability**
+We'll discuss that next and in the process describe the concept of **exchangeability**.
 
 Relationship Between IID and Exchangeable 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -195,20 +211,27 @@ sequence :math:`W_0, W_1, \ldots` is
 
 Notice that **conditional on nature having selected** :math:`F`, the
 sequence :math:`W_0, W_1, \ldots` is independently and
-identically distributed; and that **conditional on nature having
-selected** :math:`G`, the sequence :math:`W_0, W_1, \ldots` is
+identically distributed.
+
+Furthermore,  **conditional on nature having
+selected** :math:`G`, the sequence :math:`W_0, W_1, \ldots` is also
 independently and identically distributed.
+
+But what about the unconditional distribution?
 
 The unconditional distribution of :math:`W_0, W_1, \ldots` is
 evidently
 
-.. math::  h(W_0, W_1, \ldots ) \equiv \tilde \pi [f(W_0) f(W_1) \cdots ] + ( 1- \tilde \pi) [g(W_0) g(W_1) \cdots ] 
+.. math::
+    :label: eq_definetti
+
+    h(W_0, W_1, \ldots ) \equiv \tilde \pi [f(W_0) f(W_1) \cdots ] + ( 1- \tilde \pi) [g(W_0) g(W_1) \cdots ] 
 
 Under the unconditional distribution :math:`h(W_0, W_1, \ldots )`, the
 sequence :math:`W_0, W_1, \ldots` is **not** independently and
 identically distributed.
 
-To verify this claim, notice, for example, that
+To verify this claim, it is sufficient to notice, for example, that
 
 .. math::
 
@@ -223,24 +246,76 @@ Thus, the conditional distribution
     h(w_1 | w_0) \equiv \frac{h(w_0, w_1)}{(\tilde \pi f(w_0) + (1-\tilde \pi) g(w_0))}
      \neq ( \tilde \pi f(w_1) + (1-\tilde \pi) g(w_1)) 
 
-While the sequence :math:`W_0, W_1, \ldots` is not i.i.d., it is
+This means that the realization :math:`w_0` contains information about :math:`w_1`.
+
+So there is something to learn.  
+
+But what and how?
+
+Exchangeability 
+^^^^^^^^^^^^^^^     
+
+While the sequence :math:`W_0, W_1, \ldots` is not IID, it can be verified that it is
 **exchangeable**, which means that
 
 .. math::  h(w_0, w_1) = h(w_1, w_0) 
 
 and so on.
 
-Let :math:`q` represent the distribution that nature ends up drawing
+
+More generally, a sequence of random variables is said to be **exchangeable** if  the  joint probability distribution
+for the sequence does not change when the positions in the sequence in which finitely many of the random variables
+appear are altered.
+
+Equation :eq:`eq_definetti` represents our instance of an exchangeable joint density over a sequence of random 
+variables  as a **mixture**  of  two IID joint densities over a sequence of random variables.
+
+For a Bayesian statistician, the mixing parameter :math:`\tilde \pi \in (0,1)` has a special interpretation
+as a **prior probability** that nature selected probability distribution :math:`F`.
+
+DeFinetti :cite:`definetti` established a related representation of an exchangeable process created by mixing
+sequences of IID Bernoulli random variables with parameters :math:`\theta` and mixing probability :math:`\pi(\theta)`
+for a density :math:`\pi(\theta)` that a Bayesian statistician would interpret as a prior over the unknown
+Bernoulli paramter :math:`\theta`.
+
+
+Bayes' Law
+^^^^^^^^^^^^
+
+We noted above that in our example model there is something to learn about about the future from past data drawn 
+from our particular instance of a process that is exchangeable but not IID.
+
+But how can we learn?
+
+And about what?
+
+The answer to the *about what* question is about :math:`\tilde pi`.
+
+The answer to the *how* question is to use  Bayes' Law.
+
+Another way to say *use Bayes' Law* is to say *compute an appropriate conditional distribution*.
+
+Let's dive into Bayes' Law in this context.
+
+
+
+Let :math:`q` represent the distribution that nature actually draws from
 :math:`w` from and let
 
-.. math::  \tilde \pi = \mathbb{P}\{q = f \} 
+.. math::   \pi = \mathbb{P}\{q = f \} 
 
-Suppose that at :math:`t \geq 0`, we observe a history
+where we regard :math:`\pi` as the decision maker's **subjective probability**  (also called a **personal probability**.
+
+Suppose that at :math:`t \geq 0`, the decision maker has  observed a history
 :math:`w^t \equiv [w_t, w_{t-1}, \ldots, w_0]`.
 
-Let
+We let
 
 .. math::  \pi_t  = \mathbb{P}\{q = f  | w^t \} 
+
+where we adopt the convention
+
+.. math:: \pi_{-1}  = \tilde \pi 
 
 The distribution of :math:`w_{t+1}` conditional on :math:`w^t` is then
 
@@ -249,12 +324,12 @@ The distribution of :math:`w_{t+1}` conditional on :math:`w^t` is then
 Bayes’ rule for updating :math:`\pi_{t+1}` is
 
 .. math::
-
+   :label: eq_Bayes102
 
    \pi_{t+1}
    = \frac{\pi_t f(w_{t+1})}{\pi_t f(w_{t+1}) + (1 - \pi_t) g(w_{t+1})}
 
-As another reminder, the last expression follows from Bayes’ rule, which
+The last expression follows from Bayes’ rule, which
 tells us that
 
 .. math::
@@ -266,14 +341,19 @@ tells us that
    \quad \text{and} \quad
    \mathbb{P}\{W = w\} = \sum_{\omega \in \{f, g\}} \mathbb{P}\{W = w \,|\, q = \omega\} \mathbb{P}\{q = \omega\}
 
-Define the **likelihood ratio** 
+More Details about Bayesian Updating 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let's stare at and rearrange Bayes' Law as represented in equation :eq:`eq_Bayes102` with the aim of understanding
+how the **posterior** :math:`\pi_{t+1}` is influenced by the **prior** :math:`\pi_t` and the **likelihood ratio**
+
 
 .. math::
 
    l(w) = \frac{f(w)}{g(w)}
 
 
-It is convenient for us to rewrite the updating rule :eq:`odu_pi_rec` as
+It is convenient for us to rewrite the updating rule :eq:`eq_Bayes102` as
 
 .. math::
 
@@ -282,22 +362,36 @@ It is convenient for us to rewrite the updating rule :eq:`odu_pi_rec` as
        =\frac{\pi_{t}\frac{f\left(w_{t+1}\right)}{g\left(w_{t+1}\right)}}{\pi_{t}\frac{f\left(w_{t+1}\right)}{g\left(w_{t+1}\right)}+\left(1-\pi_{t}\right)}
        =\frac{\pi_{t}l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}
 
+
 This implies that
 
 .. math::
-
+   :label: eq_Bayes103
 
    \frac{\pi_{t+1}}{\pi_{t}}=\frac{l\left(w_{t+1}\right)}{\pi_{t}l\left(w_{t+1}\right)+\left(1-\pi_{t}\right)}\begin{cases}
    >1 & \text{if }l\left(w_{t+1}\right)>1\\
    \leq1 & \text{if }l\left(w_{t+1}\right)\leq1
    \end{cases}
 
+Notice how the likelihood ratio and the prior interact to determine whether an observation :math:`w_{t+1}` leads the decision maker 
+to increase or decrease the subjective probability he/she attaches to distribution :math:`F`. 
+
+When the likelihood ratio :math:`l(w_{t+1})` exceeds one, the observation :math:`w_{t+1}` nudges the probability 
+:math:`\pi` put on distribution :math:`F` upward,
+and when the likelihood ratio :math:`l(w_{t+1})` is less that  one, the observation :math:`w_{t+1}` nudges :math:`\pi` downward.
+
+
+
+Representation :eq:`eq_Bayes103` is the foundation of the graphs that we'll use to display the dynamics of 
+:math:`\{\pi_t\}_{t=0}^\infty` that are  induced by
+Bayes' Law.  
+
 We’ll plot :math:`l\left(w\right)` as a way to enlighten us about how
 learning – i.e., Bayesian updating of the probability :math:`\pi` that
 nature has chosen distribution :math:`f` – works.
 
 
-Below we define a wrapper function that displays informative graphs
+To create the Python infrastructure to do our work for us,  we construct a wrapper function that displays informative graphs
 given parameters of :math:`f` and :math:`g`.
 
 .. code-block:: python3
@@ -380,19 +474,77 @@ given parameters of :math:`f` and :math:`g`.
     
         plt.show()
 
+
+Now we'll create a group of graphs designed to illustrate the dynamics induced by Bayes' Law.
+
+We'll begin with the default values of various objects, then change them in a subsequent example.
+
 .. code-block:: python3
 
     learning_example()
+
+Please look at the three graphs above created for an instance in which :math:`f` is a uniform distribution on :math:`[0,1]`
+(i.e., a Beta distribution with parameters :math:`F_a=1, F_b=1`, while  :math:`g` is a Beta distribution with the default parameter values :math:`G_a=3, G_b=1.2`.  
+
+
+
+The graph in the left  plots the likehood ratio :math:`l(w)` on the coordinate axis against :math:`w` on the coordinate axis.
+
+The middle graph plots both :math:`f(w)` and :math:`g(w)`  against :math:`w`, with the horizontal dotted lines showing values 
+of :math:`w` at which the likelihood ratio equals :math:`1`.
+
+The graph on the right side plots arrows to the right that show when Bayes' Law  makes :math:`\pi` increase and arrows 
+to the left that show when Bayes' Law make :math:`\pi` decrease.  
+
+Notice how the length of the arrows, which show the magnitude of the force from Bayes' Law impelling :math:`\pi` to change,
+depend on both the prior probability :math:`\pi` on the ordinate axis and the evidence in the form of the current draw of 
+:math:`w` on the coordinate axis.  
+
+
+The fractions in the colored areas of the middle graphs are probabilities under :math:`F` and :math:`G`, respectively,
+that  realizations of :math:`w` fall
+into the interval that updates the belief :math:`\pi` in a correct direction (i.e., toward :math:`0` when :math:`G` is the true 
+distribution, and towards :math:`1` when :math:`F` is the true distribution).
+
+For example, 
+in the above  example, under true distribution :math:`F`,  :math:`\pi` will  be updated toward :math:`0` if :math:`w` falls into the interval
+:math:`[0.524, 0.999]`, which occurs with probability :math:`1 - .524 = .476` under :math:`F`.  But this
+would occur with probability
+:math:`0.816` if :math:`G` were the true distribution.  The fraction :math:`0.816`
+in the orange region is the integral of :math:`g(w)` over this interval.
+
+
+Next we use our code to create graphs for another instance of our model.
+
+We keep :math:`F` the same as in the preceding instance, namely a uniform distribution, but now assume that :math:`G`
+is a Beta distribution with parameters :math:`G_a=2, G_b=1.6`. 
 
 .. code-block:: python3
 
     learning_example(G_a=2, G_b=1.6)
 
+Notice how the likelihood ratio, the middle graph, and the arrows compare with the previous instance of our example.    
 
 
 
-TOM EDIT MORE BELOW 
----------------------
+Appendix 
+-----------
+
+Sample Paths of :math:`\pi_t`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now we'll have some fun by plotting multiple realizations of sample paths of :math:`\pi_t` under two possible 
+assumptions about nature's choice of distribution:
+
+-  that nature permanently draws from :math:`F`
+
+-  that nature permanently draws from :math:`G`
+
+
+Outcomes depend on a peculiar property of likelihood ratio processes that are discussed in
+:doc:`this lecture<additive_functionals>` 
+
+To do this, we create some Python code.
 
 .. code-block:: python3
 
@@ -456,29 +608,48 @@ TOM EDIT MORE BELOW
 
     simulate = function_factory()
 
-Here we show :math:`N` simulated :math:`\pi_t` paths with :math:`T`
-periods.
+
+We begin by generating :math:`N` simulated :math:`\{\pi_t\}` paths with :math:`T`
+periods when the sequence is truly IID draws from :math:`F`. We set the initial prior :math:`\pi_{-1} = .5`.
 
 .. code-block:: python3
 
     T = 50
+    
 
 .. code-block:: python3
 
     # when nature selects F
     π_paths_F = simulate(a=1, b=1, T=T, N=1000)
 
+
+In the above graph we observe that  for most paths :math:`\pi_t \rightarrow 1`. So Bayes' Law evidently eventually
+discovers the truth for most of our paths.
+
+Next, we generate paths with :math:`T`
+periods when the sequence is truly IID draws from :math:`G`. Again, we set the initial prior :math:`\pi_{-1} = .5`.
+
+
 .. code-block:: python3
 
     # when nature selects G
     π_paths_G = simulate(a=3, b=1.2, T=T, N=1000)
 
-In the following, we compare the convergences of :math:`\pi_t` when the
-nature selects :math:`f` or :math:`g`.
+In  the above graph we observe that now  most paths :math:`\pi_t \rightarrow 0`.    
 
-Using the simulated :math:`N` :math:`\pi_t` paths, we compute
-:math:`1 - \sum_{i=1}^{N}\pi_{i,t}` at each :math:`t` when :math:`f`
-generates, and :math:`\sum_{i=1}^{N}\pi_{i,t}` when :math:`g` generates.
+
+Rates of convergence 
+^^^^^^^^^^^^^^^^^^^^^
+
+We study rates of  convergence of :math:`\pi_t` to :math:`1` when nature generates the data as IID draws from :math:`F`
+and of :math:`\pi_t` to :math:`0` when nature generates the data as IID draws from :math:`G`.
+
+
+We do this by averaging across simulated paths of :math:`\{\pi_t\}_{t=0}^T`.
+
+Using   :math:`N` simulated :math:`\pi_t` paths, we compute
+:math:`1 - \sum_{i=1}^{N}\pi_{i,t}` at each :math:`t` when the data are generated as draws from  :math:`F`
+and compute :math:`\sum_{i=1}^{N}\pi_{i,t}` when the data are generated as draws from :math:`G`.
 
 .. code-block:: python3
 
@@ -487,7 +658,15 @@ generates, and :math:`\sum_{i=1}^{N}\pi_{i,t}` when :math:`g` generates.
     plt.legend()
     plt.title("convergence")
 
-Now we compute the following conditional expectations,
+From the above graph, rates of convergence appear not to depend on whether :math:`F` or :math:`G` generates the data.
+
+
+Another Graph of Population Dynamics of :math:`\pi_t`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+More insights about the dynamics of :math:`\{\pi_t\}` can be gleaned by computing the following
+conditional expectations of :math:`\frac{\pi_{t+1}}{\pi_{t}}` as functions of :math:`\pi_t` via integration with respect
+to the pertinent probability distribution:
 
 .. math::
 
@@ -498,6 +677,8 @@ Now we compute the following conditional expectations,
    \end{aligned}
 
 where :math:`\omega=f,g`.
+
+The following code approximates the integral above:
 
 .. code-block:: python3
 
@@ -531,16 +712,25 @@ First, consider the case where :math:`F_a=F_b=1` and
 
     expected_ratio()
 
-Here shows the case where :math:`f` and :math:`g` are identical beta
-distributions, and :math:`F_a=G_a=3, F_b=G_b=1.2`. (The case where there
-is nothing to learn.)
+The above graphs shows that when :math:`F` generates the data, :math:`\pi_t` on average always heads north, while 
+when :math:`G` generates the data, :math:`\pi_t` heads south. 
+
+
+
+Next, we'll look at a degenerate case in whcih  :math:`f` and :math:`g` are identical beta
+distributions, and :math:`F_a=G_a=3, F_b=G_b=1.2`. 
+
+In a sense, here  there
+is nothing to learn.
 
 .. code-block:: python3
 
     expected_ratio(F_a=3, F_b=1.2)
 
-Lastly, we show the case where :math:`f` and :math:`g` are neither very
-different, and nor identical. :math:`F_a=2, F_b=1` and
+The above graph says that :math:\pi_t` is inert and would remain at its initial value.
+
+Finally, let's look at a case in which  :math:`f` and :math:`g` are neither very
+different nor identical, in particular one in which  :math:`F_a=2, F_b=1` and
 :math:`G_a=3, G_b=1.2`.
 
 .. code-block:: python3
