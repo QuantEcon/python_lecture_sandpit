@@ -54,6 +54,8 @@ Let’s start with some imports
     import matplotlib.pyplot as plt
     %matplotlib inline
     from matplotlib import cm
+    import scipy.optimize as op
+    from scipy.stats import cumfreq, beta
 
 Model Features
 ~~~~~~~~~~~~~~

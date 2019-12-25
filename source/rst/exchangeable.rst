@@ -10,11 +10,14 @@ Exchangeability and Bayesian Updating
 
 In addition to what's in Anaconda, this lecture employs the following libraries:
 
-.. code-block:: ipython
+.. code-block:: python3
   :class: hide-output
 
   !pip install --upgrade quantecon
   !pip install interpolation
+
+
+.. code-block:: ipython
 
   from numba import njit, prange, vectorize
   from interpolation import mlinterp, interp
@@ -23,11 +26,8 @@ In addition to what's in Anaconda, this lecture employs the following libraries:
   import matplotlib.pyplot as plt
   %matplotlib inline
   from matplotlib import cm
-
-.. code-block:: python3
-
-    import scipy.optimize as op
-    from scipy.stats import cumfreq, beta
+  import scipy.optimize as op
+  from scipy.stats import cumfreq, beta
 
 
 Overview
@@ -41,7 +41,7 @@ We touch on foundations of Bayesian statistical inference invented by Bruno DeFi
 The relevance of DeFinetti's work for economists is presented forcefully 
 in chapter 11 of :cite:`kreps` by David Kreps.
 
-The example  that we study in this lecture  is a key component of :doc:`this lecture<odu>` that augments the 
+The example  that we study in this lecture  is a key component of :doc:`this lecture <odu>` that augments the 
 :doc:`classic  <mccall_model>`  job search model of McCall
 :cite:`McCall1970` by presenting an unemployed worker with a statistical inference problem. 
 
