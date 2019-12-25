@@ -8,8 +8,6 @@
 Job Search III: Search with Learning
 ====================================
 
-**Co-author: Thomas J. Sargent**
-
 
 In addition to what’s in Anaconda, this lecture will need the following libraries:
 
@@ -1046,7 +1044,7 @@ Example 1 (Baseline)
 
 :math:`F` ~ Beta(1, 1), :math:`G` ~ Beta(3, 1.2), :math:`c`\ =0.3.
 
-The red arrows in the upper right figure show how :math:`\pi_t` is updated in response to the
+In the graphs below, the red arrows in the upper right figure show how :math:`\pi_t` is updated in response to the
 new information :math:`w_t`. 
 
 
@@ -1071,25 +1069,32 @@ The magnitude is small if
 -  :math:`\pi_{t-1}` is close to either :math:`0` or :math:`1`, which
    means the priori is strong.
 
-One question of interest is whether worker will get employed earlier or
+Will an unemployed  worker accept an offer earlier or
 not, when the actual ruling distribution is :math:`g` instead of
-:math:`f`? The argument has two aspects that go in the oppsite
-directions.
+:math:`f`? 
 
--  if f generates, then w is more likely to be low, but we also expect
-   :math:`\pi` to move to 1 and lower the threshold for getting employed
-   (worker being less selective),
--  if g generates, then w is more likely to be high, but we also expect
-   :math:`\pi` to move to 0 and increase the threshold for getting
-   employed (worker being more selective).
+Two countervailing effects are at work.
 
-Quantitatively, the lower right figure sheds lights on which part of the
-argument is dominant in this example. It shows the probability of worker
-accepting an offer at different π, when :math:`f` or :math:`g` generates
-the wage offer. As it implies, under the current parameterization,
-worker is always more likely to accept an offer even if the worker
-believes the true distribution is :math:`g` and therefore is relatively
-more selective. The empirical cumulative distribution of the duration of
+
+-  if f generates successive wage offers, then :math:`w` is more likely to be low, but 
+   :math:`\pi` is moving up toward to 1, which lowers the reservation wage, 
+   i.e., the worker becomes  less selective the longer he or she remains unemployed.
+-  if g generates wage offers , then :math:`w` is more likely to be high, but
+   :math:`\pi` is moving downward toward 0, increasing the reservation wage, i.e., the worker becomes  more selective
+   the longer he or she remains unemployed. 
+
+Quantitatively, the lower right figure sheds lights on which effect dominates in this example.
+
+It shows the probability that a previously unemployed  worker
+accepts an offer at different values of :math:`\pi` when :math:`f` or :math:`g` generates
+wage offers. 
+
+That graph shows that for the particular :math:`f` and :math:`g` in this example, the
+worker is always more likely to accept an offer when :math:`f` generates the data  even when :math:`\pi` is close to zero so
+that  the worker believes the true distribution is :math:`g` and therefore is relatively
+more selective. 
+
+The empirical cumulative distribution of the duration of
 unemployment verifies our conjecture.
 
 .. code-block:: python3
@@ -1102,9 +1107,12 @@ Example 2
 :math:`F` ~ Beta(1, 1), :math:`G` ~ Beta(1.2, 1.2), :math:`c`\ =0.3.
 
 Now :math:`G` has the same mean as :math:`F` with a smaller variance.
+
 Since the unemployment compensation :math:`c` serves as a lower bound
 for bad wage offers, :math:`G` is now an “inferior” distribution to
-:math:`F`. Consequently, we observe that the optimal policy
+:math:`F`.
+
+Consequently, we observe that the optimal policy
 :math:`\overline{w}(\pi)` is increasing in :math:`\pi`.
 
 .. code-block:: python3
@@ -1131,13 +1139,21 @@ Example 4
 
 In this example, we keep the parameters of beta distributions to be the
 same with the baseline case, but increase the unemployment compensation
-:math:`c`. Comparing to the baseline case (example 1) where the
+:math:`c`. 
+
+Comparing outcomes to the baseline case (example 1) in which 
 unemployment compensation if low (:math:`c`\ =0.3), now the worker can
-afford a longer learning period. As a result, the worker tends to accept
-wage offers much later, and at the time of employment, the belief
-:math:`\pi` is either more close to :math:`0` or :math:`1`, which means
-the worker has a more clear idea about what the true distribution is
-when chooses to accept the wage offer.
+afford a longer  learning period.
+
+As a result, the worker tends to accept
+wage offers much later.
+
+Furthermore, at the time of accepting employment, the belief
+:math:`\pi` is closer to either :math:`0` or :math:`1`.
+
+That means that 
+the worker has a better  idea about what the true distribution is
+when he eventually chooses to accept a wage offer.
 
 .. code-block:: python3
 
@@ -1148,9 +1164,8 @@ Example 5
 
 :math:`F` ~ Beta(1, 1), :math:`G` ~ Beta(3, 1.2), and :math:`c`\ =0.1.
 
-As expected, a smaller :math:`c` makes people accept wage offers earlier
-with little knowledge accumulated about the true distribution, because
-of the more painful unemployment.
+As expected, a smaller :math:`c` makes an unemployed worker  accept wage offers earlier
+after having acquired less information about the wage distribution.
 
 .. code-block:: python3
 
