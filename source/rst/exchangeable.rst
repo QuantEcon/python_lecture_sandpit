@@ -727,7 +727,7 @@ is nothing to learn.
 
     expected_ratio(F_a=3, F_b=1.2)
 
-The above graph says that :math:\pi_t` is inert and would remain at its initial value.
+The above graph says that :math:`\pi_t` is inert and would remain at its initial value.
 
 Finally, let's look at a case in which  :math:`f` and :math:`g` are neither very
 different nor identical, in particular one in which  :math:`F_a=2, F_b=1` and

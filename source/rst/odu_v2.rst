@@ -125,10 +125,12 @@ Update rule: worker's time :math:`t` estimate of the distribution is :math:`\pi_
 where :math:`\pi_t` updates via
 
 .. math::
-    :label: odu_pi_rec
+    :label: odu_pi_rec_2
 
     \pi_{t+1}
     = \frac{\pi_t f(w_{t+1})}{\pi_t f(w_{t+1}) + (1 - \pi_t) g(w_{t+1})}
+
+
 This last expression follows from Bayes’ rule, which tells us that
 
 .. math::
@@ -140,7 +142,7 @@ This last expression follows from Bayes’ rule, which tells us that
    \quad \text{and} \quad
    \mathbb{P}\{W = w\} = \sum_{\omega \in \{f, g\}} \mathbb{P}\{W = w \,|\, q = \omega\} \mathbb{P}\{q = \omega\}
 
-The fact that :eq:`odu_pi_rec` is recursive allows us to
+The fact that :eq:`odu_pi_rec_2` is recursive allows us to
 progress to a recursive solution method.
 
 Letting
