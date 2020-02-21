@@ -420,7 +420,7 @@ jupyter_allow_html_only = True
 jupyter_target_html = True
 jupyter_target_html_urlpath = "https://lectures.quantecon.org/py/"
 #Use urlprefix images
-jupyter_images_urlpath = "https://s3-ap-southeast-2.amazonaws.com/lectures.quantecon.org/py/_static/"
+jupyter_download_nb_image_urlpath = "https://s3-ap-southeast-2.amazonaws.com/lectures.quantecon.org/py/_static/"
 
 #Allow ipython as a language synonym for blocks to be ipython highlighted
 jupyter_lang_synonyms = ["ipython"]
