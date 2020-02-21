@@ -49,7 +49,7 @@ The logarithm of the demand for real money balances :math:`m_t^d - p_t`
 is an inverse function of the expected rate of inflation
 :math:`p_{t+1} - p_t` for :math:`t \geq 0`:
 
-.. math::  m_t^d - p_t = - \beta (p_{t+1} - p_t ), \quad \beta >0   
+.. math::  m_t^d - p_t = - \beta (p_{t+1} - p_t ), \quad \beta >0
 
 Equate the demand for log money :math:`m_t^d` to the supply of log money
 :math:`m_t` in the above equation and rearrange to deduce that the
@@ -59,7 +59,7 @@ the money supply :math:`m_t` by
 .. math::
   :label: equation_1
 
-    p_t = (1 -\lambda) m_t + \lambda p_{t+1}   
+    p_t = (1 -\lambda) m_t + \lambda p_{t+1}
 
 where :math:`\lambda \equiv \frac{\beta}{1+\beta} \in (0,1)`.
 
@@ -68,12 +68,12 @@ Solving the first order difference equation :eq:`equation_1` forward gives
 .. math::
   :label: equation_2
 
-    p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j},  
+    p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j},
 
 which is the unique **stable** solution of difference equation :eq:`equation_1` among
 a class of more general solutions
 
-.. math::  p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j} + c \lambda^{-t}   
+.. math::  p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j} + c \lambda^{-t}
 
 that is indexed by the real number :math:`c \in {\bf R}`.
 
@@ -86,12 +86,12 @@ the log of the price level.
 In particular, we assume that the log of the money supply is described
 by the linear state space system
 
-.. math::  
+.. math::
   :label: equation_3
 
    \begin{aligned}
     m_t &  = G x_t \\ x_{t+1} & = A x_t
-   \end{aligned} 
+   \end{aligned}
 
 where :math:`x_t` is an :math:`n \times 1` vector that does not include
 :math:`p_t` or lags of :math:`p_t`, :math:`A` is an :math:`n \times n`
@@ -108,7 +108,7 @@ An example of such an :math:`\{m_t\}` process that fits info state space
 system :eq:`equation_3` is one that satisfies the second order linear difference
 equation
 
-.. math::  m_{t+1} = \alpha + \rho_1 m_t + \rho_2 m_{t-1}  
+.. math::  m_{t+1} = \alpha + \rho_1 m_t + \rho_2 m_{t-1}
 
 where the zeros of the characteristic polynomial
 :math:`(1 - \rho_1 z - \rho_2 z^2)` are strictly greater than :math:`1`
@@ -125,14 +125,14 @@ The solution we are after is
 .. math::
   :label: equation_4
 
-    p_t = F x_t  
+    p_t = F x_t
 
 where
 
 .. math::
   :label: equation_5
 
-   F = (1-\lambda) G (I - \lambda A)^{-1}   
+   F = (1-\lambda) G (I - \lambda A)^{-1}
 
 **Note:** As mentioned above, an *explosive solution* of difference
 equation :eq:`equation_1` can be constructed by adding to the right hand of :eq:`equation_4` a
@@ -150,7 +150,7 @@ the second order difference equation
 .. math::
   :label: equation_6
 
-    m_{t+1} = \alpha + \rho_1 m_t + \rho_2 m_{t-1}   
+    m_{t+1} = \alpha + \rho_1 m_t + \rho_2 m_{t-1}
 
 that is parameterized by :math:`\rho_1, \rho_2, \alpha`
 
@@ -162,18 +162,18 @@ To capture this parameterization with system :eq:`equation_2` we set
       A= \begin{bmatrix} 1 & 0 & 0 \cr
                          \alpha & \rho_1 & \rho_2 \cr
                           0 & 1 & 0 \end{bmatrix} , \quad
-      G = \begin{bmatrix} 0 & 1 & 0 \end{bmatrix} 
+      G = \begin{bmatrix} 0 & 1 & 0 \end{bmatrix}
 
 Here is Python code
 
 .. code-block:: python3
 
     λ = .9
-    
+
     α = 0
     ρ1 = .9
     ρ2 = .05
-    
+
     A = np.array([[1,  0,  0],
                   [α, ρ1, ρ2],
                   [0,  1,  0]])
@@ -212,24 +212,24 @@ initial value :math:`x_0`.
 
     # set the initial state
     x0 = np.array([1, 1, 0])
-    
+
     T = 100 # length of simulation
-    
+
     m_seq = np.empty(T+1)
     p_seq = np.empty(T+1)
-    
+
     m_seq[0] = G @ x0
     p_seq[0] = F @ x0
-    
+
     # simulate for T periods
     x_old = x0
     for t in range(T):
-        
+
         x = A @ x_old
-        
+
         m_seq[t+1] = G @ x
         p_seq[t+1] = F @ x
-        
+
         x_old = x
 
 .. code-block:: python3
@@ -262,21 +262,21 @@ We could also have run the simulation using the quantecon
 .. code-block:: python3
 
     # construct a LinearStateSpace instance
-    
+
     # stack G and F
     G_ext = np.vstack([G, F])
-    
+
     C = np.zeros((A.shape[0], 1))
-    
+
     ss = qe.LinearStateSpace(A, C, G_ext, mu_0=x0)
 
 .. code-block:: python3
 
     T = 100
-    
+
     # simulate using LinearStateSpace
     x, y = ss.simulate(ts_length=T)
-    
+
     # plot
     plt.figure()
     plt.plot(range(T+1), m_seq, label='$m_t$')
@@ -298,16 +298,16 @@ of motion for :math:`m_t` becomes
 .. math::
   :label: equation_7
 
-    m_{t+1} =\rho m_t  
+    m_{t+1} =\rho m_t
 
 and the state :math:`x_t` becomes
 
-.. math::  x_t = m_t . 
+.. math::  x_t = m_t .
 
 So we can set :math:`G =1, A =\rho` making our formula :eq:`equation_5` for :math:`F`
 become
 
-.. math::  F = (1-\lambda) (1 -\lambda \rho)^{-1} . 
+.. math::  F = (1-\lambda) (1 -\lambda \rho)^{-1} .
 
 and the log the log price level satisfies
 
@@ -328,21 +328,21 @@ equations :eq:`equation_1` and :eq:`equation_7` to form the system
 .. math::
   :label: equation_8
 
-    \begin{bmatrix} m_{t+1} \cr p_{t+1} \end{bmatrix} = \begin{bmatrix} \rho & 0 \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} \begin{bmatrix} m_t \\ p_t \end{bmatrix}  
+    \begin{bmatrix} m_{t+1} \cr p_{t+1} \end{bmatrix} = \begin{bmatrix} \rho & 0 \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} \begin{bmatrix} m_t \\ p_t \end{bmatrix}
 
 or
 
 .. math::
   :label: equation_9
 
-    y_{t+1} = H y_t, \quad t \geq 0     
+    y_{t+1} = H y_t, \quad t \geq 0
 
 where
 
 .. math::
   :label: equation_10
 
-    H = \begin{bmatrix} \rho & 0 \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} .  
+    H = \begin{bmatrix} \rho & 0 \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} .
 
 Transition matrix :math:`H` has eigenvalues :math:`\rho \in (0,1)` and
 :math:`\lambda^{-1} > 1`.
@@ -357,19 +357,19 @@ To substantiate this claim, we can use the eigenector matrix
 decomposition of :math:`H` that is available to us because the
 eigenvalues of :math:`H` are distinct
 
-.. math::  H = P \Lambda P^{-1} . 
+.. math::  H = Q \Lambda Q^{-1} .
 
 Here :math:`\Lambda` is a diagonal matrix of eigenvalues of :math:`H`
-and :math:`P` is a matrix whose columns are eigenvectors of the
+and :math:`Q` is a matrix whose columns are eigenvectors of the
 corresponding eigenvalues.
 
 Note that
 
-.. math::  H^t = P \Lambda^t P^{-1} 
+.. math::  H^t = Q \Lambda^t Q^{-1}
 
 so that
 
-.. math::  y_t = P \Lambda^t P^{-1} y_0 
+.. math::  y_t = Q \Lambda^t Q^{-1} y_0
 
 For almost all initial vectors :math:`y_0`, the presence of the
 eigenvalue :math:`\lambda^{-1} > 1` causes both components of
@@ -378,22 +378,22 @@ eigenvalue :math:`\lambda^{-1} > 1` causes both components of
 To explore this outcome in more detail, we use the following
 transformation
 
-.. math::  y^*_t = P^{-1} y_t
+.. math::  y^*_t = Q^{-1} y_t
 
 that allows us to represent the dynamics in a way that isolates the
 source of the propensity of paths to diverge:
 
-.. math::  y^*_{t+1} = \Lambda^t y^*_t 
+.. math::  y^*_{t+1} = \Lambda^t y^*_t
 
 Staring at this equation indicates that unless
 
 .. math::
   :label: equation_11
 
-    y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} ,   
+    y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} ,
 
 the path of :math:`y^*_t` and therefore the paths of both components of
-:math:`y_t = P y^*_t` will diverge in absolute value as
+:math:`y_t = Q y^*_t` will diverge in absolute value as
 :math:`t \rightarrow +\infty`. (We say that the paths *explode*)
 
 Equation :eq:`equation_11` also leads us to conclude that there is a unique setting
@@ -403,7 +403,7 @@ for the initial vector :math:`y_0` for which both components of
 The required setting of :math:`y_0` must evidently have the property
 that
 
-.. math::  P y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} . 
+.. math::  Q y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} .
 
 But note that since
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` and :math:`m_0`
@@ -423,25 +423,25 @@ The component :math:`p_0` of the initial vector
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` must evidently
 satisfy
 
-.. math::  P^{\{2\}} y_0 =0 
+.. math::  Q^{\{2\}} y_0 =0
 
-where :math:`P^{\{2\}}` denotes the second row of :math:`P^{-1}`, a
+where :math:`Q^{\{2\}}` denotes the second row of :math:`Q^{-1}`, a
 restriction that is equivalent to
 
 .. math::
   :label: equation_12
 
-    P^{21} m_0 + P^{22} p_0 = 0    
+    Q^{21} m_0 + Q^{22} p_0 = 0
 
-where :math:`P^{ij}` denotes the :math:`(i,j)` component of
-:math:`P^{-1}`.
+where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
+:math:`Q^{-1}`.
 
 Solving this equation for :math:`p_0` we find
 
 .. math::
   :label: equation_13
 
-    p_0 = - (P^{22})^{-1} P^{21} m_0.   
+    p_0 = - (Q^{22})^{-1} Q^{21} m_0.
 
 This is the unique **stabilizing value** of :math:`p_0` as a function of
 :math:`m_0`.
@@ -450,60 +450,60 @@ Refining the formula
 --------------------
 
 We can get an even more convenient formula for :math:`p_0` that is cast
-in terms of components of :math:`P` instead of components of
-:math:`P^{-1}`.
+in terms of components of :math:`Q` instead of components of
+:math:`Q^{-1}`.
 
-To get this formula, first note that because :math:`(P^{21}\ P^{22})` is
-the second row of the inverse of :math:`P` and because
-:math:`P^{-1} P = I`, it follows that
+To get this formula, first note that because :math:`(Q^{21}\ Q^{22})` is
+the second row of the inverse of :math:`Q` and because
+:math:`Q^{-1} Q = I`, it follows that
 
-.. math:: \begin{bmatrix} P^{21} & P^{22} \end{bmatrix}  \begin{bmatrix} P_{11}\cr P_{21} \end{bmatrix} = 0
+.. math:: \begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  \begin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
 
 which implies that
 
-.. math:: P^{21} P_{11} + P^{22} P_{21} = 0.
+.. math:: Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
 
 Therefore,
 
-.. math:: -(P^{22})^{-1} P^{21} = P_{21} P^{-1}_{11}.
+.. math:: -(Q^{22})^{-1} Q^{21} = Q_{21} Q^{-1}_{11}.
 
 So we can write
 
 .. math::
   :label: equation_14
 
-    p_0 = P_{21} P_{11}^{-1} m_0 .  
+    p_0 = Q_{21} Q_{11}^{-1} m_0 .
 
 It can be verified that this formula replicates itself over time so that
 
 .. math::
   :label: equation_15
 
-    p_t = P_{21} P^{-1}_{11} m_t.  
+    p_t = Q_{21} Q^{-1}_{11} m_t.
 
 %
 
-To implement formula :eq:`equation_15`, we want to compute :math:`P_1` the
-eigenvector of :math:`P` associated with the stable eigenvalue
-:math:`\rho` of :math:`P`.
+To implement formula :eq:`equation_15`, we want to compute :math:`Q_1` the
+eigenvector of :math:`Q` associated with the stable eigenvalue
+:math:`\rho` of :math:`Q`.
 
 By hand it can be verified that the eigenvector associated with the
 stable eigenvalue :math:`\rho` is proportional to
 
-.. math::  P_1  = \begin{bmatrix} 1-\lambda  \rho \\ 1 - \lambda   \end{bmatrix}. 
+.. math::  Q_1  = \begin{bmatrix} 1-\lambda  \rho \\ 1 - \lambda   \end{bmatrix}.
 
 Notice that if we set :math:`A=\rho` and :math:`G=1` in our earlier
 formula for :math:`p_t` we get
 
-.. math::  P = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t 
+.. math::  Q = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t
 
 a formula that is equivalent with
 
-.. math::  p_t = P_{21} P_{11}^{-1}  m_t , 
+.. math::  p_t = Q_{21} Q_{11}^{-1}  m_t ,
 
 where
 
-.. math::  P_1 = \begin{bmatrix} P_{11} \\ P_{21}  \end{bmatrix}. 
+.. math::  Q_1 = \begin{bmatrix} Q_{11} \\ Q_{21}  \end{bmatrix}.
 
 Some remarks about feedback
 ---------------------------
@@ -541,7 +541,7 @@ Let the feedback rule be
 .. math::
   :label: equation_16
 
-    m_{t+1} =  \rho m_t + \delta p_t  
+    m_{t+1} =  \rho m_t + \delta p_t
 
 where :math:`\rho \in (0,1)` as before and where we shall now allow
 :math:`\delta \neq 0`.
@@ -560,11 +560,11 @@ We assume that equations :eq:`equation_1` and :eq:`equation_16` govern
 
 The transition matrix :math:`H` in the law of motion
 
-.. math::  y_{t+1} = H y_t 
+.. math::  y_{t+1} = H y_t
 
 now becomes
 
-.. math::  H = \begin{bmatrix} \rho & \delta \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} 
+.. math::  H = \begin{bmatrix} \rho & \delta \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix}
 
 We take :math:`m_0` as a given intial condition and as before seek an
 initial value :math:`p_0` that stabilizes the system in the sense that
@@ -594,22 +594,22 @@ Let’s write some code that will let us explore how outcomes depend on
 
     def construct_H(ρ, λ, δ):
         "contruct matrix H given parameters."
-    
+
         H = np.empty((2, 2))
         H[0, :] = ρ,δ
         H[1, :] = - (1 - λ) / λ, 1 / λ
-    
+
         return H
-    
+
     def H_eigvals(ρ=.9, λ=.5, δ=0):
         "compute the eigenvalues of matrix H given parameters."
-        
+
         # construct H matrix
         H = construct_H(ρ, λ, δ)
-    
+
         # compute eigenvalues
         eigvals = np.linalg.eigvals(H)
-    
+
         return eigvals
 
 .. code-block:: python3
@@ -656,22 +656,22 @@ values of :math:`\delta` that are too large
         Use the magic formula (8) to compute the level of p0
         that makes the system stable.
         """
-    
+
         H = construct_H(ρ, λ, δ)
-        eigvals, P = np.linalg.eig(H)
-    
+        eigvals, Q = np.linalg.eig(H)
+
         # find the index of the smaller eigenvalue
         ind = 0 if eigvals[0] < eigvals[1] else 1
-    
+
         # verify that the eigenvalue is less than unity
         if eigvals[ind] > 1:
-    
+
             print("both eigenvalues exceed unity in modulus")
-    
+
             return None
-    
-        p0 = P[1, ind] / P[0, ind] * m0
-    
+
+        p0 = Q[1, ind] / Q[0, ind] * m0
+
         return p0
 
 First, we plot how the solution :math:`p_0` changes as :math:`m_0`
@@ -680,11 +680,11 @@ changes for different settings of :math:`\delta`.
 .. code-block:: python3
 
     m_range = np.arange(0.1, 2., 0.1)
-    
+
     for δ in [-0.05, 0, 0.05]:
         plt.plot(m_range, [magic_p0(m0, δ=δ) for m0 in m_range], label=f"δ={δ}")
     plt.legend()
-    
+
     plt.xlabel("$m_0$")
     plt.ylabel("$p_0$")
     plt.show()
@@ -695,7 +695,7 @@ see how :math:`p_0` changes as :math:`\delta` changes.
 .. code-block:: python3
 
     m0 = 1
-    
+
     δ_range = np.linspace(-0.05, 0.05, 100)
     plt.plot(δ_range, [magic_p0(m0, δ=δ) for δ in δ_range])
     plt.xlabel('$\delta$')
@@ -718,7 +718,7 @@ Please do the following calculations.
 
 1. For the system with :math:`\delta\neq 0` so that there is feedback,
    please compute the stabilizing solution for :math:`p_t` in the form
-   :math:`p_t = F^* m_t` where :math:`F^* = P_{21}P_{11}^{-1}` as above.
+   :math:`p_t = F^* m_t` where :math:`F^* = Q_{21}Q_{11}^{-1}` as above.
 
 2. Please recall the system :eq:`equation_3`, :eq:`equation_4`, and :eq:`equation_5` above. Please define
    :math:`x_t = \begin{bmatrix} m_t \cr P_t \end{bmatrix}` and notice
@@ -743,10 +743,10 @@ Please do the following calculations.
 
     # solve for F_star
     H = construct_H(ρ, λ, δ)
-    eigvals, P = np.linalg.eig(H)
-    
+    eigvals, Q = np.linalg.eig(H)
+
     ind = 0 if eigvals[0] < eigvals[1] else 1
-    F_star = P[1, ind] / P[0, ind]
+    F_star = Q[1, ind] / Q[0, ind]
     F_star
 
 .. code-block:: python3
@@ -755,9 +755,9 @@ Please do the following calculations.
     A = np.empty((2, 2))
     A[0, :] = ρ, δ
     A[1, :] = F_star * A[0, :]
-    
+
     G = np.array([1, 0])
-    
+
     F_check= (1 - λ) * G @ np.linalg.inv(np.eye(2) - λ * A)
     F_check
 
@@ -775,7 +775,7 @@ Feb. 2: Adding Sympy code
 
 .. code-block:: python3
 
-    λ, δ, ρ = symbols('λ, δ, ρ') 
+    λ, δ, ρ = symbols('λ, δ, ρ')
 
 .. code-block:: python3
 
@@ -816,18 +816,18 @@ Requests for Zejin, Jan 24
 
 May I please ask that you do the following with this great code?
 
-1. In sympy, please compute the matrix :math:`P` whose first column is
+1. In sympy, please compute the matrix :math:`Q` whose first column is
    the eigenvector associated with :math:`\rho`. and whose second column
    is the eigenvector associated with :math:`\lambda^{-1}`.
 
-2. Please use sympy to compute the inverse :math:`P^{-1}` of :math:`P`
+2. Please use sympy to compute the inverse :math:`Q^{-1}` of :math:`Q`
    (both in symbols).
 
-3. Please use sympy to compute :math:`P_{21} P_{11}^{-1}` (in symbols).
+3. Please use sympy to compute :math:`Q_{21} Q_{11}^{-1}` (in symbols).
 
-4. Where :math:`P^{ij}` denotes the :math:`(i,j)` component of
-   :math:`P^{-1}`, please use sympy to compute
-   :math:`- (P^{22})^{-1} P^{21}` (again in symbols)
+4. Where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
+   :math:`Q^{-1}`, please use sympy to compute
+   :math:`- (Q^{22})^{-1} Q^{21}` (again in symbols)
 
 If you can do these things in sympy, some magic will happen.
 
@@ -839,38 +839,36 @@ class.
 
 .. code-block:: python3
 
-    # construct P
+    # construct Q
     vec = []
     for i, (eigval, _, eigvec) in enumerate(H2.eigenvects()):
-        
+
         vec.append(eigvec[0])
-        
+
         if eigval == ρ:
             ind = i
-    
-    P = vec[ind].col_insert(1, vec[1-ind])
+
+    Q = vec[ind].col_insert(1, vec[1-ind])
 
 .. code-block:: python3
 
-    P
+    Q
 
-:math:`P^{-1}`
-
-.. code-block:: python3
-
-    P_inv = P ** (-1)
-    P_inv
-
-:math:`P_{21}P_{11}^{-1}`
+:math:`Q^{-1}`
 
 .. code-block:: python3
 
-    P[1, 0] / P[0, 0]
+    Q_inv = Q ** (-1)
+    Q_inv
 
-:math:`−(P^{22})^{−1}P^{21}`
+:math:`Q_{21}Q_{11}^{-1}`
 
 .. code-block:: python3
 
-    - P_inv[1, 0] / P_inv[1, 1]
+    Q[1, 0] / Q[0, 0]
 
+:math:`−(Q^{22})^{−1}Q^{21}`
 
+.. code-block:: python3
+
+    - Q_inv[1, 0] / Q_inv[1, 1]
