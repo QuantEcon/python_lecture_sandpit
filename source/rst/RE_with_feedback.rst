@@ -357,19 +357,19 @@ To substantiate this claim, we can use the eigenector matrix
 decomposition of :math:`H` that is available to us because the
 eigenvalues of :math:`H` are distinct
 
-.. math::  H = Q \Lambda Q^{-1} . 
+.. math::  H = P \Lambda P^{-1} . 
 
 Here :math:`\Lambda` is a diagonal matrix of eigenvalues of :math:`H`
-and :math:`Q` is a matrix whose columns are eigenvectors of the
+and :math:`P` is a matrix whose columns are eigenvectors of the
 corresponding eigenvalues.
 
 Note that
 
-.. math::  H^t = Q \Lambda^t Q^{-1} 
+.. math::  H^t = P \Lambda^t P^{-1} 
 
 so that
 
-.. math::  y_t = Q \Lambda^t P^{-1} y_0 
+.. math::  y_t = P \Lambda^t P^{-1} y_0 
 
 For almost all initial vectors :math:`y_0`, the presence of the
 eigenvalue :math:`\lambda^{-1} > 1` causes both components of
@@ -378,7 +378,7 @@ eigenvalue :math:`\lambda^{-1} > 1` causes both components of
 To explore this outcome in more detail, we use the following
 transformation
 
-.. math::  y^*_t = Q^{-1} y_t
+.. math::  y^*_t = P^{-1} y_t
 
 that allows us to represent the dynamics in a way that isolates the
 source of the propensity of paths to diverge:
@@ -403,7 +403,7 @@ for the initial vector :math:`y_0` for which both components of
 The required setting of :math:`y_0` must evidently have the property
 that
 
-.. math::  Q y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} . 
+.. math::  P y_0 =  y^*_0 = \begin{bmatrix} y^*_{1,0} \cr 0 \end{bmatrix} . 
 
 But note that since
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` and :math:`m_0`
@@ -423,25 +423,25 @@ The component :math:`p_0` of the initial vector
 :math:`y_0 = \begin{bmatrix} m_0 \cr p_0 \end{bmatrix}` must evidently
 satisfy
 
-.. math::  Q^{\{2\}} y_0 =0 
+.. math::  P^{\{2\}} y_0 =0 
 
-where :math:`Q^{\{2\}}` denotes the second row of :math:`Q^{-1}`, a
+where :math:`P^{\{2\}}` denotes the second row of :math:`P^{-1}`, a
 restriction that is equivalent to
 
 .. math::
   :label: equation_12
 
-    Q^{21} m_0 + Q^{22} p_0 = 0    
+    P^{21} m_0 + P^{22} p_0 = 0    
 
-where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
-:math:`Q^{-1}`.
+where :math:`P^{ij}` denotes the :math:`(i,j)` component of
+:math:`P^{-1}`.
 
 Solving this equation for :math:`p_0` we find
 
 .. math::
   :label: equation_13
 
-    p_0 = - (Q^{22})^{-1} Q^{21} m_0.   
+    p_0 = - (P^{22})^{-1} P^{21} m_0.   
 
 This is the unique **stabilizing value** of :math:`p_0` as a function of
 :math:`m_0`.
@@ -450,60 +450,60 @@ Refining the formula
 --------------------
 
 We can get an even more convenient formula for :math:`p_0` that is cast
-in terms of components of :math:`Q` instead of components of
-:math:`Q^{-1}`.
+in terms of components of :math:`P` instead of components of
+:math:`P^{-1}`.
 
-To get this formula, first note that because :math:`(Q^{21}\ Q^{22})` is
-the second row of the inverse of :math:`Q` and because
-:math:`Q^{-1} Q = I`, it follows that
+To get this formula, first note that because :math:`(P^{21}\ P^{22})` is
+the second row of the inverse of :math:`P` and because
+:math:`P^{-1} P = I`, it follows that
 
-.. math:: \begin{bmatrix} Q^{21} & Q^{22} \end{bmatrix}  \begin{bmatrix} Q_{11}\cr Q_{21} \end{bmatrix} = 0
+.. math:: \begin{bmatrix} P^{21} & P^{22} \end{bmatrix}  \begin{bmatrix} P_{11}\cr P_{21} \end{bmatrix} = 0
 
 which implies that
 
-.. math:: Q^{21} Q_{11} + Q^{22} Q_{21} = 0.
+.. math:: P^{21} P_{11} + P^{22} P_{21} = 0.
 
 Therefore,
 
-.. math:: -(Q^{22})^{-1} Q^{21} = Q_{21} Q^{-1}_{11}.
+.. math:: -(P^{22})^{-1} P^{21} = P_{21} P^{-1}_{11}.
 
 So we can write
 
 .. math::
   :label: equation_14
 
-    p_0 = Q_{21} Q_{11}^{-1} m_0 .  
+    p_0 = P_{21} P_{11}^{-1} m_0 .  
 
 It can be verified that this formula replicates itself over time so that
 
 .. math::
   :label: equation_15
 
-    p_t = Q_{21} Q^{-1}_{11} m_t.  
+    p_t = P_{21} P^{-1}_{11} m_t.  
 
 %
 
-To implement formula :eq:`equation_15`, we want to compute :math:`Q_1` the
-eigenvector of :math:`Q` associated with the stable eigenvalue
-:math:`\rho` of :math:`Q`.
+To implement formula :eq:`equation_15`, we want to compute :math:`P_1` the
+eigenvector of :math:`P` associated with the stable eigenvalue
+:math:`\rho` of :math:`P`.
 
 By hand it can be verified that the eigenvector associated with the
 stable eigenvalue :math:`\rho` is proportional to
 
-.. math::  Q_1  = \begin{bmatrix} 1-\lambda  \rho \\ 1 - \lambda   \end{bmatrix}. 
+.. math::  P_1  = \begin{bmatrix} 1-\lambda  \rho \\ 1 - \lambda   \end{bmatrix}. 
 
 Notice that if we set :math:`A=\rho` and :math:`G=1` in our earlier
 formula for :math:`p_t` we get
 
-.. math::  Q = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t 
+.. math::  P = G (I - \lambda A)^{-1} m_t =  (1-\lambda) (1 - \lambda \rho)^{-1} m_t 
 
 a formula that is equivalent with
 
-.. math::  p_t = Q_{21} Q_{11}^{-1}  m_t , 
+.. math::  p_t = P_{21} P_{11}^{-1}  m_t , 
 
 where
 
-.. math::  Q_1 = \begin{bmatrix} Q_{11} \\ P_{21}  \end{bmatrix}. 
+.. math::  P_1 = \begin{bmatrix} P_{11} \\ P_{21}  \end{bmatrix}. 
 
 Some remarks about feedback
 ---------------------------
