@@ -427,3 +427,7 @@ jupyter_lang_synonyms = ["ipython"]
 
 #Execute skip-test code blocks for rendering of website (this will need to be ignored in coverage testing)
 jupyter_ignore_skip_test = True
+
+## Theme specific variables
+jupyter_theme_path = 'theme'
+jupyter_template_path = 'theme/templates'
