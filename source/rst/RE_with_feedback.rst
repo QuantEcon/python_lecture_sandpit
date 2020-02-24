@@ -5,14 +5,14 @@
 
 .. highlight:: python3
 
-**************************
-A model of the price level
-**************************
+**************************************************************
+Stability in Linear Rational Expectations Models
+**************************************************************
 
 .. contents:: :depth: 2
 
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
+In addition to what's in Anaconda, this lecture deploys the following libraries:
 
 .. code-block:: ipython
   :class: hide-output
@@ -32,8 +32,29 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Overview
 ==========
 
-We study a rational expectations version of Philip Cagan’s model linking
-the price level to the money supply.
+This lecture studies stability in an elementary rational expectations model.  
+
+We study a rational expectations version of Philip Cagan’s model :cite:`Cagan` linking
+the price level to the money supply. 
+
+Cagan did not use a rational expectations version of his model, but Sargent :cite:`Sargent77hyper` did.
+
+We study this model because it is intrinsically interesting and also because it  has a mathematical structure that 
+also appears in virtually all  linear rational expectations model, namely, that a key  endogenous variable is 
+a mathematical expectation of a geometric sum of future values of an exogenous variable.
+
+In a rational expectations version of Cagan's model, the endogenous variable is the price level or rate of inflation and 
+the exogenous variable is the money supply or the rate of change in the money supply. 
+
+A model is formulated as an **expectational difference equation** whose solution is a rational expectations equilibrium.
+
+
+
+
+
+
+Illustration: Cagan's Model
+=============================
 
 Let
 
