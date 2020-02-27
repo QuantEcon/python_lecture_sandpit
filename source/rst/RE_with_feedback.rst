@@ -46,8 +46,147 @@ a mathematical expectation of a geometric sum of future values of an exogenous v
 In a rational expectations version of Cagan's model, the endogenous variable is the price level or rate of inflation and 
 the exogenous variable is the money supply or the rate of change in the money supply. 
 
-A model is formulated as an **expectational difference equation** whose solution is a rational expectations equilibrium.
+In this lecture, we'll encounter the following ideas:
 
+* a convenient formula for a geometric sum of future values of an exogenous variable 
+
+* a way of solving an expectational difference equation by mapping it into a vector first-order difference equation and appropriately manipulating an eigen decomposition of the transition matrix in order to impose stability
+
+* a way to use a *Big :math:`K`, little :math:`k`* argument to allow apparent feedback from endogenous to exogenous variables within a rational expectations equilibrium
+
+
+
+
+
+Cagan's model with rational expectations
+is formulated as an **expectational difference equation** whose solution is a rational expectations equilibrium.
+
+So we'll start this lecture with a quick review of deterministic (i.e., non-random)
+first-order and second-order linear difference equations.
+
+
+
+Linear difference equations
+=============================
+
+
+First order
+^^^^^^^^^^^^^^^^^^^^^
+
+We want to solve a linear first-order scalar difference equation.
+
+First, let :math:`|\lambda | < 1`, and let
+:math:`\{u_t\}_{t=-\infty}^\infty` be a bounded sequence of scalar real
+numbers.
+
+Let :math:`L` be the lag operator defined by
+:math:`L x_t \equiv x_{t-1}` and let :math:`L^{-1}` be the forward shift
+operator defined by :math:`L^{-1} x_t \equiv x_{t+1}`.
+
+Then
+
+.. math::
+  :label: equn_1
+
+  (1 - \lambda L) y_t = u_t, \forall t
+
+has solutions
+
+.. math::
+  :label: equn_2
+
+  y_t = (1 -\lambda L)^{-1} u_t +k \lambda^t 
+
+or
+
+.. math::  y_t =  \sum_{j=0}^\infty \lambda^j u_{t-j} +k \lambda^t 
+
+for any real number :math:`k`.
+
+You can verify this fact by applying :math:`(1-\lambda L)` to both sides
+of equation :eq:`equn_2` and noting that :math:`(1 - \lambda L) \lambda^t =0`.
+
+To pin down :math:`k` we need one condition imposed from outside (e.g.,
+an initial or terminal condition) on the path of :math:`y`.
+
+Now let :math:`| \lambda | > 1`.
+
+Rewrite equation :eq:`equn_1` as
+
+.. math::
+  :label: equn_3
+
+  y_{t-1} = \lambda^{-1} y_t - \lambda^{-1} u_t , \forall t  
+
+or
+
+.. math::
+  :label: equn_4
+
+  (1 - \lambda^{-1} L^{-1}) y_t = - \lambda^{-1} u_{t+1}.  
+
+A solution is
+
+.. math::
+  :label: equn_5
+
+    y_t = - \lambda^{-1}\left({ 1 \over  1 - \lambda^{-1} L^{-1}} \right)
+           u_{t+1} + k \lambda^t   
+
+for any :math:`k`.
+
+To verify that this is a solution, check the consequences of operating
+on both sides of equation :eq:`equn_5` by :math:`(1 -\lambda L)` and compare to
+equation :eq:`equn_1`.
+
+Solution :eq:`equn_2` exists for :math:`|\lambda | < 1` because
+the distributed lag in :math:`u` converges.
+
+Solution :eq:`equn_5` exists when :math:`|\lambda| > 1` because the **distributed
+lead** in :math:`u` converges.
+
+When :math:`|\lambda | > 1`, the distributed lag in :math:`u` in :eq:`equn_2` may
+diverge, so that a solution of this form does not exist.
+
+The distributed lead in :math:`u` in :eq:`equn_5` need not
+converge when :math:`|\lambda| < 1`.
+
+Second order
+^^^^^^^^^^^^^^^^^^^^^^
+
+Now consider the second order difference equation
+
+.. math::
+  :label: equn_6
+
+  (1-\lambda_1 L) (1 - \lambda_2 L) y_{t+1} = u_t  
+
+where :math:`\{u_t\}` is a bounded sequence, :math:`y_0` is an initial
+condition, :math:`| \lambda_1 | < 1` and :math:`| \lambda_2| >1`.
+
+We seek a bounded sequence :math:`\{y_t\}_{t=0}^\infty` that satisfies
+:eq:`equn_6`. Using insights from our analysis of the first-order equation,
+operate on both sides of :eq:`equn_6` by the forward inverse of
+:math:`(1-\lambda_2 L)` to rewrite equation :eq:`equn_6` as
+
+.. math::  (1-\lambda_1 L) y_{t+1} = -{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1} 
+
+or
+
+.. math::
+  :label: equn_7
+
+  y_{t+1} = \lambda_1 y_t - \lambda_2^{-1} \sum_{j=0}^\infty \lambda_2^{-j} u_{t+j+1} .  
+
+Thus, we obtained equation :eq:`equn_7` by
+solving stable roots (in this case :math:`\lambda_1`) **backward**, and
+unstable roots (in this case :math:`\lambda_2`) **forward**.
+
+Equation :eq:`equn_7` has a form that we shall encounter often.
+
+:math:`\lambda_1 y_t` is called the **feedback part** and
+:math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is
+called the **feed-forward part** of the solution.
 
 
 
