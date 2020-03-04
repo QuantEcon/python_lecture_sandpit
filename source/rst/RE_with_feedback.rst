@@ -32,7 +32,7 @@ In addition to what's in Anaconda, this lecture deploys the following libraries:
 Overview
 ==========
 
-This lecture studies stability in an elementary rational expectations model.  
+This lecture studies stability in the context of an elementary rational expectations model.  
 
 We study a rational expectations version of Philip Cagan’s model :cite:`Cagan` linking
 the price level to the money supply. 
@@ -40,28 +40,28 @@ the price level to the money supply.
 Cagan did not use a rational expectations version of his model, but Sargent :cite:`Sargent77hyper` did.
 
 We study this model because it is intrinsically interesting and also because it  has a mathematical structure that 
-also appears in virtually all  linear rational expectations model, namely, that a key  endogenous variable is 
-a mathematical expectation of a geometric sum of future values of an exogenous variable.
+also appears in virtually all  linear rational expectations model, namely, that a key  endogenous variable equals
+a mathematical expectation of a geometric sum of future values of another variable.
 
 In a rational expectations version of Cagan's model, the endogenous variable is the price level or rate of inflation and 
-the exogenous variable is the money supply or the rate of change in the money supply. 
+the other variable is the money supply or the rate of change in the money supply. 
 
-In this lecture, we'll encounter the following ideas:
+In this lecture, we'll encounter:
 
-* a convenient formula for a geometric sum of future values of an exogenous variable 
+* a convenient formula for the expectation of geometric sum of future values of a variable 
 
 * a way of solving an expectational difference equation by mapping it into a vector first-order difference equation and appropriately manipulating an eigen decomposition of the transition matrix in order to impose stability
 
-* a way to use a *Big :math:`K`, little :math:`k`* argument to allow apparent feedback from endogenous to exogenous variables within a rational expectations equilibrium
+* a way to use a Big :math:`K`, little :math:`k` argument to allow apparent feedback from endogenous to exogenous variables within a rational expectations equilibrium
 
-
+* a use of eigenvector decompositions of matrices that allowed :cite:`Blanchard_Khan` and :cite:`Whiteman` to solve a class of linear rational expectations models 
 
 
 
 Cagan's model with rational expectations
 is formulated as an **expectational difference equation** whose solution is a rational expectations equilibrium.
 
-So we'll start this lecture with a quick review of deterministic (i.e., non-random)
+We'll start this lecture with a quick review of deterministic (i.e., non-random)
 first-order and second-order linear difference equations.
 
 
@@ -69,6 +69,21 @@ first-order and second-order linear difference equations.
 Linear difference equations
 =============================
 
+In this quick review of linear difference equations, we'll use the *backward shift* or *lag* operator :math:`L`
+
+The lag operator :math:`L`  maps a sequence :math:`\{x_t\}_{t=0}^\infty` into the sequence :math:`\{x_{t-1}\}_{t=0}^\infty`
+
+We'll can use  :math:`L` in linear difference equations by using the equality  
+:math:`L x_t \equiv x_{t-1}` in algebraic expressions.
+
+Further,  the inverse :math:`L^{-1}` of the lag operator is  the *forward shift*
+operator.
+
+In linear difference equations, we'll often use the equaltiy  :math:`L^{-1} x_t \equiv x_{t+1}` in the the algebra
+below.
+
+The algebra of lag and forward shift operators often simplifies formulas for linear difference equations and their
+solutions.
 
 First order
 ^^^^^^^^^^^^^^^^^^^^^
@@ -186,7 +201,7 @@ Equation :eq:`equn_7` has a form that we shall encounter often.
 
 :math:`\lambda_1 y_t` is called the **feedback part** and
 :math:`-{\frac{\lambda_2^{-1}}{1 - \lambda_2^{-1}L^{-1}}} u_{t+1}` is
-called the **feed-forward part** of the solution.
+called the **feedforward part** of the solution.
 
 
 
@@ -233,7 +248,10 @@ Solving the first order difference equation :eq:`equation_1` forward gives
 which is the unique **stable** solution of difference equation :eq:`equation_1` among
 a class of more general solutions
 
-.. math::  p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j} + c \lambda^{-t}
+.. math::  
+  :label: equation_1a 
+  
+    p_t = (1 - \lambda) \sum_{j=0}^\infty \lambda^j m_{t+j} + c \lambda^{-t}
 
 that is indexed by the real number :math:`c \in {\bf R}`.
 
@@ -274,11 +292,13 @@ where the zeros of the characteristic polynomial
 :math:`(1 - \rho_1 z - \rho_2 z^2)` are strictly greater than :math:`1`
 in modulus
 
-We seek a non-explosive solution of the difference equation :eq:`equation_1` that
+We seek a stable or non-explosive solution of the difference equation :eq:`equation_1` that
 obeys the system comprised of :eq:`equation_1`-:eq:`equation_3`.
 
-By non-explosive, we mean that neither :math:`m_t` nor :math:`p_t`
+By stable or non-explosive, we mean that neither :math:`m_t` nor :math:`p_t`
 diverges as :math:`t \rightarrow + \infty`.
+
+This means that we are shutting down the term :math:`c \lambda^{-t}` in equation :eq:`equation_1a` above by setting :math:`c=0`
 
 The solution we are after is
 
@@ -339,9 +359,8 @@ Here is Python code
                   [0,  1,  0]])
     G = np.array([[0, 1, 0]])
 
-The matrix :math:`A` has one eigenvalue equal to unity.
-
-It is associated with the :math:`A_{11}` component that captures a
+The matrix :math:`A` has one eigenvalue equal to unity that is 
+associated with the :math:`A_{11}` component that captures a
 constant component of the state :math:`x_t`.
 
 We can verify that the two eigenvalues of :math:`A` not associated with
@@ -417,7 +436,9 @@ Alternative code
 ================
 
 We could also have run the simulation using the quantecon
-**LinearStateSpace** code
+**LinearStateSpace** code.
+
+The following code block performs the calculation with that code.
 
 .. code-block:: python3
 
@@ -451,7 +472,7 @@ Special case
 
 To simplify our presentation in ways that will let focus on an important
 idea, in the above second-order difference equation :eq:`equation_6` that governs
-:math:`m_t` we now set :math:`\alpha =0`,
+:math:`m_t`, we now set :math:`\alpha =0`,
 :math:`\rho_1 = \rho \in (-1,1)`, and :math:`\rho_2 =0` so that the law
 of motion for :math:`m_t` becomes
 
@@ -464,7 +485,7 @@ and the state :math:`x_t` becomes
 
 .. math::  x_t = m_t .
 
-So we can set :math:`G =1, A =\rho` making our formula :eq:`equation_5` for :math:`F`
+Consequently,  we can set :math:`G =1, A =\rho` making our formula :eq:`equation_5` for :math:`F`
 become
 
 .. math::  F = (1-\lambda) (1 -\lambda \rho)^{-1} .
@@ -478,6 +499,9 @@ route to and interpretation of the formula for :math:`F`.
 
 Another perspective
 ===================
+
+Above, we imposed stability or non-explosiveness on the solution of the key difference equation :eq:`equation_1`
+in Cagan's model by solving the  unstable root :math:`\lambda^{-1}` forward.  
 
 To shed light on the mechanics involved in imposing stability on a
 solution of a potentially unstable system of linear difference equations
@@ -558,7 +582,7 @@ the path of :math:`y^*_t` and therefore the paths of both components of
 
 Equation :eq:`equation_11` also leads us to conclude that there is a unique setting
 for the initial vector :math:`y_0` for which both components of
-:math:`y_t` will not diverge.
+:math:`y_t` do not diverge.
 
 The required setting of :math:`y_0` must evidently have the property
 that
@@ -641,7 +665,6 @@ It can be verified that this formula replicates itself over time so that
 
     p_t = Q_{21} Q^{-1}_{11} m_t.
 
-%
 
 To implement formula :eq:`equation_15`, we want to compute :math:`Q_1` the
 eigenvector of :math:`Q` associated with the stable eigenvalue
@@ -692,8 +715,8 @@ Log money supply feeds back on log price level
 ==============================================
 
 The same pattern of eigenvalues splitting around unity, with one being
-below unity and another greater than unity, will sometimes continue to
-prevail when we activate feedback from the log price level to the log
+below unity and another greater than unity, sometimes continues to
+prevail when there is  *feedback* from the log price level to the log
 money supply.
 
 Let the feedback rule be
@@ -706,9 +729,9 @@ Let the feedback rule be
 where :math:`\rho \in (0,1)` as before and where we shall now allow
 :math:`\delta \neq 0`.
 
-However, we shall see that we have to be careful about allowing
-:math:`\delta` to be too large in order for things to fit together as we
-wish to deliver a stable system for some initial condition :math:`p_0`.
+However, 
+:math:`\delta` cannot be too large if things are to fit together as we
+wish to deliver a stable system for some initial value :math:`p_0` that we want to determine uniquely.
 .
 
 The forward-looking equation :eq:`equation_1` continues to describe equality between
@@ -724,7 +747,7 @@ The transition matrix :math:`H` in the law of motion
 
 now becomes
 
-.. math::  H = \begin{bmatrix} \rho & \delta \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix}
+.. math::  H = \begin{bmatrix} \rho & \delta \\ - (1-\lambda)/\lambda & \lambda^{-1}  \end{bmatrix} .
 
 We take :math:`m_0` as a given intial condition and as before seek an
 initial value :math:`p_0` that stabilizes the system in the sense that
@@ -744,10 +767,10 @@ above.
 That algorithm remains valid so long as the eigenvalues split around
 unity as before.
 
-Again we assume that :math:`m_0` is as an initial condition, but that
+Again we assume that :math:`m_0` is  an initial condition, but that
 :math:`p_0` is not given but to be solved for.
 
-Let’s write some code that will let us explore how outcomes depend on
+Let’s write and execute some Python code that will let us explore how outcomes depend on
 :math:`\delta`.
 
 .. code-block:: python3
@@ -834,7 +857,7 @@ values of :math:`\delta` that are too large
 
         return p0
 
-First, we plot how the solution :math:`p_0` changes as :math:`m_0`
+Let's plot how the solution :math:`p_0` changes as :math:`m_0`
 changes for different settings of :math:`\delta`.
 
 .. code-block:: python3
@@ -849,7 +872,7 @@ changes for different settings of :math:`\delta`.
     plt.ylabel("$p_0$")
     plt.show()
 
-From another point of view, we can fix the initial value :math:`m_0` and
+To look at things from a different angle, we can fix the initial value :math:`m_0` and
 see how :math:`p_0` changes as :math:`\delta` changes.
 
 .. code-block:: python3
