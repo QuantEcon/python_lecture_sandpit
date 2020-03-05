@@ -894,8 +894,48 @@ exist.
 
     magic_p0(1, δ=0.2)
 
-More requests for Zejin, Feb 19, 2020
+Big P, little p interpretation
 =====================================
+
+Let's write the stabilizing solution tha we have computed as :math:`P_t = F^* m_t` where
+
+.. math: 
+
+    F^* = Q_{21} Q_{11}^{-1} m_t
+
+Then we can deduce the recursion :math:`P_{t+1} = F^* \rho m_t + F^* \delta P_t` and create the stacked system
+
+.. math::
+
+    \begin{bmatrix} m_{t+1} \cr P_{t+1} \end{bmatrix}  =    \begin{bmatrix} \rho & \delta \cr
+                    F^* \rho & F^* \delta   \end{bmatrix} \begin{bmatrix} m_t \cr P_t \end{bmatrix}
+
+or 
+
+ .. math::
+
+     x_{t+1} = A x_t 
+
+where :math:`x_t = \begin{bmatrix} m_t \cr P_t \end{bmatrix}`. 
+
+Then apply formula :eq:`equation_5` for :math:`F` to deduce that 
+
+ .. math::
+
+     p_t = F \begin{bmatrix} m_t \cr P_t \end{bmatrix} = F \begin{bmatrix} m_t \cr F^* m_t \end{bmatrix}  
+
+which implies that
+
+ .. math:: 
+
+     p_t = \begin{bmatrix} F_1 & F_2 \end{bmatrix}    \begin{bmatrix} m_t \cr F^* m_t \end{bmatrix} = F_1 m_t + F_2 F^* m_t
+
+so that we expect to have
+
+.. math::
+
+     F^* = F_1 + F_2 F^*
+
 
 Please do the following calculations.
 
