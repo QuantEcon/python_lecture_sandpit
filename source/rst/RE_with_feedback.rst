@@ -54,8 +54,8 @@ In this lecture, we'll encounter:
 
 * a way to use a Big :math:`K`, little :math:`k` argument to allow apparent feedback from endogenous to exogenous variables within a rational expectations equilibrium
 
-* a use of eigenvector decompositions of matrices that allowed :cite:`Blanchard_Khan` and :cite:`Whiteman` to solve a class of linear rational expectations models 
-
+* a use of eigenvector decompositions of matrices that allowed Blanchard and Khan (1981) :cite:`Blanchard_Khan` and 
+Whiteman (1983) :cite:`Whiteman` to solve a class of linear rational expectations models 
 
 
 Cagan's model with rational expectations
@@ -894,16 +894,25 @@ exist.
 
     magic_p0(1, δ=0.2)
 
-Big P, little p interpretation
-=====================================
+Big :math:`P`, little :math:`p` interpretation
+===============================================
 
-Let's write the stabilizing solution tha we have computed as :math:`P_t = F^* m_t` where
+It is helpful to view our solutions with feedback from the price level or inflation to money or the rate of money 
+creation in terms of the Big :math:`K`, little :math:`k` idea discussed in :doc:`Rational Expectations Models<rational_expectations>`
 
-.. math: 
+This will help us sort out what is taken as given by the decision makers who use the 
+difference equation :eq:`equation_2` to determine :math:`p_t` as a function of their forecasts of future values of
+:math:`m_t`.
 
-    F^* = Q_{21} Q_{11}^{-1} m_t
 
-Then we can deduce the recursion :math:`P_{t+1} = F^* \rho m_t + F^* \delta P_t` and create the stacked system
+Let's write the stabilizing solution that we have computed using the eigenvector decomposition of :math:`H` as 
+:math:`P_t = F^* m_t` where
+
+.. math:: 
+
+    F^* = Q_{21} Q_{11}^{-1} 
+
+Then from :math:`P_{t+1} = F^* m_{t+1}` and :math:`m_{t+1} = \rho m_t + \delta P_t` we can deduce the recursion :math:`P_{t+1} = F^* \rho m_t + F^* \delta P_t` and create the stacked system
 
 .. math::
 
@@ -937,23 +946,23 @@ so that we expect to have
      F^* = F_1 + F_2 F^*
 
 
-Please do the following calculations.
+We verify this equality in the next block of Python code that implements the following
+computations. 
 
 1. For the system with :math:`\delta\neq 0` so that there is feedback,
-   please compute the stabilizing solution for :math:`p_t` in the form
+   we compute the stabilizing solution for :math:`p_t` in the form
    :math:`p_t = F^* m_t` where :math:`F^* = Q_{21}Q_{11}^{-1}` as above.
 
-2. Please recall the system :eq:`equation_3`, :eq:`equation_4`, and :eq:`equation_5` above. Please define
+2. Recalling the system :eq:`equation_3`, :eq:`equation_4`, and :eq:`equation_5` above, we define
    :math:`x_t = \begin{bmatrix} m_t \cr P_t \end{bmatrix}` and notice
-   that it is Big :math:`P_t` and not little :math:`p_t` here. This is
-   not a typo. Please form :math:`A` and :math:`G` as
+   that it is Big :math:`P_t` and not little :math:`p_t` here. Then we form :math:`A` and :math:`G` as
    :math:`A = \begin{bmatrix}\rho & \delta \cr F^* \rho & F^*\delta \end{bmatrix}`
-   and :math:`G = \begin{bmatrix} 1 & 0 \end{bmatrix}` and then compute
-   :math:`\check F = \begin{bmatrix} \check F_1 & \check F_2 \end{bmatrix} \equiv F`
+   and :math:`G = \begin{bmatrix} 1 & 0 \end{bmatrix}` and we compute
+   :math:`\begin{bmatrix}  F_1 &  F_2 \end{bmatrix} \equiv F`
    from equation :eq:`equation_5` above.
 
-3. Please compute :math:`\check F_1 + \check F_2 F^*` and compare it
-   with :math:`F^*`.
+3. We compute :math:` F_1 +  F_2 F^*` and compare it
+   with :math:`F^*` and verify equality.
 
 .. code-block:: python3
 
@@ -991,8 +1000,14 @@ Compare :math:`F^*` with :math:`\check F_1 + \check F_2 F^*`
     F_check[0] + F_check[1] * F_star, F_star
 
 
-Feb. 2: Adding Sympy code
+Fun with Sympy code
 =========================
+
+This section is a small gift for readers who have made it this far.  
+
+It puts Sympy to work on our model.
+
+Thus, we  use Sympy to compute some of the key objects comprising the eigenvector decomposition of :math:`H`.
 
 :math:`H` with nonzero :math:`\delta`.
 
@@ -1034,31 +1049,21 @@ Feb. 2: Adding Sympy code
 
     H2.eigenvects()
 
-Requests for Zejin, Jan 24
-==========================
+Below we do induce sympy to do the following fun things for us analytically:
 
-May I please ask that you do the following with this great code?
-
-1. In sympy, please compute the matrix :math:`Q` whose first column is
+1. We compute the matrix :math:`Q` whose first column is
    the eigenvector associated with :math:`\rho`. and whose second column
    is the eigenvector associated with :math:`\lambda^{-1}`.
 
-2. Please use sympy to compute the inverse :math:`Q^{-1}` of :math:`Q`
+2. We use sympy to compute the inverse :math:`Q^{-1}` of :math:`Q`
    (both in symbols).
 
-3. Please use sympy to compute :math:`Q_{21} Q_{11}^{-1}` (in symbols).
+3. We use sympy to compute :math:`Q_{21} Q_{11}^{-1}` (in symbols).
 
 4. Where :math:`Q^{ij}` denotes the :math:`(i,j)` component of
-   :math:`Q^{-1}`, please use sympy to compute
+   :math:`Q^{-1}`, weighted use sympy to compute
    :math:`- (Q^{22})^{-1} Q^{21}` (again in symbols)
 
-If you can do these things in sympy, some magic will happen.
-
-After this has been done, we can bring this code into the “main” Cagan
-notebook. But let’s wait please for that
-
-This notebook is really shaping up and will be great fun to teach in
-class.
 
 .. code-block:: python3
 
