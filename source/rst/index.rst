@@ -17,7 +17,6 @@
     :maxdepth: 2
     :titlesonly:
 
-    RE_with_feedback
     likelihood_ratio_process
 
     zreferences

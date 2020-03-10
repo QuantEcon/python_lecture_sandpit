@@ -1,13 +1,12 @@
-
 .. _likelihood_ratio_process:
 
 .. include:: /_static/includes/header.raw
 
 .. highlight:: python3
 
-**********************************************************
-Likelihood ratio processes: frequentist and Bayesian uses
-**********************************************************
+****************************
+Likelihood Ratio Processes
+****************************
 
 .. contents:: :depth: 2
 
@@ -23,48 +22,66 @@ Likelihood ratio processes: frequentist and Bayesian uses
     from math import gamma
     %matplotlib inline
 
+
+Overview
+=========
+This lecture describes likelihood ratio processes and some of their uses by frequentist and Bayesian statisticians.
+
+
+
 Likelihood ratio process
 ========================
 
-A nonnegative random variable :math:`W` has probability density function
+A nonnegative random variable :math:`W` has one of two probability density functions, either
 :math:`f` or :math:`g`.
 
-Before the beginning of time, nature once and all decides whether
-:math:`f` or :math:`g` governs i.i.d. draws.
+Before the beginning of time, nature once and all decides whether she will draw a sequence of i.i.d. draws from either
+:math:`f` or :math:`g`.
 
-We will sometimes let :math:`q` be the density that nature chose, so
+We will sometimes let :math:`q` be the density that nature chose once and for all, so
 that :math:`q` is either :math:`f` or :math:`g`, permanently.
 
-We know :math:`f` and :math:`g` but don’t know which density nature
+Nature knows which density it permanently draws from, but we the observers don't know.
+
+We do know both :math:`f` and :math:`g` but we don’t know which density nature
 chose.
 
 But we want to know.
 
-We observe a sequence :math:`\{w_t\}_{t=1}^T` of :math:`T` i.i.d. draws
+To do that, we use observations.
+
+We observe a sequence :math:`\{w_t\}_{t=1}^T` of :math:`T` i.i.d. draws 
 from either :math:`f` or :math:`g`.
 
-We want to use these observations to infer whether :math:`f` or
-:math:`g` generated the data.
+We want to use these observations to infer whether nature chose :math:`f` or
+:math:`g` before the beginning of time. 
 
-Define the observation :math:`t` likelihood ratio
+A **likelihood ratio process** is a useful tool for this task. 
+
+To begin, we define the time :math:`t` likelihood ratio  as the random variable
 
 .. math::
 
 
    l\left(w_{t}\right)=\frac{f\left(w_{t}\right)}{g\left(w_{t}\right)},\quad t\geq1.
 
-We assume that :math:`f` and :math:`g` put positive probabilities on the
-same intervals.
 
-Define the *likelihood ratio process* for sequence
-:math:`\left\{ l\left(w_{t}\right)\right\} _{t=1}^{\infty}` as
+We assume that :math:`f` and :math:`g` both put positive probabilities on the
+same intervals of possible realizations of :math:`w_t`.
+
+That means that under the :math:`g` density,  :math:`l\left(w_{t}\right)=\frac{f\left(w_{t}\right)}{g\left(w_{t}\right)}`
+is evidently a nonnegative  random variable with mean :math:`1`.     
+
+
+A **likelihood ratio process** for sequence
+:math:`\left\{ l\left(w_{t}\right)\right\} _{t=1}^{\infty}` is defined as
 
 .. math::
 
 
    L\left(w^{t}\right)=\prod_{i=1}^{t}l\left(w_{i}\right).
 
-where :math:`w^{t}=\left\{ w_{1},\dots,w_{t}\right\}` is the history of
+where :math:`w^{t}=\left\{ w_{1},\dots,w_{t}\right\}` is a history of
 observations up to and including time :math:`t`.
 
 Notice that the likelihood process satisfies the *recursion* or
@@ -75,14 +92,14 @@ Notice that the likelihood process satisfies the *recursion* or
 
    L\left(w^t\right) = l\left(w_t\right) L\left(w^{t-1}\right) .
 
-The likelihood ratio and its logarithm are our tools for making
+The likelihood ratio and its logarithm are key tools for making
 inferences using a classic frequentist approach due to Neyman and
-Pearson.
+Pearson :cite:`Neyman_Pearson`.
 
-The following Python code evaluates :math:`f` and :math:`g` as different
+To help us appreciate how things work, the following Python code evaluates :math:`f` and :math:`g` as different
 beta distributions, then computes and simulates an associated likelihood
 ratio process by generating a sequence :math:`w^t` from **some**
-probability distribution, for example, i.i.d. draws from :math:`g`.
+probability distribution, for example, a sequence of  i.i.d. draws from :math:`g`.
 
 .. code-block:: python3
 
@@ -112,7 +129,7 @@ probability distribution, for example, i.i.d. draws from :math:`g`.
 
         return l_arr
 
-Sample behavior of a likelihood ratio process
+Nature Permanently Draws from Density g
 =============================================
 
 We first simulate the likelihood ratio process when nature permanently
@@ -151,7 +168,7 @@ ratio process is that the unconditional mean of
 :math:`L\left(w^t\right)` under probability density :math:`g` is
 identically :math:`1` for all :math:`t`.
 
-To verify this assertion, first notice that the unconditional mean
+To verify this assertion, first notice that as mentioned earlier the unconditional mean
 :math:`E_{0}\left[l\left(w_{t}\right)\bigm|q=g\right]` is :math:`1` for
 all :math:`t`:
 
@@ -193,6 +210,9 @@ Mathematical induction implies
 :math:`E_{0}\left[L\left(w^{t}\right)\bigm|q=g\right]=1` for all
 :math:`t \geq 1`.
 
+Peculiar Property of Likelihood Ratio Process
+-----------------------------------------------
+
 How can this possibly be true if probability mass of the likelihood
 ratio process is piling up near :math:`1` as
 :math:`t \rightarrow + \infty`?
@@ -222,13 +242,13 @@ paths.
     plt.plot(range(T), np.mean(l_arr_g, axis=0))
     plt.hlines(1, 0, T, linestyle='--')
 
-Behavior of likelihood ratio process when nature permanently draws from f
-=========================================================================
+Nature Permanently Draws from Density f
+==========================================
 
-Now suppose that nature selected :math:`f`.
+Now suppose that before time :math:`0` nature selected :math:`f`.
 
-In this case, the unconditional mean of the likelihood ratio explodes
-very quickly, because
+In this case, the unconditional mean of the likelihood ratio 
+diverges toward :math:`+ \infty` because
 
 .. math::
 
@@ -265,8 +285,8 @@ fast probability mass moves towards :math:`\infty`.
 
     plt.plot(range(T), np.sum(l_seq_f > 10000, axis=0) / N)
 
-Likelihood ratio and Bayes’ La
-==============================
+Likelihood Ratio Process and Bayes’ Law
+==========================================
 
 Let :math:`\pi_t` be a Bayesian posterior defined as
 
@@ -275,7 +295,7 @@ Let :math:`\pi_t` be a Bayesian posterior defined as
 Bayes’ law implies that :math:`\{\pi_t\}` obeys the recursion
 
 .. math::
-
+   :label: eq_recur1
 
    \pi_t=\frac{\pi_{t-1} l_t(w_t)}{\pi_{t-1} l_t(w_t)+1-\pi_{t-1}},
 
@@ -283,16 +303,7 @@ with :math:`\pi_{0}` be a Bayesian prior probability that :math:`q = f`,
 i.e., a belief about :math:`q` based on having seen no data.
 
 Below we define a Python function that updates belief :math:`\pi` using
-likelihood ratio :math:`l` according to the recursion
-
-Question for Zejin –
-====================
-
-1. please check to see whether we want the initial prior to be
-   :math:`\pi_{-1}` or :math:`\pi_0`
-
-2. Please check below to see that I haven’t flipped what :math:`q`
-   generates the data (:math:`f` or :math:`g`) below.
+likelihood ratio :math:`l` according to  recursion :eq:`eq_recur1`
 
 .. code-block:: python3
 
@@ -306,16 +317,18 @@ Question for Zejin –
         return π
 
 Below we will plot some informative graphs showing **one** simulated
-path of the cumulative likelihood ratio :math:`L_t` along with paths of
-:math:`\pi_t` associated with two different initial priors
-:math:`\pi_{-1}`.
+path of the cumulative likelihood ratio process :math:`L_t` along with paths of
+:math:`\pi_t` that are associated with the same realization of the likelihood ratio process but two different initial priors
+:math:`\pi_{0}`.
+
+First, we specify the two values of :math:`\pi_0`.
 
 .. code-block:: python3
 
     π1, π2 = 0.2, 0.8
 
-paths when f truly generates dat
---------------------------------
+Now we generate paths of the likelihood ratio process :math:`L_t` and the posteior :math:`\pi_t` for a history drawn as i.i.d.
+draws from density :math:`f`.
 
 .. code-block:: python3
 
@@ -345,23 +358,13 @@ paths when f truly generates dat
 
     plt.show()
 
-request for Zejin, Feb 18 :
-===========================
-
-If the samples run from time :math:`0` onwards, then the initial
-:math:`\pi` should be :math:`\pi_{-1}` shouldn’t it be?
-
-Please check this in the above graph and also earlier in the notebook
-where I made some changes.
-
-50-50 chance I am very wrong here.
 
 The dotted line records the logarithm of the cumulative likelihood
 ratio.
 
 Please note that there are two different scales of y axis.
 
-Distribution g truly generates dat
+Now let's study what happens when the history consists of i.i.d. draws from density :math:`g`
 ----------------------------------
 
 .. code-block:: python3
