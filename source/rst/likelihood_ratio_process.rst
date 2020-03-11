@@ -236,6 +236,9 @@ The following Python code approximates the unconditional means
 :math:`E_{0}\left[L\left(w^{t}\right)\right]` by averaging across sample
 paths.
 
+Please notice that while  sample averages  hover around their population means of :math:`1`, there is quite a bit
+of variability, a consequence of the *fat tail* of the distribution of  :math:`L\left(w^{t}\right)`.
+
 .. code-block:: python3
 
     N, T = l_arr_g.shape
@@ -245,10 +248,12 @@ paths.
 Nature Permanently Draws from Density f
 ==========================================
 
-Now suppose that before time :math:`0` nature selected :math:`f`.
+Now suppose that before time :math:`0` nature permanently decided to draw repeatedly from density :math:`f`.
 
-In this case, the unconditional mean of the likelihood ratio 
-diverges toward :math:`+ \infty` because
+A useful property is that while the mean of the likelihood ratio :math:`l\left(w_{t}\right)` under density 
+:math:`g` is :math:`1`, its mean under the density :math:`f` exceeds one.  
+
+To see this, we compute 
 
 .. math::
 
@@ -262,6 +267,10 @@ diverges toward :math:`+ \infty` because
        &>E_{0}\left[l\left(w_{t}\right)\mid q=g\right]^{2} \\
        &=1 \\
    \end{aligned}
+
+
+This in turn implies that the unconditional mean of the likelihood ratio process :math:`L(w^t)` 
+diverges toward :math:`+ \infty`.
 
 Simulations below confirms this conclusion.
 
@@ -317,8 +326,8 @@ likelihood ratio :math:`l` according to  recursion :eq:`eq_recur1`
         return π
 
 Below we will plot some informative graphs showing **one** simulated
-path of the cumulative likelihood ratio process :math:`L_t` along with paths of
-:math:`\pi_t` that are associated with the same realization of the likelihood ratio process but two different initial priors
+path of the cumulative likelihood ratio process :math:`L_t` along with two paths of
+:math:`\pi_t` that are associated with the *same* realization of the likelihood ratio process but *different* initial prior probabilities
 :math:`\pi_{0}`.
 
 First, we specify the two values of :math:`\pi_0`.
@@ -359,13 +368,13 @@ draws from density :math:`f`.
     plt.show()
 
 
-The dotted line records the logarithm of the cumulative likelihood
+The dotted line in the graph above records the logarithm of the  likelihood process :math:`\log L(w^t)`.
 ratio.
 
-Please note that there are two different scales of y axis.
+Please note that there are two different scales on the :math:`y` axis.
 
 Now let's study what happens when the history consists of i.i.d. draws from density :math:`g`
-----------------------------------
+
 
 .. code-block:: python3
 
@@ -448,7 +457,7 @@ which can be understood as one step update in belief as if we treat
 associated with likelihood :math:`L\left(w^{t+1}\right)`.
 
 Below we offer Python code that verifies this in a setting in which
-nature has selected :math:`f`.
+nature chose permanently to draw from density :math:`f`.
 
 .. code-block:: python3
 
@@ -463,8 +472,8 @@ nature has selected :math:`f`.
 
     np.abs(π_seq - π_seq_f).max() < 1e-10
 
-Likelihood Ratio tes
-====================
+Likelihood Ratio Test
+======================
 
 Denote :math:`q` as the data generating process, so that
 :math:`q=f \text{ or } g`.
