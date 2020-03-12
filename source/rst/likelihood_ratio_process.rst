@@ -10,9 +10,6 @@ Likelihood Ratio Processes
 
 .. contents:: :depth: 2
 
-1. Likelihood ratio process
-2. Likelihood ratio and beliefs
-3. Likelihood ratio test
 
 .. code-block:: ipython
 
@@ -27,10 +24,23 @@ Overview
 =========
 This lecture describes likelihood ratio processes and some of their uses by frequentist and Bayesian statisticians.
 
+We'll use the simple statistical setting also used in :doc:`this lecture <exchangeable>`.
+
+Among the things that we'll learn about are
+
+   * A peculiar property of likelihood ratio processes
+
+   * How for a Bayesian  a likelihood ratio process and a prior probability determine a posterior probability
+
+   * How a likelihood ratio process is the key ingredient in frequentist hypothesis testing
+
+   * How a **receiver operator characteristic curve** summarizes information about a false alarm probability and power in frequentist hypothesis testing 
 
 
-Likelihood ratio process
-========================
+
+Likelihood Ratio Process
+========================  
+
 
 A nonnegative random variable :math:`W` has one of two probability density functions, either
 :math:`f` or :math:`g`.
@@ -331,7 +341,9 @@ likelihood ratio :math:`l` according to  recursion :eq:`eq_recur1`
 
         return π
 
-It is useful to iterate on recursion :eq:`eq_recur1` in order to derive an expression for  the time :math:`t` posterior 
+Formula :eq:`eq_recur1` can be generalized in a useful way.
+
+We do this by iterating on recursion :eq:`eq_recur1` in order to derive an expression for  the time :math:`t` posterior 
 :math:`\pi_{t+1}` as a function of the time :math:`0` prior :math:`\pi_0` and the likelihood ratio process
 :math:`L(w^{t+1})` at time :math:`t`.
 
@@ -380,15 +392,19 @@ and the initial prior :math:`\pi_{0}`
 
    \pi_{t+1}=\frac{\pi_{0}L\left(w^{t+1}\right)}{\pi_{0}L\left(w^{t+1}\right)+1-\pi_{0}} .
 
+Formula :eq:`eq_Bayeslaw103` generalizes generalizes formula :eq:`eq_recur1`.
+
 Formula :eq:`eq_Bayeslaw103`  can be regarded as a one step  revision of prior probability :math:`\pi_0` after seeing
 the batch of data :math:`\left\{ w_{i}\right\} _{i=1}^{t+1}`.
 
-Thus, notice how formula :eq:`eq_Bayeslaw103` naturally generalizes formula :eq:`eq_recur1`.
-
-Formula :eq:`eq_Bayeslaw103` shows the key role of that the likelihood ratio process  :math:`L\left(w^{t+1}\right)` plays in determining
+Formula :eq:`eq_Bayeslaw103` shows the key role that the likelihood ratio process  :math:`L\left(w^{t+1}\right)` plays in determining
 the posterior probability :math:`\pi_{t+1}`.
 
-Below we will plot  graphs showing **one** simulated
+Formula :eq:`eq_Bayeslaw103` is the foundation for the insight that, because of the way the likelihood ratio process behaves
+as :math:`t \rightarrow + \infty`, the likelihood ratio process dominates the initial prior :math:`\pi_0` in determining the 
+limiting behavior of :math:`\pi_t`.
+
+To illustrate this insight, below we will plot  graphs showing **one** simulated
 path of the  likelihood ratio process :math:`L_t` along with two paths of
 :math:`\pi_t` that are associated with the *same* realization of the likelihood ratio process but *different* initial prior probabilities
 probabilities :math:`\pi_{0}`.
@@ -422,7 +438,7 @@ draws from density :math:`f`.
     ax1.set_ylabel("$\pi_t$")
     ax1.set_xlabel("t")
     ax1.legend()
-    ax1.set_title("when f generates")
+    ax1.set_title("when f governs data")
 
     ax2 = ax1.twinx()
     ax2.plot(range(1, T+1), np.log(l_seq_f[0, :]), '--', color='b')
@@ -459,7 +475,7 @@ Now let's study what happens when the history consists of i.i.d. draws from dens
     ax1.set_ylabel("$\pi_t$")
     ax1.set_xlabel("t")
     ax1.legend()
-    ax1.set_title("when g generates")
+    ax1.set_title("when g governs data")
 
     ax2 = ax1.twinx()
     ax2.plot(range(1, T+1), np.log(l_seq_g[0, :]), '--', color='b')
