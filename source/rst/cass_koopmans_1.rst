@@ -46,10 +46,10 @@ Let's start with some standard imports:
 
 .. code-block:: ipython
 
-  from numba import njit
-  import numpy as np
-  import matplotlib.pyplot as plt
-  %matplotlib inline
+    from numba import njit, jitclass, float64
+    import numpy as np
+    import matplotlib.pyplot as plt
+    %matplotlib inline
 
 The Growth Model
 ==================
@@ -286,58 +286,98 @@ equation**
   (1-\delta)]\right)^{1/\gamma} \notag\\= C_t\left(\beta [f'(K_{t+1}) +
   (1-\delta)]\right)^{1/\gamma} \end{aligned}
 
+Zejin: change
 
 We now write Python code for some 
 variables and functions that we'll want in order to solve the planning
 problem.
 
+to
+
+In below, we define a ``jitclass`` that stores all the parameters and functions
+we need to construct a planned economy.
+
 .. code-block:: python3
 
-    @njit
-    def u(c, γ):
-        '''
-        Utility function
-        ASIDE: If you have a utility function that is hard to solve by hand
-        you can use automatic or symbolic  differentiation
-        See https://github.com/HIPS/autograd
-        '''
-        if γ == 1:
-            # If γ = 1 we can show via L'hopital's Rule that the utility
-            # becomes log
-            return np.log(c)
-        else:
-            return c**(1 - γ) / (1 - γ)
+    planning_data = [
+        ('γ', float64),    # Coefficient of relative risk aversion
+        ('β', float64),    # Discount factor
+        ('δ', float64),    # Depreciation rate on capital
+        ('α', float64),    # Return to capital per capita
+        ('A', float64)     # Technology
+    ]
 
-    @njit
-    def u_prime(c, γ):
-        '''Derivative of utility'''
-        if γ == 1:
-            return 1 / c
-        else:
-            return c**(-γ)
+.. code-block:: python3
 
-    @njit
-    def u_prime_inv(c, γ):
-        '''Inverse utility'''
-        if γ == 1:
-            return c
-        else:
-            return c**(-1 / γ)
+    @jitclass(planning_data)
+    class PlanningProblem():
 
-    @njit
-    def f(A, k, α):
-        '''Production function'''
-        return A * k**α
+        def __init__(self, γ=2, β=0.95, δ=0.02, α=0.33, A=1):
 
-    @njit
-    def f_prime(A, k, α):
-        '''Derivative of production function'''
-        return α * A * k**(α - 1)
+            self.γ, self.β = γ, β
+            self.δ, self.α, self.A = δ, α, A
 
-    @njit
-    def f_prime_inv(A, k, α):
-        return (k / (A * α))**(1 / (α - 1))
+        def u(self, c):
+            '''
+            Utility function
+            ASIDE: If you have a utility function that is hard to solve by hand
+            you can use automatic or symbolic differentiation
+            See https://github.com/HIPS/autograd
+            '''
+            γ = self.γ
 
+            return c ** (1 - γ) / (1 - γ) if γ!= 1 else np.log(c)
+
+        def u_prime(self, c):
+            'Derivative of utility'
+            γ = self.γ
+
+            return c ** (-γ)
+
+        def u_prime_inv(self, c):
+            'Inverse of derivative of utility'
+            γ = self.γ
+
+            return c ** (-1 / γ)
+
+        def f(self, k):
+            'Production function'
+            α, A = self.α, self.A
+
+            return A * k ** α
+
+        def f_prime(self, k):
+            'Derivative of production function'
+            α, A = self.α, self.A
+
+            return α * A * k ** (α - 1)
+
+        def f_prime_inv(self, k):
+            'Inverse of derivative of production function'
+            α, A = self.α, self.A
+
+            return (k / (A * α)) ** (1 / (α - 1))
+
+        def next_k_c(self, k, c):
+            ''''
+            Given the current capital Kt and an arbitrary feasible
+            consumption choice Ct, computes Kt+1 by state transition law
+            and optimal Ct+1 by Euler equation.
+            '''
+            β, δ = self.β, self.δ
+            u_prime, u_prime_inv = self.u_prime, self.u_prime_inv
+            f, f_prime = self.f, self.f_prime
+
+            k_next = f(k) + (1 - δ) * k - c
+            c_next = u_prime_inv(u_prime(c) / (β * (f_prime(k_next) + (1 - δ))))
+
+            return k_next, c_next
+
+Zejin: We can construct a planned economy by following:
+
+.. code-block:: python3
+
+    pp = PlanningProblem()
 
 Shooting Method
 ----------------
@@ -398,73 +438,56 @@ planning problem.
 We actually modify the algorithm slightly by starting with a guess for 
 :math:`c_0` instead of :math:`\mu_0` in the following code. 
 
-We'll start with an incorrect guess.
+.. code-block:: python3
+
+    @njit
+    def shooting(pp, c0, k0, T=10):
+        '''
+        Given the initial condition of capital k0 and an initial guess
+        of consumption c0, computes the whole paths of c and k
+        using the state transition law and Euler equation for T periods.
+        '''
+        if c0 > pp.f(k0):
+            print("initial consumption is not feasible")
+
+            return None
+
+        # initialize vectors of c and k
+        c_vec = np.empty(T+1)
+        k_vec = np.empty(T+2)
+
+        c_vec[0] = c0
+        k_vec[0] = k0
+
+        for t in range(T):
+            k_vec[t+1], c_vec[t+1] = pp.next_k_c(k_vec[t], c_vec[t])
+
+        k_vec[T+1] = pp.f(k_vec[T]) + (1 - pp.δ) * k_vec[T] - c_vec[T]
+
+        return c_vec, k_vec
+
+We’ll start with an incorrect guess.
 
 .. code-block:: python3
 
-    # Parameters
-    γ = 2
-    δ = 0.02
-    β = 0.95
-    α = 0.33
-    A = 1
+    paths = shooting(pp, 0.2, 0.3, T=10)
 
-    # Initial guesses
-    T = 10
-    c = np.zeros(T+1)  # T periods of consumption initialized to 0
-    # T periods of capital initialized to 0 (T+2 to include t+1 variable as well)
-    k = np.zeros(T+2)
-    k[0] = 0.3  # Initial k
-    c[0] = 0.2  # Guess of c_0
+.. code-block:: python3
 
-    @njit
-    def shooting_method(c, # Initial consumption
-                        k,   # Initial capital
-                        γ,   # Coefficient of relative risk aversion
-                        δ,   # Depreciation rate on capital# Depreciation rate
-                        β,   # Discount factor
-                        α,   # Return to capital per capita
-                        A):  # Technology
+    fig, axs = plt.subplots(1, 2, figsize=(14, 5))
 
-        T = len(c) - 1
-
-        for t in range(T):
-            # Equation 1 with inequality
-            k[t+1] = f(A=A, k=k[t], α=α) + (1 - δ) * k[t] - c[t]
-            if k[t+1] < 0:   # Ensure nonnegativity
-                k[t+1] = 0
-
-          # Equation 2: We keep in the general form to show how we would
-          # solve if we didn't want to do any simplification
-
-            if β * (f_prime(A=A, k=k[t+1], α=α) + (1 - δ)) == np.inf:
-                # This only occurs if k[t+1] is 0, in which case, we won't
-                # produce anything next period, so consumption will have to be 0
-                c[t+1] = 0
-            else:
-                c[t+1] = u_prime_inv(u_prime(c=c[t], γ=γ) \
-                / (β * (f_prime(A=A, k=k[t+1], α=α) + (1 - δ))), γ=γ)
-
-        # Terminal condition calculation
-        k[T+1] = f(A=A, k=k[T], α=α) + (1 - δ) * k[T] - c[T]
-
-        return c, k
-
-    paths = shooting_method(c, k, γ, δ, β, α, A)
-
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     colors = ['blue', 'red']
     titles = ['Consumption', 'Capital']
     ylabels = ['$c_t$', '$k_t$']
 
-    for path, color, title, y, ax in zip(paths, colors, titles, ylabels, axes):
-        ax.plot(path, c=color, alpha=0.7)
-        ax.set(title=title, ylabel=y, xlabel='t')
+    T = paths[0].size - 1
+    for i in range(2):
+        axs[i].plot(paths[i], c=colors[i])
+        axs[i].set(xlabel='t', ylabel=ylabels[i], title=titles[i])
 
-    ax.scatter(T+1, 0, s=80)
-    ax.axvline(T+1, color='k', ls='--', lw=1)
+    axs[1].scatter(T+1, 0, s=80)
+    axs[1].axvline(T+1, color='k', ls='--', lw=1)
 
-    plt.tight_layout()
     plt.show()
 
 Evidently, our initial guess for :math:`\mu_0` is too high and makes
@@ -503,89 +526,74 @@ tolerance bounds), we stop and declare victory.
 .. code-block:: python3
 
     @njit
-    def bisection_method(c,
-                         k,
-                         γ,              # Coefficient of relative risk aversion
-                         δ,              # Depreciation rate
-                         β,              # Discount factor
-                         α,              # Return to capital per capita
-                         A,              # Technology
-                         tol=1e-4,
-                         max_iter=1e4,
-                         terminal=0):    # Value we are shooting towards
+    def bisection(pp, c0, k0, T=10, tol=1e-4, max_iter=500, k_ter=0, verbose=True):
 
-        T = len(c) - 1
-        i = 1                            # Initial iteration
-        c_high = f(k=k[0], α=α, A=A)     # Initial high value of c
-        c_low = 0                        # Initial low value of c
+        # initial boundaries for guess c0
+        c0_upper = pp.f(k0)
+        c0_lower = 0
 
-        path_c, path_k = shooting_method(c, k, γ, δ, β, α, A)
+        i = 0
+        while True:
+            c_vec, k_vec = shooting(pp, c0, k0, T)
+            error = k_vec[-1] - k_ter
 
-        while (np.abs((path_k[T+1] - terminal)) > tol or path_k[T] == terminal) \
-            and i < max_iter:
+            # check if the terminal condition is satisfied
+            if np.abs(error) < tol:
+                if verbose:
+                    print('Converged successfully on iteration ', i+1)
+                return c_vec, k_vec
 
-            if path_k[T+1] - terminal > tol:
-                # If assets are too high the c[0] we chose is now a lower bound
-                # on possible values of c[0]
-                c_low = c[0]
-            elif path_k[T+1] - terminal < -tol:
-                # If assets fell too quickly, the c[0] we chose is now an upper
-                # bound on possible values of c[0]
-                c_high=c[0]
-            elif path_k[T] == terminal:
-                # If assets fell  too quickly, the c[0] we chose is now an upper
-                # bound on possible values of c[0]
-                c_high=c[0]
-
-            c[0] = (c_high + c_low) / 2  # This is the bisection part
-            path_c, path_k = shooting_method(c, k, γ, δ, β, α, A)
             i += 1
+            if i == max_iter:
+                if verbose:
+                    print('Convergence failed.')
+                return c_vec, k_vec
 
-        if np.abs(path_k[T+1] - terminal) < tol and path_k[T] != terminal:
-            print('Converged successfully on iteration', i-1)
-        else:
-            print('Failed to converge and hit maximum iteration')
+            # if iteration continues, updates boundaries and guess of c0
+            if error > 0:
+                c0_lower = c0
+            else:
+                c0_upper = c0
 
-        μ = u_prime(c=path_c, γ=γ)
-        return path_c, path_k, μ
-
-Now we can plot
+            c0 = (c0_lower + c0_upper) / 2
 
 .. code-block:: python3
 
-    T = 10
-    c = np.zeros(T+1) # T periods of consumption initialized to 0
-    # T periods of capital initialized to 0. T+2 to include t+1 variable as well
-    k = np.zeros(T+2)
+    def plot_paths(pp, c0, k0, T_arr, k_ter=0, k_ss=None, axs=None):
 
-    k[0] = 0.3 # initial k
-    c[0] = 0.3 # our guess of c_0
-
-    paths = bisection_method(c, k, γ, δ, β, α, A)
-
-    def plot_paths(paths, axes=None, ss=None):
-
-        T = len(paths[0])
-
-        if axes is None:
-            fix, axes = plt.subplots(1, 3, figsize=(13, 3))
-
+        if axs is None:
+            fix, axs = plt.subplots(1, 3, figsize=(16, 4))
         ylabels = ['$c_t$', '$k_t$', '$\mu_t$']
         titles = ['Consumption', 'Capital', 'Lagrange Multiplier']
 
-        for path, y, title, ax in zip(paths, ylabels, titles, axes):
-            ax.plot(path)
-            ax.set(ylabel=y, title=title, xlabel='t')
+        c_paths = []
+        k_paths = []
+        for T in T_arr:
+            c_vec, k_vec = bisection(pp, c0, k0, T, k_ter=k_ter, verbose=False)
+            c_paths.append(c_vec)
+            k_paths.append(k_vec)
 
-        # Plot steady state value of capital
-        if ss is not None:
-            axes[1].axhline(ss, c='k', ls='--', lw=1)
+            μ_vec = pp.u_prime(c_vec)
+            paths = [c_vec, k_vec, μ_vec]
 
-        axes[1].axvline(T, c='k', ls='--', lw=1)
-        axes[1].scatter(T, paths[1][-1], s=80)
-        plt.tight_layout()
+            for i in range(3):
+                axs[i].plot(paths[i])
+                axs[i].set(xlabel='t', ylabel=ylabels[i], title=titles[i])
 
-    plot_paths(paths)
+            # Plot steady state value of capital
+            if k_ss is not None:
+                axs[1].axhline(k_ss, c='k', ls='--', lw=1)
+
+            axs[1].axvline(T+1, c='k', ls='--', lw=1)
+            axs[1].scatter(T+1, paths[1][-1], s=80)
+
+        return c_paths, k_paths
+
+Now we can solve the model and plot the paths of consumption, capital, and Lagrange multiplier.
+
+.. code-block:: python3
+
+    plot_paths(pp, 0.3, 0.3, [10]);
 
 
 Setting Initial Capital to Steady State Capital
@@ -639,8 +647,8 @@ Let's verify this with Python and then use this steady state
 
 .. code-block:: python3
 
-    ρ = 1 / β - 1
-    k_ss = f_prime_inv(k=ρ+δ, A=A, α=α)
+    ρ = 1 / pp.β - 1
+    k_ss = pp.f_prime_inv(ρ+pp.δ)
 
     print(f'steady state for capital is: {k_ss}')
 
@@ -648,14 +656,7 @@ Now we plot
 
 .. code-block:: python3
 
-    T = 150
-    c = np.zeros(T+1)
-    k = np.zeros(T+2)
-    c[0] = 0.3
-    k[0] = k_ss  # Start at steady state
-    paths = bisection_method(c, k, γ, δ, β, α, A)
-
-    plot_paths(paths, ss=k_ss)
+    plot_paths(pp, 0.3, k_ss, [150], k_ss=k_ss);
 
 Evidently,  with a large value of
 :math:`T`, :math:`K_t` stays near :math:`K_0` until :math:`t` approaches :math:`T` closely.
@@ -666,15 +667,7 @@ Let's see what the planner does when we set
 
 .. code-block:: python3
 
-    k_init = k_ss / 3   # Below our steady state
-    T = 150
-    c = np.zeros(T+1)
-    k = np.zeros(T+2)
-    c[0] = 0.3
-    k[0] = k_init
-    paths = bisection_method(c, k, γ, δ, β, α, A)
-
-    plot_paths(paths, ss=k_ss)
+    plot_paths(pp, 0.3, k_ss/3, [150], k_ss=k_ss);
 
 Notice how the planner pushes capital toward the steady state, stays
 near there for a while, then pushes :math:`K_t` toward the terminal
@@ -684,17 +677,7 @@ The following graphs compare optimal outcomes as we vary :math:`T`.
 
 .. code-block:: python3
 
-    T_list = (150, 75, 50, 25)
-
-    fix, axes = plt.subplots(1, 3, figsize=(13, 3))
-
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_init
-        paths = bisection_method(c, k, γ, δ, β, α, A)
-        plot_paths(paths, ss=k_ss, axes=axes)
+    plot_paths(pp, 0.3, k_ss/3, [150, 75, 50, 25], k_ss=k_ss);
 
 The following calculation indicates that when  :math:`T` is very large,
 the optimal capital stock is  close to
@@ -702,17 +685,7 @@ its steady state value most of the time.
 
 .. code-block:: python3
 
-    T_list = (250, 150, 50, 25)
-
-    fix, axes = plt.subplots(1, 3, figsize=(13, 3))
-
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_init
-        paths = bisection_method(c, k, γ, δ, β, α, A)
-        plot_paths(paths, ss=k_ss, axes=axes)
+    plot_paths(pp, 0.3, k_ss/3, [250, 150, 50, 25], k_ss=k_ss);
 
 Different colors in the above graphs are associated
 different horizons :math:`T`.
@@ -736,68 +709,32 @@ Let's calculate the saving rate.
 .. code-block:: python3
 
     @njit
-    def S(K):
-        '''Aggregate savings'''
-        T = len(K) - 2
-        S = np.zeros(T+1)
-        for t in range(T+1):
-            S[t] = K[t+1] - (1 - δ) * K[t]
-        return S
+    def saving_rate(pp, c_path, k_path):
+        'Given paths of c and k, computes the path of saving rate.'
+        production = pp.f(k_path[:-1])
 
-    @njit
-    def s(K):
-        '''Savings rate'''
-        T = len(K) - 2
-        Y = f(A, K, α)
-        Y = Y[0:T+1]
-        s = S(K) / Y
-        return s
+        return (production - c_path) / production
 
-    def plot_savings(paths, c_ss=None, k_ss=None, s_ss=None, axes=None):
+.. code-block:: python3
 
-        T = len(paths[0])
-        k_star = paths[1]
-        savings_path = s(k_star)
-        new_paths = (paths[0], paths[1], savings_path)
+    def plot_saving_rate(pp, c0, k0, T_arr, k_ter=0, k_ss=None, s_ss=None):
 
-        if axes is None:
-            fix, axes = plt.subplots(1, 3, figsize=(13, 3))
+        fix, axs = plt.subplots(2, 2, figsize=(12, 9))
 
-        ylabels = ['$c_t$', '$k_t$', '$s_t$']
-        titles = ['Consumption', 'Capital', 'Savings Rate']
+        c_paths, k_paths = plot_paths(pp, c0, k0, T_arr, k_ter=k_ter, k_ss=k_ss, axs=axs.flatten())
 
-        for path, y, title, ax in zip(new_paths, ylabels, titles, axes):
-            ax.plot(path)
-            ax.set(ylabel=y, title=title, xlabel='t')
+        for i, T in enumerate(T_arr):
+            s_path = saving_rate(pp, c_paths[i], k_paths[i])
+            axs[1, 1].plot(s_path)
 
-        # Plot steady state value of consumption
-        if c_ss is not None:
-            axes[0].axhline(c_ss, c='k', ls='--', lw=1)
+        axs[1, 1].set(xlabel='t', ylabel='$s_t$', title='Saving rate')
 
-        # Plot steady state value of capital
-        if k_ss is not None:
-            axes[1].axhline(k_ss, c='k', ls='--', lw=1)
-
-        # Plot steady state value of savings
         if s_ss is not None:
-            axes[2].axhline(s_ss, c='k', ls='--', lw=1)
+            axs[1, 1].hlines(s_ss, 0, np.max(T_arr), linestyle='--')
 
-        axes[1].axvline(T, c='k', ls='--', lw=1)
-        axes[1].scatter(T, k_star[-1], s=80)
-        plt.tight_layout()
+.. code-block:: python3
 
-    T_list = (250, 150, 75, 50)
-
-    fix, axes = plt.subplots(1, 3, figsize=(13, 3))
-
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_init
-        paths = bisection_method(c, k, γ, δ, β, α, A)
-        plot_savings(paths, k_ss=k_ss, axes=axes)
-
+    plot_saving_rate(pp, 0.3, k_ss/3, [250, 150, 75, 50], k_ss=k_ss)
 
 The Limiting Economy
 --------------------------
@@ -839,19 +776,10 @@ state.
 
 .. code-block:: python3
 
-    T = 130
+    # steady state of saving rate
+    s_ss = pp.δ * k_ss / pp.f(k_ss)
 
-    # Steady states
-    S_ss = δ * k_ss
-    c_ss = f(A, k_ss, α) - S_ss
-    s_ss = S_ss / f(A, k_ss, α)
-
-    c = np.zeros(T+1)
-    k = np.zeros(T+2)
-    c[0] = 0.3
-    k[0] = k_ss / 3         # Start below steady state
-    paths = bisection_method(c, k, γ, δ, β, α, A, terminal=k_ss)
-    plot_savings(paths, k_ss=k_ss, s_ss=s_ss, c_ss=c_ss)
+    plot_saving_rate(pp, 0.3, k_ss/3, [130], k_ter=k_ss, k_ss=k_ss, s_ss=s_ss)
 
 Since :math:`K_0<\bar K`, :math:`f'(K_0)>\rho +\delta`.
 
@@ -877,14 +805,7 @@ Solution
 
 .. code-block:: python3
 
-    T = 130
-
-    c = np.zeros(T+1)
-    k = np.zeros(T+2)
-    c[0] = 0.3
-    k[0] = k_ss * 1.5   # Start above steady state
-    paths = bisection_method(c, k, γ, δ, β, α, A, terminal=k_ss)
-    plot_savings(paths, k_ss=k_ss, s_ss=s_ss, c_ss=c_ss)
+    plot_saving_rate(pp, 0.3, k_ss*1.5, [130], k_ter=k_ss, k_ss=k_ss, s_ss=s_ss)
 
 Concluding Remarks
 ========================
