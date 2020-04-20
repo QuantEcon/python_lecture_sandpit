@@ -14,7 +14,7 @@ Cass-Koopmans Planning Problem
 Overview
 =========
 
-This lecture and the following one XXXX describe a model that Tjalling Koopmans :cite:`Koopmans`
+This lecture and in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>` describe a model that Tjalling Koopmans :cite:`Koopmans`
 and David Cass :cite:`Cass` used to analyze optimal growth.
 
 The model can be viewed as an extension of the model of Robert Solow
@@ -24,7 +24,7 @@ but adapted to make the savings rate the outcome of an optimal choice.
 (Solow assumed a constant saving rate determined outside the model).
 
 
-We describe two versions of the model, one in this lecture and the other in XXXX
+We describe two versions of the model, one in this lecture and the other in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>`.
 
 Together, the two lectures  illustrate what is, in fact, a
 more general connection between a **planned economy** and an economy
@@ -40,7 +40,7 @@ The lecture uses important ideas including
    to initial and terminal conditions.
 
 -  A **turnpike** property that describes optimal paths for
-   long-but-finite horizon economies.
+   long but finite-horizon economies.
 
 Let's start with some standard imports:
 
@@ -51,7 +51,7 @@ Let's start with some standard imports:
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-The Growth Model
+The Model
 ==================
 
 Time is discrete and takes values :math:`t = 0, 1 , \ldots, T` where :math:`T` is  finite.
@@ -126,7 +126,7 @@ A feasible allocation :math:`\vec C, \vec K` satisfies
 where :math:`\delta \in (0,1)` is a depreciation rate of capital.
 
 Planning Problem
-------------------
+=================
 
 A planner chooses an allocation :math:`\{\vec{C},\vec{K}\}` to
 maximize :eq:`utility-functional` subject to :eq:`allocation`.
@@ -148,6 +148,21 @@ and then pose the following min-max problem:
   :label: min-max-prob
 
   \min_{\vec{\mu}} \max_{\vec{C},\vec{K}} \mathcal{L}(\vec{C},\vec{K},\vec{\mu})
+
+
+-  **Extremization** means
+   maximization with respect to :math:`\vec C, \vec K` and
+   minimization with respect to :math:`\vec \mu`). 
+
+ 
+-  Our problem satisfies
+   conditions that assure that required second-order
+   conditions are satisfied at an allocation that satisfies the
+   first-order conditions that we are about to compute.  
+
+Before computing first-order conditions, we present some handy formulas that we'll take advantage of. 
+
+
 
 Useful Properties of Linearly Homogeneous Production Function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -206,19 +221,7 @@ and the marginal product of labor
 Back to Solving the Problem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To solve the Lagrangian extremization problem, we compute first
-derivatives of the Lagrangian and set them equal to 0.
-
--  **Note:** Our problem satisfies
-   conditions that assure that required second-order
-   conditions are satisfied at an allocation that satisfies the
-   first-order conditions that we are about to compute.
-
--  **Note:**  **Extremization** means
-   maximization with respect to :math:`\vec C, \vec K` and
-   minimization with respect to :math:`\vec \mu`). 
-
-Here are the **first order necessary conditions** for extremization:
+We now compute **first order necessary conditions** for extremization of the Lagrangian:
 
 
 .. math::
@@ -286,16 +289,8 @@ equation**
   (1-\delta)]\right)^{1/\gamma} \notag\\= C_t\left(\beta [f'(K_{t+1}) +
   (1-\delta)]\right)^{1/\gamma} \end{aligned}
 
-Zejin: change
-
-We now write Python code for some 
-variables and functions that we'll want in order to solve the planning
-problem.
-
-to
-
-In below, we define a ``jitclass`` that stores all the parameters and functions
-we need to construct a planned economy.
+Below we define a ``jitclass`` that stores parameters and functions
+that define our economy.
 
 .. code-block:: python3
 
@@ -373,16 +368,16 @@ we need to construct a planned economy.
 
             return k_next, c_next
 
-Zejin: We can construct a planned economy by following:
+We can construct an economy with the Python code:
 
 .. code-block:: python3
 
     pp = PlanningProblem()
 
-Shooting Method
-----------------
+Shooting Algorithm
+===================
 
-We shall use a **shooting method** to compute an optimal allocation
+We use  **shooting** to compute an optimal allocation
 :math:`\vec C, \vec K` and an associated Lagrange multiplier sequence
 :math:`\vec \mu`.
 
@@ -597,7 +592,7 @@ Now we can solve the model and plot the paths of consumption, capital, and Lagra
 
 
 Setting Initial Capital to Steady State Capital
-----------------------------------------------------
+================================================
 
 When  :math:`T \rightarrow +\infty`, the optimal allocation converges to
 steady state values of :math:`C_t` and :math:`K_t`.
@@ -608,7 +603,7 @@ to the :math:`\lim_{T \rightarrow + \infty } K_t`, which we'll call  steady stat
 In a steady state :math:`K_{t+1} = K_t=\bar{K}` for all very
 large :math:`t`.
 
-Evalauating the feasibility constraint :eq:`allocation` at :math \bar K` gives
+Evalauating the feasibility constraint :eq:`allocation` at :math:`\bar K` gives
 
 .. math::
     :label: feasibility-constraint
@@ -679,6 +674,9 @@ The following graphs compare optimal outcomes as we vary :math:`T`.
 
     plot_paths(pp, 0.3, k_ss/3, [150, 75, 50, 25], k_ss=k_ss);
 
+The Turnpike Property 
+======================
+
 The following calculation indicates that when  :math:`T` is very large,
 the optimal capital stock is  close to
 its steady state value most of the time.
@@ -736,8 +734,8 @@ Let's calculate the saving rate.
 
     plot_saving_rate(pp, 0.3, k_ss/3, [250, 150, 75, 50], k_ss=k_ss)
 
-The Limiting Economy
---------------------------
+A Limiting Economy
+===================
 
 We now consider an economy in which :math:`T = +\infty`.
 
@@ -810,7 +808,7 @@ Solution
 Concluding Remarks
 ========================
 
-In this lecture  XXXX,  we study a decentralized version of an economy with exactly the same
+In :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>`,  we study a decentralized version of an economy with exactly the same
 technology and preference structure as deployed here.
 
 In that lecture, we replace the  planner of this lecture with Adam Smith's **invisible hand**
@@ -822,5 +820,5 @@ Market prices must adjust to reconcile distinct decisions that are made independ
 by a representative household and a representative firm.
 
 The relationship between a command economy like the one studied in this lecture and a market economy like that
-studied in XXXX is a foundational topic in general equilibrium theory and welfare economics. 
+studied in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>` is a foundational topic in general equilibrium theory and welfare economics. 
 
