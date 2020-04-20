@@ -67,10 +67,10 @@ Let's start with some standard imports:
 
 .. code-block:: ipython
 
-  from numba import njit
-  import numpy as np
-  import matplotlib.pyplot as plt
-  %matplotlib inline
+    from numba import njit, jitclass, float64
+    import numpy as np
+    import matplotlib.pyplot as plt
+    %matplotlib inline
 
 Review of Cass-Koopmans Model
 ==============================
@@ -624,159 +624,155 @@ problem.
 
 We bring in Python code that lecture XXXX used to solve the planning problem
 
-First some preliminary code for 
-variables and functions that we'll want in order to solve the planning
-problem.
+First let's define a ``jitclass`` which stores all the parameters and functions
+we need to construct a planned economy.
+
+.. code-block:: python3
+
+    planning_data = [
+        ('γ', float64),    # Coefficient of relative risk aversion
+        ('β', float64),    # Discount factor
+        ('δ', float64),    # Depreciation rate on capital
+        ('α', float64),    # Return to capital per capita
+        ('A', float64)     # Technology
+    ]
+
+.. code-block:: python3
+
+    @jitclass(planning_data)
+    class PlanningProblem():
+
+        def __init__(self, γ=2, β=0.95, δ=0.02, α=0.33, A=1):
+
+            self.γ, self.β = γ, β
+            self.δ, self.α, self.A = δ, α, A
+
+        def u(self, c):
+            '''
+            Utility function
+            ASIDE: If you have a utility function that is hard to solve by hand
+            you can use automatic or symbolic differentiation
+            See https://github.com/HIPS/autograd
+            '''
+            γ = self.γ
+
+            return c ** (1 - γ) / (1 - γ) if γ!= 1 else np.log(c)
+
+        def u_prime(self, c):
+            'Derivative of utility'
+            γ = self.γ
+
+            return c ** (-γ)
+
+        def u_prime_inv(self, c):
+            'Inverse of derivative of utility'
+            γ = self.γ
+
+            return c ** (-1 / γ)
+
+        def f(self, k):
+            'Production function'
+            α, A = self.α, self.A
+
+            return A * k ** α
+
+        def f_prime(self, k):
+            'Derivative of production function'
+            α, A = self.α, self.A
+
+            return α * A * k ** (α - 1)
+
+        def f_prime_inv(self, k):
+            'Inverse of derivative of production function'
+            α, A = self.α, self.A
+
+            return (k / (A * α)) ** (1 / (α - 1))
+
+        def next_k_c(self, k, c):
+            ''''
+            Given the current capital Kt and an arbitrary feasible
+            consumption choice Ct, computes Kt+1 by state transition law
+            and optimal Ct+1 by Euler equation.
+            '''
+            β, δ = self.β, self.δ
+            u_prime, u_prime_inv = self.u_prime, self.u_prime_inv
+            f, f_prime = self.f, self.f_prime
+
+            k_next = f(k) + (1 - δ) * k - c
+            c_next = u_prime_inv(u_prime(c) / (β * (f_prime(k_next) + (1 - δ))))
+
+            return k_next, c_next
 
 .. code-block:: python3
 
     @njit
-    def u(c, γ):
+    def shooting(pp, c0, k0, T=10):
         '''
-        Utility function
-        ASIDE: If you have a utility function that is hard to solve by hand
-        you can use automatic or symbolic  differentiation
-        See https://github.com/HIPS/autograd
+        Given the initial condition of capital k0 and an initial guess
+        of consumption c0, computes the whole paths of c and k
+        using the state transition law and Euler equation for T periods.
         '''
-        if γ == 1:
-            # If γ = 1 we can show via L'hopital's Rule that the utility
-            # becomes log
-            return np.log(c)
-        else:
-            return c**(1 - γ) / (1 - γ)
+        if c0 > pp.f(k0):
+            print("initial consumption is not feasible")
 
-    @njit
-    def u_prime(c, γ):
-        '''Derivative of utility'''
-        if γ == 1:
-            return 1 / c
-        else:
-            return c**(-γ)
+            return None
 
-    @njit
-    def u_prime_inv(c, γ):
-        '''Inverse utility'''
-        if γ == 1:
-            return c
-        else:
-            return c**(-1 / γ)
+        # initialize vectors of c and k
+        c_vec = np.empty(T+1)
+        k_vec = np.empty(T+2)
 
-    @njit
-    def f(A, k, α):
-        '''Production function'''
-        return A * k**α
-
-    @njit
-    def f_prime(A, k, α):
-        '''Derivative of production function'''
-        return α * A * k**(α - 1)
-
-    @njit
-    def f_prime_inv(A, k, α):
-        return (k / (A * α))**(1 / (α - 1))
-
-
-
-
-.. code-block:: python3
-
-    # Parameters
-    γ = 2
-    δ = 0.02
-    β = 0.95
-    α = 0.33
-    A = 1
-
-    # Initial guesses
-    T = 10
-    c = np.zeros(T+1)  # T periods of consumption initialized to 0
-    # T periods of capital initialized to 0 (T+2 to include t+1 variable as well)
-    k = np.zeros(T+2)
-    k[0] = 0.3  # Initial k
-    c[0] = 0.2  # Guess of c_0
-
-    @njit
-    def shooting_method(c, # Initial consumption
-                        k,   # Initial capital
-                        γ,   # Coefficient of relative risk aversion
-                        δ,   # Depreciation rate on capital# Depreciation rate
-                        β,   # Discount factor
-                        α,   # Return to capital per capita
-                        A):  # Technology
-
-        T = len(c) - 1
+        c_vec[0] = c0
+        k_vec[0] = k0
 
         for t in range(T):
-            # Equation 1 with inequality
-            k[t+1] = f(A=A, k=k[t], α=α) + (1 - δ) * k[t] - c[t]
-            if k[t+1] < 0:   # Ensure nonnegativity
-                k[t+1] = 0
+            k_vec[t+1], c_vec[t+1] = pp.next_k_c(k_vec[t], c_vec[t])
 
-          # Equation 2: We keep in the general form to show how we would
-          # solve if we didn't want to do any simplification
+        k_vec[T+1] = pp.f(k_vec[T]) + (1 - pp.δ) * k_vec[T] - c_vec[T]
 
-            if β * (f_prime(A=A, k=k[t+1], α=α) + (1 - δ)) == np.inf:
-                # This only occurs if k[t+1] is 0, in which case, we won't
-                # produce anything next period, so consumption will have to be 0
-                c[t+1] = 0
-            else:
-                c[t+1] = u_prime_inv(u_prime(c=c[t], γ=γ) \
-                / (β * (f_prime(A=A, k=k[t+1], α=α) + (1 - δ))), γ=γ)
-
-        # Terminal condition calculation
-        k[T+1] = f(A=A, k=k[T], α=α) + (1 - δ) * k[T] - c[T]
-
-        return c, k
-
+        return c_vec, k_vec
 
 .. code-block:: python3
 
     @njit
-    def bisection_method(c,
-                         k,
-                         γ,              # Coefficient of relative risk aversion
-                         δ,              # Depreciation rate
-                         β,              # Discount factor
-                         α,              # Return to capital per capita
-                         A,              # Technology
-                         tol=1e-4,
-                         max_iter=1e4,
-                         terminal=0):    # Value we are shooting towards
+    def bisection(pp, c0, k0, T=10, tol=1e-4, max_iter=500, k_ter=0, verbose=True):
 
-        T = len(c) - 1
-        i = 1                            # Initial iteration
-        c_high = f(k=k[0], α=α, A=A)     # Initial high value of c
-        c_low = 0                        # Initial low value of c
+        # initial boundaries for guess c0
+        c0_upper = pp.f(k0)
+        c0_lower = 0
 
-        path_c, path_k = shooting_method(c, k, γ, δ, β, α, A)
+        i = 0
+        while True:
+            c_vec, k_vec = shooting(pp, c0, k0, T)
+            error = k_vec[-1] - k_ter
 
-        while (np.abs((path_k[T+1] - terminal)) > tol or path_k[T] == terminal) \
-            and i < max_iter:
+            # check if the terminal condition is satisfied
+            if np.abs(error) < tol:
+                if verbose:
+                    print('Converged successfully on iteration ', i+1)
+                return c_vec, k_vec
 
-            if path_k[T+1] - terminal > tol:
-                # If assets are too high the c[0] we chose is now a lower bound
-                # on possible values of c[0]
-                c_low = c[0]
-            elif path_k[T+1] - terminal < -tol:
-                # If assets fell too quickly, the c[0] we chose is now an upper
-                # bound on possible values of c[0]
-                c_high=c[0]
-            elif path_k[T] == terminal:
-                # If assets fell  too quickly, the c[0] we chose is now an upper
-                # bound on possible values of c[0]
-                c_high=c[0]
-
-            c[0] = (c_high + c_low) / 2  # This is the bisection part
-            path_c, path_k = shooting_method(c, k, γ, δ, β, α, A)
             i += 1
+            if i == max_iter:
+                if verbose:
+                    print('Convergence failed.')
+                return c_vec, k_vec
 
-        if np.abs(path_k[T+1] - terminal) < tol and path_k[T] != terminal:
-            print('Converged successfully on iteration', i-1)
-        else:
-            print('Failed to converge and hit maximum iteration')
+            # if iteration continues, updates boundaries and guess of c0
+            if error > 0:
+                c0_lower = c0
+            else:
+                c0_upper = c0
 
-        μ = u_prime(c=path_c, γ=γ)
-        return path_c, path_k, μ
+            c0 = (c0_lower + c0_upper) / 2
+
+.. code-block:: python3
+
+    pp = PlanningProblem()
+
+    # Steady states
+    ρ = 1 / pp.β - 1
+    k_ss = pp.f_prime_inv(ρ+pp.δ)
+    c_ss = pp.f(k_ss) - pp.δ * k_ss
 
 
 The above code from lecture XXXX let's us compute the optimal allocation for the planning problem that turns
@@ -787,81 +783,52 @@ Now  we're ready to bring in Python code that we require to compute additional o
 .. code-block:: python3
 
     @njit
-    def q_func(β, c, γ):
+    def q(pp, c_path):
         # Here we choose numeraire to be u'(c_0) -- this is q^(t_0)_t
-        T = len(c) - 2
-        q = np.zeros(T+1)
-        q[0] = 1
-        for t in range(1, T+2):
-            q[t] = β**t * u_prime(c[t], γ)
-        return q
+        T = len(c_path) - 1
+        q_path = np.ones(T+1)
+        q_path[0] = 1
+        for t in range(1, T+1):
+            q_path[t] = pp.β ** t * pp.u_prime(c_path[t])
+        return q_path
 
     @njit
-    def w_func(A, k, α):
-        w = f(A, k, α) - k * f_prime(A, k, α)
-        return w
+    def w(pp, k_path):
+        w_path = pp.f(k_path) - k_path * pp.f_prime(k_path)
+        return w_path
 
     @njit
-    def η_func(A, k, α):
-        η = f_prime(A, k, α)
-        return η
-
-
-.. code-block:: python3
-
-    ρ = 1 / β - 1
-    k_ss = f_prime_inv(k=ρ+δ, A=A, α=α)
-
-    print(f'steady state for capital is: {k_ss}')
-
-
-.. code-block:: python3
-
-    T = 130
-
-    # Steady states
-    S_ss = δ * k_ss
-    c_ss = f(A, k_ss, α) - S_ss
-    s_ss = S_ss / f(A, k_ss, α)
-
-    c = np.zeros(T+1)
-    k = np.zeros(T+2)
-    c[0] = 0.3
-    k[0] = k_ss / 3         # Start below steady state
-    paths = bisection_method(c, k, γ, δ, β, α, A, terminal=k_ss)
-    
+    def η(pp, k_path):
+        η_path = pp.f_prime(k_path)
+        return η_path
 
 Now we calculate and plot for each :math:`T`
 
 .. code-block:: python3
 
-    T_list = (250, 150, 75, 50)
+    T_arr = [250, 150, 75, 50]
 
-    fix, axes = plt.subplots(2, 3, figsize=(13, 6))
+    fix, axs = plt.subplots(2, 3, figsize=(13, 6))
     titles = ['Arrow-Hicks Prices', 'Labor Rental Rate', 'Capital Rental Rate',
               'Consumption', 'Capital', 'Lagrange Multiplier']
     ylabels = ['$q_t^0$', '$w_t$', '$\eta_t$', '$c_t$', '$k_t$', '$\mu_t$']
 
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_ss / 3
-        c, k, μ = bisection_method(c, k, γ, δ, β, α, A)
+    for T in T_arr:
+        c_path, k_path = bisection(pp, 0.3, k_ss/3, T, verbose=False)
+        μ_path = pp.u_prime(c_path)
 
-        q = q_func(β, c, γ)
-        w = w_func(β, k, α)[:-1]
-        η = η_func(A, k, α)[:-1]
-        plots = [q, w, η, c, k, μ]
+        q_path = q(pp, c_path)
+        w_path = w(pp, k_path)[:-1]
+        η_path = η(pp, k_path)[:-1]
+        paths = [q_path, w_path, η_path, c_path, k_path, μ_path]
 
-        for ax, plot, title, y in zip(axes.flatten(), plots, titles, ylabels):
-            ax.plot(plot)
-            ax.set(title=title, ylabel=y, xlabel='t')
-            if title is 'Capital':
+        for i, ax in enumerate(axs.flatten()):
+            ax.plot(paths[i])
+            ax.set(title=titles[i], ylabel=ylabels[i], xlabel='t')
+            if titles[i] is 'Capital':
                 ax.axhline(k_ss, lw=1, ls='--', c='k')
-            if title is 'Consumption':
+            if titles[i] is 'Consumption':
                 ax.axhline(c_ss, lw=1, ls='--', c='k')
-
 
     plt.tight_layout()
     plt.show()
@@ -878,32 +845,30 @@ We plot the results for :math:`T=150`
 
 .. code-block:: python3
 
-    γ_list = (1.1, 4, 6, 8)
     T = 150
+    γ_arr = [1.1, 4, 6, 8]
 
-    fix, axes = plt.subplots(2, 3, figsize=(13, 6))
+    fix, axs = plt.subplots(2, 3, figsize=(13, 6))
 
-    for γ in γ_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_ss / 3
-        c, k, μ = bisection_method(c, k, γ, δ, β, α, A)
+    for γ in γ_arr:
+        pp_γ = PlanningProblem(γ=γ)
+        c_path, k_path = bisection(pp_γ, 0.3, k_ss/3, T, verbose=False)
+        μ_path = pp_γ.u_prime(c_path)
 
-        q = q_func(β, c, γ)
-        w = w_func(β, k, α)[:-1]
-        η = η_func(A, k, α)[:-1]
-        plots = [q, w, η, c, k, μ]
+        q_path = q(pp_γ, c_path)
+        w_path = w(pp_γ, k_path)[:-1]
+        η_path = η(pp_γ, k_path)[:-1]
+        paths = [q_path, w_path, η_path, c_path, k_path, μ_path]
 
-        for ax, plot, title, y in zip(axes.flatten(), plots, titles, ylabels):
-            ax.plot(plot, label=f'$\gamma = {γ}$')
-            ax.set(title=title, ylabel=y, xlabel='t')
-            if title is 'Capital':
+        for i, ax in enumerate(axs.flatten()):
+            ax.plot(paths[i], label=f'$\gamma = {γ}$')
+            ax.set(title=titles[i], ylabel=ylabels[i], xlabel='t')
+            if titles[i] is 'Capital':
                 ax.axhline(k_ss, lw=1, ls='--', c='k')
-            if title is 'Consumption':
+            if titles[i] is 'Consumption':
                 ax.axhline(c_ss, lw=1, ls='--', c='k')
 
-    axes[0, 0].legend()
+    axs[0, 0].legend()
     plt.tight_layout()
     plt.show()
 
@@ -942,78 +907,55 @@ A generic Hicks-Arrow price for any base-year :math:`t_0\leq t`
 We redefine our function for :math:`q` to allow arbitrary base
 years, and define a new function for :math:`r`, then plot both.
 
-First, we plot when :math:`t_0=0` as before, for different values of
+Zejin: First, we plot when :math:`t_0=0` as before, for different values of
 :math:`T`, with :math:`K_0` below the steady state
 
 .. code-block:: python3
 
     @njit
-    def q_func(t_0, β, c, γ):
-        # Here we choose numeraire to be u'(c_0) -- this is q^(t_0)_t
-        T = len(c)
-        q = np.zeros(T+1-t_0)
-        q[0] = 1
-        for t in range(t_0+1, T):
-            q[t-t_0] = β**(t - t_0) * u_prime(c[t], γ) / u_prime(c[t_0], γ)
-        return q
+    def q_generic(pp, t0, c_path):
+        # simplify notations
+        β = pp.β
+        u_prime = pp.u_prime
+
+        T = len(c_path) - 1
+        q_path = np.zeros(T+1-t0)
+        q_path[0] = 1
+        for t in range(t0+1, T+1):
+            q_path[t-t0] = β ** (t-t0) * u_prime(c_path[t]) / u_prime(c_path[t0])
+        return q_path
 
     @njit
-    def r_func(t_0, β, c, γ):
+    def r(pp, t0, q_path):
         '''Yield to maturity'''
-        T = len(c) - 1
-        r = np.zeros(T+1-t_0)
-        for t in range(t_0+1, T+1):
-            r[t-t_0]= -np.log(q_func(t_0, β, c, γ)[t-t_0]) / (t - t_0)
-        return r
+        r_path = - np.log(q_path[1:]) / np.arange(1, len(q_path))
+        return r_path
 
-    t_0 = 0
-    T_list = [150, 75, 50]
-    γ = 2
-    titles = ['Hicks-Arrow Prices', 'Yields']
-    ylabels = ['$q_t^0$', '$r_t^0$']
+    def plot_yield_curves(pp, t0, c0, k0, T_arr):
 
-    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+        fig, axs = plt.subplots(1, 2, figsize=(10, 5))
 
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_ss / 3
-        c, k, μ = bisection_method(c, k, γ, δ, β, α, A)
-        q = q_func(t_0, β, c, γ)
-        r = r_func(t_0, β, c, γ)
+        for T in T_arr:
+            c_path, k_path = bisection(pp, c0, k0, T, verbose=False)
+            q_path = q_generic(pp, t0, c_path)
+            r_path = r(pp, t0, q_path)
 
-        for ax, plot, title, y in zip(axes, (q, r), titles, ylabels):
-            ax.plot(plot)
-            ax.set(title=title, ylabel=y, xlabel='t')
+            axs[0].plot(range(t0, T+1), q_path)
+            axs[0].set(xlabel='t', ylabel='$q_t^0$', title='Hicks-Arrow Prices')
 
-    plt.tight_layout()
-    plt.show()
+            axs[1].plot(range(t0+1, T+1), r_path)
+            axs[1].set(xlabel='t', ylabel='$r_t^0$', title='Yields')
+
+.. code-block:: python3
+
+    T_arr = [150, 75, 50]
+    plot_yield_curves(pp, 0, 0.3, k_ss/3, T_arr)
 
 Now we plot when :math:`t_0=20`
 
 .. code-block:: python3
 
-    t_0 = 20
-
-    fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-
-    for T in T_list:
-        c = np.zeros(T+1)
-        k = np.zeros(T+2)
-        c[0] = 0.3
-        k[0] = k_ss / 3
-        c, k, μ = bisection_method(c, k, γ, δ, β, α, A)
-        q = q_func(t_0, β, c, γ)
-        r = r_func(t_0, β, c, γ)
-
-        for ax, plot, title, y in zip(axes, (q, r), titles, ylabels):
-            ax.plot(plot)
-            ax.set(title=title, ylabel=y, xlabel='t')
-
-    axes[1].set_title(f'Yields at $t_0 = {t_0}$')
-    plt.tight_layout()
-    plt.show()
+    plot_yield_curves(pp, 20, 0.3, k_ss/3, T_arr)
 
 We shall have more to say about the term structure of interest rates
 in a later lecture on the topic.
