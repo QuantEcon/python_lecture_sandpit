@@ -19,7 +19,7 @@ and David Cass :cite:`Cass` used to analyze optimal growth.
 
 The model can be viewed as an extension of the model of Robert Solow
 described in `an earlier lecture <https://lectures.quantecon.org/py/python_oop.html>`__
-but adapted to make the savings rate the outcome of an optimal choice.
+but adapted to make the saving rate the outcome of an optimal choice.
 
 (Solow assumed a constant saving rate determined outside the model).
 
@@ -27,7 +27,7 @@ but adapted to make the savings rate the outcome of an optimal choice.
 We describe two versions of the model, one in this lecture and the other in :doc:`Cass-Koopmans Competitive Equilibrium <cass_koopmans_2>`.
 
 Together, the two lectures  illustrate what is, in fact, a
-more general connection between a **planned economy** and an economy
+more general connection between a **planned economy** and a decentralized economy
 organized as a **competitive equilibrium**.
 
 This lecture is devoted to the planned economy version.  
@@ -116,7 +116,7 @@ There is an economy-wide production function
 
 with :math:`0 < \alpha<1`, :math:`A > 0`.
 
-A feasible allocation :math:`\vec C, \vec K` satisfies
+A feasible allocation :math:`\vec{C}, \vec{K}` satisfies
 
 .. math::
   :label: allocation
@@ -138,7 +138,7 @@ To find an optimal allocation, form a Lagrangian
 
 .. math::
 
-  \mathcal{L}(\vec{C},\vec{K},\vec{\mu}) =
+  \mathcal{L}(\vec{C} ,\vec{K} ,\vec{\mu} ) =
   \sum_{t=0}^T \beta^t\left\{ u(C_t)+ \mu_t
   \left(F(K_t,1) + (1-\delta) K_t- C_t - K_{t+1} \right)\right\}
 
@@ -147,12 +147,12 @@ and then pose the following min-max problem:
 .. math::
   :label: min-max-prob
 
-  \min_{\vec{\mu}} \max_{\vec{C},\vec{K}} \mathcal{L}(\vec{C},\vec{K},\vec{\mu})
+  \min_{\vec{\mu}} \max_{\vec{C},\vec{K}} \mathcal{L}(\vec{C},\vec{K},\vec{\mu} )
 
 
 -  **Extremization** means
-   maximization with respect to :math:`\vec C, \vec K` and
-   minimization with respect to :math:`\vec \mu`). 
+   maximization with respect to :math:`\vec{C}, \vec{K}` and
+   minimization with respect to :math:`\vec{\mu}`. 
 
  
 -  Our problem satisfies
@@ -160,7 +160,7 @@ and then pose the following min-max problem:
    conditions are satisfied at an allocation that satisfies the
    first-order conditions that we are about to compute.  
 
-Before computing first-order conditions, we present some handy formulas that we'll take advantage of. 
+Before computing first-order conditions, we present some handy formulas. 
 
 
 
@@ -218,8 +218,8 @@ and the marginal product of labor
   \end{aligned}
 
 
-Back to Solving the Problem
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+First-order necessary conditions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We now compute **first order necessary conditions** for extremization of the Lagrangian:
 
@@ -378,8 +378,8 @@ Shooting Algorithm
 ===================
 
 We use  **shooting** to compute an optimal allocation
-:math:`\vec C, \vec K` and an associated Lagrange multiplier sequence
-:math:`\vec \mu`.
+:math:`\vec{C}, \vec{K}` and an associated Lagrange multiplier sequence
+:math:`\vec{\mu}`.
 
 The first-order necessary conditions 
 :eq:`constraint1`, :eq:`constraint2`, and
@@ -403,25 +403,28 @@ If we did, our job would be easy:
    :eq:`constraint2`.
 
 -  We could continue in this way to compute the remaining elements of
-   :math:`\vec C, \vec K, \vec \mu`.
+   :math:`\vec{C}, \vec{K}, \vec{\mu}`.
 
 But we don't have an initial condition for :math:`\mu_0`, so this
 won't work.
 
-But a simple modification called the **shooting algorithm** 
-works.
+Indeed, part of our task is to compute the optimal value of :math:\mu_0`.
+
+To compute :math:`\mu_0` and the other objects we want, a  simple modification of the above procedure will work.
+
+It is  called the **shooting algorithm**. 
 
 It is  an instance of a **guess and verify**
-algorithm consisting of the following steps:
+algorithm that consists of the following steps:
 
--  Guess a value for the initial Lagrange multiplier :math:`\mu_0`.
+-  Guess an initial Lagrange multiplier :math:`\mu_0`.
 
 -  Apply the **simple algorithm** described above.
 
--  Compute the implied value of :math:`k_{T+1}` and check whether it
+-  Compute :math:`k_{T+1}` and check whether it
    equals zero.
 
--  If the implied :math:`K_{T+1} =0`, we have solved the problem.
+-  If  :math:`K_{T+1} =0`, we have solved the problem.
 
 -  If :math:`K_{T+1} > 0`, lower :math:`\mu_0` and try again.
 
@@ -485,7 +488,7 @@ We’ll start with an incorrect guess.
 
     plt.show()
 
-Evidently, our initial guess for :math:`\mu_0` is too high and makes
+Evidently, our initial guess for :math:`\mu_0` is too high, so
 initial consumption too low.
 
 We know this because we miss our :math:`K_{T+1}=0` target on the high
@@ -494,7 +497,7 @@ side.
 Now we automate things with a search-for-a-good :math:`\mu_0`
 algorithm that stops when we hit the target :math:`K_{t+1} = 0`.
 
-The search procedure is to use a **bisection method**.
+We use a **bisection method**.
 
 We make an initial guess for :math:`C_0` (we can eliminate
 :math:`\mu_0` because :math:`C_0` is an exact function of
@@ -503,20 +506,20 @@ We make an initial guess for :math:`C_0` (we can eliminate
 We know that the lowest :math:`C_0` can ever be is :math:`0` and the
 largest it can be is initial output :math:`f(K_0)`.
 
-We make a :math:`C_0` guess and shoot forward to :math:`T+1`.
+Guess :math:`C_0`  and shoot forward to :math:`T+1`.
 
-If the :math:`K_{T+1}>0`, we take it to be our new **lower** bound
+If :math:`K_{T+1}>0`, we take it to be our new **lower** bound
 on :math:`C_0`.
 
 If :math:`K_{T+1}<0`, we take  it to be our new **upper** bound.
 
-Then we make a new guess for :math:`C_0` that is  halfway between our new
+Make a new guess for :math:`C_0` that is  halfway between our new
 upper and lower bounds.
 
-We then shoot forward again, iterating on these steps until we converge.  
+Shoot forward again, iterating on these steps until we converge.  
 
-When :math:`K_{T+1}` gets close enough to 0 (within some error
-tolerance bounds), we stop and declare victory.
+When :math:`K_{T+1}` gets close enough to :math:`0` (i.e., within an error
+tolerance bounds), we stop.
 
 .. code-block:: python3
 
@@ -631,7 +634,7 @@ For the  production function :eq:`production-function` this becomes
 
 .. math:: \alpha \bar{K}^{\alpha-1} = \rho + \delta
 
-As an example, using :math:`\alpha= .33`,
+As an example, after setting :math:`\alpha= .33`,
 :math:`\rho = 1/\beta-1 =1/(19/20)-1 = 20/19-19/19 = 1/19`, :math:`\delta = 1/50`,
 we get
 
@@ -674,11 +677,11 @@ The following graphs compare optimal outcomes as we vary :math:`T`.
 
     plot_paths(pp, 0.3, k_ss/3, [150, 75, 50, 25], k_ss=k_ss);
 
-The Turnpike Property 
+A Turnpike Property 
 ======================
 
 The following calculation indicates that when  :math:`T` is very large,
-the optimal capital stock is  close to
+the optimal capital stock stays close to
 its steady state value most of the time.
 
 .. code-block:: python3
@@ -695,14 +698,14 @@ This pattern reflects a **turnpike** property of the steady state.
 
 A rule of thumb for the planner is
 
--  for whatever :math:`K_0` you start with, push :math:`K_t` toward
-   the steady state and stay there for as long as you can.
+-  from :math:`K_0`, push :math:`K_t` toward
+   the steady state and stay close to the steady state until time approaches :math:`T`.
 
 
 The planner accomplishes this by adjusting the saving rate :math:`\frac{f(K_t) - C_t}{f(K_t)}`
 over time.
 
-Let's calculate the saving rate.
+Let's calculate and  plot the saving rate.
 
 .. code-block:: python3
 
@@ -737,25 +740,24 @@ Let's calculate the saving rate.
 A Limiting Economy
 ===================
 
-We now consider an economy in which :math:`T = +\infty`.
+We want to set :math:`T = +\infty`.
 
 The appropriate thing to do is to replace terminal condition
 :eq:`constraint4` with
 
 .. math::
 
-  \lim_{T \rightarrow +\infty} \beta^T u'(C_T) K_{T+1} = 0
+  \lim_{T \rightarrow +\infty} \beta^T u'(C_T) K_{T+1} = 0 ,
 
 a condition that will be satisfied by a path that converges to an
 optimal steady state.
 
-We can approximate the optimal path from an arbitrary initial
+We can approximate the optimal path by starting from an arbitrary initial
 :math:`K_0` and shooting towards the optimal steady state
 :math:`K` at a large but finite :math:`T+1`.
 
-In the following code, we do this for a large :math:`T`; we shoot
-towards the **steady state** and plot consumption, capital and the
-savings rate.
+In the following code, we do this for a large :math:`T` and plot consumption, capital, and the
+saving rate.
 
 We know that in the steady state that the saving rate is constant
 and that :math:`\bar s= \frac{f(\bar K)-\bar C}{f(\bar K)}`.
@@ -786,17 +788,17 @@ saving rate.
 
 Note, :math:`f''(K)<0`, so as :math:`K` rises, :math:`f'(K)` declines.
 
-The planner slowly lowers the savings rate until reaching a steady
+The planner slowly lowers the saving rate until reaching a steady
 state in which :math:`f'(K)=\rho +\delta`.
 
 Exercise
 ---------
 
--  Plot the optimal consumption, capital, and savings paths when the
+-  Plot the optimal consumption, capital, and saving paths when the
    initial capital level begins at 1.5 times the steady state level
    as we shoot towards the steady state at :math:`T=130`.
 
--  Why does the savings rate respond like it does?
+-  Why does the saving rate respond as it does?
 
 Solution
 ----------

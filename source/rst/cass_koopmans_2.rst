@@ -56,10 +56,10 @@ The present lecture uses  additional  ideas including
   *  **socialism** in which a central planner commands the
      allocation of resources, and
 
-  *  **capitalism** (also known as **a free markets economy**) in
+  *  **capitalism** (also known as **a  market economy**) in
      which competitive equilibrium **prices** induce individual
      consumers and producers to choose a socially optimal allocation
-     as an unintended consequence of their completely selfish
+     as an unintended consequence of their selfish
      decisions
 
 
@@ -85,7 +85,7 @@ A single good can either be consumed or invested in physical capital.
 The consumption good is not durable and depreciates completely if not
 consumed immediately.
 
-The capital good is durable but depreciates each period at a constant rate.
+The capital good is durable but partially depreciates each period at a constant rate.
 
 We let :math:`C_t` be a nondurable consumption good at time t.
 
@@ -123,7 +123,7 @@ There is an economy-wide production function
 
 with :math:`0 < \alpha<1`, :math:`A > 0`.
 
-A feasible allocation :math:`\vec C, \vec K` satisfies
+A feasible allocation :math:`\vec{C}, \vec{K}` satisfies
 
 .. math::
   :label: allocation
@@ -135,7 +135,7 @@ where :math:`\delta \in (0,1)` is a depreciation rate of capital.
 Planning Problem
 ------------------
 
-In :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we studied a problem in which a planner chooses an allocation :math:`\{\vec{C},\vec{K}\}` to
+In this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we studied a problem in which a planner chooses an allocation :math:`\{\vec{C},\vec{K}\}` to
 maximize :eq:`utility-functional` subject to :eq:`allocation`.
 
 The allocation that solves the planning problem plays an important role in a competitive equilibrium as we shall see below.
@@ -148,7 +148,7 @@ Competitive Equilibrium
 We now study a decentralized version of the  economy.
 
 It shares  the same
-technology and preference structure as the planned economy studied in :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`.
+technology and preference structure as the planned economy studied in this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`.
 
 But now there is no planner.
 
@@ -189,10 +189,7 @@ household chooses for itself subject to a budget constraint
    household.
 
 -  The representative household and the representative firm are both
-   **price takers:**
-
-   -  they  believe that prices are not affected by their
-      choices
+   **price takers:** who believe that prices are not affected by their choices
 
 **Note:** We can think of there being a large number
 :math:`M` of identical representative consumers and :math:`M`
@@ -219,7 +216,7 @@ Prices
 
 
 There are  sequences of prices 
-:math:`\{w_t,\eta_t\}_{t=0}^T= \{\vec w, \vec \eta \}`
+:math:`\{w_t,\eta_t\}_{t=0}^T= \{\vec{w}, \vec{\eta} \}`
 where :math:`w_t` is a wage or rental rate for labor at time :math:`t` and
 :math:`eta_t` is a rental rate for capital at time :math:`t`.
 
@@ -329,7 +326,7 @@ If :math:`\frac{\partial \tilde k_t}{\partial \tilde k_t}< \eta_t`,
 the firm will set :math:`\tilde k_t` to zero, something that is not feasible.
 
 It is convenient to define
-:math:`\vec w_t =\{w_0, \dots,w_T\}`\ and :math:`\vec \eta_t = \{\eta_0, \dots, \eta_T\}`.
+:math:`\vec{w} =\{w_0, \dots,w_T\}`\ and :math:`\vec{\eta}= \{\eta_0, \dots, \eta_T\}`.
 
 Household Problem
 ===================
@@ -360,7 +357,7 @@ is the gap
 
 .. math:: e_t \equiv \left(c_t + (k_{t+1} -(1-\delta)k_t)\right)-(w_t 1 + \eta_t k_t)
 
-Let :math:`\vec c = \{c_0,\dots,c_T\}` and let :math:`\vec k = \{k_1,\dots,k_{T+1}\}`.
+Let :math:`\vec{c} = \{c_0,\dots,c_T\}` and let :math:`\vec{k} = \{k_1,\dots,k_{T+1}\}`.
 
 :math:`k_0` is given to the household.
 
@@ -380,7 +377,7 @@ or
 
 The household chooses an allocation to solve the constrained optimization problem:
 
-.. math:: \begin{aligned}& \max_{\vec c, \vec k}  \sum_{t=0}^T \beta^t u(c_t) \\ \text{subject to} \ \   & \sum_{t=0}^T q_t^0\left(c_t +\left(k_{t+1}-(1-\delta) k_t\right) -w_t -\eta_t k_t\right) \leq 0  \notag \end{aligned}
+.. math:: \begin{aligned}& \max_{\vec{c}, \vec{k} }  \sum_{t=0}^T \beta^t u(c_t) \\ \text{subject to} \ \   & \sum_{t=0}^T q_t^0\left(c_t +\left(k_{t+1}-(1-\delta) k_t\right) -w_t -\eta_t k_t\right) \leq 0  \notag \end{aligned}
 
 
 
@@ -389,10 +386,10 @@ Definitions
 ------------
 
 -  A **price system** is a sequence
-   :math:`\{q_t^0,\eta_t,w_t\}_{t=0}^T= \{\vec q, \vec \eta, \vec w\}`.
+   :math:`\{q_t^0,\eta_t,w_t\}_{t=0}^T= \{\vec{q}, \vec{\eta}, \vec{w}\}`.
 
 -  An **allocation** is a sequence
-   :math:`\{c_t,k_{t+1},n_t=1\}_{t=0}^T = \{\vec c, \vec k, \vec n =1\}`.
+   :math:`\{c_t,k_{t+1},n_t=1\}_{t=0}^T = \{\vec{c}, \vec{k}, \vec{n}\}`.
 
 -  A **competitive equilibrium** is a price system and an allocation
    for which
@@ -410,7 +407,7 @@ We compute a competitive equilibrium by using a **guess and
 verify** approach.
 
 -  We  **guess** equilibrium price sequences
-   :math:`\{\vec q, \vec \eta, \vec w\}`.
+   :math:`\{\vec{q}, \vec{\eta}, \vec{w}\}`.
 
 -  We then **verify** that at those prices, the household and
    the firm choose the same allocation.
@@ -418,8 +415,12 @@ verify** approach.
 Guess for Price System
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-In :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we  computed an allocation :math:`\{\vec C, \vec K, \vec 1\}`
+In this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`, we  computed an allocation :math:`\{\vec{C}, \vec{K}, \vec{N}\}`
 that solves the planning problem.
+
+(This allocation will constitute the **Big** :math:`K`  to be in the presence instance of the *Big** :math:`K` **, little** :math:`k` trick
+that we'll apply to  a competitive equilibrium in the spirit of `this lecture <https://lectures.quantecon.org/py/rational_expectations.html#>`__
+and  `this lecture <https://lectures.quantecon.org/py/dyn_stack.html#>`__.)
 
 We use that allocation to construct a guess for the equilibrium
 price system.
@@ -447,11 +448,11 @@ At these prices, let the capital chosen by the household be
 .. math::
     :label: eq-pr4
 
-    k^*_t(\vec q, \vec w, \vec \eta) , \quad t \geq 0
+    k^*_t(\vec {q}, \vec{w}, \vec{\eta)} , \quad t \geq 0
 
 and let the allocation chosen by the firm be
 
-.. math:: \tilde k^*_t(\vec q, \vec  w, \vec \eta), \quad t \geq 0
+.. math:: \tilde k^*_t(\vec{q}, \vec{w}, \vec{\eta}), \quad t \geq 0
 
 and so on.
 
@@ -782,7 +783,7 @@ the characterize an economy.
     c_ss = pp.f(k_ss) - pp.δ * k_ss
 
 
-The above code from :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>` lets us compute an optimal allocation for the planning problem that turns
+The above code from this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>` lets us compute an optimal allocation for the planning problem that turns
 out to be the allocation associated with a competitive equilibium.
 
 Now  we're ready to bring in Python code that we require to compute additional objects that appear in a competitive equilibrium.
@@ -891,12 +892,11 @@ Vice-versa for lower :math:`\gamma`.
 Yield Curves and Hicks-Arrow Prices 
 ==========================================
 
-We return to  Hicks-Arrow prices and  calculate how they are related to 
-implied **yields**  loans of alternative maturities.
+We return to  Hicks-Arrow prices and  calculate how they are related to  **yields**  on loans of alternative maturities.
 
-This will let us plot a **yield curve**.
+This will let us plot a **yield curve** that graphs   yields  on bonds of  maturities :math:`j=1, 2, \ldots` against :math:j=1,2, \ldots`. 
 
-The formulas are:
+The formulas we want are:
 
 A **yield to maturity** on a loan made at time :math:`t_0` that matures at time :math:`t > t_0`
 
