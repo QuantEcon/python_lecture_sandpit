@@ -92,7 +92,7 @@ We let :math:`C_t` be a nondurable consumption good at time t.
 Let :math:`K_t` be the stock of physical capital at time t.
 
 Let :math:`\vec{C}` = :math:`\{C_0,\dots, C_T\}` and
-:math:`\vec{K}` = :math:`\{K_1,\dots,K_{T+1}\}`.
+:math:`\vec{K}` = :math:`\{K_0,\dots,K_{T+1}\}`.
 
 A representative household is endowed with one unit of labor at each
 :math:`t` and likes the consumption good at each :math:`t`.
@@ -105,8 +105,7 @@ The representative household has preferences over consumption bundles
 ordered by the utility functional:
 
 .. math::
-    :label: utility-functional
-
+    
     U(\vec{C}) = \sum_{t=0}^{T} \beta^t \frac{C_t^{1-\gamma}}{1-\gamma}
 
 where :math:`\beta \in (0,1)` is a discount factor and :math:`\gamma >0`
@@ -117,18 +116,16 @@ We assume that :math:`K_0 > 0`.
 There is an economy-wide production function
 
 .. math::
-  :label: production-function
-
-  F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
+  
+   F(K_t,N_t) = A K_t^{\alpha}N_t^{1-\alpha}
 
 with :math:`0 < \alpha<1`, :math:`A > 0`.
 
 A feasible allocation :math:`\vec{C}, \vec{K}` satisfies
 
 .. math::
-  :label: allocation
-
-  C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
+ 
+   C_t + K_{t+1} \leq F(K_t,N_t) + (1-\delta) K_t, \quad \text{for all } t \in [0, T]
 
 where :math:`\delta \in (0,1)` is a depreciation rate of capital.
 
@@ -189,7 +186,7 @@ household chooses for itself subject to a budget constraint
    household.
 
 -  The representative household and the representative firm are both
-   **price takers:** who believe that prices are not affected by their choices
+   **price takers** who believe that prices are not affected by their choices
 
 **Note:** We can think of there being a large number
 :math:`M` of identical representative consumers and :math:`M`
@@ -534,8 +531,9 @@ First-order conditions are
     k_{T+1}: \quad -\lambda q_0^{T+1} \leq 0, \ \leq 0 \text{ if } k_{T+1}=0; \ =0 \text{ if } k_{T+1}>0
 
 
-Now we plug in for our guesses of prices and derive all the FONC of
-the planner problem :eq:`constraint1`-:eq:`constraint4`:
+
+Now we plug in our guesses of prices and embark on some algebra in the hope of derived all first-order necessary conditions
+:eq:`constraint1`-:eq:`constraint4` for the planning problem from this lecture :doc:`Cass-Koopmans Planning Model <cass_koopmans_1>`.
 
 Combining :eq:`cond1` and :eq:`eq-price`, we get:
 
@@ -552,7 +550,7 @@ Combining :eq:`cond2`, :eq:`eq-price`, and
     -\lambda \beta^t \mu_t\left[(1-\delta) +f'(K_t)\right] +\lambda \beta^{t-1}\mu_{t-1}=0
 
 Rewriting :eq:`co-re` by dividing by :math:`\lambda` on
-both sides (which is nonzero due to u'>0) we get:
+both sides (which is nonzero since  u'>0) we get:
 
 .. math:: \beta^t \mu_t [(1-\delta+f'(K_t)] = \beta^{t-1} \mu_{t-1}
 
@@ -963,5 +961,5 @@ Now we plot when :math:`t_0=20`
 
     plot_yield_curves(pp, 20, 0.3, k_ss/3, T_arr)
 
-We hope to have more to say about the term structure of interest rates
+We aim to have more to say about the term structure of interest rates
 in a planned lecture on the topic. 

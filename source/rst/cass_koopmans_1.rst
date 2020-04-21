@@ -70,7 +70,7 @@ We let :math:`C_t` be a nondurable consumption good at time :math:`t`.
 Let :math:`K_t` be the stock of physical capital at time :math:`t`.
 
 Let :math:`\vec{C}` = :math:`\{C_0,\dots, C_T\}` and
-:math:`\vec{K}` = :math:`\{K_1,\dots,K_{T+1}\}`.
+:math:`\vec{K}` = :math:`\{K_0,\dots,K_{T+1}\}`.
 
 A representative household is endowed with one unit of labor at each
 :math:`t` and likes the consumption good at each :math:`t`.
