@@ -17,7 +17,7 @@
     :maxdepth: 2
     :titlesonly:
 
-    navy_captain
+    lq_inventories
     
     
 
