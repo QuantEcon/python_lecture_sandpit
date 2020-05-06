@@ -17,7 +17,12 @@
     :maxdepth: 2
     :titlesonly:
 
-    lq_inventories
+    odu
+    likelihood_ratio_process
+    wald_friedman
+    exchangeable
+    likelihood_bayes
+    navy_captain
     
     
 
