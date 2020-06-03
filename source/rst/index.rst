@@ -17,13 +17,7 @@
     :maxdepth: 2
     :titlesonly:
 
-    odu
-    likelihood_ratio_process
-    wald_friedman
-    exchangeable
-    likelihood_bayes
-    navy_captain
-    
+    multi_hyper 
     
 
     zreferences
