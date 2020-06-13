@@ -11,14 +11,6 @@ Multivariate hypergeometric distribution
 .. contents:: :depth: 2
 
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-.. code-block:: ipython
-  :class: hide-output
-
-  !pip install --upgrade quantecon
-
-
 Overview
 =========
 
