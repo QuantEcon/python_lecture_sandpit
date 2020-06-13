@@ -90,7 +90,7 @@ The right tool   for the administrator's job is the **multivaraiate hypergeometr
 Multivariate Hypergeometric Distribution
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's Start with some imports-
+Let's Start with some imports.
 
 .. code-block:: ipython
 
@@ -315,7 +315,7 @@ numbers of :math:`i` objects in the urn is
     K_arr = [157, 11, 46, 24]
     urn = Urn(K_arr)
 
-Let's compute the probability of the outcome :math:`\left(10 1, 4, 0 \right)`.
+Let's compute the probability of the outcome :math:`\left(10, 1, 4, 0 \right)`.
 
 .. code-block:: python3
 
@@ -323,7 +323,7 @@ Let's compute the probability of the outcome :math:`\left(10 1, 4, 0 \right)`.
     urn.pmf(k_arr)
 
 We can compute probabilities of three possible outcomes by constructing a 3-dimensional
-arrays ``k_arr`` and ``pmf``.
+arrays ``k_arr`` and utilizing the method ``pmf`` of the ``Urn`` class.
 
 .. code-block:: python3
 
@@ -459,7 +459,7 @@ The null hypothesis is that the sample follows normal distribution.
     test_multihyper = normaltest(sample)
     test_multihyper.pvalue
 
-As we can see, all the p-values are almost :math:`0` and the null hypothesis is soundly be rejected.
+As we can see, all the p-values are almost :math:`0` and the null hypothesis is soundly rejected.
 
 By contrast, the sample from normal distribution does not reject the null hypothesis.
 
