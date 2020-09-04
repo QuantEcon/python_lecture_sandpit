@@ -17,7 +17,8 @@
     :maxdepth: 2
     :titlesonly:
 
-    multi_hyper 
+    BCG_complete_mkts.rst
+    BCG_incomplete_mkts.rst
     
 
     zreferences
