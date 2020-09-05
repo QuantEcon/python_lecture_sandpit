@@ -12,13 +12,9 @@
     ==================================
 
 
-
 .. toctree::
     :maxdepth: 2
     :titlesonly:
 
     BCG_complete_mkts.rst
     BCG_incomplete_mkts.rst
-    
-
-    zreferences
