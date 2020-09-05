@@ -4,9 +4,9 @@
 
 .. highlight:: python3
 
-*******************
-A BCG laboratory
-*******************
+**************************************************
+Capital Structures in a Complete Markets Economy
+**************************************************
 
 .. contents:: :depth: 2
 
@@ -20,8 +20,8 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Introduction
 =============
 
-This is a prolegomenon to a subsequent notebook about a model of
-incomplete markets authored by Bisin, Clemente, and Gottardi (2018).
+This is a prolegomenon to a subsequent lecture about a model of
+incomplete markets authored by Bisin, Clementi, and Gottardi :cite:`BCG_2018`.
 
 We adopt specifications of preferences and technologies very close to
 Bisin, Clemente, and Gottardi’s but assume that there are complete
@@ -41,7 +41,7 @@ This simplification of BCG’s setup helps us by
    -  indeterminacy of consumers’ portfolio choices
 
    -  indeterminacy of a firm’s financial structure that underlies a
-      Modigliani-Miller theorem
+      Modigliani-Miller theorem :cite:`Modigliani_Miller_1958`
 
 -  introducing ``Big K, little k`` issues in a simple context that will
    recur in the BCG incomplete markets environment
@@ -438,10 +438,11 @@ Thus, the firm’s problem is to choose :math:`k` to maximize
 
 The first-order necessary condition for an optimal :math:`k` is
 
-.. math::
-    :label: fonck
 
-     - 1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon) d \epsilon = 0
+
+.. math::
+    - 1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon) d \epsilon = 0
+
 
 
 The time :math:`0` value of the representative firm is
@@ -521,9 +522,8 @@ constraint
 .. math::
     :label: noarb
 
-    w_0^i + \theta_0^i V + \int w_1^i(\epsilon) q(\epsilon) d \epsilon
-      + \theta^i \left[ A k^\alpha \int e^\epsilon q(\epsilon) d \epsilon - \tilde V \right]
-        = c_0^i + \int c_1^i(\epsilon) q(\epsilon) d \epsilon
+    w_0^i + \theta_0^i V + \int w_1^i(\epsilon) q(\epsilon) d \epsilon + \theta^i \left[ A k^\alpha \int e^\epsilon q(\epsilon) d \epsilon - \tilde V \right]
+    = c_0^i + \int c_1^i(\epsilon) q(\epsilon) d \epsilon
 
 
 The right side of equation :eq:`noarb` is the present value
@@ -595,14 +595,13 @@ equilibrium Arrow securities prices
 
 .. math::
 
-    q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)}
-                       {u'(w_0 - K )} \right) 
+    q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)} {u'(w_0 - K )} \right) 
 
 To confirm the guess, we begin by considering the consequences of this
 guess for the firm’s choice of :math:`k`.
 
 With the Arrow securities prices that we have guessed, the firm’s
-first-order for choosing :math:`k` becomes
+first-order necessary condition for choosing :math:`k` becomes
 
 .. math::
     :label: kK
@@ -711,7 +710,7 @@ The value of the firm is
 which is the same expression that we obtained above when we assumed that
 the firm issued only equity.
 
-We thus obtain a version of the celebrated Modigliani-Miller theorem
+We thus obtain a version of the celebrated Modigliani-Miller theorem :cite:`Modigliani_Miller_1958`
 about firms’ finance:
 
 **Modigliani-Miller theorem:**
@@ -729,7 +728,7 @@ about firms’ finance:
 Please note the role of the assumption of complete markets in Arrow
 securities in substantiating these claims.
 
-In a subsequent notebook, we will assume that markets are (very)
+In a subsequent lecture, we will assume that markets are (very)
 incomplete – we’ll shut down markets in all Arrow securities.
 
 That will pull the rug from underneath the Modigliani-Miller theorem.
@@ -761,8 +760,7 @@ It consistx of 4 functions:
 
    .. math::
 
-       q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)}
-                       {u'(w_0 - K )} \right) 
+       q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)} {u'(w_0 - K )} \right) 
 
 3. ``V`` solves for the firm value given capital :math:`k`
 
