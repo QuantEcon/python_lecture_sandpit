@@ -59,7 +59,7 @@ A scalar random variable :math:`\epsilon` affects both
    :math:`k \geq 0` in capital in period :math:`0`.
 
 -  exogenous period :math:`1` endowments of the consumption good for
-   agents :math:`i =1` and :math:`i=2`.
+   agents of types :math:`i =1` and :math:`i=2`.
 
 Type :math:`i=1` and :math:`i=2` agents’ period :math:`1` endowments are
 correlated with the physical return on capital in different ways.
