@@ -1145,6 +1145,7 @@ https://plotly.com/python/getting-started/ for further instructions.
 
     #=== Example: Plot optimal k with different correlations ===#
     
+    from IPython.display import Image
     # Import plotly
     import plotly.graph_objs as go
     
@@ -1159,5 +1160,8 @@ https://plotly.com/python/getting-started/ for further instructions.
                       margin=dict(l=50, r=50, b=65, t=90))
     fig.update_layout(scene_camera=dict(eye=dict(x=2, y=-2, z=1.5)))
     
-    fig.show()
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
