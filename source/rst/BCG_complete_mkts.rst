@@ -606,7 +606,7 @@ first-order necessary condition for choosing :math:`k` becomes
 .. math::
     :label: kK
 
-    - 1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon;K) d \epsilon = 0
+    -1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon;K) d \epsilon = 0
 
 which can be verified to be satisfied if the firm sets
 
