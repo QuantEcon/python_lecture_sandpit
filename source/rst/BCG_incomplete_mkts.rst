@@ -1214,11 +1214,12 @@ We’ll also plot the equilibrium price functions :math:`q(k,b)` and
 
 .. code-block:: python3
 
+    from IPython.display import Image
     import matplotlib.pyplot as plt
     from mpl_toolkits import mplot3d
     import plotly.graph_objs as go
     
-    Firm Valuation
+    # Firm Valuation
     fig = go.Figure(data=[go.Scatter3d(x=[kss], 
                                        y=[bss], 
                                        z=[Vss], 
@@ -1240,8 +1241,10 @@ We’ll also plot the equilibrium price functions :math:`q(k,b)` and
     fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
     fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
     
-    
-    fig.show()
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
 A Modigliani-Miller theorem?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1571,7 +1574,7 @@ We first check the case in which :math:`b^{**} = b^* - e` where
                                                                     bss,
                                                                     e=-0.1)
     
-    Firm Valuation
+    # Firm Valuation
     kgride1, bgride1, Vgride1, Qgride1, Pgride1 = mdl.eq_valuation(c10e1, c11e1, c20e1, c21e1,N=20)
     
     print('Maximum valuation of the firm value in the (k,b) grid: {:.4f}'.format(Vgride1.max()))
@@ -1598,7 +1601,11 @@ We first check the case in which :math:`b^{**} = b^* - e` where
     fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
     fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
     
-    fig.show()
+
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
 
 In the above 3D surface of prospective firm valuations, the perturbed
@@ -1620,7 +1627,7 @@ Next, we check for :math:`b^{**} = b^* + e`.
                                                                     bss,
                                                                     e=0.1)
     
-    Firm Valuation
+    # Firm Valuation
     kgride2, bgride2, Vgride2, Qgride2, Pgride2 = mdl.eq_valuation(c10e2, c11e2, c20e2, c21e2,N=20)
     
     print('Maximum valuation of the firm value in the (k,b) grid: {:.4f}'.format(Vgride2.max()))
@@ -1647,7 +1654,10 @@ Next, we check for :math:`b^{**} = b^* + e`.
     fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
     fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
     
-    fig.show()
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
 In contrast to :math:`(k^*,b^* - e)`, the 3D surface for
 :math:`(k^*,b^*+e)` now indicates that a firm would want o *decrease*
@@ -1681,7 +1691,7 @@ expectations equilibrium.
 
 .. code-block:: python3
 
-    Equity Valuation
+    # Equity Valuation
     fig = go.Figure(data=[go.Scatter3d(x=[kss], 
                                        y=[bss], 
                                        z=[qss], 
@@ -1704,11 +1714,14 @@ expectations equilibrium.
     fig.update_layout(title='Equilibrium equity valuation for the grid of (k,b)')
     
     
-    fig.show()
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
 .. code-block:: python3
 
-    Bond Valuation
+    # Bond Valuation
     fig = go.Figure(data=[go.Scatter3d(x=[kss], 
                                        y=[bss], 
                                        z=[pss], 
@@ -1731,7 +1744,10 @@ expectations equilibrium.
     fig.update_layout(title='Equilibrium bond valuation for the grid of (k,b)')
     
     
-    fig.show()
+    # Export to PNG file
+    Image(fig.to_image(format="png"))
+    # fig.show() will provide interactive plot when running
+    # notebook locally
 
 Comments on the equilibrium pricing functions
 ---------------------------------------------
