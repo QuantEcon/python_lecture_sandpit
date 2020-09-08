@@ -17,23 +17,58 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
   !pip install --upgrade quantecon
 
-Introduction
+  Introduction
 =============
 
-This is an extension of our earlier notebook about a complete markets
+This is an extension of an earlier lecture :doc:`BCG_complete_mkts` about a **complete markets**
 model.
 
-It describes an instance of a model authored by Bisin, Clemente, and
-Gottardi (2018) in which financial markets are incomplete.
+In contrast to that lecture, this lecture  describes an instance of a model authored by Bisin, Clementi, and Gottardi :cite:`BCG_2018`
+in which financial markets are **incomplete**.
 
 Instead of being able to trade equities and a full set of one-period
-Arrow securities, consumers and first trade only equity and a bond.
+Arrow securities as they can in the earlier lecture :doc:`BCG_complete_mkts`, now consumers and firms trade only equity and a bond.
+
+It is useful to watch how outcomes differ  as  consequences of  trading opportunities differing in the two settings.
+
+In the complete markets economy in :doc:`BCG_complete_mkts`
+
+- there is a unique  stochastic discount factor that prices all assets
+
+- consumers’ portfolio choices are indeterminate
+
+- firms' financial structures are indeterminate, so the model embodies an instance of a Modigliani-Miller theorem :cite:`Modigliani_Miller_1958`
+
+- the aggregate of all firms' financial structures are indeterminate, a consequence of there being redundant assets
+
+In the incomplete markets economy studied here
+
+
+- there are multiple stochastic discount factors and they price different assets 
+
+- consumers’ portfolio choices are determinate
+
+- while **individual** firms' financial structures are indeterminate, thus conforming to an aspect of a Modigliani-Miller theorem,
+  :cite:`Modigliani_Miller_1958`, the **aggregate**  of all firms' financial structures **is** determinate.
+   
+
+
+
+A  ``Big K, little k`` analysis played an important role in the  previous lecture :doc:`BCG_complete_mkts`.  
+
+A more subtle version of a ``Big K, little k``  will be featured in our  presentation and analysis of  BCG incomplete markets environment.
+
+We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which the ``rational conjectures'' are about
+equilibrium pricing functions in regions of the state space that an average consumer or firm does not choose to inhabit in equilibrium.
+
+
+
 
 Setup
 -----
 
 We adopt specifications of preferences and technologies used by Bisin,
-Clemente, and Gottardi (2018) and in our notebook on a complete markets
+Clemente, and Gottardi (2018) :cite:`BCG_2018` and in our earlier lecture on a complete markets
 version of their model.
 
 The economy lasts for two periods, :math:`t=0, 1`.
@@ -132,9 +167,8 @@ where :math:`f(k) = A k^\alpha, A >0, \alpha \in (0,1)`.
 Measures of agents and firms
 ----------------------------
 
-As in the partner notebook that studies a complete markets version of
-the model, we follow BCG in assuming that there are equal unit measures
-of
+As in the companion lecture :doc:`BCG_complete_mkts` that studies a complete markets version of
+the model, we follow BCG in assuming that there are equal unit measures of
 
 -  consumers of type :math:`i=1`
 
@@ -197,7 +231,7 @@ We call an equilibrium **symmetric** if
    :math:`k(\zeta) = K`, :math:`b(\zeta) = B` for all
    :math:`\zeta \in [0,1]`
 
-In this notebook, we restrict ourselves to describing symmetric
+In this lecture, we restrict ourselves to describing symmetric
 equilibria.
 
 Asset Markets
@@ -1168,8 +1202,8 @@ Examples
 
 Below we show some examples computed using ``BCG_incomplete markets``.
 
-1st example
------------
+First example
+-------------
 
 In the first example, we set up an instance of the BCG incomplete
 markets model with default parameter values.
@@ -1244,7 +1278,7 @@ We’ll also plot the equilibrium price functions :math:`q(k,b)` and
     # Export to PNG file
     Image(fig.to_image(format="png"))
     # fig.show() will provide interactive plot when running
-    # notebook locally
+    # code locally
 
 A Modigliani-Miller theorem?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1277,7 +1311,7 @@ indeterminate, the **market’s** financial structure is determinant and
 sits at the red dot in the above graph.
 
 This contrasts sharply with the *unqualified* Modigliani-Miller theorem
-descibed in the complete markets model in the previous notebook. There
+descibed in the complete markets model in the lecture :doc:`BCG_complete_mkts` . There
 the **market’s** financial structure was indeterminate.
 
 These things bear some more thought and exploration.
@@ -1605,7 +1639,7 @@ We first check the case in which :math:`b^{**} = b^* - e` where
     # Export to PNG file
     Image(fig.to_image(format="png"))
     # fig.show() will provide interactive plot when running
-    # notebook locally
+    # code locally
 
 
 In the above 3D surface of prospective firm valuations, the perturbed
@@ -1657,7 +1691,7 @@ Next, we check for :math:`b^{**} = b^* + e`.
     # Export to PNG file
     Image(fig.to_image(format="png"))
     # fig.show() will provide interactive plot when running
-    # notebook locally
+    # code locally
 
 In contrast to :math:`(k^*,b^* - e)`, the 3D surface for
 :math:`(k^*,b^*+e)` now indicates that a firm would want o *decrease*
@@ -1717,7 +1751,7 @@ expectations equilibrium.
     # Export to PNG file
     Image(fig.to_image(format="png"))
     # fig.show() will provide interactive plot when running
-    # notebook locally
+    # code locally
 
 .. code-block:: python3
 
@@ -1747,9 +1781,9 @@ expectations equilibrium.
     # Export to PNG file
     Image(fig.to_image(format="png"))
     # fig.show() will provide interactive plot when running
-    # notebook locally
+    # code locally
 
-Comments on the equilibrium pricing functions
+Comments on equilibrium pricing functions
 ---------------------------------------------
 
 The equilibrium pricing functions displayed above merit study and
@@ -1904,8 +1938,7 @@ It is rewarding to stare at the above plots too.
 In equilibrium, equity valuations are the same across the two types of
 agents but bond valuations are not.
 
-Agents of type 2 value bonds more highly (they have bigger hedging
-wants).
+Agents of type 2 value bonds more highly (they want more hedging).
 
 Taken together with our earlier plot of equity holdings of type w
 agents, these graphs confirm the earlier conjecture that while both type

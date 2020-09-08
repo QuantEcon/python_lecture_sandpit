@@ -20,11 +20,11 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 Introduction
 =============
 
-This is a prolegomenon to a subsequent lecture about a model of
+This is a prolegomenon to another lecture :doc:`BCG_incomplete_mkts` about a model with
 incomplete markets authored by Bisin, Clementi, and Gottardi :cite:`BCG_2018`.
 
 We adopt specifications of preferences and technologies very close to
-Bisin, Clemente, and Gottardi’s but assume that there are complete
+Bisin, Clemente, and Gottardi’s  but unlike them  assume that there are complete
 markets in one-period Arrow securities.
 
 This simplification of BCG’s setup helps us by
