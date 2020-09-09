@@ -18,4 +18,6 @@
 
     BCG_complete_mkts.rst
     BCG_incomplete_mkts.rst
+    multivariate_normal.rst
+    time_series_with_matrices.rst
     

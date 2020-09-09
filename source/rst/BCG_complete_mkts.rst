@@ -48,6 +48,9 @@ This simplification of BCG’s setup helps us by
 -  introducing ``Big K, little k`` issues in a simple context that will
    recur in the BCG incomplete markets environment
 
+
+A Big K, little k analysis also played   roles in :doc:`this<cass_koopmans_2>` quantecon lecture as well  as :doc:`here<rational_expectations>` and :doc:`here<dyn_stack>`. 
+
 Setup
 -----
 

@@ -45,8 +45,9 @@ In the complete markets economy in :doc:`BCG_complete_mkts`
 
 In the incomplete markets economy studied here
 
+- there is a not a unique equilibrium stochastic discount factor
 
-- there are multiple stochastic discount factors and they price different assets 
+- different stochastic discount factors price different assets 
 
 - consumers’ portfolio choices are determinate
 
