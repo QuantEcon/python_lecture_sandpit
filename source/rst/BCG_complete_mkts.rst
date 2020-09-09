@@ -13,9 +13,11 @@ Capital Structures in a Complete Markets Economy
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 .. code-block:: ipython
-  :class: hide-output
+    :class: hide-output
 
-  !pip install --upgrade quantecon
+    !pip install --upgrade quantecon
+    !pip install interpolation
+    !conda install -y -c plotly plotly plotly-orca
 
 Introduction
 =============
@@ -266,7 +268,7 @@ mentioned above that is a function of the Pareto weight :math:`\phi_1`
 and the utility curvature parameter :math:`\gamma`.
 
 Remark
-^^^^^^^^^^^^^^^^
+^^^^^^
 
 The relative Pareto weight parameter :math:`\eta` does not appear in
 equation :eq:`focke` that determines :math:`K`.

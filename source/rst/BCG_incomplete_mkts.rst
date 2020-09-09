@@ -13,12 +13,14 @@ Equilibrium Capital Structures with Incomplete Markets
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 .. code-block:: ipython
-  :class: hide-output
+    :class: hide-output
 
-  !pip install --upgrade quantecon
+    !pip install --upgrade quantecon
+    !pip install interpolation
+    !conda install -y -c plotly plotly plotly-orca
 
-  Introduction
-=============
+Introduction
+============
 
 This is an extension of an earlier lecture :doc:`BCG_complete_mkts` about a **complete markets**
 model.
@@ -58,7 +60,7 @@ A  ``Big K, little k`` analysis played an important role in the  previous lectur
 
 A more subtle version of a ``Big K, little k``  will be featured in our  presentation and analysis of  BCG incomplete markets environment.
 
-We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which the ``rational conjectures'' are about
+We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which the ``rational conjectures`` are about
 equilibrium pricing functions in regions of the state space that an average consumer or firm does not choose to inhabit in equilibrium.
 
 
@@ -437,7 +439,7 @@ We can rewrite the pricing functions as:
    \end{aligned} 
 
 Firm’s optimization problem
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The firm’s optimization problem is
 
